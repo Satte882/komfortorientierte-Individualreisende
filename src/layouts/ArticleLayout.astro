@@ -16,7 +16,12 @@ const jsonLd = {
   inLanguage: 'de-DE'
 };
 ---
-<BaseLayout title={data.title} description={data.description} jsonLd={jsonLd}>
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  jsonLd={jsonLd}
+  noindex={data.status !== 'published'}
+>
   <Breadcrumbs items={[{ label: data.title }]} />
   <header class="article-header prose">
     <p class="eyebrow">{data.type === 'decision' ? 'Reiseentscheidung' : data.type === 'guide' ? 'Kuratierter Guide' : 'Reiseziel'}</p>
