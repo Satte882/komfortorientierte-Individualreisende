@@ -1,0 +1,11 @@
+---
+const { sources = [] } = Astro.props as { sources: { label: string; url: string }[] };
+---
+<section class="source-list">
+  <h2>Quellen</h2>
+  <ul>
+    {sources.map((source) => (
+      <li><a href={source.url} rel="nofollow noopener">{source.label}</a></li>
+    ))}
+  </ul>
+</section>
