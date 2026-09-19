@@ -301,3 +301,34 @@ Die erste Version braucht jetzt nur noch:
 **sauberes Theme + diese Templates + Tracking + Affiliate-Kennzeichnung + Bildprozess + Structured Data.**
 
 Danach sollte die nächste Optimierung **aus Nutzerdaten kommen**, nicht aus einer weiteren theoretischen Designrunde.
+
+---
+
+## Verbindliche Legal-/Footer-Basis vor Go-live
+
+Der Footer muss auf jeder Seite mindestens folgende Links dauerhaft und leicht erreichbar enthalten:
+
+```text
+FOOTER
+
+Über uns
+Methodik
+
+Impressum
+Datenschutzerklärung
+Cookie-Einstellungen
+
+Affiliate-Hinweis
+```
+
+Dazu gehören im Repository folgende Dummy-Vorlagen:
+
+- [13-impressum-dummy.md](13-impressum-dummy.md)
+- [14-datenschutzerklaerung-dummy.md](14-datenschutzerklaerung-dummy.md)
+- [15-cookie-und-consent-dummy.md](15-cookie-und-consent-dummy.md)
+
+Vor dem Livegang müssen alle Dummy-Felder durch reale Angaben ersetzt, nicht verwendete Abschnitte entfernt und eingesetzte Dienste vollständig dokumentiert werden.
+
+Die Go-live-Mindestbasis lautet damit:
+
+**sauberes Theme + Content-Templates + Affiliate-Kennzeichnung + Bildrechteprozess + Event-Tracking + Consent-Management + Structured Data + Impressum + Datenschutzerklärung + dauerhaft erreichbare Cookie-Einstellungen.**
