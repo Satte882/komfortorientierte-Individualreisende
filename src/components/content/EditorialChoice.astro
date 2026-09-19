@@ -1,0 +1,25 @@
+---
+const {
+  priority = [],
+  optional = [],
+  skip = []
+} = Astro.props as { priority?: string[]; optional?: string[]; skip?: string[] };
+---
+<section class="editorial-box" aria-labelledby="editorial-choice-heading">
+  <span class="label">Unsere Auswahl</span>
+  <h2 id="editorial-choice-heading">Was wir priorisieren</h2>
+  <div class="editorial-grid">
+    <div>
+      <h3>Priorität</h3>
+      <ul>{priority.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div>
+      <h3>Optional</h3>
+      <ul>{optional.map((item) => <li>{item}</li>)}</ul>
+    </div>
+    <div>
+      <h3>Bei knapper Zeit</h3>
+      <ul>{skip.map((item) => <li>{item}</li>)}</ul>
+    </div>
+  </div>
+</section>
