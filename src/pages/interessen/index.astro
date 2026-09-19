@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { interests } from '../../data/taxonomy';
+---
+<BaseLayout title="Interessen" description="Interessenbasierte Kuration für komfortorientierte Individualreisen." noindex={true}>
+  <section class="hero container">
+    <p class="eyebrow">Interessen</p>
+    <h1>Was interessiert dich wirklich?</h1>
+    <div class="grid">
+      {Object.values(interests).map((interest) => <div class="card"><strong>{interest.name}</strong></div>)}
+    </div>
+  </section>
+</BaseLayout>
