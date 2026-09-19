@@ -3,6 +3,7 @@ import { join, relative } from 'node:path';
 
 const root = process.cwd();
 const contentRoot = join(root, 'src', 'content');
+const publicLaunch = process.env.PUBLIC_LAUNCH === 'true';
 
 function walk(dir) {
   if (!existsSync(dir)) return [];
@@ -12,7 +13,7 @@ function walk(dir) {
   });
 }
 
-const files = walk(contentRoot).filter((file) => /\.(md|mdx)$/.test(file));
+const files = walk(contentRoot).filter((file) => /.(md|mdx)$/.test(file));
 const errors = [];
 
 for (const file of files) {
@@ -68,6 +69,21 @@ for (const page of legalPages) {
   if (!existsSync(page)) errors.push(`missing legal page: ${relative(root, page)}`);
 }
 
+if (publicLaunch) {
+  for (const page of legalPages) {
+    if (!existsSync(page)) continue;
+    const text = readFileSync(page, 'utf8');
+    if (
+      text.includes('Dummy') ||
+      text.includes('[Vorname Nachname') ||
+      text.includes('[E-Mail-Adresse]') ||
+      text.includes('[TT.MM.JJJJ]')
+    ) {
+      errors.push(`${relative(root, page)}: PUBLIC_LAUNCH=true is blocked while dummy legal placeholders remain`);
+    }
+  }
+}
+
 if (errors.length) {
   console.error('\nContent validation failed:\n');
   for (const error of errors) console.error(`- ${error}`);
@@ -75,3 +91,6 @@ if (errors.length) {
 }
 
 console.log(`Content validation passed for ${files.length} content file(s).`);
+if (!publicLaunch) {
+  console.log('PUBLIC_LAUNCH is not enabled; dummy legal pages may remain for preview/development only.');
+}
