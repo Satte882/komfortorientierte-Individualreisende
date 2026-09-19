@@ -1,0 +1,37 @@
+<script>
+  type AnalyticsEvent = {
+    name: string;
+    params: Record<string, string>;
+  };
+
+  declare global {
+    interface Window {
+      __analyticsEvents?: AnalyticsEvent[];
+      __siteConsent?: { analytics: boolean; marketing: boolean };
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const link = target.closest<HTMLAnchorElement>('[data-affiliate-link]');
+    if (!link) return;
+
+    if (!window.__siteConsent?.analytics) return;
+
+    const detail: AnalyticsEvent = {
+      name: 'affiliate_click',
+      params: {
+        partner: link.dataset.partner ?? '',
+        destination: link.dataset.destination ?? '',
+        article_type: link.dataset.articleType ?? '',
+        interest: link.dataset.interest ?? '',
+        placement: link.dataset.placement ?? ''
+      }
+    };
+
+    window.__analyticsEvents ??= [];
+    window.__analyticsEvents.push(detail);
+    window.dispatchEvent(new CustomEvent('analytics:event', { detail }));
+  });
+</script>
