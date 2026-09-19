@@ -1,0 +1,79 @@
+<div class="consent-backdrop" data-consent-root hidden>
+  <section class="consent-panel" role="dialog" aria-modal="true" aria-labelledby="consent-title">
+    <p class="eyebrow">Datenschutz-Einstellungen</p>
+    <h2 id="consent-title">Deine Auswahl</h2>
+    <p>Notwendige Technologien sichern den Betrieb der Website. Optionale Analyse-Technologien helfen uns zu verstehen, welche redaktionellen Entscheidungen tatsächlich genutzt werden.</p>
+
+    <label class="consent-row">
+      <input type="checkbox" checked disabled />
+      <span><strong>Notwendig</strong><br />Immer aktiv.</span>
+    </label>
+    <label class="consent-row">
+      <input type="checkbox" data-consent-analytics />
+      <span><strong>Analyse</strong><br />Misst Seiten- und Affiliate-Klicks. Standardmäßig aus.</span>
+    </label>
+    <label class="consent-row">
+      <input type="checkbox" data-consent-marketing />
+      <span><strong>Affiliate / Marketing</strong><br />Für optionale Partner-Technologien. Standardmäßig aus.</span>
+    </label>
+
+    <div class="consent-actions">
+      <button type="button" data-consent-essential>Nur notwendige</button>
+      <button type="button" data-consent-save>Einstellungen speichern</button>
+      <button type="button" data-consent-all>Alle akzeptieren</button>
+    </div>
+    <p class="article-meta"><a href="/datenschutz/">Datenschutzerklärung</a> · <a href="/impressum/">Impressum</a></p>
+  </section>
+</div>
+
+<script>
+  declare global {
+    interface Window {
+      __siteConsent?: { analytics: boolean; marketing: boolean };
+    }
+  }
+
+  const key = 'reiseauswahl-consent-v1';
+  const root = document.querySelector<HTMLElement>('[data-consent-root]');
+  const analytics = document.querySelector<HTMLInputElement>('[data-consent-analytics]');
+  const marketing = document.querySelector<HTMLInputElement>('[data-consent-marketing]');
+
+  function apply(value: { analytics: boolean; marketing: boolean }) {
+    window.__siteConsent = value;
+    if (analytics) analytics.checked = value.analytics;
+    if (marketing) marketing.checked = value.marketing;
+    localStorage.setItem(key, JSON.stringify(value));
+    if (root) root.hidden = true;
+    window.dispatchEvent(new CustomEvent('consent:changed', { detail: value }));
+  }
+
+  function open() {
+    if (root) root.hidden = false;
+  }
+
+  const stored = localStorage.getItem(key);
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      window.__siteConsent = {
+        analytics: Boolean(parsed.analytics),
+        marketing: Boolean(parsed.marketing)
+      };
+      if (analytics) analytics.checked = window.__siteConsent.analytics;
+      if (marketing) marketing.checked = window.__siteConsent.marketing;
+    } catch {
+      open();
+    }
+  } else {
+    window.__siteConsent = { analytics: false, marketing: false };
+    open();
+  }
+
+  document.querySelector('[data-consent-essential]')?.addEventListener('click', () => apply({ analytics: false, marketing: false }));
+  document.querySelector('[data-consent-all]')?.addEventListener('click', () => apply({ analytics: true, marketing: true }));
+  document.querySelector('[data-consent-save]')?.addEventListener('click', () => apply({
+    analytics: Boolean(analytics?.checked),
+    marketing: Boolean(marketing?.checked)
+  }));
+  window.addEventListener('consent:open', open);
+</script>
