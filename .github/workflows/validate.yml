@@ -24,5 +24,10 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Validate
+      - name: Validate production-safe build
         run: npm run check
+
+      - name: Build review-content preview
+        env:
+          PREVIEW_CONTENT: "true"
+        run: npm run build
