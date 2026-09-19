@@ -1,0 +1,9 @@
+---
+const { title, reason, alternative } = Astro.props as { title: string; reason: string; alternative?: string };
+---
+<section class="editorial-box">
+  <span class="label">Was wir bewusst weglassen</span>
+  <h2>{title}</h2>
+  <p>{reason}</p>
+  {alternative && <p><strong>Für wen wir anders entscheiden würden:</strong> {alternative}</p>}
+</section>
