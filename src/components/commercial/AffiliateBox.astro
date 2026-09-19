@@ -1,0 +1,38 @@
+---
+import AffiliateDisclosure from './AffiliateDisclosure.astro';
+import { affiliatePartners, type AffiliatePartnerId } from '../../data/affiliatePartners';
+
+interface Props {
+  partner: AffiliatePartnerId;
+  url: string;
+  placement: string;
+  destination: string;
+  articleType: 'guide' | 'decision' | 'destination';
+  interest?: string;
+  title: string;
+  text?: string;
+  cta: string;
+}
+
+const { partner, url, placement, destination, articleType, interest = '', title, text, cta } = Astro.props;
+const config = affiliatePartners[partner];
+---
+<aside class="affiliate-box">
+  <AffiliateDisclosure label={config.disclosure} />
+  <h3>{title}</h3>
+  {text && <p>{text}</p>}
+  <a
+    class="button"
+    href={url}
+    rel="sponsored noopener"
+    data-affiliate-link
+    data-partner={partner}
+    data-placement={placement}
+    data-destination={destination}
+    data-article-type={articleType}
+    data-interest={interest}
+  >
+    {cta}
+  </a>
+  <p class="article-meta">Wenn du über diesen Link buchst, können wir eine Provision erhalten. Für dich ändert sich der Preis dadurch grundsätzlich nicht.</p>
+</aside>
