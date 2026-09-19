@@ -75,3 +75,37 @@ th, td { text-align: left; padding: .8rem; border-bottom: 1px solid var(--border
   .hero-grid, .grid, .editorial-grid { grid-template-columns: 1fr; }
   .header-inner { align-items: flex-start; padding-block: 1rem; flex-direction: column; }
 }
+
+
+.commercial-label { margin-bottom: .6rem; }
+.consent-backdrop[hidden] { display: none; }
+.consent-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(27, 27, 24, .5);
+  display: grid;
+  place-items: end center;
+  padding: 1rem;
+}
+.consent-panel {
+  width: min(100%, 720px);
+  max-height: min(90vh, 760px);
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  box-shadow: 0 18px 48px rgba(0,0,0,.16);
+}
+.consent-panel h2 { margin-top: .25rem; }
+.consent-row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .8rem;
+  align-items: start;
+  padding: .9rem 0;
+  border-top: 1px solid var(--border);
+}
+.consent-row input { margin-top: .35rem; }
+.consent-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
