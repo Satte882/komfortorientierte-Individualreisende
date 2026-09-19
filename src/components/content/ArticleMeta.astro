@@ -1,0 +1,11 @@
+---
+const { datePublished, dateReviewed, duration } = Astro.props;
+const date = new Intl.DateTimeFormat('de-DE', { dateStyle: 'medium' });
+---
+<div class="article-meta">
+  <span>{duration?.ideal} Tage</span>
+  <span aria-hidden="true"> · </span>
+  <span>Veröffentlicht: {date.format(new Date(datePublished))}</span>
+  <span aria-hidden="true"> · </span>
+  <span>Zuletzt geprüft: {date.format(new Date(dateReviewed))}</span>
+</div>
