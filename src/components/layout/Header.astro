@@ -1,7 +1,7 @@
 ---
 import { site } from '../../data/site';
 ---
-<header class="site-header">
+<header class="site-header" data-site-header>
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="Reiseauswahl Startseite">
       <span class="brand-mark" aria-hidden="true">R</span>
@@ -10,8 +10,55 @@ import { site } from '../../data/site';
         <small>{site.tagline}</small>
       </span>
     </a>
-    <nav class="nav" aria-label="Hauptnavigation">
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+      aria-label="Hauptnavigation öffnen"
+      data-nav-toggle
+    >
+      <span class="nav-toggle__line" aria-hidden="true"></span>
+      <span class="nav-toggle__line" aria-hidden="true"></span>
+      <span class="nav-toggle__line" aria-hidden="true"></span>
+    </button>
+
+    <nav id="primary-navigation" class="nav" aria-label="Hauptnavigation" data-primary-nav>
       {site.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
   </div>
 </header>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-site-header]');
+  const toggle = header?.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const nav = header?.querySelector<HTMLElement>('[data-primary-nav]');
+
+  if (header && toggle && nav) {
+    header.dataset.navEnhanced = 'true';
+
+    const setOpen = (open: boolean) => {
+      header.dataset.navOpen = String(open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Hauptnavigation schließen' : 'Hauptnavigation öffnen');
+    };
+
+    setOpen(false);
+
+    toggle.addEventListener('click', () => {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
