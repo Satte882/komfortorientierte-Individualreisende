@@ -28,7 +28,7 @@ Begründung:
 
 ### Centre Pompidou Beaubourg
 
-Nicht nur niedrige Priorität, sondern 2026 praktisch ausgeschlossen: Das historische Gebäude ist wegen der Renovierung bis 2030 geschlossen.
+2026 praktisch ausgeschlossen: Das historische Gebäude ist wegen der Renovierung bis 2030 geschlossen.
 
 ## Grobe 4-Tage-Logik
 
@@ -39,14 +39,18 @@ Nicht nur niedrige Priorität, sondern 2026 praktisch ausgeschlossen: Das histor
 
 Kein minutengenauer Plan.
 
+## Testfreigabe
+
+Für den lokalen MVP wurde diese Kuration am 19.09.2026 durch den Owner als Human Gate freigegeben. Im späteren produktiven Betrieb wird der Gate regulär je Artikel durchlaufen.
+
 ## Redaktionsfreigabe
 
 - [x] zentrale Fakten gegen geeignete Primärquellen geprüft
-- [x] volatile Angaben mit Abrufstand gekennzeichnet
+- [x] volatile Angaben aktuell geprüft
 - [x] keine unbelegten Mengenbehauptungen verwendet
 - [x] keine längeren Formulierungen aus Quellen übernommen
 - [x] eigene Artikelstruktur statt Struktur einer Einzelquelle
 - [x] Quellen für wesentliche Aussagen dokumentiert
-- [ ] Kuration / Priorisierung durch menschlichen Owner freigegeben
+- [x] Kuration / Priorisierung freigegeben
 
-**Status:** fachlich vorbereitet; Human Gate ausstehend. Bis dahin finaler Artikelstatus `review`.
+**Status:** Testfreigabe erteilt; Artikel darf im lokalen MVP als published dargestellt werden.

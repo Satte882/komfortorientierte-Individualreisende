@@ -2,14 +2,24 @@
 import { site } from '../../data/site';
 ---
 <footer class="site-footer">
-  <div class="container">
-    <strong>{site.name}</strong>
-    <p>Redaktionelle Auswahl statt endloser Reiselisten.</p>
-    <nav class="footer-links" aria-label="Footer-Navigation">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">{site.name}</div>
+      <p>Redaktionelle Auswahl für selbstorganisierte Reisen mit Komfort, Kultur und klaren Entscheidungen.</p>
+      <p class="footer-note">Demo-MVP · Inhalte, Affiliate-Links und Rechtstexte enthalten teilweise Test-/Dummywerte.</p>
+    </div>
+    <div>
+      <strong>Inhalt</strong>
+      <a href="/reiseziele/">Reiseziele</a>
+      <a href="/interessen/">Interessen</a>
+      <a href="/entscheidungen/">Entscheidungen</a>
       <a href="/methodik/">Methodik</a>
+    </div>
+    <div>
+      <strong>Rechtliches</strong>
       <a href="/impressum/">Impressum</a>
       <a href="/datenschutz/">Datenschutzerklärung</a>
-      <button type="button" class="button" data-open-consent>Cookie-Einstellungen</button>
-    </nav>
+      <button type="button" class="footer-button" data-open-consent>Cookie-Einstellungen</button>
+    </div>
   </div>
 </footer>

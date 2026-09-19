@@ -22,14 +22,18 @@ Für komfortorientierte Individualreisende auf einer Kulturroute Sevilla–Córd
 
 Eine Nacht in Córdoba kostet eine Nacht, die sonst Sevilla oder Granada zugeschlagen werden könnte. Der Mehrwert muss deshalb aus einem breiteren Córdoba-Programm entstehen, nicht nur aus dem Wunsch, „auch dort übernachtet zu haben“.
 
+## Testfreigabe
+
+Für den lokalen MVP wurde diese Kuration am 19.09.2026 durch den Owner als Human Gate freigegeben. Im späteren produktiven Betrieb wird der Gate regulär je Artikel durchlaufen.
+
 ## Redaktionsfreigabe
 
 - [x] zentrale Fakten gegen geeignete Primärquellen geprüft
-- [x] volatile Angaben als prüfpflichtig markiert
+- [x] volatile Angaben aktuell geprüft
 - [x] keine unbelegten Mengenbehauptungen verwendet
 - [x] keine längeren Formulierungen aus Quellen übernommen
 - [x] eigene Entscheidungsstruktur
 - [x] Quellen dokumentiert
-- [ ] Kuration / Priorisierung durch menschlichen Owner freigegeben
+- [x] Kuration / Priorisierung freigegeben
 
-**Status:** fachlich vorbereitet; Human Gate ausstehend. Finaler Artikelstatus bleibt `review`.
+**Status:** Testfreigabe erteilt; Artikel darf im lokalen MVP als published dargestellt werden.

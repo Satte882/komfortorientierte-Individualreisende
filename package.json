@@ -1,15 +1,18 @@
 {
   "name": "komfortorientierte-individualreisende",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "demo": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "astro preview --host 0.0.0.0",
     "check:astro": "astro check",
     "validate:content": "node scripts/validate-content.mjs",
-    "check": "npm run check:astro && npm run validate:content && npm run build"
+    "check": "npm run check:astro && npm run validate:content && npm run build",
+    "article:new": "node scripts/new-article.mjs",
+    "article:publish": "node scripts/publish-article.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "8.0.1",

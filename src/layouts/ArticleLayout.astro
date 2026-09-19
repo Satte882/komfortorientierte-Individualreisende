@@ -15,6 +15,7 @@ const jsonLd = {
   dateModified: new Date(data.dateReviewed).toISOString(),
   inLanguage: 'de-DE'
 };
+const typeLabel = data.type === 'decision' ? 'Reiseentscheidung' : data.type === 'guide' ? 'Kuratierter Guide' : 'Reiseziel';
 ---
 <BaseLayout
   title={data.title}
@@ -23,18 +24,26 @@ const jsonLd = {
   noindex={data.status !== 'published'}
 >
   <Breadcrumbs items={[{ label: data.title }]} />
-  <header class="article-header prose">
-    <p class="eyebrow">{data.type === 'decision' ? 'Reiseentscheidung' : data.type === 'guide' ? 'Kuratierter Guide' : 'Reiseziel'}</p>
-    <h1>{data.title}</h1>
-    <p class="lead">{data.description}</p>
-    <ArticleMeta datePublished={data.datePublished} dateReviewed={data.dateReviewed} duration={data.duration} />
-  </header>
-  {data.heroImage && (
-    <figure class="container">
-      <img class="hero-image" src={data.heroImage.src} alt={data.heroImage.alt} loading="eager" />
-      <figcaption class="article-meta">Foto: {data.heroImage.creator} · {data.heroImage.source}</figcaption>
+  <header class="article-hero container">
+    <div class="article-hero__copy">
+      <p class="eyebrow">{typeLabel}</p>
+      <h1>{data.title}</h1>
+      <p class="lead">{data.description}</p>
+      <ArticleMeta datePublished={data.datePublished} dateReviewed={data.dateReviewed} duration={data.duration} />
+      <div class="tag-row">
+        {data.interests.map((interest: string) => <span class="tag">{interest}</span>)}
+        <span class="tag tag--muted">komfortorientiert</span>
+      </div>
+    </div>
+    <figure class="article-hero__visual">
+      {data.heroImage ? (
+        <>
+          <img src={data.heroImage.src} alt={data.heroImage.alt} loading="eager" />
+          <figcaption>{data.heroImage.source} · {data.heroImage.license}</figcaption>
+        </>
+      ) : <div class="visual-placeholder visual-placeholder--large" aria-hidden="true"></div>}
     </figure>
-  )}
+  </header>
   <article class="prose article-body">
     <slot />
     <MethodologyNote />

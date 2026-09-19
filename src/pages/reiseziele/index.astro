@@ -1,10 +1,25 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/content/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const guides = (await getCollection('guides')).filter((entry) => entry.data.status === 'published');
+const decisions = (await getCollection('decisions')).filter((entry) => entry.data.status === 'published');
 ---
-<BaseLayout title="Reiseziele" description="Unsere kuratierten Reiseziele. Die Taxonomie wird erst indexiert, wenn daraus eigenständige redaktionelle Landingpages entstehen." noindex={true}>
-  <section class="hero prose">
+<BaseLayout title="Reiseziele" description="Kuratierte Reiseziele und Routen für komfortorientierte Individualreisende.">
+  <section class="page-hero container">
     <p class="eyebrow">Reiseziele</p>
-    <h1>Reiseziele</h1>
-    <p class="lead">Diese Übersicht ist im MVP bewusst noch nicht für Suchmaschinen indexiert. Zuerst entstehen eigenständige, hochwertige Artikel.</p>
+    <h1>Wenige Ziele.<br />Mehr Entscheidungstiefe.</h1>
+    <p class="lead">Wir bauen keine vollständige Weltkarte. Ein Ziel kommt erst dann hierher, wenn wir eine konkrete Auswahlentscheidung dazu begründen können.</p>
+  </section>
+  <section class="section container">
+    <div class="article-grid">
+      {guides.map((entry) => (
+        <ArticleCard href={`/guides/${entry.data.slug}/`} title={entry.data.title} description={entry.data.description} image={entry.data.heroImage?.src} kicker={entry.data.destination} meta={`${entry.data.duration.ideal} Tage`} />
+      ))}
+      {decisions.map((entry) => (
+        <ArticleCard href={`/decisions/${entry.data.slug}/`} title={entry.data.title} description={entry.data.description} image={entry.data.heroImage?.src} kicker="Entscheidung" meta={entry.data.destination} />
+      ))}
+    </div>
   </section>
 </BaseLayout>

@@ -1,59 +1,103 @@
-# Komfortorientierte Individualreisende
+# Reiseauswahl – komfortorientierte Individualreisen
 
-Arbeitsrepository für eine redaktionelle Affiliate-Reisewebsite für **komfortorientierte Individualreisende**.
+Redaktionelle Reisewebsite für Menschen, die selbst buchen, aber **weniger Optionen und bessere Entscheidungen** wollen.
 
-## Technischer MVP
+## Lokal ansehen
 
-- Astro + TypeScript
-- statische Ausgabe, kein Backend und keine Datenbank
-- Markdown/MDX als Content
-- GitHub als Source of Truth
-- kontrollierte Content Collections für `destinations`, `guides` und `decisions`
-- ein schlanker MVP-Validator plus GitHub Actions
-- Review-Content nur bei explizitem `PREVIEW_CONTENT=true`
-- öffentliche Freigabe mit Dummy-Rechtstexten wird durch `PUBLIC_LAUNCH=true` blockiert
-
-### Lokal starten
+Voraussetzung: Node.js 22+.
 
 ```bash
 npm install
-npm run dev
+npm run demo
 ```
 
-Review-Artikel lokal sichtbar machen:
+Dann öffnen:
 
-```bash
-PREVIEW_CONTENT=true npm run dev
+```text
+http://localhost:4321
 ```
 
-### Prüfen und bauen
+Die drei Pilotartikel sind für den Test freigegeben und direkt über die Startseite erreichbar.
+
+## Qualitätscheck
 
 ```bash
 npm run check
-npm run build
 ```
 
-Ein späterer öffentlicher Build soll mit
+Der Check umfasst:
+- Astro/TypeScript;
+- Content-Schema;
+- Pflicht-Metadaten;
+- Quellen;
+- Redaktionsfreigabe;
+- Bild-/Lizenzmetadaten;
+- Affiliate-Kennzeichnung;
+- statischen Build.
+
+## Neuer Beitrag: ein Thema als Startpunkt
+
+Beispiel:
 
 ```bash
-PUBLIC_LAUNCH=true npm run check
+npm run article:new -- "Toskana Kunst Genuss 7 Tage"
 ```
 
-geprüft werden. Solange offensichtliche Dummy-Felder in Impressum oder Datenschutzerklärung vorhanden sind, schlägt dieser Check absichtlich fehl.
+Automatisch entstehen:
 
-## Strategischer Stand
+```text
+research/<slug>/brief.yml
+research/<slug>/sources.md
+research/<slug>/research.md
+research/<slug>/curation.md
+research/<slug>/agent-task.md
+assets/articles/<slug>/manifest.yml
+src/content/<guides|decisions>/<slug>.mdx
+```
 
-Das Projekt ist **keine Reise-Software, keine Recommendation Engine und kein Live-Datenprodukt**. Fremde Reiseblogs und andere Quellen dienen als Recherchematerial. Der eigentliche Mehrwert entsteht durch **Kuration, Auswahl, Gewichtung, Trade-offs und konkrete Entscheidungshilfe**.
+Danach:
+1. `agent-task.md` mit einem Web-fähigen KI-Agenten abarbeiten;
+2. Research und Kuration prüfen;
+3. Human-Gate-Checkboxen setzen;
+4. veröffentlichen:
 
-> **Content zuerst. Kuration als redaktionelle Methode. Einfache Taxonomie. Software nur dann, wenn echte Nutzerdaten zeigen, dass sie benötigt wird.**
+```bash
+npm run article:publish -- <slug>
+npm run check
+```
 
-## ICP-Arbeitshypothese
+Details: [docs/21-content-automation.md](docs/21-content-automation.md)
 
-> **Deutschsprachige, komfortorientierte Individualreisende, Kernalter ca. 50–64 Jahre, häufig als Paar reisend, mit mittlerem bis überdurchschnittlichem Reisebudget, die Reisen selbst online organisieren und Kultur, Architektur, Geschichte, Natur, Genuss und moderate Aktivitäten höher gewichten als Minimalpreis, Backpacking oder Pauschalprogramm.**
+## Architektur
 
-Verhaltensbezogen wichtiger:
+```text
+Thema
+  ↓
+Research-Ordner
+  ↓
+Quellen + Fakten
+  ↓
+Kuration / Trade-offs
+  ↓
+Human Gate
+  ↓
+MDX-Artikel
+  ↓
+Validator + Astro Build
+  ↓
+lokale Website / später Deployment
+```
 
-> **Zahlungsbereite Selbstbucher mit mehreren Buchungsentscheidungen, die Kuration höher bewerten als den billigsten Preis.**
+### Stack
+
+- Astro + TypeScript
+- Markdown/MDX
+- statische Ausgabe
+- kein Backend
+- keine Datenbank
+- keine Recommendation Engine
+- minimales Client-JavaScript
+- GitHub als Source of Truth
 
 ## Repo-Struktur
 
@@ -69,86 +113,59 @@ src/
   pages/
   styles/
 
+public/images/
+  Demo-Visuals
+
 research/
   <article-slug>/
     brief.yml
     sources.md
     research.md
     curation.md
+    agent-task.md
 
 assets/articles/
   <article-slug>/
     manifest.yml
 
 scripts/
+  new-article.mjs
+  publish-article.mjs
   validate-content.mjs
-
-.github/workflows/
-  validate.yml
 
 docs/
 ```
 
-Research enthält paraphrasierte Erkenntnisse und Quellenverweise, **keine Archive kopierter Fremdtexte**.
+## Pilotartikel
 
-## Aktuelle Pilotartikel
+- Paris für Kunstinteressierte: 4 Tage
+- Córdoba: Tagesausflug oder übernachten?
+- Andalusien in 9 Tagen: Kultur & Architektur
 
-Alle drei Piloten stehen zunächst auf `status: review` und `editorialApproval: false`:
+## Demo-Hinweis
 
-- `paris-kunst-4-tage`
-- `cordoba-tagesausflug-oder-uebernachten`
-- `andalusien-kultur-9-tage`
+Der lokale MVP ist bewusst vollständig sichtbar. Einige Informationen sind Dummy/Testwerte:
 
-Damit können Technik und Preview geprüft werden, ohne eine menschliche Redaktionsfreigabe vorzutäuschen.
+- Impressumsdaten;
+- Datenschutz-Anbieterangaben;
+- Affiliate-URLs;
+- finale Reisefotografie.
+
+Die Demo-Visuals im Repository sind projekterzeugte Platzhalter und keine fremden Stockbilder.
 
 ## Dokumentation
 
-- [Konzept und Entwicklung](docs/01-konzept-und-entwicklung.md)
-- [Recht und Quellennutzung](docs/02-recht-und-quellennutzung.md)
-- [SEO, E-E-A-T und AI Search](docs/03-seo-eeat-und-ai-search.md)
-- [Kuration und Content-Modell](docs/04-kuration-und-content-modell.md)
-- [ICP und Zielgruppe](docs/05-icp-und-zielgruppe.md)
-- [Monetarisierung und Unit Economics](docs/06-monetarisierung-und-unit-economics.md)
-- [Redaktionelle Methodik](docs/07-redaktionelle-methodik.md)
-- [Risiken und offene Annahmen](docs/08-risiken-und-offene-annahmen.md)
-- [MVP und Validierung](docs/09-mvp-und-validierung.md)
-- [Quellen und Referenzlinks](docs/10-quellen-und-referenzlinks.md)
-- [Feedback und Entscheidungsprotokoll](docs/11-feedback-und-entscheidungsprotokoll.md)
-- [Finales HTML- und Template-Design](docs/12-finales-html-und-template-design.md)
-- [Impressum Dummy](docs/13-impressum-dummy.md)
-- [Datenschutzerklärung Dummy](docs/14-datenschutzerklaerung-dummy.md)
-- [Cookie- und Consent-Dummy](docs/15-cookie-und-consent-dummy.md)
-- [Ordnerstruktur, Taxonomie und Research](docs/16-ordnerstruktur-taxonomie-und-research.md)
-- [MVP-Content-Pipeline und Human Gate](docs/17-mvp-content-pipeline-und-human-gate.md)
-- [Deployment](docs/18-deployment.md)
-- [Pilotthemen und Validierungskriterien](docs/19-pilotthemen-und-validierungskriterien.md)
+Die fachliche Entwicklung liegt unter `docs/01...` bis `docs/22...`.
 
-## Nicht-Ziele des MVP
+Besonders relevant:
+- `docs/12-finales-html-und-template-design.md`
+- `docs/16-ordnerstruktur-taxonomie-und-research.md`
+- `docs/17-mvp-content-pipeline-und-human-gate.md`
+- `docs/19-pilotthemen-und-validierungskriterien.md`
+- `docs/20-mvp-auswertung.md`
+- `docs/21-content-automation.md`
+- `docs/22-lokaler-mvp-dod.md`
 
-Noch nicht vorgesehen:
+## Leitprinzip
 
-- Live-Wetter- oder Straßendaten
-- Preis-Scraping
-- eigene Buchungsengine
-- Recommendation Engine
-- Nutzerprofile/Login
-- Suchfunktion
-- automatisch indexierte Taxonomie-Landingpages
-- wöchentliche Review-Jobs
-- Broken-Link-Crawler
-- AI-Similarity-Audit
-- komplexe Multi-Agent-Orchestrierung
-
-## Go-live-Mindestbasis
-
-Vor einem öffentlichen Launch müssen mindestens erfüllt sein:
-
-- reales Impressum
-- reale Datenschutzerklärung passend zu den tatsächlich eingesetzten Diensten
-- dauerhaft erreichbare Cookie-Einstellungen
-- Consent-Management passend zur realen Tracking-Technik
-- sichtbare Affiliate-Kennzeichnung
-- `rel="sponsored"` für Affiliate-Links
-- dokumentierter Bildrechteprozess
-- freigegebene Artikel mit `editorialApproval: true`
-- finale Domain/Hosting-Konfiguration
+> Content zuerst. Kuration als redaktionelle Methode. Einfache Taxonomie. Automatisierung dort, wo sie Wiederholarbeit beseitigt – nicht dort, wo das redaktionelle Urteil entsteht.

@@ -1,13 +1,31 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { interests } from '../../data/taxonomy';
+import { getCollection } from 'astro:content';
+
+const entries = [
+  ...(await getCollection('guides')),
+  ...(await getCollection('decisions'))
+].filter((entry) => entry.data.status === 'published');
 ---
-<BaseLayout title="Interessen" description="Interessenbasierte Kuration für komfortorientierte Individualreisen." noindex={true}>
-  <section class="hero container">
+<BaseLayout title="Interessen" description="Reisen nach Kunst, Geschichte, Architektur, Natur und Genuss kuratieren.">
+  <section class="page-hero container">
     <p class="eyebrow">Interessen</p>
-    <h1>Was interessiert dich wirklich?</h1>
-    <div class="grid">
-      {Object.values(interests).map((interest) => <div class="card"><strong>{interest.name}</strong></div>)}
+    <h1>Dein Interesse ist der Filter.<br />Nicht die Popularität.</h1>
+    <p class="lead">Dass ein Ort bekannt ist, macht ihn nicht automatisch relevant für deine Reise. Wir priorisieren entlang des tatsächlichen Schwerpunkts.</p>
+  </section>
+  <section class="section container">
+    <div class="interest-grid interest-grid--large">
+      {Object.entries(interests).map(([key, interest], index) => {
+        const count = entries.filter((entry) => entry.data.interests.includes(key)).length;
+        return (
+          <div class="interest-card">
+            <span>{String(index + 1).padStart(2,'0')}</span>
+            <h2>{interest.name}</h2>
+            <p>{count ? `${count} veröffentlichte Auswahl${count > 1 ? 'en' : ''} im aktuellen MVP.` : 'Als Themenfeld vorbereitet; noch kein eigener Beitrag veröffentlicht.'}</p>
+          </div>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>

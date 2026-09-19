@@ -22,8 +22,16 @@ commercialIntent:
 datePublished: 2026-09-19
 dateReviewed: 2026-09-19
 reviewAfter: 2027-03-19
-status: review
-affiliateDisclosure: false
+status: published
+heroImage:
+  src: "/images/cordoba-editorial.svg"
+  alt: "Redaktionelles Demo-Visual für Córdoba"
+  source: "Reiseauswahl Demo-Visual"
+  creator: "Reiseauswahl"
+  sourceUrl: "https://github.com/Satte882/komfortorientierte-Individualreisende/blob/main/public/images/cordoba-editorial.svg"
+  license: "Projekt-eigener Demo-Platzhalter"
+  downloaded: 2026-09-19
+affiliateDisclosure: true
 sources:
   - label: "Turismo de Córdoba – Medina Azahara"
     url: "https://www.turismodecordoba.org/medina-azahara"
@@ -31,11 +39,12 @@ sources:
     url: "https://mezquita-catedraldecordoba.es/en/organiza-la-visita/entradas-y-horarios/"
   - label: "Andalucía Tourism – Córdoba"
     url: "https://en.andalucia.org/places-to-visit/cordoba/cordoba/"
-editorialApproval: false
+editorialApproval: true
 ---
 
 import EditorialChoice from '../../components/content/EditorialChoice.astro';
 import SkipRecommendation from '../../components/content/SkipRecommendation.astro';
+import AffiliateBox from '../../components/commercial/AffiliateBox.astro';
 
 Córdoba funktioniert **als Tagesausflug**, wenn du eine klare Auswahl triffst. Für unser Profil würden wir aber **eine Übernachtung bevorzugen**, sobald du mehr willst als Mezquita-Catedral plus Altstadt.
 
@@ -64,6 +73,18 @@ Eine Übernachtung wird für uns sinnvoller, sobald mindestens einer dieser Punk
 - Du möchtest nicht mit einem festen Rückfahrtzeitpunkt durch die Altstadt gehen.
 - Córdoba liegt ohnehin als Zwischenstation zwischen Sevilla und Granada.
 - Architektur und Geschichte sind Kerninteressen und nicht nur Nebenprogramm.
+
+<AffiliateBox
+  partner="booking"
+  url="https://example.com/demo-cordoba-hotel"
+  placement="cordoba-overnight"
+  destination="cordoba"
+  articleType="decision"
+  interest="geschichte"
+  title="Demo: Übernachtung in Córdoba"
+  text="So könnte später eine kontextbezogene Hotelbox aussehen. Im MVP führt sie nur zu einem Dummy-Link."
+  cta="Demo-Hotels ansehen"
+/>
 
 ## Der eigentliche Trade-off
 

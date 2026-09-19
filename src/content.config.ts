@@ -14,7 +14,7 @@ const durationSchema = z.object({
 
 const heroImageSchema = z
   .object({
-    src: z.string().url(),
+    src: z.string().min(1),
     alt: z.string().min(5),
     source: z.string().min(2),
     creator: z.string().min(2),
@@ -30,9 +30,7 @@ const commonSchema = z.object({
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   country: z.string().min(2),
   destination: z.string().refine((value) => destinationIds.has(value), 'Unknown destination'),
-  interests: z
-    .array(z.string().refine((value) => interestIds.has(value), 'Unknown interest'))
-    .min(1),
+  interests: z.array(z.string().refine((value) => interestIds.has(value), 'Unknown interest')).min(1),
   duration: durationSchema,
   targetProfile: z.array(z.string()).default(['komfortorientiert', 'individualreisend']),
   commercialIntent: z.array(z.enum(['hotel', 'tickets', 'tours', 'rental-car', 'none'])).default(['none']),
@@ -48,27 +46,17 @@ const commonSchema = z.object({
 
 const destinationsCollection = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/destinations' }),
-  schema: commonSchema.extend({
-    type: z.literal('destination')
-  })
+  schema: commonSchema.extend({ type: z.literal('destination') })
 });
 
 const guides = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guides' }),
-  schema: commonSchema.extend({
-    type: z.literal('guide')
-  })
+  schema: commonSchema.extend({ type: z.literal('guide') })
 });
 
 const decisions = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/decisions' }),
-  schema: commonSchema.extend({
-    type: z.literal('decision')
-  })
+  schema: commonSchema.extend({ type: z.literal('decision') })
 });
 
-export const collections = {
-  destinations: destinationsCollection,
-  guides,
-  decisions
-};
+export const collections = { destinations: destinationsCollection, guides, decisions };

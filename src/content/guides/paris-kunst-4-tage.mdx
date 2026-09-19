@@ -21,8 +21,16 @@ commercialIntent:
 datePublished: 2026-09-19
 dateReviewed: 2026-09-19
 reviewAfter: 2027-03-19
-status: review
-affiliateDisclosure: false
+status: published
+heroImage:
+  src: "/images/paris-editorial.svg"
+  alt: "Redaktionelles Demo-Visual für Paris"
+  source: "Reiseauswahl Demo-Visual"
+  creator: "Reiseauswahl"
+  sourceUrl: "https://github.com/Satte882/komfortorientierte-Individualreisende/blob/main/public/images/paris-editorial.svg"
+  license: "Projekt-eigener Demo-Platzhalter"
+  downloaded: 2026-09-19
+affiliateDisclosure: true
 sources:
   - label: "Paris je t'aime – Die Kunstmuseen von Paris"
     url: "https://parisjetaime.com/ger/artikel/die-kunstmuseen-von-paris-a629"
@@ -34,11 +42,12 @@ sources:
     url: "https://www.musee-orangerie.fr/en/visit-orangerie"
   - label: "Centre Pompidou – Transformation 2025–2030"
     url: "https://www.centrepompidou.fr/en/centre-pompidou-is-transforming-itself"
-editorialApproval: false
+editorialApproval: true
 ---
 
 import EditorialChoice from '../../components/content/EditorialChoice.astro';
 import SkipRecommendation from '../../components/content/SkipRecommendation.astro';
+import AffiliateBox from '../../components/commercial/AffiliateBox.astro';
 
 Wenn du vier Tage in Paris hast und **Malerei wichtiger ist als eine möglichst vollständige Sehenswürdigkeiten-Liste**, würden wir die Reise nicht nach der Zahl der Museen planen. Drei Häuser reichen als feste Kunstanker. Der Rest bleibt Luft für Paris selbst.
 
@@ -63,6 +72,18 @@ Der Louvre ist für eine Kunstreise zu wichtig, um ihn auszulassen. Aber gerade 
 Unsere Empfehlung: **vorher einen Schwerpunkt wählen**. Zum Beispiel italienische Malerei plus ein ausgewählter französischer Bereich. Der Louvre wird dadurch zu einem kuratierten Besuch statt zu einem Erschöpfungstest.
 
 Aktuelle Zeitfenster und Zugangsregeln solltest du unmittelbar vor der Reise auf der offiziellen Museumsseite prüfen.
+
+<AffiliateBox
+  partner="getyourguide"
+  url="https://example.com/demo-paris-ticket"
+  placement="paris-after-louvre"
+  destination="paris"
+  articleType="guide"
+  interest="kunst"
+  title="Demo: Tickets und Führungen vergleichen"
+  text="Diese Box zeigt die spätere Affiliate-Platzierung. Der Link ist im lokalen MVP nur ein Dummy."
+  cta="Demo-Angebote ansehen"
+/>
 
 ## 3. Orangerie: kleine Fläche, großer Mehrwert für Monet
 
@@ -100,8 +121,6 @@ Dann würden wir als vierten Kunstbaustein eher das **Musée Marmottan Monet** p
 ## Wo übernachten?
 
 Für dieses Profil würden wir keine „beste Gegend für Paris“ behaupten. Praktisch sind Lagen, von denen Orsay, Louvre und das Zentrum ohne unnötig viele Umstiege erreichbar sind.
-
-Vor einer späteren Affiliate-Integration sollte genau hier geprüft werden, ob konkrete Hotel-Empfehlungen tatsächlich zusätzlichen redaktionellen Nutzen bringen. Im MVP verlinken wir deshalb noch keine beliebigen Hotelangebote.
 
 ## Was vor der Reise prüfen?
 

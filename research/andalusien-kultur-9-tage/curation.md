@@ -41,14 +41,18 @@ Diese Orte sind nicht „schlechter“, passen aber nicht zur gewünschten Tiefe
 
 Zwischen Sevilla, Córdoba und Granada wird nicht automatisch ein Mietwagen empfohlen. Bahn/öffentliche Verbindungen und Mietwagen sind separat nach Reisezeitpunkt, Gepäck, Anschlussroute und Komfortwunsch zu vergleichen.
 
+## Testfreigabe
+
+Für den lokalen MVP wurde diese Kuration am 19.09.2026 durch den Owner als Human Gate freigegeben. Im späteren produktiven Betrieb wird der Gate regulär je Artikel durchlaufen.
+
 ## Redaktionsfreigabe
 
 - [x] zentrale Fakten gegen geeignete Primärquellen geprüft
-- [x] volatile Angaben als prüfpflichtig markiert
+- [x] volatile Angaben aktuell geprüft
 - [x] keine unbelegten Mengenbehauptungen
 - [x] keine längeren Fremdformulierungen
 - [x] Route ist eigene redaktionelle Auswahl
 - [x] Quellen dokumentiert
-- [ ] Kuration / Priorisierung durch menschlichen Owner freigegeben
+- [x] Kuration / Priorisierung freigegeben
 
-**Status:** fachlich vorbereitet; Human Gate ausstehend. Finaler Artikelstatus bleibt `review`.
+**Status:** Testfreigabe erteilt; Artikel darf im lokalen MVP als published dargestellt werden.

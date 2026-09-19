@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/content/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+const decisions = (await getCollection('decisions')).filter((entry) => entry.data.status === 'published');
+---
+<BaseLayout title="Reiseentscheidungen" description="Konkrete Reiseentscheidungen mit sichtbaren Trade-offs statt allgemeiner Bestenlisten.">
+  <section class="page-hero container">
+    <p class="eyebrow">Entscheidungen</p>
+    <h1>Die eigentliche Arbeit beginnt bei „oder“.</h1>
+    <p class="lead">Tagesausflug oder Übernachtung? Mietwagen oder Bahn? Drei Nächte oder vier? Diese Seiten konzentrieren sich genau auf solche Entscheidungen.</p>
+  </section>
+  <section class="section container">
+    <div class="article-grid">
+      {decisions.map((entry) => (
+        <ArticleCard href={`/decisions/${entry.data.slug}/`} title={entry.data.title} description={entry.data.description} image={entry.data.heroImage?.src} kicker="Entscheidung" meta={entry.data.destination} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

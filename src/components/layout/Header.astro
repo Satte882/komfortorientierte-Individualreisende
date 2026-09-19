@@ -3,7 +3,13 @@ import { site } from '../../data/site';
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/">{site.name}</a>
+    <a class="brand" href="/" aria-label="Reiseauswahl Startseite">
+      <span class="brand-mark" aria-hidden="true">R</span>
+      <span>
+        <strong>{site.name}</strong>
+        <small>{site.tagline}</small>
+      </span>
+    </a>
     <nav class="nav" aria-label="Hauptnavigation">
       {site.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
