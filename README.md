@@ -63,6 +63,18 @@ Wichtiger als das Alter ist das Verhalten:
 11. [11-feedback-und-entscheidungsprotokoll.md](docs/11-feedback-und-entscheidungsprotokoll.md)  
     Die drei ausführlichen Gegenanalysen, akzeptierte Kritikpunkte, Korrekturen und verworfene Ansätze.
 
+12. [12-finales-html-und-template-design.md](docs/12-finales-html-und-template-design.md)  
+    Finales HTML-/Template-Konzept inklusive Affiliate-Kennzeichnung, Tracking, Structured Data und Legal-Footer.
+
+13. [13-impressum-dummy.md](docs/13-impressum-dummy.md)  
+    Dummy-Vorlage für das Impressum mit Platzhaltern für Anbieter-, Kontakt- und Registerangaben.
+
+14. [14-datenschutzerklaerung-dummy.md](docs/14-datenschutzerklaerung-dummy.md)  
+    Dummy-Vorlage für die Datenschutzerklärung inklusive Hosting, Consent, Analytics, Affiliate-Tracking und Betroffenenrechten.
+
+15. [15-cookie-und-consent-dummy.md](docs/15-cookie-und-consent-dummy.md)  
+    Dummy-Konzept für Consent-Banner, Cookie-Einstellungen, Affiliate-Tracking und Widerruf.
+
 ## Nicht-Ziele
 
 Aktuell ausdrücklich **nicht** vorgesehen:
@@ -84,3 +96,19 @@ Aktuell ausdrücklich **nicht** vorgesehen:
 ## Zentraler offener Business-Test
 
 > **Kann eine klar fokussierte, zahlungsbereite Zielgruppe mit mehreren Affiliate-relevanten Buchungsentscheidungen wirtschaftlich genug erreicht und konvertiert werden, um den redaktionellen Aufwand zu rechtfertigen?**
+
+
+## Go-live-Mindestbasis
+
+Vor Veröffentlichung müssen mindestens umgesetzt und geprüft sein:
+
+- Impressum;
+- Datenschutzerklärung;
+- dauerhaft erreichbare Cookie-Einstellungen;
+- Consent-Management passend zu den tatsächlich eingesetzten Technologien;
+- sichtbare Affiliate-Kennzeichnung;
+- `rel="sponsored"` für Affiliate-Links;
+- dokumentierter Bildrechteprozess;
+- Affiliate-Event-Tracking;
+- Structured Data;
+- vollständige Ersetzung aller Dummy-Felder durch reale Angaben.
