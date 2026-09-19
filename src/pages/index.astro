@@ -12,7 +12,8 @@ const decisions = (await getCollection('decisions')).filter((entry) => entry.dat
       <div class="home-hero__copy">
         <p class="eyebrow">Redaktionelle Reiseauswahl</p>
         <h1>Nicht mehr sehen.<br /><em>Besser auswählen.</em></h1>
-        <p class="lead">Für Menschen, die ihre Reise selbst organisieren, aber nicht jeden Ort, jedes Museum und jede Route selbst gegeneinander abwägen wollen.</p>
+        <p class="lead">Für alle, die ihre Reise selbst planen möchten – aber nicht jede Entscheidung allein und unsicher treffen wollen.</p>
+        <p class="hero-trust">Redaktionell kuratiert. Quellen geprüft. Trade-offs sichtbar. Vor Veröffentlichung freigegeben.</p>
         <div class="hero-actions">
           <a class="button" href="#auswahl">Ausgewählte Reisen</a>
           <a class="button button--ghost" href="/methodik/">Wie wir auswählen</a>
@@ -24,9 +25,10 @@ const decisions = (await getCollection('decisions')).filter((entry) => entry.dat
         </div>
       </div>
       <div class="home-hero__visual">
-        <img src="/images/hero-editorial.svg" alt="Abstrakte redaktionelle Reisecollage" />
+        <!-- PLACEHOLDER: real image pending, slug=home -->
+        <img src="/images/hero-editorial.svg" alt="Abstrakte redaktionelle Reisecollage" fetchpriority="high" />
         <div class="hero-note">
-          <span class="label">Unsere Logik</span>
+          <span class="label">Unsere Auswahl</span>
           <strong>Was lohnt sich wirklich?</strong>
           <p>Wir gewichten nach Interesse, Zeit, Route und Komfort – nicht nach Anzahl der Sehenswürdigkeiten.</p>
         </div>
@@ -53,12 +55,12 @@ const decisions = (await getCollection('decisions')).filter((entry) => entry.dat
     <div class="article-grid">
       {guides.map((entry) => (
         <ArticleCard
-          href={`/guides/${entry.data.slug}/`}
+          href={'/guides/' + entry.data.slug + '/'}
           title={entry.data.title}
           description={entry.data.description}
           image={entry.data.heroImage?.src}
           kicker="Guide"
-          meta={`${entry.data.duration.ideal} Tage`}
+          meta={entry.data.duration.ideal + ' Tage'}
         />
       ))}
     </div>
@@ -74,7 +76,7 @@ const decisions = (await getCollection('decisions')).filter((entry) => entry.dat
       </div>
       <div class="decision-row">
         {decisions.map((entry) => (
-          <a class="decision-card" href={`/decisions/${entry.data.slug}/`}>
+          <a class="decision-card" href={'/decisions/' + entry.data.slug + '/'}>
             <span class="label">Entscheidung</span>
             <h3>{entry.data.title}</h3>
             <p>{entry.data.description}</p>

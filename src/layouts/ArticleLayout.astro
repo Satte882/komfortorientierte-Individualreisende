@@ -16,6 +16,8 @@ const jsonLd = {
   inLanguage: 'de-DE'
 };
 const typeLabel = data.type === 'decision' ? 'Reiseentscheidung' : data.type === 'guide' ? 'Kuratierter Guide' : 'Reiseziel';
+const isDemoImage = Boolean(data.heroImage?.src && data.heroImage.src.includes('-editorial.svg'));
+const placeholderComment = '<!-- PLACEHOLDER: real image pending, slug=' + data.slug + ' -->';
 ---
 <BaseLayout
   title={data.title}
@@ -36,12 +38,24 @@ const typeLabel = data.type === 'decision' ? 'Reiseentscheidung' : data.type ===
       </div>
     </div>
     <figure class="article-hero__visual">
+      {isDemoImage && <Fragment set:html={placeholderComment} />}
       {data.heroImage ? (
         <>
-          <img src={data.heroImage.src} alt={data.heroImage.alt} loading="eager" />
+          <img
+            src={data.heroImage.src}
+            alt={data.heroImage.alt}
+            loading="eager"
+            fetchpriority="high"
+            data-demo-asset={isDemoImage ? 'true' : undefined}
+          />
           <figcaption>{data.heroImage.source} · {data.heroImage.license}</figcaption>
         </>
-      ) : <div class="visual-placeholder visual-placeholder--large" aria-hidden="true"></div>}
+      ) : (
+        <>
+          <Fragment set:html={placeholderComment} />
+          <div class="visual-placeholder visual-placeholder--large" aria-hidden="true" data-placeholder-slug={data.slug}></div>
+        </>
+      )}
     </figure>
   </header>
   <article class="prose article-body">

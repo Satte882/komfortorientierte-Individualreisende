@@ -8,10 +8,21 @@ interface Props {
   meta?: string;
 }
 const { href, title, description, image, kicker = 'Reiseauswahl', meta = '' } = Astro.props;
+const placeholderSlug = href.split('/').filter(Boolean).pop() || 'article-card';
+const isDemoImage = Boolean(image && image.includes('-editorial.svg'));
+const placeholderComment = '<!-- PLACEHOLDER: real image pending, slug=' + placeholderSlug + ' -->';
 ---
 <a class="article-card" href={href}>
   <div class="article-card__visual">
-    {image ? <img src={image} alt="" loading="lazy" /> : <div class="visual-placeholder" aria-hidden="true"></div>}
+    {isDemoImage && <Fragment set:html={placeholderComment} />}
+    {image ? (
+      <img src={image} alt="" loading="lazy" data-demo-asset={isDemoImage ? 'true' : undefined} />
+    ) : (
+      <>
+        <Fragment set:html={placeholderComment} />
+        <div class="visual-placeholder" aria-hidden="true" data-placeholder-slug={placeholderSlug}></div>
+      </>
+    )}
   </div>
   <div class="article-card__body">
     <div class="article-card__topline">
