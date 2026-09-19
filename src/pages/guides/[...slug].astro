@@ -3,7 +3,10 @@ import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 
 export async function getStaticPaths() {
-  const entries = (await getCollection('guides')).filter((entry) => entry.data.status === 'published');
+  const preview = import.meta.env.PREVIEW_CONTENT === 'true';
+  const entries = (await getCollection('guides')).filter((entry) =>
+    entry.data.status === 'published' || (preview && entry.data.status === 'review')
+  );
   return entries.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
 }
 
