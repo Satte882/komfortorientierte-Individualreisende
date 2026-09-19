@@ -1,0 +1,38 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import ArticleMeta from '../components/content/ArticleMeta.astro';
+import MethodologyNote from '../components/content/MethodologyNote.astro';
+import SourceList from '../components/content/SourceList.astro';
+
+const { data } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: new Date(data.datePublished).toISOString(),
+  dateModified: new Date(data.dateReviewed).toISOString(),
+  inLanguage: 'de-DE'
+};
+---
+<BaseLayout title={data.title} description={data.description} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ label: data.title }]} />
+  <header class="article-header prose">
+    <p class="eyebrow">{data.type === 'decision' ? 'Reiseentscheidung' : data.type === 'guide' ? 'Kuratierter Guide' : 'Reiseziel'}</p>
+    <h1>{data.title}</h1>
+    <p class="lead">{data.description}</p>
+    <ArticleMeta datePublished={data.datePublished} dateReviewed={data.dateReviewed} duration={data.duration} />
+  </header>
+  {data.heroImage && (
+    <figure class="container">
+      <img class="hero-image" src={data.heroImage.src} alt={data.heroImage.alt} loading="eager" />
+      <figcaption class="article-meta">Foto: {data.heroImage.creator} · {data.heroImage.source}</figcaption>
+    </figure>
+  )}
+  <article class="prose article-body">
+    <slot />
+    <MethodologyNote />
+    <SourceList sources={data.sources} />
+  </article>
+</BaseLayout>
