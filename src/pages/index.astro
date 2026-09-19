@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const publishedGuides = (await getCollection('guides')).filter((entry) => entry.data.status === 'published').slice(0, 3);
+const publishedDecisions = (await getCollection('decisions')).filter((entry) => entry.data.status === 'published').slice(0, 3);
+---
+<BaseLayout>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">Komfortorientierte Individualreisen</p>
+        <h1>Reisen, die zu deinen Interessen passen.</h1>
+        <p class="lead">Wir helfen dir auszuwählen: Was lohnt sich? Was kannst du weglassen? Wie kombinierst du deine Reise sinnvoll?</p>
+        <a class="button" href="#auswahl">Auswahl entdecken</a>
+      </div>
+      <aside class="hero-panel">
+        <strong>Redaktion statt Reizüberflutung</strong>
+        <p>Klare Prioritäten, bewusste Trade-offs und nachvollziehbare Quellen – ohne Scores und ohne endlose Listen.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="auswahl" class="section container">
+    <p class="eyebrow">Interessen</p>
+    <h2>Wähle, was dich wirklich interessiert</h2>
+    <div class="grid">
+      {['Kunst & Kultur', 'Geschichte', 'Architektur', 'Natur & Wandern', 'Genuss'].map((interest) => (
+        <div class="card"><strong>{interest}</strong><p>Kuratiert nach Zeit, Route und Relevanz.</p></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container">
+    <p class="eyebrow">Ausgewählte Reisen</p>
+    <h2>Guides</h2>
+    <div class="grid">
+      {publishedGuides.length ? publishedGuides.map((entry) => (
+        <a class="card" href={`/guides/${entry.data.slug}/`}><strong>{entry.data.title}</strong><p>{entry.data.description}</p></a>
+      )) : <p>Noch keine veröffentlichten Guides.</p>}
+    </div>
+  </section>
+
+  <section class="section container">
+    <p class="eyebrow">Konkrete Entscheidungen</p>
+    <h2>Was lohnt sich – und was nicht?</h2>
+    <div class="grid">
+      {publishedDecisions.length ? publishedDecisions.map((entry) => (
+        <a class="card" href={`/decisions/${entry.data.slug}/`}><strong>{entry.data.title}</strong><p>{entry.data.description}</p></a>
+      )) : <p>Noch keine veröffentlichten Entscheidungsartikel.</p>}
+    </div>
+  </section>
+</BaseLayout>
