@@ -99,13 +99,21 @@ const jsonLd = {
       <aside class="paris-stage" aria-label="Visuelle Begleitung des Paris-Guides">
         <div class="paris-stage__frame">
           <div class="paris-stage__media" aria-live="polite">
-            <figure class="paris-stage__image is-active" data-media="paris">
+            <figure class="paris-stage__image paris-stage__image--collage is-active" data-media="overview">
+              <div class="paris-stage__collage" aria-label="Orsay, Louvre und Orangerie">
+                <img src="/images/paris-spike/orsay.webp" alt="Musée d'Orsay" loading="eager" />
+                <img src="/images/paris-spike/louvre.webp" alt="Louvre" loading="eager" />
+                <img src="/images/paris-spike/orangerie.webp" alt="Musée de l'Orangerie" loading="eager" />
+              </div>
+              <figcaption>Unsere drei Kunstanker · Orsay · Louvre · Orangerie</figcaption>
+            </figure>
+            <figure class="paris-stage__image" data-media="paris" aria-hidden="true">
               <img
                 src="/images/paris-spike/paris-seine-sunset.webp"
                 alt="Paris an der Seine bei Sonnenuntergang"
-                loading="eager"
+                loading="lazy"
               />
-              <figcaption>Paris · Einstieg</figcaption>
+              <figcaption>Paris · Raum für Pause und Flexibilität</figcaption>
             </figure>
             <figure class="paris-stage__image" data-media="orsay" aria-hidden="true">
               <img
@@ -130,6 +138,14 @@ const jsonLd = {
                 loading="lazy"
               />
               <figcaption>Musée de l'Orangerie · Foto: John Samuel · CC BY-SA 4.0</figcaption>
+            </figure>
+            <figure class="paris-stage__image" data-media="marmottan" aria-hidden="true">
+              <img
+                src="/images/paris-spike/marmottan.webp"
+                alt="Außenansicht des Musée Marmottan Monet in Paris"
+                loading="lazy"
+              />
+              <figcaption>Musée Marmottan Monet · Pierre André Leclercq · CC BY-SA 4.0</figcaption>
             </figure>
           </div>
 
@@ -206,167 +222,145 @@ const jsonLd = {
         orsay: {
           id: 'orsay',
           name: "Musée d'Orsay",
-          center: [2.3259, 48.8600],
-          zoom: 15.2,
-          role: 'Priorität',
-          media: 'orsay',
-          copy: 'Erste Priorität für Impressionismus und Kunst des 19. Jahrhunderts.'
+          center: [2.3259, 48.8600]
         },
         louvre: {
           id: 'louvre',
           name: 'Louvre',
-          center: [2.3364, 48.8606],
-          zoom: 15.2,
-          role: 'Priorität',
-          media: 'louvre',
-          copy: 'Unbedingt – aber mit vorher gewähltem Schwerpunkt statt als Vollständigkeitsprojekt.'
+          center: [2.3364, 48.8606]
         },
         orangerie: {
           id: 'orangerie',
           name: "Musée de l'Orangerie",
-          center: [2.3226, 48.8638],
-          zoom: 15.5,
-          role: 'Priorität',
-          media: 'orangerie',
-          copy: 'Kleine Fläche, großer Mehrwert für Monet – bewusst an einem leichteren Tag.'
+          center: [2.3226, 48.8638]
         },
         marmottan: {
           id: 'marmottan',
           name: 'Musée Marmottan Monet',
-          center: [2.2672, 48.8593],
-          zoom: 13.8,
+          center: [2.2672, 48.8593]
+        }
+      };
+
+      const routeOrder = ['orsay', 'louvre', 'orangerie'];
+      const routeCoordinates = routeOrder.map((key) => places[key].center);
+
+      const stageStates = {
+        overview: {
+          media: 'overview',
+          role: 'Unsere Auswahl',
+          title: 'Orsay → Louvre → Orangerie → Flex',
+          copy: 'Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        profile: {
+          media: 'overview',
+          role: 'Für dieses Profil',
+          title: 'Kunst sehen – nicht Museen sammeln',
+          copy: 'Ein fordernder Kunstblock pro Tag. Danach Paris, Pause und freie Zeit.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        orsay: {
+          media: 'orsay',
+          role: 'Priorität 1',
+          title: "Musée d'Orsay",
+          copy: 'Höchste Profilpassung für Impressionismus und Kunst des 19. Jahrhunderts – als eigener, konzentrierter Museumsblock.',
+          map: { view: 'core', focus: 'orsay', route: 0 }
+        },
+        louvre: {
+          media: 'louvre',
+          role: 'Priorität 2',
+          title: 'Louvre',
+          copy: 'Unbedingt – aber mit vorher gewähltem Schwerpunkt statt als Vollständigkeitsprojekt.',
+          map: { view: 'core', focus: 'louvre', route: 1 }
+        },
+        orangerie: {
+          media: 'orangerie',
+          role: 'Priorität 3',
+          title: "Musée de l'Orangerie",
+          copy: 'Der bewusst leichtere dritte Kunstanker: kompakter, fokussierter und gut mit den Tuilerien kombinierbar.',
+          map: { view: 'core', focus: 'orangerie', route: 2 }
+        },
+        plan: {
+          media: 'overview',
+          role: '4-Tage-Struktur',
+          title: 'Orsay → Louvre → Orangerie → Flex',
+          copy: 'Die drei Kernmuseen bekommen je ihren eigenen Rhythmus. Tag vier bleibt Risikopuffer statt Pflichtprogramm.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        versailles: {
+          media: 'overview',
+          role: 'Bewusst weglassen',
+          title: 'Versailles',
+          copy: 'Bei vier Tagen und engem Malerei-Fokus investieren wir die Zeit lieber in die drei Kernanker und in Paris selbst.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        pompidou: {
+          media: 'overview',
+          role: 'Aktuell weglassen',
+          title: 'Centre Pompidou',
+          copy: '2026 nicht als normalen Museumsstop einplanen. Die drei Kernanker bleiben die belastbare Basis.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        marmottan: {
+          media: 'marmottan',
           role: 'Optional',
+          title: 'Musée Marmottan Monet',
+          copy: 'Als vierter Kunstbaustein nur bei echtem Monet-Spezialinteresse – räumlich deutlich außerhalb der Kernroute.',
+          map: { view: 'all', focus: 'marmottan', route: 'full' }
+        },
+        flex: {
           media: 'paris',
-          copy: 'Als vierter Kunstbaustein nur bei echtem Monet-Spezialinteresse.'
+          role: 'Flex-Puffer',
+          title: 'Tag D hält die Reise beweglich',
+          copy: 'Verpasste Slots, Wetter oder Müdigkeit werden aufgefangen, ohne einen Kunsttag zu überladen.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        stay: {
+          media: 'paris',
+          role: 'Komfortentscheidung',
+          title: 'Lage schlägt Romantik',
+          copy: 'Kurze, einfache Wege zur Seine-Achse sind für diesen Guide wichtiger als die spektakulärste Adresse.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        precheck: {
+          media: 'overview',
+          role: 'Vor der Reise',
+          title: 'Öffnungstage und Slots zuerst',
+          copy: 'Die Reihenfolge bleibt flexibel. Entscheidend sind aktuelle Öffnungstage, Zeitfenster und Sonderausstellungen.',
+          map: { view: 'core', focus: null, route: 'full' }
+        },
+        final: {
+          media: 'overview',
+          role: 'Unsere Entscheidung',
+          title: 'Drei Kunstanker. Ein Flex-Tag.',
+          copy: 'Orsay priorisieren, Louvre kuratieren, Orangerie leicht halten und den vierten Tag bewusst schützen.',
+          map: { view: 'core', focus: null, route: 'full' }
         }
       };
 
-      const overviewState = {
-        media: 'paris',
-        role: 'Unsere Auswahl',
-        title: 'Orsay → Louvre → Orangerie → Flex',
-        copy: 'Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.',
-        mapView: 'core',
-        route: 'full'
-      };
-
-      const states = [
-        {
-          match: /für wen wir hier entscheiden/i,
-          custom: {
-            media: 'paris',
-            role: 'Für dieses Profil',
-            title: 'Kunst sehen – nicht Museen sammeln',
-            copy: 'Ein fordernder Kunstblock pro Tag. Danach Paris, Pause und freie Zeit.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /musée d'orsay/i,
-          place: 'orsay'
-        },
-        {
-          match: /^louvre:/i,
-          place: 'louvre'
-        },
-        {
-          match: /orangerie:/i,
-          place: 'orangerie'
-        },
-        {
-          match: /so würden wir vier tage tatsächlich aufbauen/i,
-          custom: {
-            media: 'paris',
-            role: '4-Tage-Struktur',
-            title: 'Orsay → Louvre → Orangerie → Flex',
-            copy: 'Die drei Kernmuseen bekommen je ihren eigenen Rhythmus. Tag vier bleibt Risikopuffer statt Pflichtprogramm.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /^versailles$/i,
-          custom: {
-            media: 'paris',
-            role: 'Bewusst weglassen',
-            title: 'Versailles',
-            copy: 'Bei vier Tagen und engem Malerei-Fokus bindet der Ausflug zu viel Zeit und Energie.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /centre pompidou/i,
-          custom: {
-            media: 'paris',
-            role: 'Aktuell weglassen',
-            title: 'Centre Pompidou',
-            copy: '2026 nicht als normalen Museumsstop einplanen. Erst das aktuelle Programm an Ausweichorten prüfen.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /monet dein spezialinteresse/i,
-          place: 'marmottan'
-        },
-        {
-          match: /plan b:/i,
-          custom: {
-            media: 'paris',
-            role: 'Flex-Puffer',
-            title: 'Tag D hält die Reise beweglich',
-            copy: 'Verpasste Slots, Wetter oder Müdigkeit werden aufgefangen, ohne einen Kunsttag zu überladen.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /wo würden wir übernachten/i,
-          custom: {
-            media: 'paris',
-            role: 'Komfortentscheidung',
-            title: 'Lage schlägt Romantik',
-            copy: 'Kurze, einfache Wege zu Orsay, Louvre und Tuilerien sind für diesen Guide wichtiger als die spektakulärste Adresse.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /was vor der reise noch einmal prüfen/i,
-          custom: {
-            media: 'paris',
-            role: 'Vor der Reise',
-            title: 'Öffnungstage und Slots zuerst',
-            copy: 'Die Reihenfolge bleibt flexibel. Entscheidend sind aktuelle Öffnungstage, Zeitfenster und Sonderausstellungen.',
-            mapView: 'core',
-            route: 'full'
-          }
-        },
-        {
-          match: /unsere entscheidung in einem satz/i,
-          custom: {
-            media: 'paris',
-            role: 'Unsere Entscheidung',
-            title: 'Drei Kunstanker. Ein Flex-Tag.',
-            copy: 'Orsay priorisieren, Louvre kuratieren, Orangerie leicht halten und den vierten Tag bewusst schützen.',
-            mapView: 'core',
-            route: 'full'
-          }
-        }
+      const chapterStates = [
+        { match: /für wen wir hier entscheiden/i, key: 'profile' },
+        { match: /musée d'orsay/i, key: 'orsay' },
+        { match: /^louvre:/i, key: 'louvre' },
+        { match: /orangerie:/i, key: 'orangerie' },
+        { match: /so würden wir vier tage tatsächlich aufbauen/i, key: 'plan' },
+        { match: /^versailles$/i, key: 'versailles' },
+        { match: /centre pompidou/i, key: 'pompidou' },
+        { match: /monet dein spezialinteresse/i, key: 'marmottan' },
+        { match: /plan b:/i, key: 'flex' },
+        { match: /wo würden wir übernachten/i, key: 'stay' },
+        { match: /was vor der reise noch einmal prüfen/i, key: 'precheck' },
+        { match: /unsere entscheidung in einem satz/i, key: 'final' }
       ];
 
       let map;
       let maplibregl;
       let routeSource;
       let routeAnimationFrame = null;
-      let activePlace = null;
-      let activeCustom = overviewState;
       let mapReady = false;
-
-      const routeOrder = ['orsay', 'louvre', 'orangerie'];
-      const routeCoordinates = routeOrder.map((key) => places[key].center);
+      let activeStateKey = 'overview';
+      let activeStoryElement = null;
+      let storyTicking = false;
 
       if (heroVideo && heroSource && !reducedMotion && !saveData) {
         heroSource.src = heroSource.dataset.src;
@@ -385,18 +379,19 @@ const jsonLd = {
         });
       }
 
-      function setDecision(role, title, copy) {
-        if (decisionStatus) decisionStatus.textContent = role;
-        if (decisionTitle) decisionTitle.textContent = title;
-        if (decisionCopy) decisionCopy.textContent = copy;
+      function setDecision(state) {
+        if (decisionStatus) decisionStatus.textContent = state.role;
+        if (decisionTitle) decisionTitle.textContent = state.title;
+        if (decisionCopy) decisionCopy.textContent = state.copy;
         const decision = experience.querySelector('[data-paris-decision]');
-        if (decision) decision.setAttribute('data-role', role.toLowerCase());
+        if (decision) decision.setAttribute('data-role', state.role.toLowerCase());
       }
 
-      function routeForPlace(key) {
-        const index = routeOrder.indexOf(key);
-        if (index < 0) return routeCoordinates;
-        return routeCoordinates.slice(0, index + 1);
+      function boundsFor(coordinates) {
+        return coordinates.reduce(
+          (bounds, coordinate) => bounds.extend(coordinate),
+          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+        );
       }
 
       function setRouteData(coordinates) {
@@ -411,16 +406,28 @@ const jsonLd = {
         });
       }
 
-      function updateRoute(key) {
+      function routeCoordinatesFor(route) {
+        if (route === 'full') return routeCoordinates;
+        if (typeof route === 'number') {
+          return routeCoordinates.slice(0, Math.max(1, route + 1));
+        }
+        return [routeCoordinates[0]];
+      }
+
+      function animateRouteFor(state) {
         if (!mapReady || !routeSource) return;
-        const coordinates = routeForPlace(key);
+        const coordinates = routeCoordinatesFor(state.map.route);
 
         if (routeAnimationFrame) {
           cancelAnimationFrame(routeAnimationFrame);
           routeAnimationFrame = null;
         }
 
-        if (reducedMotion || coordinates.length < 2 || routeOrder.indexOf(key) < 0) {
+        if (
+          reducedMotion ||
+          state.map.route === 'full' ||
+          coordinates.length < 2
+        ) {
           setRouteData(coordinates);
           return;
         }
@@ -429,7 +436,7 @@ const jsonLd = {
         const from = coordinates[coordinates.length - 2];
         const to = coordinates[coordinates.length - 1];
         const started = performance.now();
-        const duration = 700;
+        const duration = 650;
 
         const frame = (now) => {
           const progress = Math.min(1, (now - started) / duration);
@@ -450,88 +457,80 @@ const jsonLd = {
         routeAnimationFrame = requestAnimationFrame(frame);
       }
 
-      function boundsFor(coordinates) {
-        return coordinates.reduce(
-          (bounds, coordinate) => bounds.extend(coordinate),
-          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
-        );
+      function mapPadding(state) {
+        if (state.map.view === 'all') {
+          return { top: 52, right: 46, bottom: 52, left: 46 };
+        }
+
+        switch (state.map.focus) {
+          case 'orsay':
+            return { top: 62, right: 118, bottom: 56, left: 44 };
+          case 'louvre':
+            return { top: 62, right: 44, bottom: 56, left: 118 };
+          case 'orangerie':
+            return { top: 96, right: 102, bottom: 42, left: 48 };
+          default:
+            return { top: 60, right: 60, bottom: 60, left: 60 };
+        }
       }
 
-      function fitMapContext(view = 'core') {
+      function updateMarkerState(state) {
+        const focus = state.map.focus;
+        const focusIndex = routeOrder.indexOf(focus);
+
+        experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
+          const key = marker.getAttribute('data-poi-key');
+          const index = routeOrder.indexOf(key);
+          marker.classList.toggle('is-active', key === focus);
+          marker.classList.toggle(
+            'is-completed',
+            focusIndex >= 0 && index >= 0 && index < focusIndex
+          );
+          marker.classList.toggle(
+            'is-future',
+            focusIndex >= 0 && index > focusIndex
+          );
+        });
+
+        experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
+          card.classList.toggle('is-active', card.getAttribute('data-poi-jump') === focus);
+        });
+      }
+
+      function updateMapState(state) {
         if (!mapReady || !map || !maplibregl) return;
 
-        const core = view !== 'all';
-        const coordinates = core
-          ? routeCoordinates
-          : [...routeCoordinates, places.marmottan.center];
+        animateRouteFor(state);
+        updateMarkerState(state);
+
+        const coordinates = state.map.view === 'all'
+          ? [...routeCoordinates, places.marmottan.center]
+          : routeCoordinates;
 
         map.fitBounds(boundsFor(coordinates), {
-          padding: core
-            ? { top: 58, right: 52, bottom: 58, left: 52 }
-            : { top: 52, right: 46, bottom: 52, left: 46 },
-          maxZoom: core ? 14.15 : 12.8,
-          duration: reducedMotion ? 0 : 700,
+          padding: mapPadding(state),
+          maxZoom: state.map.view === 'all' ? 12.8 : 14.05,
+          duration: reducedMotion ? 0 : 650,
           essential: false
         });
       }
 
-      function fitMapForPlace(key) {
-        fitMapContext(routeOrder.includes(key) ? 'core' : 'all');
+      function activateStageState(key) {
+        const state = stageStates[key];
+        if (!state) return;
+
+        activeStateKey = key;
+        setMedia(state.media);
+        setDecision(state);
+        updateMapState(state);
       }
 
-      function activatePlace(key, shouldScroll = false) {
-        const place = places[key];
-        if (!place) return;
-        activePlace = key;
-        activeCustom = null;
-        setMedia(place.media);
-        setDecision(place.role, place.name, place.copy);
-        updateRoute(key);
-        fitMapForPlace(key);
-
-        const activeIndex = routeOrder.indexOf(key);
-        experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
-          const markerKey = marker.getAttribute('data-poi-key');
-          const markerIndex = routeOrder.indexOf(markerKey);
-          marker.classList.toggle('is-active', markerKey === key);
-          marker.classList.toggle('is-completed', activeIndex >= 0 && markerIndex >= 0 && markerIndex < activeIndex);
-          marker.classList.toggle('is-future', activeIndex >= 0 && markerIndex > activeIndex);
+      function scrollToState(key) {
+        const trackedItem = tracked.find((item) => item.key === key);
+        trackedItem?.element.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'center'
         });
-        experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
-          card.classList.toggle('is-active', card.getAttribute('data-poi-jump') === key);
-        });
-
-        if (shouldScroll) {
-          const target = [...experience.querySelectorAll('h2')].find((heading) => {
-            const text = heading.textContent?.trim() || '';
-            const state = states.find((entry) => entry.place === key);
-            return Boolean(state?.match.test(text));
-          });
-          target?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
-        }
-      }
-
-      function activateCustom(custom) {
-        activePlace = null;
-        activeCustom = custom;
-        setMedia(custom.media);
-        setDecision(custom.role, custom.title, custom.copy);
-
-        experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
-          marker.classList.remove('is-active', 'is-completed', 'is-future');
-        });
-        experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
-          card.classList.remove('is-active');
-        });
-
-        if (mapReady) {
-          if (custom.route === 'none') {
-            setRouteData([routeCoordinates[0]]);
-          } else {
-            setRouteData(routeCoordinates);
-          }
-          fitMapContext(custom.mapView || 'core');
-        }
       }
 
       async function initMap() {
@@ -578,7 +577,7 @@ const jsonLd = {
               paint: {
                 'line-color': '#526057',
                 'line-width': 3,
-                'line-opacity': 0.32,
+                'line-opacity': 0.30,
                 'line-dasharray': [1.5, 1.5]
               }
             });
@@ -606,7 +605,7 @@ const jsonLd = {
               paint: {
                 'line-color': '#9a7146',
                 'line-width': 5,
-                'line-opacity': 0.96
+                'line-opacity': 0.98
               }
             });
 
@@ -618,9 +617,18 @@ const jsonLd = {
               marker.className = 'paris-map-marker';
               marker.setAttribute('data-poi-key', place.id);
               marker.setAttribute('aria-label', place.name + ' auf der Karte auswählen');
-              marker.textContent = place.id === 'marmottan' ? 'O' : String(routeOrder.indexOf(place.id) + 1);
-              if (place.id === 'marmottan') marker.classList.add('paris-map-marker--optional');
-              marker.addEventListener('click', () => activatePlace(place.id, true));
+              marker.textContent = place.id === 'marmottan'
+                ? 'O'
+                : String(routeOrder.indexOf(place.id) + 1);
+              if (place.id === 'marmottan') {
+                marker.classList.add('paris-map-marker--optional');
+              }
+
+              marker.addEventListener('click', () => {
+                const key = place.id;
+                activateStageState(key);
+                scrollToState(key);
+              });
 
               new maplibregl.Marker({ element: marker, anchor: 'center' })
                 .setLngLat(place.center)
@@ -628,14 +636,11 @@ const jsonLd = {
             });
 
             mapReady = true;
-            if (activeCustom) {
-              activateCustom(activeCustom);
-            } else {
-              activatePlace(activePlace || 'orsay');
-            }
+            updateMapState(stageStates[activeStateKey]);
           });
         } catch (error) {
-          mapContainer.innerHTML = '<div class="paris-stage__map-placeholder"><span>Interaktive Karte konnte nicht geladen werden. Der Guide bleibt vollständig nutzbar.</span></div>';
+          mapContainer.innerHTML =
+            '<div class="paris-stage__map-placeholder"><span>Interaktive Karte konnte nicht geladen werden. Der Guide bleibt vollständig nutzbar.</span></div>';
           console.error('Paris map failed to initialize', error);
         }
       }
@@ -655,42 +660,27 @@ const jsonLd = {
         initMap();
       }
 
-      experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
-        card.addEventListener('click', () => {
-          const key = card.getAttribute('data-poi-jump');
-          if (key) activatePlace(key, true);
-        });
-      });
-
-      const candidates = [
-        ...experience.querySelectorAll('[data-paris-story-copy] h2')
-      ];
-
+      const candidates = [...experience.querySelectorAll('[data-paris-story-copy] h2')];
       const tracked = candidates
         .map((element) => {
           const text = element.textContent?.trim() || '';
-          const state = states.find((entry) => entry.match.test(text));
-          return state ? { element, state } : null;
+          const match = chapterStates.find((entry) => entry.match.test(text));
+          return match ? { element, key: match.key } : null;
         })
         .filter(Boolean);
 
-      let activeStoryElement = null;
-      let storyTicking = false;
-
-      function applyStoryState(item) {
-        if (!item || activeStoryElement === item.element) return;
-        activeStoryElement = item.element;
-
-        if (item.state.place) {
-          activatePlace(item.state.place);
-        } else if (item.state.custom) {
-          activateCustom(item.state.custom);
-        }
-      }
+      experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
+        card.addEventListener('click', () => {
+          const key = card.getAttribute('data-poi-jump');
+          if (!key) return;
+          activateStageState(key);
+          scrollToState(key);
+        });
+      });
 
       function syncStoryState() {
         storyTicking = false;
-        const anchorY = window.innerHeight * 0.70;
+        const anchorY = window.innerHeight * 0.58;
         let current = null;
         let nearestTop = Number.NEGATIVE_INFINITY;
 
@@ -709,10 +699,13 @@ const jsonLd = {
         }
 
         if (current) {
-          applyStoryState(current);
+          if (activeStoryElement !== current.element) {
+            activeStoryElement = current.element;
+            activateStageState(current.key);
+          }
         } else if (activeStoryElement !== null) {
           activeStoryElement = null;
-          activateCustom(overviewState);
+          activateStageState('overview');
         }
       }
 
@@ -724,9 +717,9 @@ const jsonLd = {
 
       window.addEventListener('scroll', requestStorySync, { passive: true });
       window.addEventListener('resize', requestStorySync);
-      requestStorySync();
 
-      setMedia('paris');
+      activateStageState('overview');
+      requestStorySync();
     }
   </script>
 </BaseLayout>
@@ -924,6 +917,25 @@ const jsonLd = {
   .paris-stage__image img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+
+  .paris-stage__image--collage {
+    background: #17231b;
+  }
+
+  .paris-stage__collage {
+    display: grid;
+    grid-template-columns: 1.12fr 1fr 1fr;
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .paris-stage__collage img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
     object-fit: cover;
   }
 
