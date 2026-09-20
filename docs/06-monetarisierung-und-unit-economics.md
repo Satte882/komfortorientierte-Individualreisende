@@ -317,3 +317,28 @@ Vor großer Content-Skalierung zuerst testen:
 7. Wie hoch ist der Wartungsaufwand?
 
 Erst danach über große Skalierung entscheiden.
+
+
+## 17. Verbindliches Prinzip: Entscheidung vor Affiliate
+
+Affiliate ist kein eigener redaktioneller Strang.
+
+Für jede relevante redaktionelle Entscheidung wird nur geprüft:
+
+> Entsteht daraus natürlicherweise eine buchbare nächste Handlung?
+
+Beispiele:
+- Museum / Attraktion → Ticket oder Führung;
+- Unterkunftsentscheidung → passende Hotels;
+- Roadtrip → Mietwagen;
+- Tagesausflug → Tour oder Transfer.
+
+Wenn keine natürliche Buchungsentscheidung entsteht, wird kein Link erzwungen.
+
+Die technische Umsetzung verwendet ausschließlich die bestehende Infrastruktur:
+- `AffiliateBox.astro`;
+- `AffiliateDisclosure.astro`;
+- `affiliatePartners.ts`;
+- `TrackingClient.astro`.
+
+Damit gilt: Mehrere Stopps bedeuten mehrere Affiliate-Prüfungen, nicht automatisch mehrere Affiliate-Links.
