@@ -663,8 +663,7 @@ const jsonLd = {
       });
 
       const candidates = [
-        ...experience.querySelectorAll('[data-paris-story-copy] h2'),
-        ...experience.querySelectorAll('[data-paris-story-copy] .editorial-box h2')
+        ...experience.querySelectorAll('[data-paris-story-copy] h2')
       ];
 
       const tracked = candidates
@@ -693,10 +692,14 @@ const jsonLd = {
         storyTicking = false;
         const anchorY = window.innerHeight * 0.56;
         let current = null;
+        let nearestTop = Number.NEGATIVE_INFINITY;
 
         tracked.forEach((item) => {
           const top = item.element.getBoundingClientRect().top;
-          if (top <= anchorY) current = item;
+          if (top <= anchorY && top > nearestTop) {
+            current = item;
+            nearestTop = top;
+          }
         });
 
         if (current) {
