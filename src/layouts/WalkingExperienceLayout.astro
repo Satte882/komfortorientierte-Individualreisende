@@ -496,7 +496,7 @@ const firstPoi = experience.pois[0];
 <style>
   .walking-cinematic-hero {
     position: relative;
-    min-height: min(82svh, 900px);
+    min-height: clamp(460px, 56svh, 620px);
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -737,10 +737,6 @@ const firstPoi = experience.pois[0];
   }
 
   @media (max-width: 760px), (max-height: 500px) and (max-width: 900px) {
-    .walking-cinematic-hero {
-      min-height: min(78svh, 760px);
-    }
-
     .walking-cinematic-hero__fallback,
     .walking-cinematic-hero__video {
       object-position: center 48%;
