@@ -300,6 +300,7 @@ Der Scan prüft verpflichtend fünf Dimensionen:
    - Ergebnis je relevantem Signal: **problemlos mitnehmen / Zusatzaufwand einplanen / zu anderer Zeit besuchen / bessere Alternative wählen / eher vermeiden**.
    - „Trendend“ nur schreiben, wenn ein aktuelles Plattform-/Trend-Signal oder wiederkehrende aktuelle Hinweise aus mindestens zwei unabhängigen Quellen/Plattformen vorliegen.
    - Nicht behaupten, ein Ort sei **wegen Social Media** überlaufen, wenn nur Gleichzeitigkeit sichtbar ist. Kausalität nur bei belastbarer Quelle.
+   - Für den öffentlichen Artikel wird immer geprüft, ob ein **eigener Social-Media-Realitätscheck** nötig ist. Bei relevantem Signal wird er sichtbar aufgenommen und mit praktischer Empfehlung versehen; ohne relevantes Signal keinen künstlichen Abschnitt erzeugen.
 
 3. **Tipps & Tricks**
    - bessere Uhrzeit oder Reihenfolge;
@@ -329,7 +330,8 @@ Der Scan endet mit:
 - **1 primären ICP-Problemahypothese**;
 - höchstens **2 Nebenfragen**;
 - den stärksten 3–7 Signalen, die diese Hypothese begründen;
-- Kennzeichnung, was belastbarer Fakt, aktuelles Signal oder noch zu verifizieren ist.
+- Kennzeichnung, was belastbarer Fakt, aktuelles Signal oder noch zu verifizieren ist;
+- Entscheidung **„Social-Media-Realitätscheck im Artikel: ja/nein“** mit kurzer Begründung.
 
 Erst danach beginnt das vertiefte Research.
 
