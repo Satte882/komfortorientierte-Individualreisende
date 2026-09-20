@@ -38,6 +38,7 @@ Die Fließtextspalte bleibt unabhängig vom Viewport auf etwa 780 px begrenzt. D
 - Für Cinematic Heroes gilt site-weit dieselbe Zielgeometrie: `min-height: clamp(460px, 56svh, 620px)`. Längerer Inhalt darf den Block vergrößern; das Medium selbst erzeugt keine artikelspezifische Höhe.
 - Hero-Medien werden so ausgewählt und gecroppt, dass sie in diesem Frame funktionieren. Die Seite wird nicht pro Video neu dimensioniert.
 - Hero-Medien behalten standardmäßig natürliche Farbe; kein globaler Grayscale-/Entsättigungs-Look ohne explizite redaktionelle Begründung.
+- Als Reiseblog zeigt die Bildsprache standardmäßig **Frühling/Sommer bzw. helle, reisefreundliche Tageslicht-Situationen**. Herbst, Winter, Nacht oder bewusst graue Wetterstimmungen nur, wenn sie zum konkreten Artikelinhalt gehören.
 - Artikelbilder nutzen auf Desktop ein redaktionelles 4:3-Format, auf schmaleren Viewports eine breitere Darstellung.
 - Demo-Assets werden über assets/placeholder-tracking.md verfolgt und in den Templates als PLACEHOLDER markiert.
 
