@@ -27,6 +27,7 @@ Research-/Technikdetails bleiben in `research/`, `docs/` oder Issues.
 Neue oder bewusst migrierte öffentliche Inhalte verwenden `editorialGateVersion: 2`.
 
 Vor `published` müssen:
+- ICP-Signal-Scan und Hypothesen-Review abgeschlossen sein;
 - Decision-Blöcke in `curation.md` vorhanden sein;
 - natürliche Affiliate-Chancen geprüft sein;
 - Full Article Review abgeschlossen sein;
