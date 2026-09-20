@@ -35,8 +35,11 @@ Vor `published` müssen:
 Ein technischer Experience-Spike bleibt `review/noindex`, solange dieser Content-Gate nicht bestanden ist.
 
 Wenn du ein Content-Issue anlegst, enthält dessen DoD mindestens:
-- ICP-Problem geklärt;
-- Research dokumentiert;
+- bestehendes ICP-Modell auf den konkreten Beitrag angewendet;
+- ICP-Signal-Scan durchgeführt;
+- primäre ICP-Problemahypothese + max. 2 Nebenfragen dokumentiert;
+- vertieftes Research dokumentiert;
+- Problemahypothese nach Research bestätigt, präzisiert oder verworfen und finales ICP-Problem festgehalten;
 - Decision-Blöcke vorhanden;
 - Insights geprüft;
 - Affiliate-Potenziale über bestehende Logik geprüft;
@@ -47,6 +50,12 @@ Wenn du ein Content-Issue anlegst, enthält dessen DoD mindestens:
 - erst danach `published`.
 
 Bei einer neuen Destination darf ein GitHub Research-Issue die Arbeit steuern. Dauerhafte Erkenntnisse gehören aber ausschließlich nach `research/`.
+
+Verbindlicher Content-Pfad:
+
+> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Hypothesen-Review/finales ICP-Problem → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
+
+Keinen Schritt überspringen. Insbesondere entsteht die öffentliche Prosa erst nach Kuration, Decision-Blöcken und Human Gate.
 
 ## Experience / UI
 
