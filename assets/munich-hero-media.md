@@ -11,9 +11,9 @@
 ## Quelle und Lizenz
 
 - Quelle: Pexels
-- Asset: **Historic Marienplatz Square in Munich, Germany**
-- Urheber/Creator: **Memory Lane**
-- Quellseite: https://www.pexels.com/video/historic-marienplatz-square-in-munich-germany-36249012/
+- Asset: **Time Lapse of a City** – München-Cityscape mit Himmel und Verkehr
+- Urheber/Creator: **Fluxx Films**
+- Quellseite: https://www.pexels.com/video/time-lapse-of-a-city-3863114/
 - Lizenz: **Pexels License**
 - Lizenzprüfung: 2026-09-20
 - Kommerzielle Nutzung: laut Pexels-Lizenz zulässig
@@ -25,14 +25,15 @@ Pexels weist zusätzlich darauf hin, dass Rechte an dargestellten Personen, Mark
 
 Aus dem Pexels-Original wurde für die Website ein lokales Derivat erzeugt:
 
-- erste 8 Sekunden des Quellclips;
+- 8-Sekunden-Fassung ab ca. Sekunde 2 des Quellclips;
 - Ton vollständig entfernt;
 - auf 1280 × 720 px skaliert/zugeschnitten;
 - H.264/MP4, Web-Optimierung mit Faststart;
-- Poster aus dem Clip bei ca. 1,5 Sekunden als WebP erzeugt.
+- Poster aus dem Quellclip bei ca. Sekunde 4 als WebP erzeugt;
+- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.1397` (Grenzwert `0.10`), damit nicht erneut ein praktisch monochromes Hero-Asset durchgewinkt wird.
 
 Das Frontend lädt das Video nur, wenn weder `prefers-reduced-motion: reduce` noch Data Saver aktiv ist. Andernfalls bleibt ausschließlich das lokale Poster sichtbar.
 
 ## Alt-Text
 
-> Marienplatz in München mit historischer Architektur als Einstieg in den Altstadt-Walk
+> Münchner Stadtansicht mit Gebäuden, Himmel und Verkehr als Einstieg in den Altstadt-Walk
