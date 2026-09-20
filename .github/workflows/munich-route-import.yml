@@ -1,0 +1,32 @@
+name: import Munich walking route
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  import-route:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/munich-walking-spike
+
+      - name: Generate local walking GeoJSON
+        run: bash scripts/import-munich-walking-route.sh
+
+      - name: Commit generated route
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data/routes/munich-altstadt-walk.geojson
+          if git diff --cached --quiet; then
+            echo "Route unchanged"
+            exit 0
+          fi
+          git commit -m "chore: store Munich walking route geometry"
+          git push origin HEAD:feat/munich-walking-spike
