@@ -123,20 +123,20 @@ Beispiele für interne Informationen, die nicht in den öffentlichen Artikel geh
 Solche Informationen bleiben in `research/`, `docs/` oder GitHub Issues.
 
 
-## 7. Editorial Gate v2
+## 7. Editorial Gate v3
 
 Neue Artikel aus `article:new` erhalten automatisch:
 
 ```yaml
-editorialGateVersion: 2
+editorialGateVersion: 3
 ```
 
 Der Generator legt den vollständigen Prozess in den Arbeitsartefakten an:
 
 - `research.md`: Signal-Scan, Problemahypothese, vertieftes Research, Hypothesen-Review und finales ICP-Problem;
-- `curation.md`: Kuration, Decision-Blöcke, Human Gate, Affiliate-Prüfung, Full Article Review und Redaktionsfreigabe;
+- `curation.md`: Kuration, Decision-Blöcke, Human Gate, Pflichtbausteine v3, Affiliate-Prüfung, Full Article Review und Redaktionsfreigabe;
 - MDX: öffentlicher Artikelentwurf.
 
-`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-Prüfung. Für neue v2-Artikel werden Sources, Research, Human Gate, offene Checkboxen und verbliebene `TODO`-Platzhalter geprüft. Ein Artikel kann deshalb nicht durch direktes Ändern des Frontmatters an einem unvollständigen Prozess vorbei veröffentlicht werden.
+`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-Prüfung. Für neue v3-Artikel werden Sources, Research, Human Gate, offene Checkboxen und verbliebene `TODO`-Platzhalter geprüft. Ein Artikel kann deshalb nicht durch direktes Ändern des Frontmatters an einem unvollständigen Prozess vorbei veröffentlicht werden.
 
-Bestehende freigegebene Legacy-Inhalte sind explizit grandfathered und werden erst bei bewusster redaktioneller Überarbeitung auf den strengeren Prozess migriert.
+Bestehende freigegebene v1/v2-Legacy-Inhalte sind explizit grandfathered. Neue Artikel erhalten v3; bewusst migrierte Artikel müssen danach auch Tipps, Andrang/Social-Media-Einordnung, Kosten für zwei und Besonderes Extra bzw. die 3-Suchen-Ausnahme erfüllen.
