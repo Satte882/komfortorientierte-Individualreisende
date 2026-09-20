@@ -12,20 +12,23 @@ interface Props {
   title: string;
   text?: string;
   cta: string;
+  eyebrow?: string;
+  affiliateActive?: boolean;
 }
 
-const { partner, url, placement, destination, articleType, interest = '', title, text, cta } = Astro.props;
+const { partner, url, placement, destination, articleType, interest = '', title, text, cta, eyebrow, affiliateActive = true } = Astro.props;
 const config = affiliatePartners[partner];
 ---
-<aside class="affiliate-box">
-  <AffiliateDisclosure label={config.disclosure} />
+<aside class="affiliate-box" data-commercial-active={affiliateActive ? 'true' : 'false'}>
+  {eyebrow && <span class="label">{eyebrow}</span>}
+  {affiliateActive && <AffiliateDisclosure label={config.disclosure} />}
   <h3>{title}</h3>
   {text && <p>{text}</p>}
   <a
     class="button"
     href={url}
-    rel="sponsored noopener"
-    data-affiliate-link
+    rel={affiliateActive ? 'sponsored noopener' : 'noopener'}
+    data-affiliate-link={affiliateActive ? '' : undefined}
     data-partner={partner}
     data-placement={placement}
     data-destination={destination}
@@ -34,5 +37,7 @@ const config = affiliatePartners[partner];
   >
     {cta}
   </a>
-  <p class="article-meta">Wenn du über diesen Link buchst, können wir eine Provision erhalten. Für dich ändert sich der Preis dadurch grundsätzlich nicht.</p>
+  {affiliateActive && (
+    <p class="article-meta">Wenn du über diesen Link buchst, können wir eine Provision erhalten. Für dich ändert sich der Preis dadurch grundsätzlich nicht.</p>
+  )}
 </aside>
