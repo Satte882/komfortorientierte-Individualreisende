@@ -1,19 +1,19 @@
 slug: heidelberg-ein-tag-entspannt
 images:
-  - file: "/images/heidelberg-hero-poster.webp"
+  - file: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Heidelberg-Schlo%C3%9F.JPG"
     source: "Wikimedia Commons"
     creator: "Reinhard Wolf (Pumuckel42)"
     source_url: "https://commons.wikimedia.org/wiki/File:Heidelberg-Schlo%C3%9F.JPG"
     license: "CC BY-SA 3.0"
     status: spike
-    rights_note: "Lokales 1120×480-(7:3)-Poster-Derivat aus dem bereits verwendeten Schlossmotiv; Zuschnitt/Skalierung dokumentiert."
+    rights_note: "Poster/Fallback für den E2E-Spike; externe URL ist nur im Spike-Status zulässig."
 videos:
-  - file: "/videos/heidelberg-hero.mp4"
-    poster: "/images/heidelberg-hero-poster.webp"
-    source: "Wikimedia Commons"
-    creator: "Reinhard Wolf (Pumuckel42)"
-    source_url: "https://commons.wikimedia.org/wiki/File:Heidelberg-Schlo%C3%9F.JPG"
-    license: "CC BY-SA 3.0"
+  - file: "https://videos.pexels.com/video-files/33386385/14213622_3840_2160_30fps.mp4"
+    poster: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Heidelberg-Schlo%C3%9F.JPG"
+    source: "Pexels"
+    creator: "Alyona Nagel"
+    source_url: "https://www.pexels.com/video/heidelberg-castle-and-scenic-city-view-33386385/"
+    license: "Pexels License"
     status: spike
-    rights_note: "6-s-Motion-Derivat des lizenzierten Schlossfotos, 1120×480, 7:3, ohne Ton; Bearbeitung gemäß CC BY-SA als Derivat gekennzeichnet."
-note: "Lokale Spike-Medien für den E2E-Test; Attribution bleibt im Hero sichtbar."
+    rights_note: "Heidelberg-spezifischer 10-s-Querformatclip. Im Walking-Hero auf 7:3 gerendert; für dauerhafte Produktionsfreigabe noch lokal ableiten und den finalen Crop als Datei prüfen."
+note: "E2E-Spike: Video vorhanden und Experience-Vertrag sichtbar prüfbar; lokale Produktionsableitung bleibt separat."
