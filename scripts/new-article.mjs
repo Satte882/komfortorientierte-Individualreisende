@@ -130,6 +130,9 @@ Nebenfragen (max. 2):
 Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
 - TODO
 
+Social-Media-Realitätscheck im öffentlichen Artikel:
+TODO: ja/nein + kurze Begründung; bei ja: praktischen Effekt und Empfehlung festhalten.
+
 ## Belastbare Fakten
 
 TODO
@@ -168,6 +171,16 @@ TODO
 ## Begründung / Trade-offs
 
 TODO
+
+## Social-Media-Realitätscheck
+
+Im öffentlichen Artikel erforderlich: TODO ja/nein
+
+Falls ja:
+- Signal / betroffener Ort: TODO
+- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): TODO
+- Empfehlung für den ICP: TODO
+- Evidenz / Abrufstand: TODO
 
 ## Entscheidungsblöcke
 
@@ -238,19 +251,20 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 2. Lies verbindlich docs/05-icp-und-zielgruppe.md, docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
 3. Führe zuerst den ICP-Signal-Scan durch: Reibung, Social-Media-Hype vs. Realität, Tipps & Tricks, reale Kosten sowie bessere Alternativen/Geheimtipps.
 4. Dokumentiere 1 primäre ICP-Problemahypothese, maximal 2 Nebenfragen und 3–7 stärkste Signale. Kennzeichne Fakt / Signal / noch zu verifizieren.
-5. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
-6. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
-7. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-8. Trenne Fakten von redaktionellem Urteil.
-9. Keine persönliche Reiseerfahrung erfinden.
-10. Finalisiere den MDX-Text erst nach der Kuration und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
-11. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
-12. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
-13. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-14. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-15. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-16. Führe den Full Article Review in curation.md vollständig durch.
-17. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+5. Entscheide explizit, ob der öffentliche Artikel einen eigenen Social-Media-Realitätscheck braucht. Bei relevantem Signal: sichtbar aufnehmen und praktische Empfehlung geben; ohne relevantes Signal keinen künstlichen Abschnitt erzeugen.
+6. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
+7. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
+8. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
+9. Trenne Fakten von redaktionellem Urteil.
+10. Keine persönliche Reiseerfahrung erfinden.
+11. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Finalisiere den MDX-Text erst nach ausdrücklicher Freigabe und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+12. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+13. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+14. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+15. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+16. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+17. Führe den Full Article Review in curation.md vollständig durch.
+18. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
