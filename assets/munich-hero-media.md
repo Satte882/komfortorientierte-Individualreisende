@@ -6,7 +6,7 @@
 - Position: Walking-Hero
 - Video: `/videos/munich-altstadt-hero.mp4`
 - Poster/Fallback: `/images/munich-altstadt-hero-poster.webp`
-- Status: **Freigegeben**
+- Status: **Spike – lokal integriert**
 
 ## Quelle und Lizenz
 
@@ -19,7 +19,7 @@
 - Kommerzielle Nutzung: laut Pexels-Lizenz zulässig
 - Attribution: nach Pexels-Lizenz nicht verpflichtend; im Frontmatter trotzdem dokumentiert
 
-Pexels weist zusätzlich darauf hin, dass Rechte an dargestellten Personen, Marken oder sonstigen geschützten Inhalten unabhängig von der Dateilizenz relevant bleiben können. Die Verwendung erfolgt als redaktionelles München-Hero ohne Endorsement-Behauptung.
+Pexels weist zusätzlich darauf hin, dass Rechte an dargestellten Personen, Marken oder sonstigen geschützten Inhalten unabhängig von der Dateilizenz relevant bleiben können. Deshalb bleibt das Asset trotz lokaler Integration im Status **Spike**; die Verwendung erfolgt als redaktionelles München-Hero ohne Endorsement-Behauptung.
 
 ## Bearbeitung und lokale Auslieferung
 
@@ -35,4 +35,4 @@ Das Frontend lädt das Video nur, wenn weder `prefers-reduced-motion: reduce` no
 
 ## Alt-Text
 
-> Historische Architektur am Münchner Marienplatz im Herbst
+> Marienplatz in München mit historischer Architektur als Einstieg in den Altstadt-Walk
