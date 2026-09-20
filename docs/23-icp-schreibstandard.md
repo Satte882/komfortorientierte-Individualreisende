@@ -253,3 +253,17 @@ Vor Freigabe eines öffentlichen Artikels:
 - Ist klar, was für den ICP anders ist als für einen maximalistischen Sightseeing-Reisenden?
 
 Wenn mehrere Antworten „nein“ sind, ist der Text noch kein veröffentlichungsreifer ICP-Content.
+
+
+## 13. Verhältnis zu Decision-Blöcken und Gate v2
+
+Dieser Schreibstandard entscheidet **wie** der öffentliche Text formuliert wird.
+
+Die vorgelagerte inhaltliche Entscheidung entsteht in `curation.md` nach `docs/07-redaktionelle-methodik.md`.
+
+Damit gilt:
+
+> Decision-Block bestimmt die redaktionelle Aussage.  
+> Dieser Schreibstandard übersetzt sie in nützlichen, natürlichen Lesertext.
+
+Der Full Article Review und die Freigabe selbst sind Teil von `docs/17-mvp-content-pipeline-und-human-gate.md`; sie werden hier nicht parallel definiert.
