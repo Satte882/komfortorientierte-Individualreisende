@@ -1,8 +1,8 @@
 name: paris spike visual qa
 
 on:
-  push:
-    branches: [feat/paris-immersive-spike]
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: read
