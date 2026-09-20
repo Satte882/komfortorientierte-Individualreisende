@@ -16,7 +16,7 @@ Alle fünf Dokumente sind verbindlicher Input.
 
 > Öffentlicher Text wird für den komfortorientierten Individualreisenden geschrieben – nicht für Entwickler, Produktteam, Agenten oder QA.
 
-Interne Begriffe wie Spike, Framework, State, GeoJSON, Routing-Implementierung, Browser-QA oder technische Begründungen gehören nicht in den Nutzertext, außer der Nutzer braucht sie tatsächlich für seine Reiseentscheidung.
+Interne Begriffe wie Spike, Framework, State, GeoJSON, Routing-Implementierung, Browser-QA oder technische Begründungen gehören nicht in den Nutzertext, außer der Nutzer braucht sie tatsächlich für seine Reiseentscheidung. Öffentliche UI-Texte, Komponenten-Labels und Experience-Chrome folgen demselben ICP-Schreibstandard wie der Artikeltext: Die Redaktion empfiehlt oder zeigt mögliche Priorisierungen; sie entscheidet nicht für den Leser.
 
 Jeder Hauptabschnitt soll Entscheidungen reduzieren: Was lohnt sich, wie lange, reingehen oder außen, Pause oder weiter, was weglassen, welcher Trade-off?
 

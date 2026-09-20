@@ -186,7 +186,7 @@ Die redaktionelle Semantik machen wir zunächst über sauberes HTML:
 
 ```html
 <section>
-  <h2>Unsere Auswahl</h2>
+  <h2>Mögliche Priorisierungen</h2>
 </section>
 
 <section>
@@ -222,7 +222,7 @@ mit sauber dokumentierter Bildquelle
 
 ────────────────────
 
-UNSERE AUSWAHL
+MÖGLICHE PRIORISIERUNGEN
 
 Kurzes redaktionelles Fazit
 
@@ -232,7 +232,7 @@ Bei wenig Zeit weglassen
 
 ────────────────────
 
-DIE ORTE, DIE WIR PRIORISIEREN
+MÖGLICHE PRIORISIERUNGEN
 
 Musée d'Orsay
 Warum?

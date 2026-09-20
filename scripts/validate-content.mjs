@@ -24,6 +24,23 @@ function walk(dir) {
 const files = walk(contentRoot).filter((file) => /.(md|mdx)$/.test(file));
 const errors = [];
 
+const publicCopyRoots = [
+  join(root, 'src', 'content'),
+  join(root, 'src', 'components'),
+  join(root, 'src', 'layouts'),
+  join(root, 'src', 'pages')
+];
+
+const forbiddenPublicPhrases = [
+  'Unsere Entscheidung',
+  'Unsere Standardentscheidung',
+  'Unsere Auswahl',
+  'Was wir priorisieren',
+  'Für wen wir hier entscheiden',
+  'Wir priorisieren'
+];
+
+
 for (const file of files) {
   const text = readFileSync(file, 'utf8');
   const display = relative(root, file);
@@ -115,6 +132,21 @@ for (const file of files) {
   if (text.includes('<AffiliateBox')) {
     if (!/affiliateDisclosure:\s*true/.test(text)) {
       errors.push(`${display}: AffiliateBox requires affiliateDisclosure: true`);
+    }
+  }
+}
+
+const publicCopyFiles = [...new Set(
+  publicCopyRoots.flatMap((dir) => walk(dir))
+)].filter((file) => /\.(astro|md|mdx|ts)$/.test(file));
+
+for (const file of publicCopyFiles) {
+  const text = readFileSync(file, 'utf8');
+  const display = relative(root, file);
+
+  for (const phrase of forbiddenPublicPhrases) {
+    if (text.toLocaleLowerCase('de-DE').includes(phrase.toLocaleLowerCase('de-DE'))) {
+      errors.push(`${display}: öffentliche Sprache entscheidet für den Leser: "${phrase}"`);
     }
   }
 }

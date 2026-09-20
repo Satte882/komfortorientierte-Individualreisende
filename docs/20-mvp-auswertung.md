@@ -31,7 +31,7 @@ Daraus folgt:
 - `review`-Content nur bei explizitem Preview-Modus
 - nicht veröffentlichte Inhalte erhalten `noindex`
 - redaktionelle Komponenten:
-  - Unsere Auswahl
+  - Mögliche Priorisierungen
   - Was wir bewusst weglassen
   - Methodik
   - Quellen
