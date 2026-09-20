@@ -30,6 +30,10 @@ export const V2_STRICT_CURATION_MARKERS = [
   '### Verworfen / ohne Entscheidungsauswirkung'
 ];
 
+export const V2_STRICT_SOURCE_MARKERS = [
+  '## Primär-/offizielle Quellen'
+];
+
 export const V2_STRICT_RESEARCH_MARKERS = [
   '## ICP-Signal-Scan',
   '### Reibung / realer Aufwand',
@@ -100,6 +104,35 @@ export function validateSignalBridgeV2(curation) {
 
   if (!signalBridge || substantiveSignalItems.length < 1) {
     errors.push('Gate v2 curation.md braucht mindestens ein konkret übernommenes oder verworfenes Research-Signal');
+  }
+
+  return errors;
+}
+
+export function validateSourcesV2(sources) {
+  const errors = [];
+
+  if (!sources) {
+    return ['Gate v2 fehlt sources.md'];
+  }
+
+  for (const marker of V2_STRICT_SOURCE_MARKERS) {
+    if (!sources.includes(marker)) {
+      errors.push('Gate v2 fehlt in sources.md: ' + marker);
+    }
+  }
+
+  if (/\bTODO\b/i.test(sources)) {
+    errors.push('Gate v2 sources.md enthält noch TODO-Platzhalter');
+  }
+
+  const primaryBlock = sources.match(/## Primär-\/offizielle Quellen\s*\n([\s\S]*?)(?=\n## |$)/)?.[1] ?? '';
+  const primaryItems = (primaryBlock.match(/^\s*-\s+.+$/gm) || [])
+    .map((line) => line.replace(/^\s*-\s+/, '').trim())
+    .filter((line) => !/^(keine|nicht erforderlich)\.?$/i.test(line));
+
+  if (primaryItems.length < 1) {
+    errors.push('Gate v2 sources.md braucht mindestens eine konkrete Primär-/offizielle Quelle');
   }
 
   return errors;
@@ -183,7 +216,7 @@ export function validatePublicContentV2(content) {
     : [];
 }
 
-export function validateGateForPublish({ content, curation, research = '', slug }) {
+export function validateGateForPublish({ content, curation, research = '', sources = '', slug }) {
   const version = parseEditorialGateVersion(content);
 
   if (version === EDITORIAL_GATE_VERSION) {
@@ -195,6 +228,7 @@ export function validateGateForPublish({ content, curation, research = '', slug 
 
     return [
       ...curationErrors,
+      ...validateSourcesV2(sources),
       ...validateSignalBridgeV2(curation),
       ...validateResearchV2(research),
       ...validateHumanGateV2(curation),
