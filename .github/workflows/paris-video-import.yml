@@ -1,11 +1,8 @@
 name: import paris hero video
 
 on:
-  push:
-    branches: [feat/paris-video-map-polish]
-    paths:
-      - ".github/workflows/paris-video-import.yml"
-      - "scripts/import-paris-hero-video.sh"
+  pull_request:
+    branches: [main]
 
 permissions:
   contents: write
