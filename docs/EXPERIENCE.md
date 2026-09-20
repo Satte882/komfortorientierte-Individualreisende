@@ -45,6 +45,34 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 - Mobile: linearer Flow; kein erzwungenes Sticky- oder Scroll-Hijacking.
 - Die Stage ergänzt den Artikel, sie darf ihn nicht ersetzen.
 
+### Stage-State-Modell
+
+> **Ein Content-Kapitel aktiviert genau einen Experience-State. Dieser State steuert atomar Medium, Decision, Karte, Route, Marker und Kamera.**
+
+Damit gibt es keine getrennte Logik für Bildwechsel, Decision Layer und Kartenreaktion. Der Scroll-Trigger wählt nur den State; der State setzt alle sichtbaren Elemente gemeinsam.
+
+Verbindliche Regeln:
+
+- Ein Hauptkapitel erbt niemals unbemerkt den vorherigen visuellen Zustand.
+- POI-Kapitel nutzen das passende POI-Medium, die passende Decision und denselben POI als Kartenfokus.
+- Überblickskapitel nutzen einen echten Überblickszustand, z. B. eine Collage plus Gesamtkarte – kein beliebiges POI- oder Paris-Fallback.
+- Flex-/Plan-B-Kapitel dürfen einen neutralen Ortskontext zeigen, aber keinen scheinbar aktiven POI.
+- Bei Kern-POIs darf die Kamera den Schwerpunkt sichtbar verschieben, muss aber den relevanten räumlichen Zusammenhang erhalten.
+- Route, aktiver Marker und Decision müssen dieselbe redaktionelle Reihenfolge ausdrücken.
+- Klicks auf POI-Karten aktivieren denselben State wie Scrollen zum zugehörigen Kapitel.
+
+#### Kapitel-Zuordnung
+
+Die Zielarchitektur nutzt **stabile Kapitel-IDs bzw. State-Keys**, nicht fragile Freitext-RegExen auf gerenderten Überschriften.
+
+Grund:
+
+- Nummerierungen können sich ändern (`Louvre:` → `2. Louvre:`).
+- typografische Zeichen können sich ändern (`'` → `’`).
+- redaktionelle Umformulierungen dürfen die Experience nicht unbemerkt entkoppeln.
+
+Freitext-Matcher sind höchstens Übergangslösung für einen Spike.
+
 ### Karte und Route
 
 - Räumlichen Zusammenhang vor Einzelpunkt-Detail priorisieren.
@@ -86,8 +114,25 @@ Niedrige Eignung:
 6. Experience-Daten erfassen.
 7. Standardmechaniken rendern.
 8. Desktop, Mobile, Reduced Motion, Data Saver, SEO und Performance prüfen.
-9. Human Gate.
+9. State-Sequenz prüfen: Kapitel → Medium → Decision → Marker → Route → Kamera.
+10. Human Gate.
 
 ## Stop-Regel
 
 Destination-spezifische Sonderlogik ist ein Warnsignal. Wenn eine neue Destination nur durch neue Komponenten oder neue Interaktionslogik funktioniert, zuerst prüfen, ob das Datenmodell unvollständig ist – nicht sofort die Engine erweitern.
+
+## QA für Experience-States
+
+Vor Freigabe eines Guides mindestens folgende Sequenz prüfen:
+
+- jedes relevante Hauptkapitel aktiviert den erwarteten State;
+- Medium und Decision wechseln synchron;
+- POI-Kapitel aktivieren den richtigen Marker;
+- progressive Route entspricht der redaktionellen Reihenfolge;
+- Kamera bewegt sich sichtbar, ohne den benötigten Kontext zu verlieren;
+- Überblicks-/Flex-Zustände zeigen keinen falschen aktiven POI;
+- Klick auf POI-Karte und Scrollen führen zum selben State;
+- Desktop und Mobile haben keinen horizontalen Overflow;
+- Reduced Motion verändert Animationen, nicht die inhaltliche Zuordnung.
+
+Paris #25 ist der Referenzfall für dieses Verhalten.
