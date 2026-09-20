@@ -1,0 +1,50 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Heidelberg redaktionelle Abfolge",
+        "routeMode": "editorial",
+        "note": "Redaktionelle Verbindung der Experience-Stopps; keine Turn-by-turn-Navigation."
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.71158,
+            49.41183
+          ],
+          [
+            8.71315,
+            49.4113
+          ],
+          [
+            8.71532,
+            49.41056
+          ],
+          [
+            8.7133,
+            49.41125
+          ],
+          [
+            8.71024,
+            49.41219
+          ],
+          [
+            8.7098,
+            49.4132
+          ],
+          [
+            8.70953,
+            49.41424
+          ],
+          [
+            8.70955,
+            49.41518
+          ]
+        ]
+      }
+    }
+  ]
+}\n
