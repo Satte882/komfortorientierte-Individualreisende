@@ -1,0 +1,130 @@
+name: paris video map polish qa
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Install browser client
+        run: pip install selenium
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4321 --directory dist >/tmp/server.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:4321/guides/paris-kunst-4-tage/ >/dev/null
+
+      - name: Validate video and map behavior
+        run: |
+          python3 - <<'PY'
+          import time
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+
+          url = "http://127.0.0.1:4321/guides/paris-kunst-4-tage/"
+          options = Options()
+          options.add_argument("--headless=new")
+          options.add_argument("--no-sandbox")
+          options.add_argument("--disable-dev-shm-usage")
+          driver = webdriver.Chrome(options=options)
+          driver.set_window_size(1440, 1200)
+          driver.get(url)
+          driver.execute_script(
+              "localStorage.setItem('reiseauswahl-consent-v1', JSON.stringify({analytics:false,marketing:false}));"
+          )
+          driver.refresh()
+          time.sleep(2.5)
+
+          video = driver.find_element("css selector", "[data-paris-hero-video]")
+          time.sleep(1.5)
+          ready = driver.execute_script(
+              "const v=arguments[0]; return {ready:v.classList.contains('is-ready'), paused:v.paused, time:v.currentTime, src:v.currentSrc};",
+              video
+          )
+          if not ready["ready"] or ready["time"] <= 0 or not ready["src"]:
+              raise AssertionError(f"hero video did not start correctly: {ready}")
+
+          map_el = driver.find_element("css selector", "[data-paris-map]")
+          driver.execute_script("arguments[0].scrollIntoView({block:'center'});", map_el)
+          time.sleep(4)
+
+          if not driver.execute_script("return Boolean(document.querySelector('[data-paris-map] .maplibregl-canvas'))"):
+              raise AssertionError("MapLibre canvas missing")
+
+          def all_core_markers_visible():
+              return driver.execute_script("""
+                const map = document.querySelector('[data-paris-map]').getBoundingClientRect();
+                const keys = ['orsay','louvre','orangerie'];
+                return keys.every((key) => {
+                  const el = document.querySelector('[data-poi-key="' + key + '"]');
+                  if (!el) return false;
+                  const r = el.getBoundingClientRect();
+                  const cx = r.left + r.width / 2;
+                  const cy = r.top + r.height / 2;
+                  return cx >= map.left && cx <= map.right && cy >= map.top && cy <= map.bottom;
+                });
+              """)
+
+          for key, expected_completed in [
+              ("orsay", []),
+              ("louvre", ["orsay"]),
+              ("orangerie", ["orsay","louvre"])
+          ]:
+              card = driver.find_element("css selector", f'[data-poi-jump="{key}"]')
+              driver.execute_script("arguments[0].click();", card)
+              time.sleep(1.0)
+              if not all_core_markers_visible():
+                  raise AssertionError(f"core route context lost after selecting {key}")
+              active = driver.execute_script(
+                  "return document.querySelector('[data-poi-key=\"' + arguments[0] + '\"]').classList.contains('is-active')",
+                  key
+              )
+              if not active:
+                  raise AssertionError(f"active marker missing for {key}")
+              for completed in expected_completed:
+                  done = driver.execute_script(
+                      "return document.querySelector('[data-poi-key=\"' + arguments[0] + '\"]').classList.contains('is-completed')",
+                      completed
+                  )
+                  if not done:
+                      raise AssertionError(f"completed state missing for {completed} at {key}")
+
+          overflow = driver.execute_script(
+              "return document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+          )
+          if overflow:
+              raise AssertionError("horizontal overflow on desktop")
+
+          driver.execute_cdp_cmd("Emulation.setEmulatedMedia", {
+              "features": [{"name": "prefers-reduced-motion", "value": "reduce"}]
+          })
+          driver.get(url)
+          time.sleep(1.5)
+          reduced_video = driver.execute_script("""
+            const v = document.querySelector('[data-paris-hero-video]');
+            return {src:v.currentSrc, time:v.currentTime, display:getComputedStyle(v).display};
+          """)
+          if reduced_video["src"] or reduced_video["time"] > 0 or reduced_video["display"] != "none":
+              raise AssertionError(f"video loaded in reduced motion mode: {reduced_video}")
+
+          driver.quit()
+          print("Paris video/map polish QA passed")
+          PY
