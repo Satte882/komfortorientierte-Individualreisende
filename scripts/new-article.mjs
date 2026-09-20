@@ -220,6 +220,14 @@ TODO
 Affiliate-Prüfung:
 TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox verwenden.
 
+## Human Gate
+
+Nur nach ausdrücklicher Freigabe durch den Owner ausfüllen. Ein Agent darf diese Freigabe nicht selbst erteilen.
+
+- [ ] Kuration und Decision-Blöcke vom Owner freigegeben
+Freigabe durch: TODO
+Freigabe am: TODO YYYY-MM-DD
+
 ## Full Article Review
 
 - [ ] Titel/Intro-Versprechen wird tatsächlich erfüllt
@@ -271,7 +279,7 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 10. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
 11. Trenne Fakten von redaktionellem Urteil.
 12. Keine persönliche Reiseerfahrung erfinden.
-13. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Finalisiere den MDX-Text erst nach ausdrücklicher Freigabe und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+13. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Der Block `## Human Gate` darf nur nach ausdrücklicher Freigabe durch den Owner ausgefüllt werden; ein Agent darf weder Checkbox, Name noch Datum selbst setzen. Finalisiere den MDX-Text erst danach und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
 14. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
 15. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
 16. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
