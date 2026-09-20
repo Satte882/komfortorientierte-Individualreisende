@@ -185,11 +185,18 @@ Das ist hilfreicher als:
 
 > „Versailles ist schön.“
 
-### Schritt 10 – Affiliate nur dort, wo logisch
+### Schritt 10 – Pflichtbausteine im öffentlichen Artikel + Affiliate
 
-Nicht jeden Absatz monetarisieren.
+Für neue Gate-v3-Artikel werden nach der Kuration vier Dinge bewusst in den öffentlichen Text übersetzt:
 
-Affiliate-Link nur dort, wo ein Nutzer ohnehin buchen würde.
+- **3–5 konkrete Tipps & Tricks**, kompakt statt über den Artikel verstreut;
+- **Andrang / Social Media praktisch einordnen**: Social Media immer intern prüfen; öffentlich nur bei relevantem Signal. Unabhängig davon realen Besucherandrang dort benennen, wo er Planung, Uhrzeit oder Alternative verändert;
+- **kompakte Kostenübersicht für zwei Personen**, mit sinnvollen Varianten statt nur verstreuten Einzelpreisen;
+- **genau ein „Besonderes Extra“** als klar optionale, hervorgehobene Box, wenn nach maximal 3 gezielten Suchen ein glaubwürdiges affiliatefähiges Angebot gefunden wurde.
+
+Nicht jeden Absatz monetarisieren. Normale Affiliate-Links weiterhin nur dort, wo ein Nutzer ohnehin buchen würde. Das Besondere Extra ersetzt diese Regel nicht.
+
+Wird nach 3 gezielten Suchen kein passendes Extra gefunden, ist die dokumentierte Ausnahme zulässig; es wird nichts künstlich erzeugt.
 
 ## 6. Eigene Erfahrung vs. redaktionelle Bewertung
 
@@ -348,7 +355,7 @@ Sondern:
 
 ## 15. Von Research zu Text: Decision-Blöcke
 
-Für Editorial Gate v2 wird vor der eigentlichen Prosa in `research/<slug>/curation.md` dokumentiert, welche Entscheidung jeder wesentliche Hauptabschnitt reduziert.
+Für Editorial Gate v3 wird vor der eigentlichen Prosa in `research/<slug>/curation.md` dokumentiert, welche Entscheidung jeder wesentliche Hauptabschnitt reduziert.
 
 Minimalformat:
 

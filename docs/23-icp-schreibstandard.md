@@ -238,7 +238,18 @@ Nicht zuerst eine lange allgemeine Destinationseinführung schreiben.
 
 ---
 
-## 12. Qualitätscheck des fertigen Artikels
+## 12. Pflichtbausteine für neue Gate-v3-Artikel
+
+Zusätzlich zur natürlichen Artikelstruktur müssen sichtbar sein:
+
+- **3–5 konkrete Tipps**, die Reibung reduzieren;
+- bei relevantem Signal eine kurze praktische **Andrang-/Realitäts-Einordnung**; Social-Media-Kausalität nur bei belastbarer Evidenz;
+- eine kompakte **Kostenübersicht für zwei Personen** mit sinnvollen Varianten;
+- bei gefundenem Angebot genau eine hervorgehobene **„Besonderes Extra“-Box** über die bestehende AffiliateBox. Das Extra bleibt klar optional.
+
+Eine dokumentierte 3-Suchen-Ausnahme ersetzt die Extra-Box, wenn kein glaubwürdiges Angebot gefunden wurde.
+
+## 13. Qualitätscheck des fertigen Artikels
 
 Nach Human Gate und finaler Artikelgenerierung wird der fertige öffentliche Text im Full Article Review geprüft. Vor Publish:
 
@@ -261,7 +272,7 @@ Interne Decision-Blöcke dürfen eine redaktionelle Entscheidung festhalten; öf
 
 ---
 
-## 13. Verhältnis zu Decision-Blöcken und Gate v2
+## 14. Verhältnis zu Decision-Blöcken und Gate v3
 
 Dieser Schreibstandard entscheidet **wie** der öffentliche Text formuliert wird.
 

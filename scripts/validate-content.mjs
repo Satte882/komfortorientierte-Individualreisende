@@ -129,10 +129,10 @@ for (const file of files) {
     }
   }
 
-  if (text.includes('<AffiliateBox')) {
-    if (!/affiliateDisclosure:\s*true/.test(text)) {
-      errors.push(`${display}: AffiliateBox requires affiliateDisclosure: true`);
-    }
+  const affiliateBoxes = text.match(/<AffiliateBox[\s\S]*?\/>/g) || [];
+  const activeAffiliateBoxes = affiliateBoxes.filter((box) => !/affiliateActive=\{false\}/.test(box));
+  if (activeAffiliateBoxes.length && !/affiliateDisclosure:\s*true/.test(text)) {
+    errors.push(`${display}: active AffiliateBox requires affiliateDisclosure: true`);
   }
 }
 
@@ -154,7 +154,7 @@ for (const file of publicCopyFiles) {
 const affiliateComponent = join(root, 'src', 'components', 'commercial', 'AffiliateBox.astro');
 if (existsSync(affiliateComponent)) {
   const text = readFileSync(affiliateComponent, 'utf8');
-  if (!text.includes('rel="sponsored noopener"')) {
+  if (!text.includes('sponsored noopener')) {
     errors.push('AffiliateBox.astro must enforce rel="sponsored noopener"');
   }
   if (!text.includes('Werbung') && !text.includes('AffiliateDisclosure')) {

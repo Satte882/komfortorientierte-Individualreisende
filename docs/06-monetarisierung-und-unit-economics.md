@@ -321,7 +321,16 @@ Erst danach über große Skalierung entscheiden.
 
 ## 17. Verbindliches Prinzip: Entscheidung vor Affiliate
 
-Affiliate ist kein eigener redaktioneller Strang.
+Affiliate ist kein eigener redaktioneller Strang. Für neue Gate-v3-Artikel gilt zusätzlich genau **eine hervorgehobene „Besonderes Extra“-Box** als eigener, klar begrenzter Commercial-Touchpoint.
+
+Regeln:
+- Das Extra muss zur Destination, zum konkreten Artikel und zum ICP passen; Qualität/Erlebnis vor bloßem Preis.
+- Zulässig sind z. B. besonderes Hotel, private Führung, außergewöhnliches Dinner, Bootsfahrt, Konzert, Spa oder hochwertiges lokales Erinnerungsstück.
+- Es bleibt immer optional und wird nie Teil des notwendigen Kernprogramms.
+- Recherchebudget: maximal **3 gezielte Suchen**. Danach ist `kein passendes Angebot gefunden nach 3 gezielten Suchen` ein gültiger, nicht-blockierender Endzustand.
+- Bei Fund wird die bestehende `AffiliateBox.astro` wiederverwendet; keine zweite Commercial-Komponente.
+- Existiert bereits ein geeignetes Partnerziel, aber noch kein echter Tracking-Link, wird `affiliateActive={false}` gesetzt. Erst mit echtem Tracking-Link darf die Box Affiliate-Offenlegung und `rel=sponsored` aktivieren.
+- Nie ein mittelmäßiges Angebot nur wegen der Box-Pflicht aufnehmen.
 
 Für jede relevante redaktionelle Entscheidung wird nur geprüft:
 

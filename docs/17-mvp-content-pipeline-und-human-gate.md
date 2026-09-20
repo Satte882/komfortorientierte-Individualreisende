@@ -158,7 +158,7 @@ Pflichtfelder
 Bildrechte
 Affiliate
 Build
-Gate v2
+Gate v3
 
       ↓
 
@@ -178,21 +178,21 @@ Die technische Implementierung bleibt damit für die ersten 3–5 Artikel bewuss
 
 ---
 
-## 4. Editorial Gate v2
+## 4. Editorial Gate v3
 
 Neue oder bewusst redaktionell migrierte Artikel verwenden:
 
 ```yaml
-editorialGateVersion: 2
+editorialGateVersion: 3
 ```
 
 ### Grandfathering
 
-Bereits veröffentlichte Legacy-Artikel bleiben v1 und werden nicht rückwirkend gegen neue Pflichtbereiche geprüft.
+Bereits veröffentlichte Legacy-Artikel bleiben v1/v2 und werden nicht rückwirkend gegen neue Pflichtbereiche geprüft.
 
-Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Zusätzlich bleibt der bereits vor Einführung von ICP-Signal-Scan/Hypothesen-Review veröffentlichte v2-Artikel `munich-altstadt-walk` explizit grandfathered. Neue v2-Artikel erhalten diese Ausnahme nicht.
+Die erlaubten Legacy-Slugs werden im gemeinsamen Gate-Helper explizit geführt. `munich-altstadt-walk` bleibt als veröffentlichter v2-Artikel grandfathered. Heidelberg wird bewusst auf v3 migriert und dient als Referenz. Neue Artikel dürfen v2 nicht mehr verwenden.
 
-Neue Artikel aus `article:new` erhalten immer Gate v2 und müssen zusätzlich `sources.md` ohne Platzhalter, `research.md` mit vollständig ausgefülltem Signal-Scan/Hypothesen-Review sowie einen explizit freigegebenen Human-Gate-Block in `curation.md` besitzen.
+Neue Artikel aus `article:new` erhalten immer Gate v3 und müssen zusätzlich `sources.md` ohne Platzhalter, `research.md` mit vollständig ausgefülltem Signal-Scan/Hypothesen-Review sowie einen explizit freigegebenen Human-Gate-Block in `curation.md` besitzen.
 
 ### Gate-v2-Inhalt
 
@@ -205,6 +205,10 @@ Vor Publish müssen die Arbeitsartefakte enthalten:
 - expliziten Human Gate in `curation.md`: Owner-Freigabe, Name und Datum;
 - Decision-Blöcke für die wesentlichen Hauptabschnitte;
 - Affiliate-Prüfung über die bestehende Commercial-Logik;
+- mindestens 3 konkrete Tipps im Research und 3–5 kompakt sichtbare Tipps im Artikel;
+- praktische Andrang-/Social-Media-Einordnung oder begründetes „nicht erforderlich“;
+- kompakte Kostenübersicht für zwei Personen;
+- Besonderes-Extra-Check mit maximal 3 Suchschritten; bei Fund bestehende AffiliateBox, sonst dokumentierte 3-Suchen-Ausnahme;
 - Full Article Review;
 - Redaktionsfreigabe;
 - keine offenen Checkboxen.

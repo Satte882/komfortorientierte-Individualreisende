@@ -43,13 +43,30 @@ Die Summe der Prioritäten passt in einen realistischen Ein-Tages-Rahmen mit Mit
 
 ## Social-Media-Realitätscheck
 
-Im öffentlichen Artikel erforderlich: nein
+Im öffentlichen Artikel erforderlich: ja
 
 Falls ja:
-- Signal / betroffener Ort: nicht erforderlich
-- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): nicht erforderlich
-- Empfehlung für den ICP: nicht erforderlich
-- Evidenz / Abrufstand: nicht erforderlich
+- Signal / betroffener Ort: Heidelberg insgesamt, Altstadt und Schloss sind stark besucht; bei Großereignissen wie der Schlossbeleuchtung ist die Innenstadt nach offiziellen Angaben erfahrungsgemäß sehr voll.
+- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): touristische Verdichtung und Eventtage können Komfort und Wege beeinflussen.
+- Empfehlung für den ICP: Schlossblock früh im Tagesablauf, Eventkalender vorab prüfen, bei zu viel Andrang Nebenachsen/Neckarufer nutzen; keine Social-Media-Kausalität behaupten.
+- Evidenz / Abrufstand: Stadt Heidelberg (13,9 Mio. Gäste/Jahr; Altstadt ca. 3 Mio. Besucher/Jahr), Heidelberg Marketing Eventhinweise, Abruf 2026-09-20.
+
+## Pflichtbausteine v3
+
+Tipps im Artikel:
+ja
+
+Andrang / Social Media im Artikel:
+sichtbar
+
+Kostenübersicht für zwei:
+ja
+
+Besonderes Extra:
+gefunden
+
+Affiliate-Status:
+affiliatefähig – Tracking-Link ausstehend
 
 ## Entscheidungsblöcke
 
@@ -74,7 +91,7 @@ Insight:
 Die eigentliche Komfortentscheidung ist nicht, welche Sehenswürdigkeit „besser“ ist, sondern wie viele Höhenblöcke ein Tag verträgt.
 
 Affiliate-Prüfung:
-keine natürliche Affiliate-Aktion erforderlich; offizielle Tickets/HeidelbergCARD nur als Planungsinformation verlinken.
+Der Kern-Tagesplan braucht keinen Buchungslink. Separat wird genau ein optionales „Besonderes Extra“ als Komfort-Upgrade angeboten; Booking.com ist dafür ein bestehender Partner, Tracking-Link derzeit noch ausstehend.
 
 ### Schloss Heidelberg
 
@@ -211,7 +228,11 @@ Freigabe am: 2026-09-20
 - [x] keine wesentlichen Informationslücken
 - [x] echte Insights statt Allgemeinplätze
 - [x] natürliche Affiliate-Chancen geprüft, aber nicht künstlich erzeugt
-- [x] Text, Bild und CTA sind semantisch konsistent; keine Karte erforderlich
+- [x] 3–5 konkrete Tipps sind im öffentlichen Artikel kompakt sichtbar
+- [x] Andrang / Social Media ist praktisch eingeordnet oder begründet nicht erforderlich
+- [x] eine kompakte Kostenübersicht für zwei Personen ist sichtbar
+- [x] Besonderes Extra ist als Box umgesetzt oder die 3-Suchen-Ausnahme ist dokumentiert
+- [x] Text, Hero-Video, Walking-Map und CTA sind semantisch konsistent
 - [x] Artikel besitzt einen klaren roten Faden
 - [x] ICP müsste für die Kernentscheidung nicht sofort wieder selbst recherchieren
 
