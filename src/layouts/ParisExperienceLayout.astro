@@ -702,6 +702,12 @@ const jsonLd = {
           }
         });
 
+        const nearBottom =
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 32;
+        if (nearBottom && tracked.length) {
+          current = tracked[tracked.length - 1];
+        }
+
         if (current) {
           applyStoryState(current);
         } else if (activeStoryElement !== null) {
