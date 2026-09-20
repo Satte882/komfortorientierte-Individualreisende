@@ -34,7 +34,9 @@ Die Fließtextspalte bleibt unabhängig vom Viewport auf etwa 780 px begrenzt. D
 
 - Bilder füllen ihre Fläche mit object-fit cover.
 - **Normale zweispaltige Heroes** stapeln spätestens auf Tablet. **Cinematic Experience Heroes sind die Ausnahme:** Medium und Einstiegstext bleiben eine gemeinsame Overlay-Komposition; auf kleineren Viewports werden Höhe, Crop, Typografie und Scrim angepasst statt Bild und Text automatisch zu trennen.
-- Ein Cinematic Hero soll immersiv wirken und nicht wie ein flaches Banner vor dem eigentlichen Seitenkopf.
+- Ein Cinematic Hero soll als gemeinsame Komposition wirken und nicht wie ein flaches Banner vor dem eigentlichen Seitenkopf.
+- Für Cinematic Heroes gilt site-weit dieselbe Zielgeometrie: `min-height: clamp(460px, 56svh, 620px)`. Längerer Inhalt darf den Block vergrößern; das Medium selbst erzeugt keine artikelspezifische Höhe.
+- Hero-Medien werden so ausgewählt und gecroppt, dass sie in diesem Frame funktionieren. Die Seite wird nicht pro Video neu dimensioniert.
 - Hero-Medien behalten standardmäßig natürliche Farbe; kein globaler Grayscale-/Entsättigungs-Look ohne explizite redaktionelle Begründung.
 - Artikelbilder nutzen auf Desktop ein redaktionelles 4:3-Format, auf schmaleren Viewports eine breitere Darstellung.
 - Demo-Assets werden über assets/placeholder-tracking.md verfolgt und in den Templates als PLACEHOLDER markiert.
