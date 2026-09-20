@@ -91,7 +91,7 @@ const firstPoi = experience.pois[0];
       const contextNode = root.querySelector('[data-stop-context]');
       const steps = [...story.querySelectorAll('[data-walking-step]')];
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const mobileQuery = window.matchMedia('(max-width: 760px)');
+      const mobileQuery = window.matchMedia('(max-width: 760px), (max-height: 500px) and (max-width: 900px)');
 
       let map;
       let maplibregl;
@@ -177,6 +177,8 @@ const firstPoi = experience.pois[0];
         if (!routeSource || !fullRouteCoordinates.length) return;
         renderedRouteIndex = Math.max(0, Math.min(index, fullRouteCoordinates.length - 1));
         routeSource.setData(routeFeature(fullRouteCoordinates.slice(0, renderedRouteIndex + 1)));
+        mapContainer?.setAttribute('data-active-route-index', String(renderedRouteIndex));
+        mapContainer?.setAttribute('data-active-route-coordinate-count', String(renderedRouteIndex + 1));
       }
 
       function animateActiveRoute(targetIndex) {
@@ -260,6 +262,7 @@ const firstPoi = experience.pois[0];
 
         activeIndex = index;
         root.setAttribute('data-active-stop', poi.id);
+        mapContainer?.setAttribute('data-camera-stop', poi.id);
         if (numberNode) numberNode.textContent = 'Stop ' + String(index + 1).padStart(2, '0');
         if (titleNode) titleNode.textContent = poi.name;
         if (contextNode) contextNode.textContent = poi.shortContext;
@@ -603,7 +606,7 @@ const firstPoi = experience.pois[0];
     }
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 760px), (max-height: 500px) and (max-width: 900px) {
     .walking-hero {
       grid-template-columns: 1fr;
       gap: 1.5rem;
