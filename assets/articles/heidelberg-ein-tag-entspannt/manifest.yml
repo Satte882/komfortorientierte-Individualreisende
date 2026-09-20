@@ -6,5 +6,14 @@ images:
     source_url: "https://commons.wikimedia.org/wiki/File:Heidelberg-Schlo%C3%9F.JPG"
     license: "CC BY-SA 3.0"
     status: spike
-    rights_note: "E2E-Spike: CC BY-SA 3.0 und Attribution dokumentiert; externe URL nur für diesen Validierungslauf, vor dauerhaftem Produktionsbetrieb lokal ausliefern."
-note: "Spike-Medium für E2E-Test; vor dauerhafter Produktionsfreigabe lokal ausliefern."
+    rights_note: "Poster/Fallback für den E2E-Spike; externe URL ist nur im Spike-Status zulässig."
+videos:
+  - file: "https://videos.pexels.com/video-files/33386385/14213622_3840_2160_30fps.mp4"
+    poster: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Heidelberg-Schlo%C3%9F.JPG"
+    source: "Pexels"
+    creator: "Alyona Nagel"
+    source_url: "https://www.pexels.com/video/heidelberg-castle-and-scenic-city-view-33386385/"
+    license: "Pexels License"
+    status: spike
+    rights_note: "Heidelberg-spezifischer 10-s-Querformatclip. Im Walking-Hero auf 7:3 gerendert; für dauerhafte Produktionsfreigabe noch lokal ableiten und den finalen Crop als Datei prüfen."
+note: "E2E-Spike: Video vorhanden und Experience-Vertrag sichtbar prüfbar; lokale Produktionsableitung bleibt separat."

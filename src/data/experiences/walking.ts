@@ -51,5 +51,44 @@ export const walkingExperiences: Record<string, WalkingExperience> = {
         shortContext: 'Endpunkt an der Isar. Museumsbesuch nur mit eigenem Zeitblock.'
       }
     ]
+  },
+  'heidelberg-ein-tag-entspannt': {
+    id: 'heidelberg-ein-tag-entspannt',
+    title: 'Heidelberg an einem Tag',
+    subtitle: 'Schloss, Altstadt und Neckarblick mit nur einem optionalen Höhenblock',
+    routeUrl: '/data/routes/heidelberg-ein-tag-entspannt.geojson',
+    routeMode: 'editorial',
+    pois: [
+      {
+        id: 'kornmarkt',
+        name: 'Kornmarkt & Bergbahn',
+        coordinates: [8.71158, 49.41183],
+        shortContext: 'Start ohne ersten Kraftakt: Bergbahn statt zusätzlichem Schlossanstieg.'
+      },
+      {
+        id: 'schloss',
+        name: 'Schloss Heidelberg',
+        coordinates: [8.71532, 49.41056],
+        shortContext: '1,5–2 Std. Priorität; Innenführung nur bei starkem Geschichtsinteresse.'
+      },
+      {
+        id: 'altstadt',
+        name: 'Altstadt & Pause',
+        coordinates: [8.71024, 49.41219],
+        shortContext: '1,5–2 Std. inklusive echter Pause; Studentenkarzer bleibt optional.'
+      },
+      {
+        id: 'alte-bruecke',
+        name: 'Alte Brücke',
+        coordinates: [8.70953, 49.41424],
+        shortContext: '20–30 Min. Aussicht und Entscheidungspunkt für den letzten Tagesblock.'
+      },
+      {
+        id: 'neckar-entscheidung',
+        name: 'Neckarufer oder Philosophenweg',
+        coordinates: [8.70955, 49.41518],
+        shortContext: 'Bei guter Energie aufsteigen; sonst den Tag ohne weiteren Höhenblock auslaufen lassen.'
+      }
+    ]
   }
 };
