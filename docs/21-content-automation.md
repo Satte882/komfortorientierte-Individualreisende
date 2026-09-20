@@ -54,11 +54,27 @@ Die KI soll:
 - Quellen dokumentieren;
 - Trade-offs sichtbar machen;
 - keine persönliche Erfahrung erfinden;
-- die Kuration vorbereiten.
+- die Kuration vorbereiten;
+- **vor jeder öffentlichen Textgenerierung** `docs/07-redaktionelle-methodik.md` und `docs/23-icp-schreibstandard.md` lesen;
+- den MDX-Text aus Sicht des komfortorientierten Individualreisenden schreiben, nicht aus Sicht von Produktteam, Entwicklung oder QA.
+
+Der Schreibstandard ist kein optionaler Stilhinweis, sondern Teil des Generierungsinputs. `article:new` schreibt die Referenz automatisch in `brief.yml` und `agent-task.md`.
 
 ## 3. Human Gate
 
-In `curation.md` werden sieben Checkboxen abgearbeitet. Erst wenn alle gesetzt sind, kann der Publish-Befehl ausgeführt werden.
+In `curation.md` werden zwei Ebenen geprüft:
+
+1. Fakten / Quellen / Kuration;
+2. ICP-Nutzen / Schreibstandard.
+
+Dazu gehören ausdrücklich:
+- jeder Hauptabschnitt reduziert eine reale Reiseentscheidung;
+- generische Ortsbeschreibung ist auf das Nötige gekürzt;
+- Zeit, Aufwand, Komfort und Trade-offs werden konkret, wo sie relevant sind;
+- interne Projekt-/Techniksprache steht nicht im öffentlichen Artikel;
+- die UI wird nicht erklärt, wenn das keinen Reisezweck erfüllt.
+
+Erst wenn **alle** Checkboxen gesetzt sind, kann der Publish-Befehl ausgeführt werden.
 
 ## 4. Veröffentlichen
 
@@ -83,3 +99,20 @@ wenn im Human Gate keine Checkbox offen ist.
 - erfundene Eigenerfahrung.
 
 Damit ist der repetitive Teil automatisiert, während die eigentliche redaktionelle Auswahl als kontrollierter Gate erhalten bleibt.
+
+
+## 6. Öffentlicher Text vs. interne Projektdokumentation
+
+Faustregel:
+
+> **Research und Technik erklären uns, wie etwas funktioniert. Der Artikel erklärt dem ICP, was er daraus für seine Reise entscheiden soll.**
+
+Beispiele für interne Informationen, die nicht in den öffentlichen Artikel gehören:
+- Experience-Spike;
+- Framework-Validierung;
+- State-/Scroll-Logik;
+- GeoJSON-/Routing-Implementierung;
+- Browser-QA;
+- Gründe, warum ein POI technisch für einen Test gewählt wurde.
+
+Solche Informationen bleiben in `research/`, `docs/` oder GitHub Issues.
