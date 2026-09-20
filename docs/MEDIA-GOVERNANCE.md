@@ -49,8 +49,8 @@ Beim Eiffelturm ist zwischen dem Bauwerk bei Tag und der nächtlichen Lichtinsze
 
 Jedes Asset erhält intern genau einen Status:
 
-- **Spike** – für Prototyp/Validierung verwendbar, Produktionsrechte noch nicht abschließend geprüft.
-- **Freigegeben** – Rechteprüfung und Attribution abgeschlossen.
+- **Spike** – für Prototyp/Validierung verwendbar, Produktionsrechte noch nicht abschließend geprüft. Externe Medien-URLs sind nur in diesem Status zulässig.
+- **Freigegeben** – Rechteprüfung und Attribution abgeschlossen; Produktionsmedien werden lokal ausgeliefert.
 - **Blockiert** – nicht für Veröffentlichung verwenden.
 
 Unklarheit führt zu **Spike** oder **Blockiert**, nicht zu impliziter Freigabe.
