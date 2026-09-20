@@ -2,7 +2,8 @@ export const EDITORIAL_GATE_VERSION = 2;
 
 export const LEGACY_EDITORIAL_V1_SLUGS = new Set([
   'paris-kunst-4-tage',
-  'andalusien-kultur-9-tage'
+  'andalusien-kultur-9-tage',
+  'cordoba-tagesausflug-oder-uebernachten'
 ]);
 
 export const V2_REQUIRED_MARKERS = [
