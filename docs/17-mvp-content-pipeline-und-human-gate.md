@@ -147,3 +147,65 @@ ONLINE
 ```
 
 Die technische Implementierung bleibt damit für die ersten 3–5 Artikel bewusst klein. Erst bei nachgewiesenem Bedarf wird die Pipeline weiter automatisiert.
+
+
+---
+
+## 4. Editorial Gate v2
+
+Neue oder bewusst redaktionell migrierte Artikel verwenden:
+
+```yaml
+editorialGateVersion: 2
+```
+
+### Grandfathering
+
+Bereits veröffentlichte Legacy-Artikel bleiben v1 und werden nicht rückwirkend gegen neue Pflichtbereiche geprüft.
+
+Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Dadurch kann ein neuer Artikel das v2-Gate nicht einfach durch Weglassen des Feldes umgehen.
+
+Neue Artikel aus `article:new` erhalten immer Gate v2.
+
+### Gate-v2-Inhalt
+
+`research/<slug>/curation.md` muss enthalten:
+
+- Decision-Blöcke für die wesentlichen Hauptabschnitte;
+- Affiliate-Prüfung über die bestehende Commercial-Logik;
+- Full Article Review;
+- Redaktionsfreigabe;
+- keine offenen Checkboxen.
+
+### Full Article Review
+
+Vor Veröffentlichung wird der Gesamtartikel geprüft:
+
+- [ ] Titel/Intro-Versprechen wird tatsächlich erfüllt
+- [ ] jeder Hauptabschnitt reduziert eine reale Reiseentscheidung
+- [ ] Reihenfolge ergibt als echte Reise Sinn
+- [ ] Zeit, Wege, Pausen und Energie sind realistisch
+- [ ] unnötige Wiederholungen entfernt
+- [ ] keine wesentlichen Informationslücken
+- [ ] echte Insights statt Allgemeinplätze
+- [ ] natürliche Affiliate-Chancen geprüft, aber nicht künstlich erzeugt
+- [ ] Text, Bild, Karte und CTA sind semantisch konsistent
+- [ ] Artikel besitzt einen klaren roten Faden
+- [ ] ICP müsste für die Kernentscheidung nicht sofort wieder selbst recherchieren
+
+### Technische Experience-Spikes
+
+Ein technischer Spike kann Map, Scroll, Medien oder andere Experience-Mechaniken vollständig validieren, bleibt aber:
+
+```yaml
+status: review
+editorialApproval: false
+```
+
+bis der separate Content-Gate bestanden ist.
+
+### CI
+
+`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-v2-Prüfung.
+
+Damit reicht bei v2 ein manuelles Setzen von `status: published` und `editorialApproval: true` nicht aus: unvollständige Curation blockiert CI.
