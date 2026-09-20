@@ -1,4 +1,5 @@
 export const destinations = {
+  munchen: { name: 'München', country: 'deutschland', indexable: false },
   paris: { name: 'Paris', country: 'frankreich', indexable: false },
   andalusien: { name: 'Andalusien', country: 'spanien', indexable: false },
   cordoba: { name: 'Córdoba', country: 'spanien', indexable: false },
