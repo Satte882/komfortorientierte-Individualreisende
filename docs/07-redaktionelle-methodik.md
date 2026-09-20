@@ -132,7 +132,17 @@ Mehrere unabhängige Quellen:
 
 Keine einzelne Quelle dominieren lassen.
 
-### Schritt 6 – Bewertungskriterien anwenden
+### Schritt 6 – Hypothese nach Research prüfen
+
+Nach Fakten- und Erfahrungsrecherche wird die Ausgangshypothese ausdrücklich geprüft:
+
+- **bestätigt** – Research trägt die Ausgangshypothese;
+- **präzisiert** – Kern bleibt, aber Problem oder Nebenfragen werden geschärft;
+- **verworfen** – Research zeigt ein anderes, relevanteres ICP-Problem.
+
+Das **finale ICP-Problem** wird mit kurzer Begründung in `research.md` festgehalten und ist anschließend der verbindliche Input für Kuration und Decision-Blöcke.
+
+### Schritt 7 – Bewertungskriterien anwenden
 
 Mögliche Kriterien:
 
@@ -147,7 +157,7 @@ Mögliche Kriterien:
 - Preis;
 - Alternativen.
 
-### Schritt 7 – priorisieren
+### Schritt 8 – priorisieren
 
 Nicht alles empfehlen.
 
@@ -159,7 +169,7 @@ Mögliche Kategorien:
 - nur bei Spezialinteresse;
 - bei knapper Zeit weglassen.
 
-### Schritt 8 – Trade-offs erklären
+### Schritt 9 – Trade-offs erklären
 
 Beispiel:
 
@@ -169,7 +179,7 @@ Das ist hilfreicher als:
 
 > „Versailles ist schön.“
 
-### Schritt 9 – Affiliate nur dort, wo logisch
+### Schritt 10 – Affiliate nur dort, wo logisch
 
 Nicht jeden Absatz monetarisieren.
 
@@ -365,6 +375,6 @@ Die Decision-Blöcke sind Redaktionsinput, kein neues Frontmatter- oder Runtime-
 
 Reihenfolge:
 
-> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
+> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Hypothesen-Review / finales ICP-Problem → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
 
 Erst danach wird der Artikel nach `docs/23-icp-schreibstandard.md` formuliert.
