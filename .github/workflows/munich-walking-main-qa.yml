@@ -1,0 +1,216 @@
+name: Munich walking main QA
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Install browser client
+        run: pip install selenium
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4321 --directory dist >/tmp/server.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:4321/guides/munich-altstadt-walk/ >/dev/null
+          curl --fail http://127.0.0.1:4321/data/routes/munich-altstadt-walk.geojson >/dev/null
+
+      - name: Validate walking experience
+        run: |
+          mkdir -p visual-qa
+          python3 - <<'PY'
+          import time
+          from pathlib import Path
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+
+          url="http://127.0.0.1:4321/guides/munich-altstadt-walk/"
+          ids=[
+            "odeonsplatz","hofgarten","max-joseph-platz","marienplatz",
+            "viktualienmarkt","gaertnerplatz","deutsches-museum"
+          ]
+          out=Path("visual-qa")
+
+          options=Options()
+          options.add_argument("--headless=new")
+          options.add_argument("--no-sandbox")
+          options.add_argument("--disable-dev-shm-usage")
+          driver=webdriver.Chrome(options=options)
+
+          def wait_js(script, timeout=15):
+              end=time.time()+timeout
+              while time.time()<end:
+                  try:
+                      if driver.execute_script(script):
+                          return
+                  except Exception:
+                      pass
+                  time.sleep(.2)
+              raise AssertionError("timeout: "+script)
+
+          def open_page(width,height,suffix=""):
+              driver.set_window_size(width,height)
+              driver.get(url+suffix)
+              wait_js("return document.querySelectorAll('.walking-map-marker').length === 7")
+              wait_js("return Boolean(document.querySelector('[data-walking-map] .maplibregl-canvas'))")
+              time.sleep(.8)
+
+          def scroll_to(state_id):
+              el=driver.find_element("css selector",f'[data-walking-step="{state_id}"]')
+              driver.execute_script("arguments[0].scrollIntoView({block:'center'});",el)
+              wait_js(
+                "return document.querySelector('[data-walking-experience]')?.getAttribute('data-active-stop') === "
+                +repr(state_id)
+              )
+              time.sleep(.85)
+
+          def state():
+              root=driver.find_element("css selector","[data-walking-experience]")
+              map_el=driver.find_element("css selector","[data-walking-map]")
+              markers=driver.find_elements("css selector",".walking-map-marker")
+              cls=[m.get_attribute("class") or "" for m in markers]
+              return {
+                "active":root.get_attribute("data-active-stop"),
+                "camera":map_el.get_attribute("data-camera-stop"),
+                "route_index":int(map_el.get_attribute("data-active-route-index") or 0),
+                "completed":sum("is-completed" in c for c in cls),
+                "active_markers":sum("is-active" in c for c in cls),
+                "future":sum("is-future" in c for c in cls)
+              }
+
+          def all_markers_visible():
+              return driver.execute_script("""
+                const map=document.querySelector('[data-walking-map]').getBoundingClientRect();
+                return [...document.querySelectorAll('.walking-map-marker')].every((el)=>{
+                  const r=el.getBoundingClientRect();
+                  const x=r.left+r.width/2, y=r.top+r.height/2;
+                  return x>=map.left && x<=map.right && y>=map.top && y<=map.bottom;
+                });
+              """)
+
+          def marker_center(i):
+              return driver.execute_script("""
+                const el=document.querySelector('[data-walking-marker="'+arguments[0]+'"]');
+                const r=el.getBoundingClientRect();
+                return {x:r.left+r.width/2,y:r.top+r.height/2};
+              """,i)
+
+          open_page(1440,1200)
+
+          attribution=driver.execute_script(
+              "return document.querySelector('.maplibregl-ctrl-attrib')?.textContent || ''"
+          )
+          if "OpenStreetMap" not in attribution:
+              raise AssertionError("OSM attribution missing: "+attribution)
+
+          resources=driver.execute_script(
+              "return performance.getEntriesByType('resource').map(x=>x.name)"
+          )
+          if not any("munich-altstadt-walk.geojson" in x for x in resources):
+              raise AssertionError("local walking GeoJSON not loaded")
+          if any("routing.openstreetmap.de" in x or "brouter" in x.lower() for x in resources):
+              raise AssertionError("runtime routing request detected")
+
+          progress=[]
+          for i,state_id in enumerate(ids):
+              scroll_to(state_id)
+              s=state()
+              if s["active"]!=state_id or s["camera"]!=state_id:
+                  raise AssertionError(f"state/camera mismatch at {state_id}: {s}")
+              if s["active_markers"]!=1 or s["completed"]!=i or s["future"]!=6-i:
+                  raise AssertionError(f"marker state mismatch at {state_id}: {s}")
+              if not all_markers_visible():
+                  raise AssertionError(f"route context lost at {state_id}")
+              progress.append(s["route_index"])
+
+          if not all(progress[i] < progress[i+1] for i in range(len(progress)-1)):
+              raise AssertionError(f"route progress not monotonic: {progress}")
+
+          # Fast jump across multiple sections.
+          scroll_to("odeonsplatz")
+          fixed_before=marker_center(3)
+          scroll_to("gaertnerplatz")
+          fast=state()
+          fixed_after=marker_center(3)
+          if fast["active"]!="gaertnerplatz" or fast["completed"]!=5:
+              raise AssertionError(f"fast jump failed: {fast}")
+          if abs(fixed_before["x"]-fixed_after["x"])<8 and abs(fixed_before["y"]-fixed_after["y"])<8:
+              raise AssertionError(f"camera did not visibly shift: {fixed_before} -> {fixed_after}")
+
+          # Backward scrolling must shorten progress.
+          route_late=fast["route_index"]
+          scroll_to("max-joseph-platz")
+          back=state()
+          if back["active"]!="max-joseph-platz" or back["route_index"]>=route_late:
+              raise AssertionError(f"backward scroll failed: {back}")
+
+          driver.save_screenshot(str(out/"munich-walking-desktop.png"))
+
+          # Direct navigation to a middle/later story step must derive the right state.
+          open_page(1440,1200,"#gaertnerplatz")
+          wait_js("return document.querySelector('[data-walking-experience]')?.getAttribute('data-active-stop') === 'gaertnerplatz'")
+
+          # Mobile portrait.
+          open_page(390,844)
+          stage=driver.find_element("css selector",".walking-stage")
+          css=driver.execute_script("""
+            const s=getComputedStyle(arguments[0]);
+            const r=arguments[0].getBoundingClientRect();
+            return {position:s.position,height:r.height};
+          """,stage)
+          if css["position"]!="sticky" or not (239 <= css["height"] <= 341):
+              raise AssertionError(f"mobile sticky map incorrect: {css}")
+
+          scroll_to("viktualienmarkt")
+          mobile=state()
+          if mobile["active"]!="viktualienmarkt" or mobile["active_markers"]!=1:
+              raise AssertionError(f"mobile state failed: {mobile}")
+
+          overflow=driver.execute_script(
+              "return document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+          )
+          if overflow:
+              raise AssertionError("mobile horizontal overflow")
+
+          driver.save_screenshot(str(out/"munich-walking-mobile.png"))
+
+          # Landscape/orientation change remains in mobile layout by explicit height rule.
+          driver.set_window_size(844,390)
+          driver.execute_script("window.dispatchEvent(new Event('resize'))")
+          time.sleep(1.0)
+          stage_css=driver.execute_script(
+              "const s=getComputedStyle(document.querySelector('.walking-stage')); return {position:s.position,height:document.querySelector('.walking-stage').getBoundingClientRect().height};"
+          )
+          if stage_css["position"]!="sticky" or not (239 <= stage_css["height"] <= 341):
+              raise AssertionError(f"landscape mobile pattern lost: {stage_css}")
+          if state()["active_markers"]!=1:
+              raise AssertionError("orientation change broke marker state")
+
+          driver.quit()
+          print("Munich walking main QA passed")
+          PY
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: munich-walking-main-qa
+          path: visual-qa/*.png
+          retention-days: 7
