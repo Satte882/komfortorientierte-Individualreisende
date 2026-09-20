@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import ParisExperienceLayout from '../../layouts/ParisExperienceLayout.astro';
+import WalkingExperienceLayout from '../../layouts/WalkingExperienceLayout.astro';
+import { walkingExperiences } from '../../data/experiences/walking';
 
 export async function getStaticPaths() {
   const preview = import.meta.env.PREVIEW_CONTENT === 'true';
@@ -13,11 +15,16 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const walkingExperience = walkingExperiences[entry.data.slug];
 ---
 {entry.data.slug === 'paris-kunst-4-tage' ? (
   <ParisExperienceLayout data={entry.data}>
     <Content />
   </ParisExperienceLayout>
+) : walkingExperience ? (
+  <WalkingExperienceLayout data={entry.data} experience={walkingExperience}>
+    <Content />
+  </WalkingExperienceLayout>
 ) : (
   <ArticleLayout data={entry.data}>
     <Content />
