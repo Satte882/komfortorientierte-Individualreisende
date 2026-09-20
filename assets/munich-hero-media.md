@@ -11,9 +11,9 @@
 ## Quelle und Lizenz
 
 - Quelle: Pexels
-- Asset: **Time Lapse of a City** – München-Cityscape mit Himmel und Verkehr
-- Urheber/Creator: **Fluxx Films**
-- Quellseite: https://www.pexels.com/video/time-lapse-of-a-city-3863114/
+- Asset: **Aerial View of Marienplatz in Munich** – sommerlicher Marienplatz bei Tageslicht
+- Urheber/Creator: **Marlon Castor**
+- Quellseite: https://www.pexels.com/video/aerial-view-of-marienplatz-in-munich-37585740/
 - Lizenz: **Pexels License**
 - Lizenzprüfung: 2026-09-20
 - Kommerzielle Nutzung: laut Pexels-Lizenz zulässig
@@ -25,15 +25,16 @@ Pexels weist zusätzlich darauf hin, dass Rechte an dargestellten Personen, Mark
 
 Aus dem Pexels-Original wurde für die Website ein lokales Derivat erzeugt:
 
-- 8-Sekunden-Fassung ab ca. Sekunde 2 des Quellclips;
+- 8-Sekunden-Fassung ab ca. Sekunde 1 des Quellclips;
 - Ton vollständig entfernt;
-- auf 1280 × 720 px skaliert/zugeschnitten;
+- vertikales Original auf den site-weiten 16:9-Hero-Frame zugeschnitten und auf 1280 × 720 px ausgegeben;
 - H.264/MP4, Web-Optimierung mit Faststart;
 - Poster aus dem Quellclip bei ca. Sekunde 4 als WebP erzeugt;
-- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.1397` (Grenzwert `0.10`), damit nicht erneut ein praktisch monochromes Hero-Asset durchgewinkt wird.
+- Pexels kennzeichnet das Motiv als `Summer`, `Daytime`, `Blue Sky`, `Travel` und `Marienplatz`;
+- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.1642` (Grenzwert `0.10`).
 
 Das Frontend lädt das Video nur, wenn weder `prefers-reduced-motion: reduce` noch Data Saver aktiv ist. Andernfalls bleibt ausschließlich das lokale Poster sichtbar.
 
 ## Alt-Text
 
-> Münchner Stadtansicht mit Gebäuden, Himmel und Verkehr als Einstieg in den Altstadt-Walk
+> Sommerlicher Blick auf den Marienplatz in München mit Neuem Rathaus und blauem Himmel
