@@ -38,8 +38,10 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 - `published` Experience-Content muss durch die Content-Validierung blockiert werden, wenn das Poster/Fallback fehlt.
 - Ein **Cinematic Hero ist eine gemeinsame Komposition aus Medium und Einstiegstext**: Bild/Video liegt vollflächig im Hero, darüber liegen Scrim/Contrast-Layer sowie Breadcrumb, Eyebrow, H1, Lead und Metadaten. Ein flaches Medienbanner oberhalb eines separaten Text-Headers ist **kein** Cinematic Hero.
 - Referenzaufbau: **Poster/Fallback → Video → Scrim → Content → Credit**. Paris ist dafür das Referenzmuster; destinationsspezifischer Code wird daraus nicht kopiert.
-- Desktop/Wide: standardmäßig immersiv statt bannerartig; als Richtwert etwa 70–86 svh, gedeckelt um ca. 900 px. Ein flaches 16:7-Banner ist für einen Cinematic Hero nicht der Default.
-- Mobile/Tablet: dieselbe visuelle Hierarchie bleibt erhalten. Höhe, Crop, Typografie und Scrim dürfen angepasst werden; der Hero wird nicht automatisch in „Medium oben, Text unten“ zerlegt.
+- Cinematic Heroes haben site-weit dieselbe Zielgeometrie: `min-height: clamp(460px, 56svh, 620px)`. Sehr langer Inhalt darf den Hero vergrößern; das Medium selbst bestimmt aber nicht die Seitenhöhe.
+- Das Layout ist der Vertrag, das Medium wird dafür ausgewählt und zugeschnitten. Wenn ein Video in diesem Frame keine ruhige Textfläche, brauchbaren Crop oder passende Bildwirkung bietet, wird ein anderes Medium gewählt statt pro Artikel die Hero-Geometrie zu verändern.
+- Ein flaches 16:7-Banner ist für einen Cinematic Hero ebenso falsch wie ein Hero, der ohne inhaltlichen Grund fast den gesamten Viewport belegt.
+- Mobile/Tablet: dieselbe visuelle Hierarchie bleibt erhalten. Crop, Typografie und Scrim dürfen an Breakpoints angepasst werden; es gibt aber keine artikelspezifische Hero-Höhe und der Hero wird nicht in „Medium oben, Text unten“ zerlegt.
 - Text muss auch über bewegtem Bild jederzeit klar lesbar bleiben; dafür Scrim/Gradient und ruhige Textfläche nutzen, nicht das Medium pauschal entsättigen.
 - Hero-Medien zeigen standardmäßig natürliche Farbe und eine zum Markenbild passende warme, ruhige Anmutung. Schwarz/Weiß oder starke Farblooks sind nur bei bewusster redaktioneller Entscheidung zulässig.
 - Hero-Videos laufen ohne Ton.
@@ -51,7 +53,7 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 
 München #46 hat den technischen Vertrag erfüllt – lokales Video, Poster, Provenienz und Fallback –, aber den **Experience-Vertrag visuell verfehlt**: Das Medium wurde als separates, flaches Banner oberhalb des Headers gerendert und der ausgewählte Clip ist monochrom. Dadurch war der Hero technisch korrekt, aber deutlich schwächer als das Paris-Referenzmuster.
 
-**Konsequenz:** Ein Hero-Gate prüft nicht nur „Asset vorhanden / Lizenz dokumentiert / Fallback funktioniert“, sondern immer auch **Komposition, Farbwirkung, Textfläche und tatsächliche Darstellung bei 390 px und 1440 px**.
+**Konsequenz:** Ein Hero-Gate prüft nicht nur „Asset vorhanden / Lizenz dokumentiert / Fallback funktioniert“, sondern immer auch **Komposition, Farbwirkung, Textfläche, Hero-Geometrie und tatsächliche Darstellung bei 390 px und 1440 px**. München #48 zeigte zusätzlich: Ohne festen Größenvertrag kann selbst die richtige Overlay-Komposition zu dominant werden. Deshalb bestimmt künftig die Hero-Geometrie die Medienauswahl – nicht umgekehrt.
 
 ### Sticky Stage
 
