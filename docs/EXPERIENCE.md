@@ -136,3 +136,117 @@ Vor Freigabe eines Guides mindestens folgende Sequenz prüfen:
 - Reduced Motion verändert Animationen, nicht die inhaltliche Zuordnung.
 
 Paris #25 ist der Referenzfall für dieses Verhalten.
+
+
+## Walking-Map-Pattern
+
+Für Stadt-/Walking-Guides mit typischerweise 3–8 Stopps gilt ein eigenes, aber vollständig kompatibles Experience-Muster.
+
+### Desktop
+
+- Karte bleibt links sticky.
+- Story läuft rechts.
+- Jeder Stop ist ein eigener stabiler Story-Step mit State-ID.
+- Kein Scroll-Hijacking.
+- Die Karte dient der räumlichen Orientierung, nicht als Turn-by-turn-Navigation.
+
+### Mobile
+
+- Karte bleibt oben sticky.
+- Höhe: `clamp(240px, 38vh, 340px)`.
+- Text läuft einspaltig darunter.
+- Keine Desktop-Side-by-Side-Logik.
+- Karteninteraktion auf Mobile wird minimiert, damit Touch-Scrollen nicht gestört wird.
+
+### Deterministischer Scroll-State-Resolver
+
+Die State-Auflösung darf nicht von einer lückenlosen Reihenfolge von IntersectionObserver-Events abhängen.
+
+Standard:
+
+1. Story-Steps tragen stabile `data-walking-step`-/State-IDs.
+2. Bei Scroll und Resize wird per `requestAnimationFrame` die aktuelle DOM-Position ausgewertet.
+3. Aktiv ist der Step, dessen Oberkante die definierte Leselinie zuletzt passiert hat.
+4. Schnelles Scrollen oder übersprungene Sections führen deshalb direkt zum tatsächlich aktuellen State.
+5. IntersectionObserver darf für Lazy-Loading eingesetzt werden, aber nicht als einzige Quelle der State-Historie.
+
+### Kamera
+
+Keine POI-spezifischen Handwerte.
+
+- Gesamt-Bounds werden aus der vollständigen Walking-Route berechnet.
+- `fitBounds()` bleibt die Basis für jeden State.
+- Der aktive POI verschiebt den Schwerpunkt nur über automatisch berechnetes asymmetrisches Padding.
+- Desktop: stärkerer Fokus, Mobile: kleinere Verschiebung.
+- `maxZoom` verhindert aggressives Hineinzoomen.
+- Der vollständige räumliche Zusammenhang bleibt sichtbar.
+
+### Route
+
+Zwei Ebenen werden gleichzeitig dargestellt:
+
+- vollständige geplante Route dezent;
+- bereits erreichte Route deutlich.
+
+Markerzustände:
+
+- `completed`
+- `active`
+- `future`
+
+Die aktive Route wächst bis zum aktuellen POI. Beim Rückwärts-Scrollen wird sie entsprechend gekürzt.
+
+### Route-Modi
+
+`editorial`
+
+- direkte Verbindung der POIs;
+- zeigt nur redaktionelle Reihenfolge;
+- nicht als exakter Fußweg bezeichnen.
+
+`walking`
+
+- echte, einmalig erzeugte Weggeometrie;
+- lokal als GeoJSON gespeichert;
+- keine Routing-API zur Laufzeit.
+
+### Walking-Geometrie-Workflow
+
+1. POIs redaktionell festlegen.
+2. Route einmalig mit einem OSM-basierten Routing-Tool erzeugen.
+3. GeoJSON exportieren.
+4. Route lokal im Repo speichern.
+5. kurz visuell prüfen.
+6. Frontend verwendet ausschließlich die lokale Datei.
+
+### Basemap und Betrieb
+
+- Renderer: MapLibre GL JS.
+- Standardprovider: OpenFreeMap Public Instance.
+- Standardstyle: Positron.
+- Provider-/Style-URL steht zentral in `src/config/maps.ts`.
+- Keine individuellen Kartenstyles pro Destination.
+- Keine zweite Kartenbibliothek.
+- Kein Self-Hosting in V1.
+
+OpenFreeMap hat kein SLA. Der Provider muss deshalb austauschbar bleiben, ohne Walking-State-/Route-Logik zu ändern.
+
+### Attribution
+
+Die MapLibre-Attribution bleibt sichtbar. OSM-/OpenMapTiles-Attribution darf nicht entfernt oder überdeckt werden.
+
+### Walking-QA
+
+Vor Human Gate mindestens prüfen:
+
+- langsames Scrollen;
+- schnelles Scrollen über mehrere Stops;
+- Rückwärts-Scrollen;
+- Resize;
+- Mobile;
+- Orientation Change;
+- Marker `completed / active / future`;
+- progressive Route;
+- Kamera ohne POI-spezifisches Handtuning;
+- sichtbare Attribution;
+- kein horizontaler Overflow.

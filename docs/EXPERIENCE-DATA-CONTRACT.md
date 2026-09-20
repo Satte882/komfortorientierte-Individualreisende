@@ -148,3 +148,46 @@ Die Rendering-Engine liest `experienceStateId` und setzt Medium, Decision, Karte
 ## Akzeptanzregel für Destination 2
 
 Die Engine gilt erst dann als destinationsübergreifend belastbar, wenn ein strukturell anderes Ziel mit diesem Vertrag umgesetzt werden kann, ohne destinationsspezifische Komponentenlogik einzubauen.
+
+
+## Walking Experience Contract
+
+Walking-Guides ergänzen den bestehenden State-Vertrag um eine kleine Kartenkonfiguration.
+
+```yaml
+map:
+  provider: openfreemap
+  style: positron
+  routeMode: walking
+  routeUrl: /data/routes/example.geojson
+
+pois:
+  - id: stop-1
+    name: Erster Stopp
+    coordinates: [11.0, 48.0]
+    shortContext: Kurze Einordnung
+  - id: stop-2
+    name: Zweiter Stopp
+    coordinates: [11.1, 48.1]
+    shortContext: Kurze Einordnung
+
+route:
+  orderedPoiIds:
+    - stop-1
+    - stop-2
+
+chapters:
+  - id: stop-1
+    experienceStateId: stop-1
+  - id: stop-2
+    experienceStateId: stop-2
+```
+
+Verbindlich:
+
+- POI-Reihenfolge ist Dateninput, keine Komponentenlogik.
+- Story-Step-ID und POI-ID sind stabil und identisch referenzierbar.
+- Walking-Geometrie liegt lokal; kein Runtime-Routing.
+- Provider/Style kommen aus zentraler Konfiguration.
+- Routenfortschritt wird aus der lokalen Route bis zum nächstgelegenen Routenindex des aktiven POI berechnet.
+- Kamera-Padding wird generisch aus Route-Bounds und Lage des aktiven POI berechnet.

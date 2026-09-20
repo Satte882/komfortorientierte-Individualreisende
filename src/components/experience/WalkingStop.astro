@@ -1,0 +1,48 @@
+---
+type Props = {
+  stateId: string;
+  number: number;
+  title: string;
+  lead?: string;
+};
+
+const { stateId, number, title, lead } = Astro.props;
+---
+
+<section class="walking-stop" id={stateId} data-walking-step={stateId}>
+  <p class="walking-stop__eyebrow">Stop {String(number).padStart(2, '0')}</p>
+  <h2>{title}</h2>
+  {lead && <p class="walking-stop__lead">{lead}</p>}
+  <slot />
+</section>
+
+<style>
+  .walking-stop {
+    scroll-margin-top: 7rem;
+    padding: 1rem 0 3.4rem;
+    min-height: 58vh;
+  }
+
+  .walking-stop__eyebrow {
+    margin: 0 0 .45rem;
+    color: var(--bronze);
+    font-size: .7rem;
+    font-weight: 850;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .walking-stop__lead {
+    margin-top: -.2rem;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 760px) {
+    .walking-stop {
+      min-height: auto;
+      padding-bottom: 3rem;
+    }
+  }
+</style>
