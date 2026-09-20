@@ -14,6 +14,7 @@ const slugify = (value) => value
   .toLowerCase().replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 
 const knownDestinations = {
+  munchen: ['munchen','münchen'],
   paris: ['paris'],
   andalusien: ['andalusien'],
   cordoba: ['cordoba','córdoba'],
@@ -79,6 +80,7 @@ target_profile: "komfortorientierte Individualreisende"
 editorial_method: "docs/07-redaktionelle-methodik.md"
 writing_standard: "docs/23-icp-schreibstandard.md"
 public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
+editorial_gate_version: 2
 status: research
 `);
 
@@ -136,6 +138,47 @@ TODO
 
 TODO
 
+## Entscheidungsblöcke
+
+Für jeden wesentlichen Hauptabschnitt vor der Prosa mindestens einen Block ausfüllen:
+
+### <Abschnitt / Stop>
+
+ICP-Frage:
+TODO
+
+Entscheidung:
+TODO
+
+Warum:
+TODO
+
+Zeit / Aufwand:
+TODO
+
+Bewusst weglassen / Alternative:
+TODO
+
+Insight:
+TODO
+
+Affiliate-Prüfung:
+TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox verwenden.
+
+## Full Article Review
+
+- [ ] Titel/Intro-Versprechen wird tatsächlich erfüllt
+- [ ] jeder Hauptabschnitt reduziert eine reale Reiseentscheidung
+- [ ] Reihenfolge ergibt als echte Reise Sinn
+- [ ] Zeit, Wege, Pausen und Energie sind realistisch
+- [ ] unnötige Wiederholungen entfernt
+- [ ] keine wesentlichen Informationslücken
+- [ ] echte Insights statt Allgemeinplätze
+- [ ] natürliche Affiliate-Chancen geprüft, aber nicht künstlich erzeugt
+- [ ] Text, Bild, Karte und CTA sind semantisch konsistent
+- [ ] Artikel besitzt einen klaren roten Faden
+- [ ] ICP müsste für die Kernentscheidung nicht sofort wieder selbst recherchieren
+
 ## Redaktionsfreigabe
 
 ### Fakten und Kuration
@@ -171,7 +214,10 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 9. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
 10. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
 11. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-12. Vor Abschluss die ICP-/Sprachcheck-Checkboxen in curation.md prüfen.
+12. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+13. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+14. Führe den Full Article Review in curation.md vollständig durch.
+15. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
@@ -200,6 +246,7 @@ datePublished: ${today}
 dateReviewed: ${today}
 reviewAfter: ${reviewAfter}
 status: draft
+editorialGateVersion: 2
 affiliateDisclosure: false
 sources:
 ${sourceIndent}
