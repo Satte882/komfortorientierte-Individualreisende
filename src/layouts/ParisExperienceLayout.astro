@@ -739,7 +739,7 @@ const jsonLd = {
 
   .paris-cinematic-hero {
     position: relative;
-    min-height: clamp(460px, 56svh, 620px);
+    height: var(--cinematic-hero-height);
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -786,7 +786,7 @@ const jsonLd = {
   .paris-cinematic-hero__content {
     position: relative;
     z-index: 2;
-    padding-block: clamp(4rem, 10vh, 8rem) clamp(3.5rem, 8vh, 6rem);
+    padding-block: clamp(1.75rem, 3.5vh, 2.75rem) clamp(2rem, 4vh, 3rem);
   }
 
   .paris-cinematic-hero :global(.breadcrumbs),
@@ -797,13 +797,13 @@ const jsonLd = {
 
   .paris-cinematic-hero .eyebrow {
     color: #efd5b4;
-    margin-top: 2.2rem;
+    margin-top: .85rem;
   }
 
   .paris-cinematic-hero h1 {
     color: #fff;
     max-width: 12ch;
-    font-size: clamp(3rem, 7vw, 7.2rem);
+    font-size: clamp(2.5rem, 4.8vw, 4.8rem);
     text-wrap: balance;
     text-shadow: 0 5px 35px rgba(0,0,0,.22);
   }
@@ -811,7 +811,7 @@ const jsonLd = {
   .paris-cinematic-hero__lead {
     max-width: 62ch;
     margin: 0;
-    font-size: clamp(1.08rem, 2vw, 1.42rem);
+    font-size: clamp(1rem, 1.55vw, 1.24rem);
     color: rgba(255,255,255,.86);
   }
 
@@ -819,7 +819,7 @@ const jsonLd = {
     display: flex;
     flex-wrap: wrap;
     gap: .65rem 1.4rem;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     color: rgba(255,255,255,.72);
     font-size: .82rem;
   }
@@ -828,7 +828,7 @@ const jsonLd = {
     display: inline-flex;
     gap: .8rem;
     align-items: center;
-    margin-top: 2rem;
+    margin-top: 1.2rem;
     color: #fff;
     text-decoration: none;
     border-bottom: 1px solid rgba(255,255,255,.5);
@@ -1222,7 +1222,7 @@ const jsonLd = {
     }
 
     .paris-cinematic-hero__content {
-      padding-bottom: 4rem;
+      padding-block: 2.6rem 3.2rem;
     }
 
     .paris-cinematic-hero__credit {
