@@ -1,0 +1,17 @@
+slug: heidelberg-ein-tag-entspannt
+topic: "Heidelberg an einem Tag entspannt"
+destination: heidelberg
+content_type: guide
+duration_days: 1
+interests:
+  - geschichte
+  - architektur
+  - natur
+  - genuss
+target_profile: "komfortorientierte Individualreisende"
+icp_model: "docs/05-icp-und-zielgruppe.md"
+editorial_method: "docs/07-redaktionelle-methodik.md"
+writing_standard: "docs/23-icp-schreibstandard.md"
+public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
+editorial_gate_version: 2
+status: published
