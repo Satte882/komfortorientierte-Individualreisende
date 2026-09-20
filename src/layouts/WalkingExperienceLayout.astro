@@ -65,7 +65,7 @@ const firstPoi = experience.pois[0];
     <div class="walking-cinematic-hero__content container">
       <Breadcrumbs items={[{ label: data.title }]} />
       <p class="eyebrow">Walking Guide</p>
-      <h1 id="walking-hero-title">{data.title}</h1>
+      <h1 id="walking-hero-title">{data.heroTitle ?? data.title}</h1>
 
     </div>
 
