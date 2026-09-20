@@ -107,6 +107,10 @@ writeFileSync(join(researchDir,'research.md'), `# Research – ${topic}
 
 TODO
 
+## ICP-Fragen, praktische Hinweise und typische Fehler
+
+TODO: Recherchiere die für den ICP relevanten Fragen aus docs/05-icp-und-zielgruppe.md, insbesondere beste Zeitpunkte, Reservierung, sinnvolle Kombinationen, Wege/Wartezeiten, Pausen, typische Planungsfehler, konkrete Tipps zur Reibungsreduktion und Plan B.
+
 ## Widersprüche / Unsicherheiten
 
 TODO
@@ -204,7 +208,7 @@ TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox ve
 writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 
 1. Lies zuerst brief.yml.
-2. Lies verbindlich docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
+2. Lies verbindlich docs/05-icp-und-zielgruppe.md, docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
 3. Recherchiere aktuelle Primärquellen im Web.
 4. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
 5. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
