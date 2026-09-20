@@ -9,6 +9,7 @@ Die folgenden Medien werden ausschließlich lokal aus `public/images/paris-spike
 | Musée d'Orsay | `orsay.webp` | DiscoA340 | https://commons.wikimedia.org/wiki/File:Front_view_of_the_Mus%C3%A9e_d%27Orsay.jpg | CC BY-SA 4.0 |
 | Louvre | `louvre.webp` | DiscoA340 | https://commons.wikimedia.org/wiki/File:Mus%C3%A9e_du_Louvre_at_Sunset.jpg | CC BY-SA 4.0 |
 | Musée de l'Orangerie | `orangerie.webp` | John Samuel | https://commons.wikimedia.org/wiki/File:Mus%C3%A9e_de_l%27Orangerie.jpg | CC BY-SA 4.0 |
+| Musée Marmottan Monet | `marmottan.webp` | Pierre André Leclercq | https://commons.wikimedia.org/wiki/File:Paris.-_Mus%C3%A9e_Marmottan_Monet.jpg | CC BY-SA 4.0 |
 
 ## Spike-Regeln
 
