@@ -43,13 +43,13 @@ Die Summe der Prioritäten passt in einen realistischen Ein-Tages-Rahmen mit Mit
 
 ## Social-Media-Realitätscheck
 
-Im öffentlichen Artikel erforderlich: nein
+Im öffentlichen Artikel erforderlich: ja
 
 Falls ja:
-- Signal / betroffener Ort: nicht erforderlich
-- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): nicht erforderlich
-- Empfehlung für den ICP: nicht erforderlich
-- Evidenz / Abrufstand: nicht erforderlich
+- Signal / betroffener Ort: Heidelberg insgesamt, Altstadt und Schloss sind stark besucht; bei Großereignissen wie der Schlossbeleuchtung ist die Innenstadt nach offiziellen Angaben erfahrungsgemäß sehr voll.
+- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): touristische Verdichtung und Eventtage können Komfort und Wege beeinflussen.
+- Empfehlung für den ICP: Schlossblock früh im Tagesablauf, Eventkalender vorab prüfen, bei zu viel Andrang Nebenachsen/Neckarufer nutzen; keine Social-Media-Kausalität behaupten.
+- Evidenz / Abrufstand: Stadt Heidelberg (13,9 Mio. Gäste/Jahr; Altstadt ca. 3 Mio. Besucher/Jahr), Heidelberg Marketing Eventhinweise, Abruf 2026-09-20.
 
 ## Pflichtbausteine v3
 
