@@ -9,7 +9,7 @@ Die fachlichen Breakpoints sind:
 | Bereich | Viewport | Inhaltsbreite | Außenabstand | Grundverhalten |
 |---|---:|---:|---:|---|
 | Mobile | unter 640 px; technisch bis 640 px ohne 1-px-Lücke | 100 % minus 32 px | 16 px je Seite | eine Spalte, Navigation als Menü, Touch-Ziele mindestens 48 px |
-| Tablet | 641–1024 px | 100 % minus 40 px, maximal 1280 px | mindestens 20 px je Seite | Hero und komplexe Editorial-Flächen stapeln, Karten dürfen zweispaltig bleiben |
+| Tablet | 641–1024 px | 100 % minus 40 px, maximal 1280 px | mindestens 20 px je Seite | zweispaltige Standard-Heroes stapeln; Cinematic Heroes bleiben Overlay-Kompositionen; Karten dürfen zweispaltig bleiben |
 | Desktop | 1025–1440 px | maximal 1280 px | mindestens 20 px je Seite | zweispaltige Hero- und Artikel-Layouts, lesbare Textspalte bleibt begrenzt |
 | Wide | über 1440 px | Inhaltscontainer maximal 1280 px in einer 1440-px-Editorial-Canvas | mindestens 48 px innerhalb der Canvas | zusätzlicher Raum wird bewusst über größere Bildflächen und eine sichtbare Editorial-Canvas genutzt |
 
@@ -88,7 +88,7 @@ Verbindliche Leitidee:
 
 Vor Abschluss eines visuellen MVP werden Startseite, ein Guide und eine Decision bei folgenden Viewports geprüft:
 
-- 390 px: Mobile / Touch / kein horizontales Überlaufen.
+- 390 px: Mobile / Touch / kein horizontales Überlaufen; Cinematic Hero bleibt eine lesbare Medium-plus-Overlay-Komposition.
 - 768 px: Tablet / sauberes Stapeln und Kartenraster.
 - 1440 px: Desktop / ausgewogene Spalten und Bildflächen; bei Cinematic Hero Textlesbarkeit, Overlay-Hierarchie und ausreichende Bildwirkung prüfen.
 
