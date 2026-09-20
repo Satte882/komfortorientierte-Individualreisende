@@ -291,7 +291,7 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 8. Führe nach dem vertieften Research den Hypothesen-Review durch: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem mit kurzer Begründung in research.md festhalten.
 9. Nutze das finale ICP-Problem als verbindlichen Bezugsrahmen für Kuration und Decision-Blöcke.
 10. Prüfe vor der Priorisierung die 3–7 stärksten Research-Signale und dokumentiere in curation.md knapp, welche die Kuration beeinflussen und welche verworfen bzw. ohne Entscheidungsauswirkung bleiben.
-11. Erstelle danach in curation.md eine begründete Auswahl ausschließlich in den Kategorien Priorität, Optional und Bewusst nicht priorisieren.
+11. Bewerte Kandidaten relativ zum finalen ICP-Problem in dieser Reihenfolge: Problembeitrag, eigenständiger Zusatzwert, Reibung (Zeit/Wege/Energie/Reservierung/Kosten), bessere Alternative. Erstelle danach in curation.md eine begründete Auswahl ausschließlich in den Kategorien Priorität, Optional und Bewusst nicht priorisieren. Die Summe der Prioritäten muss in das Zeit-, Energie- und Komfortbudget des Beitrags passen.
 12. Trenne Fakten von redaktionellem Urteil.
 13. Keine persönliche Reiseerfahrung erfinden.
 14. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Der Human-Gate-Block darf nur nach ausdrücklicher Freigabe durch den Owner ausgefüllt werden; ein Agent darf weder Checkbox, Name noch Datum selbst setzen. Finalisiere den MDX-Text erst danach und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
