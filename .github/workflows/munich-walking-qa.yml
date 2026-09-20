@@ -1,3 +1,4 @@
+# Temporary QA for #30; remove before merge.
 name: Munich walking experience QA
 
 on:
