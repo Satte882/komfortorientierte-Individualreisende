@@ -116,3 +116,23 @@ Beispiele für interne Informationen, die nicht in den öffentlichen Artikel geh
 - Gründe, warum ein POI technisch für einen Test gewählt wurde.
 
 Solche Informationen bleiben in `research/`, `docs/` oder GitHub Issues.
+
+
+## 7. Editorial Gate v2
+
+Neue Artikel aus `article:new` erhalten automatisch:
+
+```yaml
+editorialGateVersion: 2
+```
+
+Der Generator legt außerdem in `curation.md` an:
+
+- Decision-Blöcke;
+- Affiliate-Prüfung;
+- Full Article Review;
+- Redaktionsfreigabe.
+
+`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-Prüfung. Ein v2-Artikel kann deshalb nicht durch direktes Ändern des Frontmatters an einer unvollständigen Curation vorbei veröffentlicht werden.
+
+Bestehende freigegebene Legacy-v1-Artikel sind explizit grandfathered und werden erst bei bewusster redaktioneller Überarbeitung auf v2 migriert.
