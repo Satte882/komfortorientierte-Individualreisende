@@ -143,6 +143,21 @@ const jsonLd = {
           <span><i class="paris-dot paris-dot--optional"></i> Optional</span>
           <span><i class="paris-dot paris-dot--skip"></i> Bewusst weglassen</span>
         </div>
+
+        <div class="paris-poi-list" aria-label="Priorisierte Kunstorte">
+          <button type="button" class="paris-poi-card" data-poi-jump="orsay">
+            <img src="/images/paris-spike/orsay.webp" alt="" loading="lazy" />
+            <span><small>Priorität</small><strong>Musée d'Orsay</strong></span>
+          </button>
+          <button type="button" class="paris-poi-card" data-poi-jump="louvre">
+            <img src="/images/paris-spike/louvre.webp" alt="" loading="lazy" />
+            <span><small>Priorität</small><strong>Louvre</strong></span>
+          </button>
+          <button type="button" class="paris-poi-card" data-poi-jump="orangerie">
+            <img src="/images/paris-spike/orangerie.webp" alt="" loading="lazy" />
+            <span><small>Priorität</small><strong>Orangerie</strong></span>
+          </button>
+        </div>
       </aside>
 
       <article class="prose article-body paris-story__copy" data-paris-story-copy>
@@ -243,6 +258,7 @@ const jsonLd = {
       let map;
       let maplibregl;
       let routeSource;
+      let routeAnimationFrame = null;
       let activePlace = null;
       let mapReady = false;
 
@@ -271,9 +287,8 @@ const jsonLd = {
         return routeCoordinates.slice(0, index + 1);
       }
 
-      function updateRoute(key) {
-        if (!mapReady || !routeSource) return;
-        const coordinates = routeForPlace(key);
+      function setRouteData(coordinates) {
+        if (!routeSource || !coordinates.length) return;
         routeSource.setData({
           type: 'Feature',
           properties: {},
@@ -282,6 +297,45 @@ const jsonLd = {
             coordinates: coordinates.length > 1 ? coordinates : [coordinates[0], coordinates[0]]
           }
         });
+      }
+
+      function updateRoute(key) {
+        if (!mapReady || !routeSource) return;
+        const coordinates = routeForPlace(key);
+
+        if (routeAnimationFrame) {
+          cancelAnimationFrame(routeAnimationFrame);
+          routeAnimationFrame = null;
+        }
+
+        if (reducedMotion || coordinates.length < 2 || routeOrder.indexOf(key) < 0) {
+          setRouteData(coordinates);
+          return;
+        }
+
+        const fixed = coordinates.slice(0, -1);
+        const from = coordinates[coordinates.length - 2];
+        const to = coordinates[coordinates.length - 1];
+        const started = performance.now();
+        const duration = 700;
+
+        const frame = (now) => {
+          const progress = Math.min(1, (now - started) / duration);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = [
+            from[0] + (to[0] - from[0]) * eased,
+            from[1] + (to[1] - from[1]) * eased
+          ];
+          setRouteData([...fixed, current]);
+
+          if (progress < 1) {
+            routeAnimationFrame = requestAnimationFrame(frame);
+          } else {
+            routeAnimationFrame = null;
+          }
+        };
+
+        routeAnimationFrame = requestAnimationFrame(frame);
       }
 
       function activatePlace(key, shouldScroll = false) {
@@ -303,6 +357,9 @@ const jsonLd = {
 
         experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
           marker.classList.toggle('is-active', marker.getAttribute('data-poi-key') === key);
+        });
+        experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
+          card.classList.toggle('is-active', card.getAttribute('data-poi-jump') === key);
         });
 
         if (shouldScroll) {
@@ -409,6 +466,13 @@ const jsonLd = {
       } else {
         initMap();
       }
+
+      experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
+        card.addEventListener('click', () => {
+          const key = card.getAttribute('data-poi-jump');
+          if (key) activatePlace(key, true);
+        });
+      });
 
       const candidates = [
         ...experience.querySelectorAll('[data-paris-story-copy] h2'),
@@ -731,6 +795,64 @@ const jsonLd = {
     gap: .35rem;
   }
 
+  .paris-poi-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .55rem;
+    margin-top: .8rem;
+  }
+
+  .paris-poi-card {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr);
+    align-items: center;
+    gap: .6rem;
+    min-width: 0;
+    min-height: 64px;
+    padding: .4rem;
+    border: 1px solid var(--line);
+    background: rgba(251,250,246,.76);
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .18s ease, transform .18s ease, background .18s ease;
+  }
+
+  .paris-poi-card:hover,
+  .paris-poi-card.is-active {
+    border-color: var(--bronze);
+    background: #fff;
+    transform: translateY(-2px);
+  }
+
+  .paris-poi-card img {
+    width: 54px;
+    height: 48px;
+    object-fit: cover;
+  }
+
+  .paris-poi-card span {
+    min-width: 0;
+  }
+
+  .paris-poi-card small,
+  .paris-poi-card strong {
+    display: block;
+  }
+
+  .paris-poi-card small {
+    color: var(--bronze);
+    font-size: .59rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .paris-poi-card strong {
+    margin-top: .1rem;
+    font: 600 .8rem/1.2 Georgia, serif;
+  }
+
   .paris-dot {
     width: .55rem;
     height: .55rem;
@@ -877,6 +999,19 @@ const jsonLd = {
     .paris-stage__legend {
       display: grid;
       gap: .35rem;
+    }
+
+    .paris-poi-list {
+      grid-template-columns: 1fr;
+    }
+
+    .paris-poi-card {
+      grid-template-columns: 70px 1fr;
+    }
+
+    .paris-poi-card img {
+      width: 70px;
+      height: 52px;
     }
   }
 
