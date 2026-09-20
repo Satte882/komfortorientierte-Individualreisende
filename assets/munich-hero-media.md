@@ -27,11 +27,11 @@ Aus dem Pexels-Original wurde für die Website ein lokales Derivat erzeugt:
 
 - 8-Sekunden-Fassung ab ca. Sekunde 1 des Quellclips;
 - Ton vollständig entfernt;
-- Querformat-Original (1920 × 1080, 16:9) auf 1280 × 720 px als lokales Web-Derivat ausgegeben;
+- Querformat-Original (1920 × 1080, 16:9) als finales Desktop-Hero-Derivat auf 1120 × 480 px (7:3) ausgegeben;
 - H.264/MP4, Web-Optimierung mit Faststart;
 - Poster aus dem Quellclip bei ca. Sekunde 4 als WebP erzeugt;
 - Pexels kennzeichnet das Motiv u. a. mit `Munich`, `Summer`, `Daylight`, `Cityscape` und `Motion`;
-- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.2502` (Grenzwert `0.10`).
+- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.2385` (Grenzwert `0.10`).
 
 Das Frontend lädt das Video nur, wenn weder `prefers-reduced-motion: reduce` noch Data Saver aktiv ist. Andernfalls bleibt ausschließlich das lokale Poster sichtbar.
 
