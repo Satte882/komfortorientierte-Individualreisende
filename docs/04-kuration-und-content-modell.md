@@ -45,6 +45,25 @@ Die Kuration verwendet nur drei Kategorien:
 
 Eine bessere Alternative ist keine vierte Kategorie, sondern Teil der Begründung für eine Entscheidung bzw. des Feldes `Bewusst weglassen / Alternative` im Decision-Block.
 
+### Kurative Entscheidungsregel
+
+Für jeden relevanten Kandidaten werden in dieser Reihenfolge vier Fragen beantwortet:
+
+1. **Problembeitrag:** Hilft der Kandidat wesentlich, das finale ICP-Problem zu lösen?
+2. **Eigenständiger Zusatzwert:** Liefert er gegenüber dem übrigen Programm einen eigenen Mehrwert statt überwiegend Wiederholung?
+3. **Reibung:** Stehen Zeit, Wege, Energie, Reservierungsaufwand und Kosten in einem vernünftigen Verhältnis zum Mehrwert?
+4. **Alternative:** Gibt es für denselben Zweck eine bessere Option für diesen ICP?
+
+Daraus folgt die Einordnung:
+
+- **Priorität:** direkter Beitrag zum finalen ICP-Problem, eigenständiger Mehrwert und angemessene Reibung.
+- **Optional:** echter Zusatzwert, aber nur unter einer Bedingung wie mehr Zeit, stärkerem Spezialinteresse, guter Energie, passender Saison oder geeignetem Zeitpunkt.
+- **Bewusst nicht priorisieren:** geringer Problembeitrag, starke Überschneidung, unverhältnismäßige Reibung, Verdrängung wichtigerer Inhalte oder bessere Alternative.
+
+`Bewusst nicht priorisieren` ist keine Qualitätsabwertung eines Ortes, sondern eine Entscheidung für das konkrete ICP-Problem und den verfügbaren Reise-Rahmen.
+
+Zusätzlich gilt: **Die Summe der Prioritäten muss in das versprochene Zeit-, Energie- und Komfortbudget des Beitrags passen.** Einzelne gute Empfehlungen dürfen zusammen kein unrealistisches Programm ergeben.
+
 ## 3. Interessen-Cluster
 
 Zu Beginn nur wenige stabile Cluster verwenden.
