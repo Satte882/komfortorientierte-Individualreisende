@@ -40,7 +40,10 @@ Beim Eiffelturm ist zwischen dem Bauwerk bei Tag und der nächtlichen Lichtinsze
 
 - ohne Ton;
 - kurze, weboptimierte Fassung;
-- Poster immer vorhanden;
+- Poster immer vorhanden und visuell passend zum tatsächlichen Video-Crop;
+- vor Auswahl im vorgesehenen Hero-Layout prüfen: ruhige Textfläche, kein dominantes Motiv direkt hinter H1/Lead, ausreichender Kontrast mit Scrim;
+- natürliche Farbe ist der Default; Schwarz/Weiß, starke Entsättigung oder Look-Filter nur als bewusste und dokumentierte redaktionelle Entscheidung;
+- technische Nutzbarkeit und Lizenz reichen nicht: das konkrete Derivat muss auch visuell zur Bildsprache und zum Hero-Aufbau passen;
 - Reduced Motion: Video nicht laden;
 - Data Saver: Video nicht laden;
 - keine Autoplay-Abhängigkeit für Inhalt oder Navigation.
