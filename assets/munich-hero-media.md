@@ -11,9 +11,9 @@
 ## Quelle und Lizenz
 
 - Quelle: Pexels
-- Asset: **Aerial View of Marienplatz in Munich** – sommerlicher Marienplatz bei Tageslicht
-- Urheber/Creator: **Marlon Castor**
-- Quellseite: https://www.pexels.com/video/aerial-view-of-marienplatz-in-munich-37585740/
+- Asset: **Dynamic Urban City Traffic in Tilt-Shift** – sommerliche München-Stadtansicht mit sichtbarer Bewegung
+- Urheber/Creator: **SHOX ART**
+- Quellseite: https://www.pexels.com/video/dynamic-urban-city-traffic-in-tilt-shift-37252002/
 - Lizenz: **Pexels License**
 - Lizenzprüfung: 2026-09-20
 - Kommerzielle Nutzung: laut Pexels-Lizenz zulässig
@@ -27,14 +27,14 @@ Aus dem Pexels-Original wurde für die Website ein lokales Derivat erzeugt:
 
 - 8-Sekunden-Fassung ab ca. Sekunde 1 des Quellclips;
 - Ton vollständig entfernt;
-- vertikales Original auf den site-weiten 16:9-Hero-Frame zugeschnitten und auf 1280 × 720 px ausgegeben;
+- Querformat-Original (1920 × 1080, 16:9) auf 1280 × 720 px als lokales Web-Derivat ausgegeben;
 - H.264/MP4, Web-Optimierung mit Faststart;
 - Poster aus dem Quellclip bei ca. Sekunde 4 als WebP erzeugt;
-- Pexels kennzeichnet das Motiv als `Summer`, `Daytime`, `Blue Sky`, `Travel` und `Marienplatz`;
-- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.1642` (Grenzwert `0.10`).
+- Pexels kennzeichnet das Motiv u. a. mit `Munich`, `Summer`, `Daylight`, `Cityscape` und `Motion`;
+- automatischer Farbcheck des Posters: mittlere HSV-Sättigung `0.2502` (Grenzwert `0.10`).
 
 Das Frontend lädt das Video nur, wenn weder `prefers-reduced-motion: reduce` noch Data Saver aktiv ist. Andernfalls bleibt ausschließlich das lokale Poster sichtbar.
 
 ## Alt-Text
 
-> Sommerlicher Blick auf den Marienplatz in München mit Neuem Rathaus und blauem Himmel
+> Sommerliche Luftaufnahme von München mit Stadtverkehr und urbaner Kulisse
