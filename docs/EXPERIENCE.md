@@ -38,7 +38,7 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 - `published` Experience-Content muss durch die Content-Validierung blockiert werden, wenn das Poster/Fallback fehlt.
 - Ein **Cinematic Hero ist eine gemeinsame Komposition aus Medium und Seiteneinstieg**. Das feste Overlay enthält **Breadcrumb, Eyebrow und H1**. Längere Beschreibung, Meta-Informationen und redaktionelle Einordnung gehören standardmäßig in den **Post-Hero-Intro-Bereich** direkt danach. So bleibt der Hero visuell stabil und lange Titel/Leads werden nicht abgeschnitten.
 - Referenzaufbau der Seite: **Hero-Medium → Scrim → Hero-Overlay → Credit → Post-Hero-Intro → Main Content**. Paris ist dafür das Referenzmuster; destinationsspezifischer Code wird daraus nicht kopiert.
-- Cinematic Heroes haben site-weit einen festen **vertikalen Budgetvertrag**: Desktop/Tablet `height: clamp(340px, 42svh, 440px)`; Mobile `height: clamp(420px, 58svh, 500px)`. Das ist eine echte Höhe, keine `min-height`.
+- Cinematic Heroes haben site-weit einen festen **Medienrahmen**: Desktop/Tablet maximal `1120px` breit bei `7:3` (≈21:9). Dadurch ist die sichtbare Hero-Fläche definiert und nicht von der Browserhöhe abhängig. Mobile nutzt einen eigenen Breakpoint mit `--cinematic-hero-mobile-height`.
 - Der Hero darf durch längere Copy **nicht automatisch wachsen**. Wenn der vollständige Artikeltitel nicht sauber in das H1-Budget passt, wird ein optionaler `heroTitle` als kürzere sichtbare Fassung verwendet; der vollständige `title` bleibt für Artikel/SEO erhalten. Lead/Meta werden nicht in den Hero hineingedrückt.
 - Das Layout ist der Vertrag, das Medium wird dafür ausgewählt und zugeschnitten. Für breite Desktop-Heros sind **Querformat-Quellen** der Standard; Hochformat-Video ist nur zulässig, wenn ein visueller Review den breiten Crop ausdrücklich bestätigt. Wenn Motiv/Fokus im Frame verloren gehen, wird ein anderes Medium gewählt statt den Hero für das Asset zu verbiegen.
 - Ein flaches 16:7-Banner ist für einen Cinematic Hero ebenso falsch wie ein Hero, der ohne inhaltlichen Grund den Großteil des ersten Viewports belegt.
@@ -55,13 +55,14 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 
 München #46 hat den technischen Vertrag erfüllt – lokales Video, Poster, Provenienz und Fallback –, aber den **Experience-Vertrag visuell verfehlt**: Das Medium wurde als separates, flaches Banner oberhalb des Headers gerendert und der ausgewählte Clip ist monochrom. Dadurch war der Hero technisch korrekt, aber deutlich schwächer als das Paris-Referenzmuster.
 
-**Konsequenz:** Ein Hero-Gate prüft nicht nur „Asset vorhanden / Lizenz dokumentiert / Fallback funktioniert“, sondern immer auch **Komposition, Farbwirkung, Textfläche, Hero-Geometrie, Quellformat und Übergang zum Content**. München #48–#50 zeigte drei Fehlerbilder: falsches Overlay-Modell, fehlende echte Größenbegrenzung und schließlich Hochformat-Medium plus fehlender Post-Hero-Abstand. Deshalb sind Hero, Intro und Main Content jetzt als drei getrennte Layout-Zonen definiert.
+**Konsequenz:** Ein Hero-Gate prüft nicht nur „Asset vorhanden / Lizenz dokumentiert / Fallback funktioniert“, sondern immer auch **Komposition, Farbwirkung, Textfläche, Hero-Geometrie, Quellformat, finalen Crop und Übergang zum Content**. München #48–#51 zeigte zusätzlich: Ein 16:9-Asset darf nicht erst im Browser auf einen deutlich breiteren Hero gecroppt werden. Für Desktop wird deshalb ein abgenommenes `7:3`-Derivat erzeugt; Browser-Cropping ist nur noch für Breakpoint-Anpassungen zulässig.
 
 ### Sticky Stage
 
 - Desktop: Sticky Stage ist erlaubt, wenn sie Orientierung schafft.
 - Mobile: linearer Flow; kein erzwungenes Sticky- oder Scroll-Hijacking.
 - Die Stage ergänzt den Artikel, sie darf ihn nicht ersetzen.
+- Karten-HUDs dürfen weder aktiven POI noch Attribution verdecken. Die Walking-Statuskarte liegt deshalb auf Desktop im **Gegenquadranten des aktiven POI**; Mobile nutzt einen festen unteren HUD-Bereich mit Attribution-Abstand.
 
 ### Stage-State-Modell
 
