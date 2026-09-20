@@ -8,7 +8,7 @@ Die klassischen Heidelberg-Punkte liegen zwar nah beieinander, aber die Tagesbel
 
 ### Social-Media-Hype vs. Realität
 
-Öffentlich sichtbare aktuelle Reisevideos und Community-Posts zeigen wiederkehrend dieselben Klassiker: Schloss, Alte Brücke, Philosophenweg und Königstuhl. Es gibt aber kein ausreichend belastbares Signal für einen einzelnen Social-Media-Hype, der eine eigene öffentliche Warnsektion rechtfertigt. Hoher Besucherandrang an Schloss, Hauptstraße und Alter Brücke wird als reales Besuchssignal behandelt, nicht kausal Social Media zugeschrieben.
+Öffentlich sichtbare aktuelle Reisevideos und Community-Posts zeigen wiederkehrend dieselben Klassiker: Schloss, Alte Brücke, Philosophenweg und Königstuhl. Es gibt aber kein ausreichend belastbares Signal, dass Social Media die Besuchermengen kausal erzeugt. Unabhängig davon ist Heidelberg stark besucht: Die Stadt nennt rund 13,9 Mio. Gäste pro Jahr, für die Altstadt rund 3 Mio. Besucher jährlich; das Schloss zählt laut Bergbahn rund 1 Mio. Gäste pro Jahr. Bei Großereignissen wie der Schlossbeleuchtung warnt Heidelberg Marketing ausdrücklich vor sehr vollem Innenstadt-/Neckarbereich. Öffentliche Konsequenz: realen Andrang benennen und praktische Ausweichoptionen geben, ohne ihn Social Media zuzuschreiben.
 
 ### Tipps & Tricks
 
@@ -45,6 +45,32 @@ Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
 
 Social-Media-Realitätscheck im öffentlichen Artikel:
 nein – es gibt kein ausreichend belegtes, eigenständiges Social-Media-Hype-Signal. Besucherandrang und Steigungen werden als praktische Reibung behandelt.
+
+## Besonderes Extra / Affiliate-Check
+
+Suchschritte:
+2
+
+Status:
+gefunden
+
+Angebot:
+Eine Übernachtung im 5-Sterne-Superior-Hotel Europäischer Hof Heidelberg als bewusstes Paar-/Komfort-Upgrade; optional mit Abendessen in der Kurfürstenstube statt eines weiteren Sightseeing-Blocks.
+
+Warum ICP-Fit:
+Zentral in der Altstadt, hoher Komfort, Spa/Dachterrasse und ein klarer Qualitäts-/Erlebnismehrwert für Paare, die aus dem Tagesbesuch einen besonderen Abend machen möchten. Das Extra ersetzt zusätzliche Programmdichte, statt sie zu erhöhen.
+
+Partner:
+Booking.com
+
+Link-Ziel:
+https://www.booking.com/hotel/de/der-europaische-hof-europa.de.html
+
+Affiliate-Potenzial:
+Booking ist im Repo als Affiliate-Partner vorgesehen; echter Tracking-Link ist noch ausstehend.
+
+Begründung:
+nicht erforderlich – passendes Angebot innerhalb von zwei gezielten Suchen gefunden.
 
 ## Belastbare Fakten
 
