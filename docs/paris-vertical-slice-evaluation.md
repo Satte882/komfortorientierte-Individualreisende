@@ -15,6 +15,20 @@ Der Spike zeigt, dass die gewünschte Richtung mit Standard-Web-Mechaniken grund
 
 Der Spike entscheidet bewusst noch **nicht** über einen finalen Map-Provider oder eine generische Destination-Pipeline.
 
+## Vorher / Nachher
+
+| Aspekt | Vorher: aktueller Paris-Guide auf main | Nachher: Vertical Slice |
+| --- | --- | --- |
+| Einstieg | klassischer zweispaltiger Artikel-Hero | großformatiger Cinematic Hero mit realem Paris-Foto |
+| Medien | Demo-SVG | lokal ausgelieferte, lizenzierte Fotografie für Paris, Orsay, Louvre und Orangerie |
+| räumlicher Kontext | keiner | interaktive Paris-Karte mit POIs und redaktioneller Abfolge |
+| Scroll-Verhalten | normaler Artikel | Desktop: Sticky Visual Stage; Mobile: linearer Flow |
+| Decisions | statische EditorialChoice-/Skip-Boxen | bestehende Boxen bleiben + aktiver Decision Layer in der Visual Stage |
+| Route | keine | progressive redaktionelle Verbindung Orsay → Louvre → Orangerie |
+| Produktlogik | redaktionelle Priorisierung | unverändert; nur visuell verstärkt |
+
+Screenshots des neuen Spikes wurden automatisiert für Desktop und Mobile erzeugt und im QA-Run als Artifact gespeichert.
+
 ## Mechaniken: Nutzen im Spike
 
 | Mechanik | Beobachtung | Nutzen/Aufwand |
