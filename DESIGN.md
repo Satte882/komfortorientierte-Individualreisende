@@ -35,7 +35,8 @@ Die Fließtextspalte bleibt unabhängig vom Viewport auf etwa 780 px begrenzt. D
 - Bilder füllen ihre Fläche mit object-fit cover.
 - **Normale zweispaltige Heroes** stapeln spätestens auf Tablet. **Cinematic Experience Heroes sind die Ausnahme:** Medium und Einstiegstext bleiben eine gemeinsame Overlay-Komposition; auf kleineren Viewports werden Höhe, Crop, Typografie und Scrim angepasst statt Bild und Text automatisch zu trennen.
 - Ein Cinematic Hero soll als gemeinsame Komposition wirken und nicht wie ein flaches Banner vor dem eigentlichen Seitenkopf.
-- Für Cinematic Heroes gilt site-weit dieselbe Zielgeometrie: `min-height: clamp(460px, 56svh, 620px)`. Längerer Inhalt darf den Block vergrößern; das Medium selbst erzeugt keine artikelspezifische Höhe.
+- Für Cinematic Heroes gilt site-weit derselbe vertikale Budgetvertrag: Desktop/Tablet `height: clamp(340px, 42svh, 440px)`, Mobile `height: clamp(420px, 58svh, 500px)`. Der Wert ist bewusst eine echte `height`, nicht `min-height`.
+- Der Hero wächst nicht mit langer Copy. H1, Lead, Meta und optionale Zusatzzeilen müssen innerhalb dieses Budgets funktionieren; andernfalls Copy/Typografie reduzieren.
 - Hero-Medien werden so ausgewählt und gecroppt, dass sie in diesem Frame funktionieren. Die Seite wird nicht pro Video neu dimensioniert.
 - Hero-Medien behalten standardmäßig natürliche Farbe; kein globaler Grayscale-/Entsättigungs-Look ohne explizite redaktionelle Begründung.
 - Als Reiseblog zeigt die Bildsprache standardmäßig **Frühling/Sommer bzw. helle, reisefreundliche Tageslicht-Situationen**. Herbst, Winter, Nacht oder bewusst graue Wetterstimmungen nur, wenn sie zum konkreten Artikelinhalt gehören.
@@ -93,6 +94,7 @@ Vor Abschluss eines visuellen MVP werden Startseite, ein Guide und eine Decision
 
 - 390 px: Mobile / Touch / kein horizontales Überlaufen; Cinematic Hero bleibt eine lesbare Medium-plus-Overlay-Komposition.
 - 768 px: Tablet / sauberes Stapeln und Kartenraster.
-- 1440 px: Desktop / ausgewogene Spalten und Bildflächen; bei Cinematic Hero Textlesbarkeit, Overlay-Hierarchie und ausreichende Bildwirkung prüfen.
+- 1440 × 720 px: Desktop mit geringer Höhe / Cinematic Hero darf den ersten Viewport nicht dominieren; Beginn der nächsten Inhaltsfläche muss sichtbar sein.
+- 1440 px Breite bei normaler Desktop-Höhe: ausgewogene Spalten und Bildflächen; bei Cinematic Hero Textlesbarkeit, Overlay-Hierarchie und ausreichende Bildwirkung prüfen.
 
 Zusätzlich wird Wide über 1440 px auf bewusste Nutzung des Raums geprüft. Neue UI-Framework-Abhängigkeiten sind für dieses Verhalten nicht vorgesehen.
