@@ -225,6 +225,7 @@ TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox ve
 Nur nach ausdrücklicher Freigabe durch den Owner ausfüllen. Ein Agent darf diese Freigabe nicht selbst erteilen.
 
 - [ ] Kuration und Decision-Blöcke vom Owner freigegeben
+- [ ] Für jeden wesentlichen öffentlichen Hauptabschnitt existiert ein vollständiger Decision-Block
 Freigabe durch: TODO
 Freigabe am: TODO YYYY-MM-DD
 
@@ -287,6 +288,7 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 18. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
 19. Führe den Full Article Review in curation.md vollständig durch.
 20. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+21. Vor Publish dürfen in research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
