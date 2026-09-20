@@ -5,7 +5,8 @@ export const destinations = {
   cordoba: { name: 'Córdoba', country: 'spanien', indexable: false },
   island: { name: 'Island', country: 'island', indexable: false },
   toskana: { name: 'Toskana', country: 'italien', indexable: false },
-  rom: { name: 'Rom', country: 'italien', indexable: false }
+  rom: { name: 'Rom', country: 'italien', indexable: false },
+  heidelberg: { name: 'Heidelberg', country: 'deutschland', indexable: false }
 } as const;
 
 export const interests = {
