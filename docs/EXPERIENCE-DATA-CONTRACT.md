@@ -16,6 +16,10 @@ Der Vertrag beschreibt die minimalen Inputs für eine Experience. Er ist noch ke
 | `poster` | ja bei Video | statischer Fallback |
 | `attribution` | ja | Quelle, Urheber, Lizenz |
 
+Der Hero-Vertrag ist **layoutübergreifend**. Paris-, Walking- und spätere Experience-Layouts müssen denselben Vertrag rendern; eine Experience darf den Hero nicht durch eine reine Text-/Infobox ersetzen.
+
+Für die aktuelle Astro-Implementierung liegen Poster-/Video-Provenienz im Content-Frontmatter (`heroImage` / `heroVideo`), während Walking-Routen- und POI-Daten getrennt bleiben. Das verhindert doppelte Medienmetadaten im Experience-State.
+
 ## `chapters[]`
 
 | Feld | Pflicht | Bedeutung |
