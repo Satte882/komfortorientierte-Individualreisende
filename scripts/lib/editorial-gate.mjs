@@ -310,8 +310,7 @@ export function validateCurationV3(curation, research) {
     'Besonderes Extra ist als Box umgesetzt oder die 3-Suchen-Ausnahme ist dokumentiert'
   ];
   for (const label of requiredChecks) {
-    const escaped = label.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\export function validatePublicContentV2(content) {');
-    if (!new RegExp('- \\[[xX]\\] ' + escaped).test(curation)) {
+    if (!curation.includes('- [x] ' + label) && !curation.includes('- [X] ' + label)) {
       errors.push('Gate v3 Full Article Review fehlt: ' + label);
     }
   }
