@@ -232,7 +232,7 @@ Freigabe am: 2026-09-20
 - [x] Andrang / Social Media ist praktisch eingeordnet oder begründet nicht erforderlich
 - [x] eine kompakte Kostenübersicht für zwei Personen ist sichtbar
 - [x] Besonderes Extra ist als Box umgesetzt oder die 3-Suchen-Ausnahme ist dokumentiert
-- [x] Text, Bild und CTA sind semantisch konsistent; keine Karte erforderlich
+- [x] Text, Hero-Video, Walking-Map und CTA sind semantisch konsistent
 - [x] Artikel besitzt einen klaren roten Faden
 - [x] ICP müsste für die Kernentscheidung nicht sofort wieder selbst recherchieren
 
