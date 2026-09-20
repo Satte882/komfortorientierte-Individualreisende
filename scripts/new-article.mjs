@@ -152,6 +152,16 @@ TODO
 ## Nicht als Fakt ausgeben
 
 TODO
+
+## Hypothesen-Review nach vertieftem Research
+
+Status: TODO bestätigt / präzisiert / verworfen
+
+Finales ICP-Problem:
+TODO
+
+Begründung:
+TODO: Welche Research-Erkenntnisse bestätigen oder verändern die Ausgangshypothese? Das finale ICP-Problem ist der verbindliche Input für Kuration und Decision-Blöcke.
 `);
 
 writeFileSync(join(researchDir,'curation.md'), `# Kuration – ${topic}
@@ -227,6 +237,7 @@ TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox ve
 
 ### Fakten und Kuration
 
+- [ ] ICP-Problemahypothese nach vertieftem Research bestätigt/präzisiert/verworfen und finales ICP-Problem in research.md festgehalten
 - [ ] zentrale Fakten gegen geeignete Primärquellen geprüft
 - [ ] volatile Angaben aktuell geprüft
 - [ ] keine unbelegten Mengenbehauptungen
@@ -254,17 +265,19 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 5. Entscheide explizit, ob der öffentliche Artikel einen eigenen Social-Media-Realitätscheck braucht. Bei relevantem Signal: sichtbar aufnehmen und praktische Empfehlung geben; ohne relevantes Signal keinen künstlichen Abschnitt erzeugen.
 6. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
 7. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
-8. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-9. Trenne Fakten von redaktionellem Urteil.
-10. Keine persönliche Reiseerfahrung erfinden.
-11. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Finalisiere den MDX-Text erst nach ausdrücklicher Freigabe und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
-12. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
-13. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
-14. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-15. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-16. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-17. Führe den Full Article Review in curation.md vollständig durch.
-18. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+8. Führe nach dem vertieften Research den Hypothesen-Review durch: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem mit kurzer Begründung in research.md festhalten.
+9. Nutze ausschließlich dieses finale ICP-Problem als Input für Kuration und Decision-Blöcke.
+10. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
+11. Trenne Fakten von redaktionellem Urteil.
+12. Keine persönliche Reiseerfahrung erfinden.
+13. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Finalisiere den MDX-Text erst nach ausdrücklicher Freigabe und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+14. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+15. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+16. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+17. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+18. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+19. Führe den Full Article Review in curation.md vollständig durch.
+20. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
