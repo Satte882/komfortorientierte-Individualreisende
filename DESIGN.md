@@ -33,7 +33,9 @@ Die Fließtextspalte bleibt unabhängig vom Viewport auf etwa 780 px begrenzt. D
 ### Bilder
 
 - Bilder füllen ihre Fläche mit object-fit cover.
-- Hero-Bereiche stapeln spätestens auf Tablet; Mobile hat immer eine eindeutige Reihenfolge und keine seitliche Enge.
+- **Normale zweispaltige Heroes** stapeln spätestens auf Tablet. **Cinematic Experience Heroes sind die Ausnahme:** Medium und Einstiegstext bleiben eine gemeinsame Overlay-Komposition; auf kleineren Viewports werden Höhe, Crop, Typografie und Scrim angepasst statt Bild und Text automatisch zu trennen.
+- Ein Cinematic Hero soll immersiv wirken und nicht wie ein flaches Banner vor dem eigentlichen Seitenkopf.
+- Hero-Medien behalten standardmäßig natürliche Farbe; kein globaler Grayscale-/Entsättigungs-Look ohne explizite redaktionelle Begründung.
 - Artikelbilder nutzen auf Desktop ein redaktionelles 4:3-Format, auf schmaleren Viewports eine breitere Darstellung.
 - Demo-Assets werden über assets/placeholder-tracking.md verfolgt und in den Templates als PLACEHOLDER markiert.
 
@@ -88,6 +90,6 @@ Vor Abschluss eines visuellen MVP werden Startseite, ein Guide und eine Decision
 
 - 390 px: Mobile / Touch / kein horizontales Überlaufen.
 - 768 px: Tablet / sauberes Stapeln und Kartenraster.
-- 1440 px: Desktop / ausgewogene Spalten und Bildflächen.
+- 1440 px: Desktop / ausgewogene Spalten und Bildflächen; bei Cinematic Hero Textlesbarkeit, Overlay-Hierarchie und ausreichende Bildwirkung prüfen.
 
 Zusätzlich wird Wide über 1440 px auf bewusste Nutzung des Raums geprüft. Neue UI-Framework-Abhängigkeiten sind für dieses Verhalten nicht vorgesehen.
