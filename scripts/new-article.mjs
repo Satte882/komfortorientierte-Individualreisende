@@ -20,7 +20,8 @@ const knownDestinations = {
   cordoba: ['cordoba','córdoba'],
   island: ['island'],
   toskana: ['toskana'],
-  rom: ['rom','roma']
+  rom: ['rom','roma'],
+  heidelberg: ['heidelberg']
 };
 const knownInterests = {
   kunst: ['kunst','museum','malerei','impressionismus'],
