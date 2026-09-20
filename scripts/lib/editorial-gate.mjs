@@ -71,6 +71,10 @@ export function validateCurationV2(curation) {
     errors.push('Gate v2 hat noch ' + unchecked + ' offene Checkbox(en)');
   }
 
+  if (/\bTODO\b/i.test(curation)) {
+    errors.push('Gate v2 curation.md enthält noch TODO-Platzhalter');
+  }
+
   return errors;
 }
 
@@ -126,6 +130,10 @@ export function validateHumanGateV2(curation) {
     errors.push('Human Gate ist nicht ausdrücklich freigegeben');
   }
 
+  if (!/- \[[xX]\] Für jeden wesentlichen öffentlichen Hauptabschnitt existiert ein vollständiger Decision-Block/.test(curation)) {
+    errors.push('Human Gate bestätigt nicht die vollständige Decision-Block-Abdeckung');
+  }
+
   const approvedBy = curation.match(/^Freigabe durch:\s*(.+)$/m)?.[1]?.trim() ?? '';
   if (!approvedBy || /^TODO\b/i.test(approvedBy)) {
     errors.push('Human Gate braucht Freigabe durch eine konkrete Person');
@@ -136,6 +144,12 @@ export function validateHumanGateV2(curation) {
   }
 
   return errors;
+}
+
+export function validatePublicContentV2(content) {
+  return /\bTODO\b/i.test(content)
+    ? ['Gate v2 öffentlicher Artikel enthält noch TODO-Platzhalter']
+    : [];
 }
 
 export function validateGateForPublish({ content, curation, research = '', slug }) {
@@ -151,7 +165,8 @@ export function validateGateForPublish({ content, curation, research = '', slug 
     return [
       ...curationErrors,
       ...validateResearchV2(research),
-      ...validateHumanGateV2(curation)
+      ...validateHumanGateV2(curation),
+      ...validatePublicContentV2(content)
     ];
   }
 
