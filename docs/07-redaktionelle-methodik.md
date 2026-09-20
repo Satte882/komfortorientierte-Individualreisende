@@ -98,7 +98,8 @@ Output:
 
 - 1 primäre ICP-Problemahypothese;
 - maximal 2 Nebenfragen;
-- 3–7 stärkste Signale mit Quelle/Abrufstand und Einordnung als Fakt, Signal oder noch zu verifizieren.
+- 3–7 stärkste Signale mit Quelle/Abrufstand und Einordnung als Fakt, Signal oder noch zu verifizieren;
+- Entscheidung, ob ein eigener Social-Media-Realitätscheck im öffentlichen Artikel erforderlich ist.
 
 ### Schritt 3 – ICP-Problemahypothese formulieren
 
@@ -364,6 +365,6 @@ Die Decision-Blöcke sind Redaktionsinput, kein neues Frontmatter- oder Runtime-
 
 Reihenfolge:
 
-> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Kuration → Decision-Blöcke → öffentlicher Text.
+> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
 
 Erst danach wird der Artikel nach `docs/23-icp-schreibstandard.md` formuliert.
