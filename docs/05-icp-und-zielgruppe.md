@@ -256,3 +256,28 @@ Die Website verkauft nicht „Information“.
 Sie verkauft indirekt:
 
 > **Orientierung, Priorisierung und Entscheidungssicherheit vor einer hochwertigen selbstorganisierten Reise.**
+
+
+## 16. Universelle Entscheidungsfragen für Content
+
+Vor der Struktur eines neuen Artikels wird nicht mit POIs oder einer Sehenswürdigkeitenliste gestartet, sondern mit den offenen Entscheidungen des ICP.
+
+Je nach Artikel sind insbesondere zu prüfen:
+
+- Lohnt sich das für dieses Profil überhaupt?
+- Was genau sollte man dort tun oder ansehen?
+- Wie viel Zeit und Energie kostet es realistisch?
+- Reingehen oder reicht außen / ein kurzer Stopp?
+- Wann ist ein sinnvoller Zeitpunkt?
+- Muss reserviert oder vorab gebucht werden?
+- Was kann guten Gewissens weggelassen werden?
+- Was lässt sich logisch kombinieren?
+- Wo ist eine Pause sinnvoll?
+- Welche Wege, Wartezeiten oder Umstände erzeugen unnötige Reibung?
+- Wann würde die Empfehlung für ein anderes Interesse anders ausfallen?
+- Was ist ein typischer Planungsfehler?
+- Welcher konkrete Tipp reduziert Reibung?
+- Was ist ein sinnvoller Plan B?
+- Welche nächste Handlung ergibt sich aus der Entscheidung?
+
+Nicht jede Sektion muss alle Fragen beantworten. Aber jeder Hauptabschnitt soll mindestens eine reale Reiseentscheidung des ICP reduzieren.

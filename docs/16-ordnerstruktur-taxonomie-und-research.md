@@ -164,3 +164,17 @@ komfortorientierte-Individualreisende/
 ```
 
 Die Struktur ist damit bereits für 40+ Artikel sauber, ohne die technische Implementierung unnötig aufzublähen.
+
+
+## 4. GitHub Research-Issue vs. Research-Ablage
+
+Bei einer neuen Destination kann ein GitHub-Issue den Arbeitsauftrag und Fortschritt steuern.
+
+Die Rollen sind strikt getrennt:
+
+> **GitHub Issue = Auftrag, Status und Verweise.**  
+> **`research/` = dauerhafte Erkenntnisse und Source of Truth.**
+
+Rechercheergebnisse werden deshalb nicht parallel als lange Issue-Texte und Research-Dateien gepflegt.
+
+Das Issue verweist auf die relevanten `research/<slug>/`-Dateien; die inhaltliche Quelle bleibt das Repository.

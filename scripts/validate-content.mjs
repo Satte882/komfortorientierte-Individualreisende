@@ -1,3 +1,4 @@
+import { validateGateForPublish } from './lib/editorial-gate.mjs';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
@@ -36,7 +37,13 @@ for (const file of files) {
       errors.push(`${display}: published content requires a parseable slug`);
     } else {
       const curation = join(root, 'research', slug, 'curation.md');
-      if (!existsSync(curation)) errors.push(`${display}: missing ${relative(root, curation)}`);
+      if (!existsSync(curation)) {
+        errors.push(`${display}: missing ${relative(root, curation)}`);
+      } else {
+        const curationText = readFileSync(curation, 'utf8');
+        const gateErrors = validateGateForPublish({ content: text, curation: curationText, slug });
+        for (const error of gateErrors) errors.push(`${display}: ${error}`);
+      }
     }
   }
 
