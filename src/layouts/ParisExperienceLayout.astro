@@ -520,6 +520,11 @@ const jsonLd = {
         if (!state) return;
 
         activeStateKey = key;
+        experience.setAttribute('data-active-stage', key);
+        if (mapContainer) {
+          mapContainer.setAttribute('data-stage-state', key);
+          mapContainer.setAttribute('data-route-progress', String(state.map.route));
+        }
         setMedia(state.media);
         setDecision(state);
         updateMapState(state);
