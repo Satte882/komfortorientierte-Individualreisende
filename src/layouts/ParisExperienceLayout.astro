@@ -80,15 +80,18 @@ const jsonLd = {
         </a>
       </div>
       <p class="paris-cinematic-hero__credit">
-        Video: Yann Caradec · CC BY-SA 2.0 · gekürzt, ohne Ton · Foto-Fallback: Raphael Desrosiers · CC BY 2.0
+        Video:
+        <a href="https://commons.wikimedia.org/wiki/File:Paris,_river_Seine102817.webm">Quahadi</a>
+        · <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>
+        · gekürzt, ohne Ton · Foto-Fallback: Raphael Desrosiers · CC BY 2.0
       </p>
     </section>
 
     <section class="paris-experience__intro container">
-      <p class="eyebrow">Vertical-Slice-Spike</p>
+      <p class="eyebrow">Unser Prinzip</p>
       <p>
-        Der redaktionelle Inhalt bleibt unverändert. Karte, Bilder und Übergänge machen nur sichtbar,
-        <strong>wo</strong> unsere Prioritäten liegen und <strong>warum</strong> wir sie so setzen.
+        Drei Kunstanker, ein geschützter Flex-Tag und genug Luft für Paris selbst.
+        Die Visualisierung folgt den Entscheidungen des Guides – <strong>nicht umgekehrt</strong>.
       </p>
     </section>
 
@@ -148,10 +151,9 @@ const jsonLd = {
 
           <div class="paris-decision" data-paris-decision>
             <span class="paris-decision__status" data-decision-status>Unsere Auswahl</span>
-            <strong data-decision-title>Orsay → Louvre → Orangerie</strong>
+            <strong data-decision-title>Orsay → Louvre → Orangerie → Flex</strong>
             <p data-decision-copy>
-              Drei Kunstanker reichen für vier Tage. Die Visualisierung folgt unserer redaktionellen
-              Priorisierung – nicht einer möglichst vollständigen Sehenswürdigkeiten-Liste.
+              Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.
             </p>
           </div>
         </div>
@@ -239,7 +241,27 @@ const jsonLd = {
         }
       };
 
+      const overviewState = {
+        media: 'paris',
+        role: 'Unsere Auswahl',
+        title: 'Orsay → Louvre → Orangerie → Flex',
+        copy: 'Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.',
+        mapView: 'core',
+        route: 'full'
+      };
+
       const states = [
+        {
+          match: /für wen wir hier entscheiden/i,
+          custom: {
+            media: 'paris',
+            role: 'Für dieses Profil',
+            title: 'Kunst sehen – nicht Museen sammeln',
+            copy: 'Ein fordernder Kunstblock pro Tag. Danach Paris, Pause und freie Zeit.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
         {
           match: /musée d'orsay/i,
           place: 'orsay'
@@ -253,16 +275,14 @@ const jsonLd = {
           place: 'orangerie'
         },
         {
-          match: /monet dein spezialinteresse/i,
-          place: 'marmottan'
-        },
-        {
-          match: /centre pompidou/i,
+          match: /so würden wir vier tage tatsächlich aufbauen/i,
           custom: {
             media: 'paris',
-            role: 'Aktuell weglassen',
-            title: 'Centre Pompidou',
-            copy: '2026 nicht als normales Museumsziel einplanen: Das Gebäude in Beaubourg ist geschlossen.'
+            role: '4-Tage-Struktur',
+            title: 'Orsay → Louvre → Orangerie → Flex',
+            copy: 'Die drei Kernmuseen bekommen je ihren eigenen Rhythmus. Tag vier bleibt Risikopuffer statt Pflichtprogramm.',
+            mapView: 'core',
+            route: 'full'
           }
         },
         {
@@ -271,7 +291,68 @@ const jsonLd = {
             media: 'paris',
             role: 'Bewusst weglassen',
             title: 'Versailles',
-            copy: 'Bei vier Tagen und engem Malerei-Fokus bindet der Ausflug zu viel Reisezeit.'
+            copy: 'Bei vier Tagen und engem Malerei-Fokus bindet der Ausflug zu viel Zeit und Energie.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
+        {
+          match: /centre pompidou/i,
+          custom: {
+            media: 'paris',
+            role: 'Aktuell weglassen',
+            title: 'Centre Pompidou',
+            copy: '2026 nicht als normalen Museumsstop einplanen. Erst das aktuelle Programm an Ausweichorten prüfen.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
+        {
+          match: /monet dein spezialinteresse/i,
+          place: 'marmottan'
+        },
+        {
+          match: /plan b:/i,
+          custom: {
+            media: 'paris',
+            role: 'Flex-Puffer',
+            title: 'Tag D hält die Reise beweglich',
+            copy: 'Verpasste Slots, Wetter oder Müdigkeit werden aufgefangen, ohne einen Kunsttag zu überladen.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
+        {
+          match: /wo würden wir übernachten/i,
+          custom: {
+            media: 'paris',
+            role: 'Komfortentscheidung',
+            title: 'Lage schlägt Romantik',
+            copy: 'Kurze, einfache Wege zu Orsay, Louvre und Tuilerien sind für diesen Guide wichtiger als die spektakulärste Adresse.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
+        {
+          match: /was vor der reise noch einmal prüfen/i,
+          custom: {
+            media: 'paris',
+            role: 'Vor der Reise',
+            title: 'Öffnungstage und Slots zuerst',
+            copy: 'Die Reihenfolge bleibt flexibel. Entscheidend sind aktuelle Öffnungstage, Zeitfenster und Sonderausstellungen.',
+            mapView: 'core',
+            route: 'full'
+          }
+        },
+        {
+          match: /unsere entscheidung in einem satz/i,
+          custom: {
+            media: 'paris',
+            role: 'Unsere Entscheidung',
+            title: 'Drei Kunstanker. Ein Flex-Tag.',
+            copy: 'Orsay priorisieren, Louvre kuratieren, Orangerie leicht halten und den vierten Tag bewusst schützen.',
+            mapView: 'core',
+            route: 'full'
           }
         }
       ];
@@ -281,6 +362,7 @@ const jsonLd = {
       let routeSource;
       let routeAnimationFrame = null;
       let activePlace = null;
+      let activeCustom = overviewState;
       let mapReady = false;
 
       const routeOrder = ['orsay', 'louvre', 'orangerie'];
@@ -375,10 +457,10 @@ const jsonLd = {
         );
       }
 
-      function fitMapForPlace(key) {
+      function fitMapContext(view = 'core') {
         if (!mapReady || !map || !maplibregl) return;
 
-        const core = routeOrder.includes(key);
+        const core = view !== 'all';
         const coordinates = core
           ? routeCoordinates
           : [...routeCoordinates, places.marmottan.center];
@@ -393,10 +475,15 @@ const jsonLd = {
         });
       }
 
+      function fitMapForPlace(key) {
+        fitMapContext(routeOrder.includes(key) ? 'core' : 'all');
+      }
+
       function activatePlace(key, shouldScroll = false) {
         const place = places[key];
         if (!place) return;
         activePlace = key;
+        activeCustom = null;
         setMedia(place.media);
         setDecision(place.role, place.name, place.copy);
         updateRoute(key);
@@ -426,8 +513,25 @@ const jsonLd = {
 
       function activateCustom(custom) {
         activePlace = null;
+        activeCustom = custom;
         setMedia(custom.media);
         setDecision(custom.role, custom.title, custom.copy);
+
+        experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
+          marker.classList.remove('is-active', 'is-completed', 'is-future');
+        });
+        experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
+          card.classList.remove('is-active');
+        });
+
+        if (mapReady) {
+          if (custom.route === 'none') {
+            setRouteData([routeCoordinates[0]]);
+          } else {
+            setRouteData(routeCoordinates);
+          }
+          fitMapContext(custom.mapView || 'core');
+        }
       }
 
       async function initMap() {
@@ -524,7 +628,11 @@ const jsonLd = {
             });
 
             mapReady = true;
-            activatePlace(activePlace || 'orsay');
+            if (activeCustom) {
+              activateCustom(activeCustom);
+            } else {
+              activatePlace(activePlace || 'orsay');
+            }
           });
         } catch (error) {
           mapContainer.innerHTML = '<div class="paris-stage__map-placeholder"><span>Interaktive Karte konnte nicht geladen werden. Der Guide bleibt vollständig nutzbar.</span></div>';
@@ -555,8 +663,7 @@ const jsonLd = {
       });
 
       const candidates = [
-        ...experience.querySelectorAll('[data-paris-story-copy] h2'),
-        ...experience.querySelectorAll('[data-paris-story-copy] .editorial-box h2')
+        ...experience.querySelectorAll('[data-paris-story-copy] h2')
       ];
 
       const tracked = candidates
@@ -567,28 +674,57 @@ const jsonLd = {
         })
         .filter(Boolean);
 
-      if ('IntersectionObserver' in window) {
-        const storyObserver = new IntersectionObserver(
-          (entries) => {
-            const visible = entries
-              .filter((entry) => entry.isIntersecting)
-              .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+      let activeStoryElement = null;
+      let storyTicking = false;
 
-            if (!visible) return;
-            const item = tracked.find((entry) => entry.element === visible.target);
-            if (!item) return;
+      function applyStoryState(item) {
+        if (!item || activeStoryElement === item.element) return;
+        activeStoryElement = item.element;
 
-            if (item.state.place) {
-              activatePlace(item.state.place);
-            } else if (item.state.custom) {
-              activateCustom(item.state.custom);
-            }
-          },
-          { rootMargin: '-28% 0px -58% 0px', threshold: [0, 1] }
-        );
-
-        tracked.forEach(({ element }) => storyObserver.observe(element));
+        if (item.state.place) {
+          activatePlace(item.state.place);
+        } else if (item.state.custom) {
+          activateCustom(item.state.custom);
+        }
       }
+
+      function syncStoryState() {
+        storyTicking = false;
+        const anchorY = window.innerHeight * 0.70;
+        let current = null;
+        let nearestTop = Number.NEGATIVE_INFINITY;
+
+        tracked.forEach((item) => {
+          const top = item.element.getBoundingClientRect().top;
+          if (top <= anchorY && top > nearestTop) {
+            current = item;
+            nearestTop = top;
+          }
+        });
+
+        const nearBottom =
+          window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 32;
+        if (nearBottom && tracked.length) {
+          current = tracked[tracked.length - 1];
+        }
+
+        if (current) {
+          applyStoryState(current);
+        } else if (activeStoryElement !== null) {
+          activeStoryElement = null;
+          activateCustom(overviewState);
+        }
+      }
+
+      function requestStorySync() {
+        if (storyTicking) return;
+        storyTicking = true;
+        requestAnimationFrame(syncStoryState);
+      }
+
+      window.addEventListener('scroll', requestStorySync, { passive: true });
+      window.addEventListener('resize', requestStorySync);
+      requestStorySync();
 
       setMedia('paris');
     }
@@ -718,6 +854,11 @@ const jsonLd = {
     margin: 0;
     color: rgba(255,255,255,.56);
     font-size: .68rem;
+  }
+
+  .paris-cinematic-hero__credit a {
+    color: inherit;
+    text-underline-offset: .15em;
   }
 
   .paris-experience__intro {

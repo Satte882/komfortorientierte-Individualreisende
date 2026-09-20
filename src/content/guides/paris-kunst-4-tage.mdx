@@ -47,6 +47,7 @@ editorialApproval: true
 
 import EditorialChoice from '../../components/content/EditorialChoice.astro';
 import SkipRecommendation from '../../components/content/SkipRecommendation.astro';
+import FourDayPlan from '../../components/content/FourDayPlan.astro';
 
 Wenn du vier Tage in Paris hast, **Kunst wirklich sehen** willst und nicht jeden Abend erschöpft im Hotel ankommen möchtest, würden wir die Reise nicht nach der Zahl der Museen optimieren. Für dieses Profil reichen drei feste Kunstanker. Der vierte Tag bleibt bewusst flexibel.
 
@@ -126,12 +127,46 @@ Die Orangerie ist aktuell dienstags geschlossen. Während bestimmter Ausstellung
 
 Die Reihenfolge ist ein **Planungsmuster**, kein starrer Wochentagsplan. Montag/ Dienstag können wegen der unterschiedlichen Schließtage einen Tausch nötig machen.
 
-| Tag | Vormittag / Hauptblock | Danach | Komfortentscheidung |
-| --- | --- | --- | --- |
-| **A – Orsay** | Orsay, ca. 2,5–3 Std. | längeres Mittagessen, Seine / Saint-Germain, freier Abend | kein zweites großes Museum |
-| **B – Louvre** | Louvre, ca. 2,5–3 Std., vorher Schwerpunkt festgelegt | echte Pause; danach nur leichtes Programm | Energie für den Louvre reservieren, nicht für eine Checkliste |
-| **C – Orangerie** | Orangerie, ca. 1–1,5 Std. | Tuilerien und ein entspannter Paris-Block | bewusst der leichtere Kunsttag |
-| **D – Flex** | Marmottan / Rodin / Sonderausstellung **oder gar kein Museum** | Viertel, Markt, Café, Spaziergang, früher Abend | Flex-Tag fängt Wetter, Müdigkeit und verpasste Slots ab |
+<FourDayPlan
+  days={[
+    {
+      code: 'Tag A',
+      title: 'Orsay',
+      duration: 'ca. 2,5–3 Std.',
+      main: 'Musée d\'Orsay als einziger großer Kunstanker.',
+      after: 'Längeres Mittagessen, Seine oder Saint-Germain, freier Abend.',
+      comfort: 'Kein zweites großes Museum.',
+      tone: 'priority'
+    },
+    {
+      code: 'Tag B',
+      title: 'Louvre',
+      duration: 'ca. 2,5–3 Std.',
+      main: 'Louvre mit vorher festgelegtem Schwerpunkt statt Vollständigkeit.',
+      after: 'Echte Pause; danach nur leichtes Programm.',
+      comfort: 'Energie für den Louvre reservieren – nicht für eine Checkliste.',
+      tone: 'priority'
+    },
+    {
+      code: 'Tag C',
+      title: 'Orangerie',
+      duration: 'ca. 1–1,5 Std.',
+      main: 'Orangerie als fokussierter dritter Kunstanker.',
+      after: 'Tuilerien und ein entspannter Paris-Block.',
+      comfort: 'Bewusst der leichtere Kunsttag.',
+      tone: 'light'
+    },
+    {
+      code: 'Tag D',
+      title: 'Flex',
+      duration: 'bewusst offen',
+      main: 'Marmottan, Rodin, Sonderausstellung – oder gar kein Museum.',
+      after: 'Viertel, Markt, Café, Spaziergang oder früher Abend.',
+      comfort: 'Der Flex-Tag fängt Wetter, Müdigkeit und verpasste Slots ab.',
+      tone: 'flex'
+    }
+  ]}
+/>
 
 Der vierte Tag ist nicht „unverplant“, sondern **Risikopuffer**. Genau dadurch bleibt die Reise angenehm, wenn ein Zeitfenster ungünstig liegt, das Wetter kippt oder du nach zwei intensiven Kunsttagen schlicht genug Museum hattest.
 

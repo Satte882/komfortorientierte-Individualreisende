@@ -4,7 +4,7 @@ Die folgenden Medien werden ausschließlich lokal aus `public/images/paris-spike
 
 | Verwendung | Lokale Datei | Urheber | Quelle | Lizenz |
 | --- | --- | --- | --- | --- |
-| Hero-Video / Paris | `public/videos/paris-spike/paris-hero.mp4` | Yann Caradec | https://commons.wikimedia.org/wiki/File:Timelapse_Tour_Eiffel_%C3%A0_Paris.webm | CC BY-SA 2.0 |
+| Hero-Video / Paris | `public/videos/paris-spike/paris-hero.mp4` | Quahadi | https://commons.wikimedia.org/wiki/File:Paris,_river_Seine102817.webm | CC BY-SA 3.0 |
 | Hero-Fallback / Paris | `paris-seine-sunset.webp` | Raphael Desrosiers | https://commons.wikimedia.org/wiki/File:Sunset_in_Paris_Seine_river_(13104965964).jpg | CC BY 2.0 |
 | Musée d'Orsay | `orsay.webp` | DiscoA340 | https://commons.wikimedia.org/wiki/File:Front_view_of_the_Mus%C3%A9e_d%27Orsay.jpg | CC BY-SA 4.0 |
 | Louvre | `louvre.webp` | DiscoA340 | https://commons.wikimedia.org/wiki/File:Mus%C3%A9e_du_Louvre_at_Sunset.jpg | CC BY-SA 4.0 |
@@ -21,12 +21,14 @@ Die folgenden Medien werden ausschließlich lokal aus `public/images/paris-spike
 
 ## Bearbeitung des Hero-Videos
 
-Das lokale Hero-Video ist eine abgeleitete Fassung des oben genannten Wikimedia-Commons-Videos:
+Das lokale Hero-Video ist eine abgeleitete Fassung von `Paris, river Seine102817.webm`, einem vom Urheber selbst auf Wikimedia Commons veröffentlichten Tagesmotiv der Seine:
 
-- Ausschnitt: ca. 11 Sekunden ab Sekunde 4;
-- Auflösung: 720p;
+- Quelle: eigenes Werk des Uploaders Quahadi;
+- Ausschnitt: ca. 12 Sekunden ab Sekunde 3;
+- Auflösung: 540p;
 - Bildrate: 24 fps;
 - Audio vollständig entfernt;
 - H.264/MP4 für breite Browser-Kompatibilität;
-- Dateigröße: ca. 1,5 MB;
-- abgeleitete Fassung bleibt unter CC BY-SA 2.0.
+- abgeleitete Fassung bleibt unter CC BY-SA 3.0.
+
+Das zuvor verwendete Eiffelturm-Nachtvideo bleibt nicht mehr aktives Hero-Asset. Grund: Für einen kommerziellen Produktionsbetrieb soll die zusätzliche Rechtefrage der nächtlichen Lichtinszenierung vollständig vermieden werden.
