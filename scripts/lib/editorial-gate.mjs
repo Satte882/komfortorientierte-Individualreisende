@@ -13,6 +13,9 @@ export const LEGACY_EDITORIAL_V2_SLUGS = new Set([
 ]);
 
 export const V2_REQUIRED_MARKERS = [
+  '## Relevante Research-Signale',
+  '### Übernommen in die Kuration',
+  '### Verworfen / ohne Entscheidungsauswirkung',
   '## Entscheidungsblöcke',
   'ICP-Frage:',
   'Entscheidung:',
@@ -75,6 +78,15 @@ export function validateCurationV2(curation) {
     errors.push('Gate v2 curation.md enthält noch TODO-Platzhalter');
   }
 
+  const signalBridge = curation.match(/## Relevante Research-Signale\s*\n([\s\S]*?)(?=\n## )/)?.[1] ?? '';
+  const substantiveSignalItems = (signalBridge.match(/^\s*-\s+.+$/gm) || [])
+    .map((line) => line.replace(/^\s*-\s+/, '').trim())
+    .filter((line) => !/^(keine|nicht erforderlich)\.?$/i.test(line));
+
+  if (!signalBridge || substantiveSignalItems.length < 1) {
+    errors.push('Gate v2 curation.md braucht mindestens ein konkret übernommenes oder verworfenes Research-Signal');
+  }
+
   return errors;
 }
 
@@ -132,6 +144,10 @@ export function validateHumanGateV2(curation) {
 
   if (!/- \[[xX]\] Für jeden wesentlichen öffentlichen Hauptabschnitt existiert ein vollständiger Decision-Block/.test(curation)) {
     errors.push('Human Gate bestätigt nicht die vollständige Decision-Block-Abdeckung');
+  }
+
+  if (!/- \[[xX]\] Die stärksten Research-Signale wurden in der Kuration berücksichtigt oder bewusst verworfen/.test(curation)) {
+    errors.push('Human Gate bestätigt nicht die Prüfung der stärksten Research-Signale');
   }
 
   const approvedBy = curation.match(/^Freigabe durch:\s*(.+)$/m)?.[1]?.trim() ?? '';
