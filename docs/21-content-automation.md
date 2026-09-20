@@ -7,12 +7,16 @@ Ein neues Thema soll nicht jedes Mal einen neuen Prozess erfinden. Das Repositor
 ```text
 Thema
 → article:new
-→ Brief
-→ Quellen
-→ Research
+→ ICP-Modell anwenden
+→ ICP-Signal-Scan
+→ ICP-Problemahypothese
+→ vertieftes Research
+→ Hypothesen-Review / finales ICP-Problem
 → Kuration
+→ Decision-Blöcke
 → Human Gate
 → MDX
+→ Full Article Review
 → check
 → article:publish
 → Build
@@ -48,33 +52,34 @@ src/content/<guides|decisions>/<slug>.mdx
 
 `research/<slug>/agent-task.md` ist der standardisierte Arbeitsauftrag für ChatGPT/Codex.
 
-Die KI soll:
-- aktuelle Primärquellen recherchieren;
-- Fakten paraphrasieren;
-- Quellen dokumentieren;
-- Trade-offs sichtbar machen;
-- keine persönliche Erfahrung erfinden;
-- die Kuration vorbereiten;
-- **vor jeder öffentlichen Textgenerierung** `docs/07-redaktionelle-methodik.md` und `docs/23-icp-schreibstandard.md` lesen;
-- den MDX-Text aus Sicht des komfortorientierten Individualreisenden schreiben, nicht aus Sicht von Produktteam, Entwicklung oder QA.
+Die KI arbeitet den festen Content-Pfad ab:
+
+- bestehendes ICP-Modell aus `docs/05-icp-und-zielgruppe.md` auf den Beitrag anwenden;
+- ICP-Signal-Scan durchführen und daraus 1 primäre Problemahypothese + maximal 2 Nebenfragen ableiten;
+- vertieft recherchieren und Fakten/volatile Signale verifizieren;
+- die Problemahypothese danach bestätigen, präzisieren oder verwerfen und das finale ICP-Problem festhalten;
+- erst daraus Kuration und Decision-Blöcke ableiten;
+- am Human Gate stoppen;
+- erst nach ausdrücklicher Owner-Freigabe den MDX-Text finalisieren;
+- anschließend den Full Article Review durchführen.
+
+Zusätzlich: Fakten paraphrasieren, Quellen dokumentieren, Trade-offs sichtbar machen und keine persönliche Erfahrung erfinden. Vor öffentlicher Textgenerierung sind `docs/07-redaktionelle-methodik.md` und `docs/23-icp-schreibstandard.md` verbindlich.
 
 Der Schreibstandard ist kein optionaler Stilhinweis, sondern Teil des Generierungsinputs. `article:new` schreibt die Referenz automatisch in `brief.yml` und `agent-task.md`.
 
 ## 3. Human Gate
 
-In `curation.md` werden zwei Ebenen geprüft:
+Der Human Gate liegt **nach Kuration und Decision-Blöcken, aber vor der finalen Artikelgenerierung**.
 
-1. Fakten / Quellen / Kuration;
-2. ICP-Nutzen / Schreibstandard.
+Geprüft wird:
+- ist das finale ICP-Problem plausibel?
+- sind Priorität, optional und bewusstes Weglassen sinnvoll?
+- existiert für jeden wesentlichen öffentlichen Hauptabschnitt ein vollständiger Decision-Block?
+- sind Quellenlage und zentrale Fakten für die Kuration ausreichend?
 
-Dazu gehören ausdrücklich:
-- jeder Hauptabschnitt reduziert eine reale Reiseentscheidung;
-- generische Ortsbeschreibung ist auf das Nötige gekürzt;
-- Zeit, Aufwand, Komfort und Trade-offs werden konkret, wo sie relevant sind;
-- interne Projekt-/Techniksprache steht nicht im öffentlichen Artikel;
-- die UI wird nicht erklärt, wenn das keinen Reisezweck erfüllt.
+Der Agent darf den Human Gate nicht selbst freigeben. Checkbox, Freigabename und Datum werden nur nach ausdrücklicher Owner-Freigabe gesetzt.
 
-Erst wenn **alle** Checkboxen gesetzt sind, kann der Publish-Befehl ausgeführt werden.
+Nach dem Human Gate wird der Artikel finalisiert. **Erst danach** folgt der separate Full Article Review des fertigen Textes.
 
 ## 4. Veröffentlichen
 
@@ -88,7 +93,7 @@ npm run check
 - `editorialApproval: true`
 - aktuelles `dateReviewed`
 
-wenn im Human Gate keine Checkbox offen ist.
+wenn Research/Hypothesen-Review vollständig sind, der Human Gate ausdrücklich freigegeben wurde, der Full Article Review abgeschlossen ist und weder `research.md`, `curation.md` noch der öffentliche MDX-Text verbliebene `TODO`-Platzhalter enthalten.
 
 ## 5. Was bewusst nicht automatisiert wird
 
@@ -126,13 +131,12 @@ Neue Artikel aus `article:new` erhalten automatisch:
 editorialGateVersion: 2
 ```
 
-Der Generator legt außerdem in `curation.md` an:
+Der Generator legt den vollständigen Prozess in den Arbeitsartefakten an:
 
-- Decision-Blöcke;
-- Affiliate-Prüfung;
-- Full Article Review;
-- Redaktionsfreigabe.
+- `research.md`: Signal-Scan, Problemahypothese, vertieftes Research, Hypothesen-Review und finales ICP-Problem;
+- `curation.md`: Kuration, Decision-Blöcke, Human Gate, Affiliate-Prüfung, Full Article Review und Redaktionsfreigabe;
+- MDX: öffentlicher Artikelentwurf.
 
-`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-Prüfung. Ein v2-Artikel kann deshalb nicht durch direktes Ändern des Frontmatters an einer unvollständigen Curation vorbei veröffentlicht werden.
+`article:publish` und `validate-content.mjs` verwenden dieselbe Gate-Prüfung. Für neue v2-Artikel werden Research, Human Gate, offene Checkboxen und verbliebene `TODO`-Platzhalter geprüft. Ein Artikel kann deshalb nicht durch direktes Ändern des Frontmatters an einem unvollständigen Prozess vorbei veröffentlicht werden.
 
-Bestehende freigegebene Legacy-v1-Artikel sind explizit grandfathered und werden erst bei bewusster redaktioneller Überarbeitung auf v2 migriert.
+Bestehende freigegebene Legacy-Inhalte sind explizit grandfathered und werden erst bei bewusster redaktioneller Überarbeitung auf den strengeren Prozess migriert.

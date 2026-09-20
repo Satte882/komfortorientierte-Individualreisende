@@ -80,13 +80,36 @@ Beispiel:
 
 Nicht jeder Artikel muss alle Merkmale explizit nennen, aber die Redaktion muss wissen, für wen sie entscheidet.
 
-### Schritt 2 – Entscheidungsfrage formulieren
+### Schritt 2 – ICP-Signal-Scan durchführen
+
+Vor dem vertieften Research wird der verbindliche Signal-Scan aus `docs/05-icp-und-zielgruppe.md` durchgeführt.
+
+Pflichtdimensionen:
+
+- Reibung / realer Aufwand;
+- Social-Media-Hype vs. Realität;
+- Tipps & Tricks;
+- reale Kosten;
+- bessere Alternativen / echte Geheimtipps.
+
+Der Scan soll bewusst nach Informationen suchen, die ein normaler „Top 10“-Artikel nicht ausreichend liefert. Social-/Community-Signale sind zunächst Hinweise und müssen bei faktischen oder volatilen Aussagen im vertieften Research verifiziert werden.
+
+Output:
+
+- 1 primäre ICP-Problemahypothese;
+- maximal 2 Nebenfragen;
+- 3–7 stärkste Signale mit Quelle/Abrufstand und Einordnung als Fakt, Signal oder noch zu verifizieren;
+- Entscheidung, ob ein eigener Social-Media-Realitätscheck im öffentlichen Artikel erforderlich ist.
+
+### Schritt 3 – ICP-Problemahypothese formulieren
 
 Beispiel:
 
 > Welche fünf Kunstorte liefern in vier Tagen den höchsten Wert für einen Paris-Erstbesucher mit Fokus Impressionismus?
 
-### Schritt 3 – Fakten sammeln
+Die Hypothese darf durch das anschließende Research bestätigt, präzisiert oder verworfen werden.
+
+### Schritt 4 – Fakten sammeln
 
 Nur relevante Fakten:
 
@@ -98,7 +121,7 @@ Nur relevante Fakten:
 - Überschneidungen;
 - logistische Kombination.
 
-### Schritt 4 – Erfahrungen sammeln
+### Schritt 5 – Erfahrungen sammeln
 
 Mehrere unabhängige Quellen:
 
@@ -109,7 +132,17 @@ Mehrere unabhängige Quellen:
 
 Keine einzelne Quelle dominieren lassen.
 
-### Schritt 5 – Bewertungskriterien anwenden
+### Schritt 6 – Hypothese nach Research prüfen
+
+Nach Fakten- und Erfahrungsrecherche wird die Ausgangshypothese ausdrücklich geprüft:
+
+- **bestätigt** – Research trägt die Ausgangshypothese;
+- **präzisiert** – Kern bleibt, aber Problem oder Nebenfragen werden geschärft;
+- **verworfen** – Research zeigt ein anderes, relevanteres ICP-Problem.
+
+Das **finale ICP-Problem** wird mit kurzer Begründung in `research.md` festgehalten und ist anschließend der verbindliche Input für Kuration und Decision-Blöcke.
+
+### Schritt 7 – Bewertungskriterien anwenden
 
 Mögliche Kriterien:
 
@@ -124,7 +157,7 @@ Mögliche Kriterien:
 - Preis;
 - Alternativen.
 
-### Schritt 6 – priorisieren
+### Schritt 8 – priorisieren
 
 Nicht alles empfehlen.
 
@@ -136,7 +169,7 @@ Mögliche Kategorien:
 - nur bei Spezialinteresse;
 - bei knapper Zeit weglassen.
 
-### Schritt 7 – Trade-offs erklären
+### Schritt 9 – Trade-offs erklären
 
 Beispiel:
 
@@ -146,7 +179,7 @@ Das ist hilfreicher als:
 
 > „Versailles ist schön.“
 
-### Schritt 8 – Affiliate nur dort, wo logisch
+### Schritt 10 – Affiliate nur dort, wo logisch
 
 Nicht jeden Absatz monetarisieren.
 
@@ -342,6 +375,6 @@ Die Decision-Blöcke sind Redaktionsinput, kein neues Frontmatter- oder Runtime-
 
 Reihenfolge:
 
-> ICP-Problem → Research → Kuration → Decision-Blöcke → öffentlicher Text.
+> ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Hypothesen-Review / finales ICP-Problem → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
 
 Erst danach wird der Artikel nach `docs/23-icp-schreibstandard.md` formuliert.

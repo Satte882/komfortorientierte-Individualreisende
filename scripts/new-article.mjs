@@ -77,6 +77,7 @@ duration_days: ${days}
 interests:
 ${interests.map((x)=>`  - ${x}`).join('\n')}
 target_profile: "komfortorientierte Individualreisende"
+icp_model: "docs/05-icp-und-zielgruppe.md"
 editorial_method: "docs/07-redaktionelle-methodik.md"
 writing_standard: "docs/23-icp-schreibstandard.md"
 public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
@@ -103,6 +104,36 @@ Keine längeren Passagen kopieren. Erkenntnisse paraphrasieren und Quellen saube
 
 writeFileSync(join(researchDir,'research.md'), `# Research – ${topic}
 
+## ICP-Signal-Scan
+
+### Reibung / realer Aufwand
+TODO: Schritte, Steigungen, Wege, Transfers, Wartezeiten, volle Zeiten, Parken und unnötige Umwege.
+
+### Social-Media-Hype vs. Realität
+TODO: Aktuell sichtbare Instagram-/TikTok-/YouTube-/Community-Signale prüfen. Für relevante Spots einordnen: problemlos mitnehmen / Zusatzaufwand einplanen / andere Zeit / bessere Alternative / eher vermeiden. „Trendend“ nur mit aktuellem Trend-Signal oder wiederkehrenden Hinweisen aus mindestens zwei unabhängigen Quellen/Plattformen. Keine Social-Media-Kausalität für Besucherandrang behaupten, wenn sie nicht belegt ist.
+
+### Tipps & Tricks
+TODO: bessere Uhrzeit/Reihenfolge, Abkürzungen, sinnvoller Transport, Pausen, Plan B und andere nicht offensichtliche Reibungsreduzierer.
+
+### Reale Kosten
+TODO: soweit sinnvoll realistische Gesamtkosten für zwei Personen recherchieren; Familienkosten nur ergänzen, wenn Familien für den Beitrag relevant sind.
+
+### Bessere Alternativen / echte Geheimtipps
+TODO: nur mit konkretem Vorteil aufnehmen, z. B. weniger voll, entspannter, kürzer, bessere Aussicht oder besseres Preis-Leistungs-Verhältnis.
+
+### Signal-Output
+Primäre ICP-Problemahypothese:
+TODO
+
+Nebenfragen (max. 2):
+- TODO
+
+Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
+- TODO
+
+Social-Media-Realitätscheck im öffentlichen Artikel:
+TODO: ja/nein + kurze Begründung; bei ja: praktischen Effekt und Empfehlung festhalten.
+
 ## Belastbare Fakten
 
 TODO
@@ -122,6 +153,16 @@ TODO
 ## Nicht als Fakt ausgeben
 
 TODO
+
+## Hypothesen-Review nach vertieftem Research
+
+Status: TODO bestätigt / präzisiert / verworfen
+
+Finales ICP-Problem:
+TODO
+
+Begründung:
+TODO: Welche Research-Erkenntnisse bestätigen oder verändern die Ausgangshypothese? Das finale ICP-Problem ist der verbindliche Input für Kuration und Decision-Blöcke.
 `);
 
 writeFileSync(join(researchDir,'curation.md'), `# Kuration – ${topic}
@@ -141,6 +182,16 @@ TODO
 ## Begründung / Trade-offs
 
 TODO
+
+## Social-Media-Realitätscheck
+
+Im öffentlichen Artikel erforderlich: TODO ja/nein
+
+Falls ja:
+- Signal / betroffener Ort: TODO
+- praktische Auswirkung (Besucherandrang, Wartezeit, Umweg, Erwartung, Zusatzaufwand): TODO
+- Empfehlung für den ICP: TODO
+- Evidenz / Abrufstand: TODO
 
 ## Entscheidungsblöcke
 
@@ -169,6 +220,15 @@ TODO
 Affiliate-Prüfung:
 TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox verwenden.
 
+## Human Gate
+
+Nur nach ausdrücklicher Freigabe durch den Owner ausfüllen. Ein Agent darf diese Freigabe nicht selbst erteilen.
+
+- [ ] Kuration und Decision-Blöcke vom Owner freigegeben
+- [ ] Für jeden wesentlichen öffentlichen Hauptabschnitt existiert ein vollständiger Decision-Block
+Freigabe durch: TODO
+Freigabe am: TODO YYYY-MM-DD
+
 ## Full Article Review
 
 - [ ] Titel/Intro-Versprechen wird tatsächlich erfüllt
@@ -187,6 +247,7 @@ TODO: natürliche buchbare Handlung ja/nein; falls ja bestehende AffiliateBox ve
 
 ### Fakten und Kuration
 
+- [ ] ICP-Problemahypothese nach vertieftem Research bestätigt/präzisiert/verworfen und finales ICP-Problem in research.md festgehalten
 - [ ] zentrale Fakten gegen geeignete Primärquellen geprüft
 - [ ] volatile Angaben aktuell geprüft
 - [ ] keine unbelegten Mengenbehauptungen
@@ -209,19 +270,25 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 
 1. Lies zuerst brief.yml.
 2. Lies verbindlich docs/05-icp-und-zielgruppe.md, docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
-3. Recherchiere aktuelle Primärquellen im Web.
-4. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
-5. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-6. Trenne Fakten von redaktionellem Urteil.
-7. Keine persönliche Reiseerfahrung erfinden.
-8. Finalisiere den MDX-Text erst nach der Kuration und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
-9. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
-10. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
-11. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-12. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-13. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-14. Führe den Full Article Review in curation.md vollständig durch.
-15. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+3. Führe zuerst den ICP-Signal-Scan durch: Reibung, Social-Media-Hype vs. Realität, Tipps & Tricks, reale Kosten sowie bessere Alternativen/Geheimtipps.
+4. Dokumentiere 1 primäre ICP-Problemahypothese, maximal 2 Nebenfragen und 3–7 stärkste Signale. Kennzeichne Fakt / Signal / noch zu verifizieren.
+5. Entscheide explizit, ob der öffentliche Artikel einen eigenen Social-Media-Realitätscheck braucht. Bei relevantem Signal: sichtbar aufnehmen und praktische Empfehlung geben; ohne relevantes Signal keinen künstlichen Abschnitt erzeugen.
+6. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
+7. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
+8. Führe nach dem vertieften Research den Hypothesen-Review durch: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem mit kurzer Begründung in research.md festhalten.
+9. Nutze ausschließlich dieses finale ICP-Problem als Input für Kuration und Decision-Blöcke.
+10. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
+11. Trenne Fakten von redaktionellem Urteil.
+12. Keine persönliche Reiseerfahrung erfinden.
+13. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Der Human-Gate-Block darf nur nach ausdrücklicher Freigabe durch den Owner ausgefüllt werden; ein Agent darf weder Checkbox, Name noch Datum selbst setzen. Finalisiere den MDX-Text erst danach und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+14. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+15. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+16. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+17. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+18. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+19. Führe den Full Article Review in curation.md vollständig durch.
+20. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+21. Vor Publish dürfen in research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}

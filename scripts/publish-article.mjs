@@ -24,9 +24,11 @@ if (!existsSync(curationPath)) {
   console.error(`Fehlt: ${curationPath}`);
   process.exit(1);
 }
+const researchPath = join('research',slug,'research.md');
+const research = existsSync(researchPath) ? readFileSync(researchPath,'utf8') : '';
 const curation = readFileSync(curationPath,'utf8');
 const content = readFileSync(contentPath,'utf8');
-const gateErrors = validateGateForPublish({ content, curation, slug });
+const gateErrors = validateGateForPublish({ content, curation, research, slug });
 if (gateErrors.length) {
   console.error('Editorial Gate nicht vollständig:');
   for (const error of gateErrors) console.error(`- ${error}`);

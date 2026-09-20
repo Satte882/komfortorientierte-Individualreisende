@@ -65,14 +65,17 @@ Die Ordnerstruktur darf diese spätere Automatisierung ermöglichen, ohne dass w
 ### MVP
 
 ```text
-Brief
-→ Research
-→ Curation
+ICP-Modell
+→ ICP-Signal-Scan
+→ ICP-Problemahypothese
+→ vertieftes Research
+→ Hypothesen-Review / finales ICP-Problem
+→ Kuration
+→ Decision-Blöcke
 → Human Gate
-→ Article
-→ einfacher Check
-→ Preview
-→ Merge
+→ Artikel
+→ Review
+→ Publish
 ```
 
 ### Erst später
@@ -91,26 +94,47 @@ Content-Agent-Pipeline
 
 ```text
 INPUT
-Destination + Interesse + Entscheidung
+Destination + Interesse
 
       ↓
 
 brief.yml
+→ bestehendes ICP-Modell aus docs/05-icp-und-zielgruppe.md anwenden
 
       ↓
 
-KI-Recherche
+ICP-Signal-Scan in research.md
+→ Reibung
+→ Social-Media-Hype vs. Realität
+→ Tipps & Tricks
+→ reale Kosten
+→ Alternativen / Geheimtipps
+
+      ↓
+
+ICP-Problemahypothese
+→ 1 primäre Hypothese
+→ max. 2 Nebenfragen
+
+      ↓
+
+vertieftes Research
 → sources.md
 → research.md
-nur extrahierte/paraphrasierte Erkenntnisse
+→ Fakten und volatile Signale verifizieren
+
+      ↓
+
+Hypothesen-Review in research.md
+→ bestätigt / präzisiert / verworfen
+→ finales ICP-Problem festhalten
 
       ↓
 
 KI-Kurationsvorschlag
-
-      ↓
-
-curation.md
+→ curation.md
+→ Priorität / optional / bewusst weglassen
+→ Decision-Blöcke
 
       ↓
 
@@ -118,20 +142,22 @@ curation.md
 Kuration bestätigen
 Fakten geprüft
 Quellen geprüft
+finales ICP-Problem plausibel
 keine Fremdformulierungen übernommen
 
       ↓
 
-KI erstellt MDX
+KI erstellt/finalisiert MDX
 
       ↓
 
-npm run check
+Full Article Review + npm run check
 
 Pflichtfelder
 Bildrechte
 Affiliate
 Build
+Gate v2
 
       ↓
 
@@ -139,7 +165,7 @@ Preview
 
       ↓
 
-★ MERGE ★
+Publish / Merge
 
       ↓
 
@@ -163,14 +189,17 @@ editorialGateVersion: 2
 
 Bereits veröffentlichte Legacy-Artikel bleiben v1 und werden nicht rückwirkend gegen neue Pflichtbereiche geprüft.
 
-Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Dadurch kann ein neuer Artikel das v2-Gate nicht einfach durch Weglassen des Feldes umgehen.
+Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Zusätzlich bleibt der bereits vor Einführung von ICP-Signal-Scan/Hypothesen-Review veröffentlichte v2-Artikel `munich-altstadt-walk` explizit grandfathered. Neue v2-Artikel erhalten diese Ausnahme nicht.
 
-Neue Artikel aus `article:new` erhalten immer Gate v2.
+Neue Artikel aus `article:new` erhalten immer Gate v2 und müssen zusätzlich `research.md` mit vollständig ausgefülltem Signal-Scan/Hypothesen-Review sowie einen explizit freigegebenen Human-Gate-Block in `curation.md` besitzen.
 
 ### Gate-v2-Inhalt
 
 `research/<slug>/curation.md` muss enthalten:
 
+- vollständig ausgefüllten ICP-Signal-Scan in `research.md` mit mindestens 3 stärksten Signalen;
+- abgeschlossenen Hypothesen-Review: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem in `research.md` festgehalten;
+- expliziten Human Gate in `curation.md`: Owner-Freigabe, Name und Datum;
 - Decision-Blöcke für die wesentlichen Hauptabschnitte;
 - Affiliate-Prüfung über die bestehende Commercial-Logik;
 - Full Article Review;

@@ -51,8 +51,10 @@ for (const file of files) {
       if (!existsSync(curation)) {
         errors.push(`${display}: missing ${relative(root, curation)}`);
       } else {
+        const research = join(root, 'research', slug, 'research.md');
+        const researchText = existsSync(research) ? readFileSync(research, 'utf8') : '';
         const curationText = readFileSync(curation, 'utf8');
-        const gateErrors = validateGateForPublish({ content: text, curation: curationText, slug });
+        const gateErrors = validateGateForPublish({ content: text, curation: curationText, research: researchText, slug });
         for (const error of gateErrors) errors.push(`${display}: ${error}`);
       }
     }

@@ -281,3 +281,58 @@ Je nach Artikel sind insbesondere zu prüfen:
 - Welche nächste Handlung ergibt sich aus der Entscheidung?
 
 Nicht jede Sektion muss alle Fragen beantworten. Aber jeder Hauptabschnitt soll mindestens eine reale Reiseentscheidung des ICP reduzieren.
+
+
+## 17. Verbindlicher ICP-Signal-Scan vor jedem neuen Beitrag
+
+Vor der ICP-Problemahypothese wird für jeden neuen Beitrag ein kurzer, aktueller Signal-Scan durchgeführt. Ziel ist **nicht**, eine weitere Sehenswürdigkeitenliste zu erzeugen, sondern Informationsvorteile zu finden, die dem ICP Planung, Zeit, Energie oder Geld sparen.
+
+Der Scan prüft verpflichtend fünf Dimensionen:
+
+1. **Reibung / realer Aufwand**
+   - Schritte, Steigungen, lange Wege, Transfers;
+   - Wartezeiten, Einlass, Parkplatzsuche, volle Zeiten;
+   - unnötige Umwege oder Kombinationen, die auf dem Papier gut aussehen, praktisch aber anstrengend sind.
+
+2. **Social-Media-Hype vs. Realität**
+   - Welche Orte, Fotospots, Aktivitäten oder Routen werden aktuell auf Instagram, TikTok, YouTube oder vergleichbaren öffentlichen Kanälen sichtbar stark verbreitet?
+   - Erzeugt die Popularität zusätzliche Besuchermengen, Wartezeit, Umwege oder unrealistische Erwartungen?
+   - Ergebnis je relevantem Signal: **problemlos mitnehmen / Zusatzaufwand einplanen / zu anderer Zeit besuchen / bessere Alternative wählen / eher vermeiden**.
+   - „Trendend“ nur schreiben, wenn ein aktuelles Plattform-/Trend-Signal oder wiederkehrende aktuelle Hinweise aus mindestens zwei unabhängigen Quellen/Plattformen vorliegen.
+   - Nicht behaupten, ein Ort sei **wegen Social Media** überlaufen, wenn nur Gleichzeitigkeit sichtbar ist. Kausalität nur bei belastbarer Quelle.
+   - Für den öffentlichen Artikel wird immer geprüft, ob ein **eigener Social-Media-Realitätscheck** nötig ist. Bei relevantem Signal wird er sichtbar aufgenommen und mit praktischer Empfehlung versehen; ohne relevantes Signal keinen künstlichen Abschnitt erzeugen.
+
+3. **Tipps & Tricks**
+   - bessere Uhrzeit oder Reihenfolge;
+   - Abkürzung, anderer Eingang, Bergbahn/ÖPNV statt unnötigem Aufstieg;
+   - sinnvolle Pause, Kombination oder Plan B;
+   - Hinweise, die typische Standard-„Top 10“-Artikel nicht ausreichend beantworten.
+
+4. **Reale Kosten**
+   - nicht nur Einzelpreise, sondern soweit sinnvoll realistische Gesamtkosten für **zwei Personen**;
+   - z. B. Eintritt, Transport/Bergbahn, Parken/ÖPNV und typische Zusatzkosten;
+   - Familienkosten zusätzlich nur, wenn Familien für den konkreten Beitrag relevant sind.
+
+5. **Bessere Alternativen / echte Geheimtipps**
+   - nur aufnehmen, wenn ein konkreter Vorteil erkennbar ist: weniger voll, entspannter, bessere Aussicht, kürzerer Weg, besseres Preis-Leistungs-Verhältnis oder sinnvollere Tageszeit;
+   - keine „Geheimtipps“ erfinden, nur um originell zu wirken.
+
+### Quellen und Evidenz
+
+Der Signal-Scan darf aktuelle öffentliche Social-/Community-Signale nutzen, z. B. Instagram/TikTok soweit öffentlich verifizierbar, YouTube, Reddit, Foren, lokale Medien und aktuelle Erfahrungsberichte. Offizielle Quellen bleiben für Fakten, Preise, Öffnungszeiten und Regeln maßgeblich.
+
+Social-/Community-Signale sind **Hinweise**, keine automatisch belastbaren Fakten. Relevante Aussagen werden im vertieften Research verifiziert oder als Erfahrungs-/Trend-Signal gekennzeichnet.
+
+### Pflicht-Output
+
+Der Scan endet mit:
+
+- **1 primären ICP-Problemahypothese**;
+- höchstens **2 Nebenfragen**;
+- den stärksten 3–7 Signalen, die diese Hypothese begründen;
+- Kennzeichnung, was belastbarer Fakt, aktuelles Signal oder noch zu verifizieren ist;
+- Entscheidung **„Social-Media-Realitätscheck im Artikel: ja/nein“** mit kurzer Begründung.
+
+Erst danach beginnt das vertiefte Research.
+
+> **Nicht „Was gibt es dort?“, sondern: Wo liegen für unseren ICP die nicht offensichtlichen Entscheidungen, Reibungen, Kosten und Fehlannahmen?**
