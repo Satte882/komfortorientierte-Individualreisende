@@ -1,0 +1,60 @@
+name: Ingest Munich hero media
+
+on:
+  push:
+    branches:
+      - fix/walking-hero-media-contract
+
+permissions:
+  contents: write
+
+jobs:
+  ingest:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/walking-hero-media-contract
+
+      - name: Skip when hero already exists
+        id: guard
+        shell: bash
+        run: |
+          if [ -f public/videos/munich-altstadt-hero.mp4 ] && [ -f public/images/munich-altstadt-hero-poster.webp ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download and optimize source
+        if: steps.guard.outputs.skip != 'true'
+        shell: bash
+        run: |
+          mkdir -p public/videos public/images
+          curl -L --fail --retry 3 \
+            'https://videos.pexels.com/video-files/36249012/15372957_1920_1080_30fps.mp4' \
+            -o /tmp/munich-source.mp4
+
+          ffmpeg -y -ss 0 -t 8 -i /tmp/munich-source.mp4 \
+            -an -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" \
+            -c:v libx264 -preset medium -crf 24 -pix_fmt yuv420p -movflags +faststart \
+            public/videos/munich-altstadt-hero.mp4
+
+          ffmpeg -y -ss 1.5 -i /tmp/munich-source.mp4 -frames:v 1 \
+            -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720" \
+            -c:v libwebp -quality 84 \
+            public/images/munich-altstadt-hero-poster.webp
+
+          test -s public/videos/munich-altstadt-hero.mp4
+          test -s public/images/munich-altstadt-hero-poster.webp
+
+      - name: Commit optimized local media
+        if: steps.guard.outputs.skip != 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/videos/munich-altstadt-hero.mp4 public/images/munich-altstadt-hero-poster.webp
+          git commit -m "feat: ingest Munich hero video [hero-ingest]"
+          git push origin HEAD:fix/walking-hero-media-contract
