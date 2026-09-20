@@ -65,14 +65,17 @@ Die Ordnerstruktur darf diese spätere Automatisierung ermöglichen, ohne dass w
 ### MVP
 
 ```text
-Brief
-→ Research
-→ Curation
+ICP-Modell
+→ ICP-Signal-Scan
+→ ICP-Problemahypothese
+→ vertieftes Research
+→ Hypothesen-Review / finales ICP-Problem
+→ Kuration
+→ Decision-Blöcke
 → Human Gate
-→ Article
-→ einfacher Check
-→ Preview
-→ Merge
+→ Artikel
+→ Review
+→ Publish
 ```
 
 ### Erst später
@@ -91,26 +94,47 @@ Content-Agent-Pipeline
 
 ```text
 INPUT
-Destination + Interesse + Entscheidung
+Destination + Interesse
 
       ↓
 
 brief.yml
+→ bestehendes ICP-Modell aus docs/05-icp-und-zielgruppe.md anwenden
 
       ↓
 
-KI-Recherche
+ICP-Signal-Scan in research.md
+→ Reibung
+→ Social-Media-Hype vs. Realität
+→ Tipps & Tricks
+→ reale Kosten
+→ Alternativen / Geheimtipps
+
+      ↓
+
+ICP-Problemahypothese
+→ 1 primäre Hypothese
+→ max. 2 Nebenfragen
+
+      ↓
+
+vertieftes Research
 → sources.md
 → research.md
-nur extrahierte/paraphrasierte Erkenntnisse
+→ Fakten und volatile Signale verifizieren
+
+      ↓
+
+Hypothesen-Review in research.md
+→ bestätigt / präzisiert / verworfen
+→ finales ICP-Problem festhalten
 
       ↓
 
 KI-Kurationsvorschlag
-
-      ↓
-
-curation.md
+→ curation.md
+→ Priorität / optional / bewusst weglassen
+→ Decision-Blöcke
 
       ↓
 
@@ -118,20 +142,22 @@ curation.md
 Kuration bestätigen
 Fakten geprüft
 Quellen geprüft
+finales ICP-Problem plausibel
 keine Fremdformulierungen übernommen
 
       ↓
 
-KI erstellt MDX
+KI erstellt/finalisiert MDX
 
       ↓
 
-npm run check
+Full Article Review + npm run check
 
 Pflichtfelder
 Bildrechte
 Affiliate
 Build
+Gate v2
 
       ↓
 
@@ -139,7 +165,7 @@ Preview
 
       ↓
 
-★ MERGE ★
+Publish / Merge
 
       ↓
 
@@ -171,6 +197,7 @@ Neue Artikel aus `article:new` erhalten immer Gate v2.
 
 `research/<slug>/curation.md` muss enthalten:
 
+- abgeschlossenen Hypothesen-Review: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem in `research.md` festgehalten;
 - Decision-Blöcke für die wesentlichen Hauptabschnitte;
 - Affiliate-Prüfung über die bestehende Commercial-Logik;
 - Full Article Review;
