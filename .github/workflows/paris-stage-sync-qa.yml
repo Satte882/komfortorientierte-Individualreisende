@@ -112,7 +112,7 @@ jobs:
                   raise AssertionError(f"{heading}: core route lost from viewport")
 
           positions={}
-          assert_stage("Musée d'Orsay", "orsay", "orsay", "Musée d'Orsay", "orsay", 0)
+          assert_stage("Musée d’Orsay", "orsay", "orsay", "Musée d'Orsay", "orsay", 0)
           positions["orsay"]=marker_center("louvre")
 
           assert_stage("Louvre:", "louvre", "louvre", "Louvre", "louvre", 1)
