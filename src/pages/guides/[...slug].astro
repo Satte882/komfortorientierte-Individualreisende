@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import ParisExperienceLayout from '../../layouts/ParisExperienceLayout.astro';
 
 export async function getStaticPaths() {
   const preview = import.meta.env.PREVIEW_CONTENT === 'true';
@@ -13,6 +14,12 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
-<ArticleLayout data={entry.data}>
-  <Content />
-</ArticleLayout>
+{entry.data.slug === 'paris-kunst-4-tage' ? (
+  <ParisExperienceLayout data={entry.data}>
+    <Content />
+  </ParisExperienceLayout>
+) : (
+  <ArticleLayout data={entry.data}>
+    <Content />
+  </ArticleLayout>
+)}
