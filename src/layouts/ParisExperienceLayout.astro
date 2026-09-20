@@ -91,7 +91,7 @@ const jsonLd = {
       <p class="eyebrow">Unser Prinzip</p>
       <p>
         Drei Kunstanker, ein geschützter Flex-Tag und genug Luft für Paris selbst.
-        Die Visualisierung folgt den Entscheidungen des Guides – <strong>nicht umgekehrt</strong>.
+        Die Visualisierung folgt den Empfehlungen des Guides – <strong>nicht umgekehrt</strong>.
       </p>
     </section>
 
@@ -105,7 +105,7 @@ const jsonLd = {
                 <img src="/images/paris-spike/louvre.webp" alt="Louvre" loading="eager" />
                 <img src="/images/paris-spike/orangerie.webp" alt="Musée de l'Orangerie" loading="eager" />
               </div>
-              <figcaption>Unsere drei Kunstanker · Orsay · Louvre · Orangerie</figcaption>
+              <figcaption>Drei Kunstanker · Orsay · Louvre · Orangerie</figcaption>
             </figure>
             <figure class="paris-stage__image" data-media="paris" aria-hidden="true">
               <img
@@ -166,7 +166,7 @@ const jsonLd = {
           </div>
 
           <div class="paris-decision" data-paris-decision>
-            <span class="paris-decision__status" data-decision-status>Unsere Auswahl</span>
+            <span class="paris-decision__status" data-decision-status>Empfehlung</span>
             <strong data-decision-title>Orsay → Louvre → Orangerie → Flex</strong>
             <p data-decision-copy>
               Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.
@@ -247,7 +247,7 @@ const jsonLd = {
       const stageStates = {
         overview: {
           media: 'overview',
-          role: 'Unsere Auswahl',
+          role: 'Empfehlung',
           title: 'Orsay → Louvre → Orangerie → Flex',
           copy: 'Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.',
           map: { view: 'core', focus: null, route: 'full' }
@@ -331,7 +331,7 @@ const jsonLd = {
         },
         final: {
           media: 'overview',
-          role: 'Unsere Entscheidung',
+          role: 'Empfehlung',
           title: 'Drei Kunstanker. Ein Flex-Tag.',
           copy: 'Orsay priorisieren, Louvre kuratieren, Orangerie leicht halten und den vierten Tag bewusst schützen.',
           map: { view: 'core', focus: null, route: 'full' }
@@ -339,7 +339,7 @@ const jsonLd = {
       };
 
       const chapterStates = [
-        { match: /für wen wir hier entscheiden/i, key: 'profile' },
+        { match: /für wen dieser guide passt/i, key: 'profile' },
         { match: /musée d[’']orsay/i, key: 'orsay' },
         { match: /louvre:/i, key: 'louvre' },
         { match: /orangerie:/i, key: 'orangerie' },
@@ -350,7 +350,7 @@ const jsonLd = {
         { match: /plan b:/i, key: 'flex' },
         { match: /wo würden wir übernachten/i, key: 'stay' },
         { match: /was vor der reise noch einmal prüfen/i, key: 'precheck' },
-        { match: /unsere entscheidung in einem satz/i, key: 'final' }
+        { match: /unsere empfehlung in einem satz/i, key: 'final' }
       ];
 
       let map;
