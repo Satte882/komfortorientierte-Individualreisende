@@ -123,7 +123,12 @@ const firstPoi = experience.pois[0];
     data-active-stop={firstPoi?.id}
   >
     <div class="walking-experience__grid">
-      <aside class="walking-stage" aria-label="Karte der Walking-Route">
+      <aside
+        class="walking-stage"
+        aria-label="Karte der Walking-Route"
+        data-status-x="left"
+        data-status-y="bottom"
+      >
         <div class="walking-stage__map" data-walking-map>
           <div class="walking-stage__placeholder">Karte wird geladen …</div>
         </div>
@@ -150,6 +155,7 @@ const firstPoi = experience.pois[0];
 
     if (root) {
       const mapContainer = root.querySelector('[data-walking-map]');
+      const stageNode = root.querySelector('.walking-stage');
       const story = root.querySelector('[data-walking-story]');
       const numberNode = root.querySelector('[data-stop-number]');
       const titleNode = root.querySelector('[data-stop-title]');
@@ -312,6 +318,15 @@ const firstPoi = experience.pois[0];
         return padding;
       }
 
+      function positionStatusCard(poi) {
+        if (!stageNode || !routeBounds) return;
+        const center = routeBounds.getCenter();
+        const [lng, lat] = poi.coordinates;
+
+        stageNode.setAttribute('data-status-x', lng >= center.lng ? 'left' : 'right');
+        stageNode.setAttribute('data-status-y', lat >= center.lat ? 'bottom' : 'top');
+      }
+
       function updateMarkers(index) {
         root.querySelectorAll('[data-walking-marker]').forEach((marker) => {
           const markerIndex = Number(marker.getAttribute('data-walking-marker'));
@@ -338,6 +353,7 @@ const firstPoi = experience.pois[0];
         if (animate) animateActiveRoute(targetRouteIndex);
         else setActiveRoute(targetRouteIndex);
         updateMarkers(index);
+        positionStatusCard(poi);
 
         const camera = mobileQuery.matches
           ? clientMapConfig.camera.mobile
@@ -503,7 +519,10 @@ const firstPoi = experience.pois[0];
 <style>
   .walking-cinematic-hero {
     position: relative;
-    height: var(--cinematic-hero-height);
+    width: min(calc(100% - 2.5rem), var(--cinematic-hero-max-width));
+    aspect-ratio: var(--cinematic-hero-aspect);
+    height: auto;
+    margin-inline: auto;
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -524,7 +543,7 @@ const firstPoi = experience.pois[0];
   .walking-cinematic-hero__video {
     object-fit: cover;
     object-position: center 52%;
-    transform: scale(1.01);
+    transform: none;
   }
 
   .walking-cinematic-hero__fallback {
@@ -662,16 +681,33 @@ const firstPoi = experience.pois[0];
 
   .walking-stage__status {
     position: absolute;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    max-width: min(420px, calc(100% - 2rem));
+    max-width: min(360px, calc(100% - 2rem));
     padding: .9rem 1rem;
     border: 1px solid rgba(255,255,255,.72);
     background: rgba(249,247,241,.94);
     box-shadow: 0 10px 30px rgba(33, 33, 27, .16);
     backdrop-filter: blur(8px);
     pointer-events: none;
+  }
+
+  .walking-stage[data-status-x='left'] .walking-stage__status {
+    left: 1rem;
+    right: auto;
+  }
+
+  .walking-stage[data-status-x='right'] .walking-stage__status {
+    right: 1rem;
+    left: auto;
+  }
+
+  .walking-stage[data-status-y='top'] .walking-stage__status {
+    top: 1rem;
+    bottom: auto;
+  }
+
+  .walking-stage[data-status-y='bottom'] .walking-stage__status {
+    bottom: 2.25rem;
+    top: auto;
   }
 
   .walking-stage__status span {
@@ -751,6 +787,12 @@ const firstPoi = experience.pois[0];
   }
 
   @media (max-width: 760px), (max-height: 500px) and (max-width: 900px) {
+    .walking-cinematic-hero {
+      width: 100%;
+      aspect-ratio: auto;
+      height: var(--cinematic-hero-mobile-height);
+    }
+
     .walking-cinematic-hero__fallback,
     .walking-cinematic-hero__video {
       object-position: center 48%;
@@ -804,10 +846,15 @@ const firstPoi = experience.pois[0];
       padding: 2rem var(--page-gutter, 1rem) 0;
     }
 
-    .walking-stage__status {
+    .walking-stage__status,
+    .walking-stage[data-status-x='left'] .walking-stage__status,
+    .walking-stage[data-status-x='right'] .walking-stage__status,
+    .walking-stage[data-status-y='top'] .walking-stage__status,
+    .walking-stage[data-status-y='bottom'] .walking-stage__status {
       left: .65rem;
       right: .65rem;
-      bottom: .65rem;
+      top: auto;
+      bottom: 2rem;
       max-width: calc(100% - 1.3rem);
       padding: .65rem .75rem;
     }
