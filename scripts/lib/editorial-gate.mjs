@@ -13,9 +13,6 @@ export const LEGACY_EDITORIAL_V2_SLUGS = new Set([
 ]);
 
 export const V2_REQUIRED_MARKERS = [
-  '## Relevante Research-Signale',
-  '### Übernommen in die Kuration',
-  '### Verworfen / ohne Entscheidungsauswirkung',
   '## Entscheidungsblöcke',
   'ICP-Frage:',
   'Entscheidung:',
@@ -25,6 +22,12 @@ export const V2_REQUIRED_MARKERS = [
   'Affiliate-Prüfung:',
   '## Full Article Review',
   '## Redaktionsfreigabe'
+];
+
+export const V2_STRICT_CURATION_MARKERS = [
+  '## Relevante Research-Signale',
+  '### Übernommen in die Kuration',
+  '### Verworfen / ohne Entscheidungsauswirkung'
 ];
 
 export const V2_STRICT_RESEARCH_MARKERS = [
@@ -76,6 +79,18 @@ export function validateCurationV2(curation) {
 
   if (/\bTODO\b/i.test(curation)) {
     errors.push('Gate v2 curation.md enthält noch TODO-Platzhalter');
+  }
+
+  return errors;
+}
+
+export function validateSignalBridgeV2(curation) {
+  const errors = [];
+
+  for (const marker of V2_STRICT_CURATION_MARKERS) {
+    if (!curation.includes(marker)) {
+      errors.push('Gate v2 fehlt in curation.md: ' + marker);
+    }
   }
 
   const signalBridge = curation.match(/## Relevante Research-Signale\s*\n([\s\S]*?)(?=\n## )/)?.[1] ?? '';
@@ -180,6 +195,7 @@ export function validateGateForPublish({ content, curation, research = '', slug 
 
     return [
       ...curationErrors,
+      ...validateSignalBridgeV2(curation),
       ...validateResearchV2(research),
       ...validateHumanGateV2(curation),
       ...validatePublicContentV2(content)
