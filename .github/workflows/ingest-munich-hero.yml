@@ -34,6 +34,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
+      - name: Install ffmpeg
+        if: steps.guard.outputs.skip != 'true'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
       - name: Download and optimize source
         if: steps.guard.outputs.skip != 'true'
         shell: bash
