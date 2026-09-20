@@ -321,13 +321,13 @@ export function validateCurationV3(curation, research) {
 export function validatePublicContentV3(content, curation, research) {
   const errors = [];
 
-  const tipsSection = content.match(/^##\s+[^\n]*Tipps[^\n]*\n([\s\S]*?)(?=^##\s+|$)/mi)?.[1] ?? '';
+  const tipsSection = content.match(/^##\s+[^\n]*Tipps[^\n]*\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/mi)?.[1] ?? '';
   const publicTips = tipsSection.match(/^\s*-\s+\S.+$/gm) || [];
   if (publicTips.length < 3) {
     errors.push('Gate v3 öffentlicher Artikel braucht einen kompakten Tipps-Abschnitt mit mindestens 3 Punkten');
   }
 
-  const costsSection = content.match(/^##\s+[^\n]*(Kosten|kostet)[^\n]*\n([\s\S]*?)(?=^##\s+|$)/mi)?.[0] ?? '';
+  const costsSection = content.match(/^##\s+[^\n]*(Kosten|kostet)[^\n]*\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/mi)?.[0] ?? '';
   const moneyValues = costsSection.match(/\d+[,.]?\d*\s*(€|Euro)/gi) || [];
   if (!/zwei/i.test(costsSection) || moneyValues.length < 3) {
     errors.push('Gate v3 öffentlicher Artikel braucht eine kompakte Kostenübersicht für zwei mit mehreren konkreten Beträgen');
