@@ -739,7 +739,10 @@ const jsonLd = {
 
   .paris-cinematic-hero {
     position: relative;
-    height: var(--cinematic-hero-height);
+    width: min(calc(100% - 2.5rem), var(--cinematic-hero-max-width));
+    aspect-ratio: var(--cinematic-hero-aspect);
+    height: auto;
+    margin-inline: auto;
     display: grid;
     align-items: end;
     overflow: hidden;
@@ -760,7 +763,7 @@ const jsonLd = {
   .paris-cinematic-hero__video {
     object-fit: cover;
     object-position: center 55%;
-    transform: scale(1.01);
+    transform: none;
   }
 
   .paris-cinematic-hero__video {
@@ -1177,10 +1180,6 @@ const jsonLd = {
   }
 
   @media (max-width: 1024px) {
-    .paris-cinematic-hero {
-      min-height: 720px;
-    }
-
     .paris-experience__intro {
       grid-template-columns: 1fr;
       gap: .8rem;
@@ -1218,7 +1217,9 @@ const jsonLd = {
 
   @media (max-width: 640px) {
     .paris-cinematic-hero {
-      min-height: 78svh;
+      width: 100%;
+      aspect-ratio: auto;
+      height: var(--cinematic-hero-mobile-height);
     }
 
     .paris-cinematic-hero__content {
