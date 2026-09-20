@@ -34,6 +34,8 @@ Nicht jede Destination braucht alle acht Mechaniken. Die Auswahl folgt dem Inhal
 
 - Video ist optional, nie Pflicht.
 - Ein Poster/Fallback-Bild ist immer Pflicht.
+- Diese Hero-Regel gilt für **jede** Experience-Variante, ausdrücklich auch Walking Experiences; ein reiner Text-Hero ist dort kein zulässiger Fallback.
+- `published` Experience-Content muss durch die Content-Validierung blockiert werden, wenn das Poster/Fallback fehlt.
 - Hero-Videos laufen ohne Ton.
 - Bei `prefers-reduced-motion: reduce` wird kein Video geladen.
 - Bei aktivem Data Saver wird kein Video geladen.
