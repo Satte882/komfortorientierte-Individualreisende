@@ -59,7 +59,10 @@ jobs:
               raise AssertionError("MapLibre canvas missing")
 
           def heading_contains(text):
-              return driver.find_element("xpath", f"//h2[contains(normalize-space(.), {text!r})]")
+              return driver.execute_script("""
+                return [...document.querySelectorAll('[data-paris-story-copy] h2')]
+                  .find((el) => (el.textContent || '').includes(arguments[0])) || null;
+              """, text)
 
           def marker_center(key):
               return driver.execute_script("""
