@@ -36,7 +36,7 @@ Die Fließtextspalte bleibt unabhängig vom Viewport auf etwa 780 px begrenzt. D
 - **Normale zweispaltige Heroes** stapeln spätestens auf Tablet. **Cinematic Experience Heroes sind die Ausnahme:** Medium und Einstiegstext bleiben eine gemeinsame Overlay-Komposition; auf kleineren Viewports werden Höhe, Crop, Typografie und Scrim angepasst statt Bild und Text automatisch zu trennen.
 - Ein Cinematic Hero soll als gemeinsame Komposition wirken und nicht wie ein flaches Banner vor dem eigentlichen Seitenkopf.
 - Für Cinematic Heroes gilt site-weit derselbe vertikale Budgetvertrag: Desktop/Tablet `height: clamp(340px, 42svh, 440px)`, Mobile `height: clamp(420px, 58svh, 500px)`. Der Wert ist bewusst eine echte `height`, nicht `min-height`.
-- Der Hero wächst nicht mit langer Copy. H1, Lead, Meta und optionale Zusatzzeilen müssen innerhalb dieses Budgets funktionieren; andernfalls Copy/Typografie reduzieren.
+- Der Hero wächst nicht mit langer Copy. Im festen Overlay liegen Breadcrumb, Eyebrow und H1. Längere Beschreibung und Meta-Informationen gehören in die Post-Hero-Intro-Zone; bei zu langem Artikeltitel kann ein kürzerer `heroTitle` verwendet werden.
 - Hero-Medien werden so ausgewählt und gecroppt, dass sie in diesem Frame funktionieren. Für breite Desktop-Heros ist Querformat der Default; Hochformat darf nicht durch aggressiven Crop den Motivkontext verlieren. Die Seite wird nicht pro Video neu dimensioniert.
 - Nach dem Cinematic Hero folgt immer eine eigene Intro-Zone mit `--experience-intro-space`; erst danach beginnt der eigentliche Artikel-/Experience-Bereich mit `--experience-content-space`.
 - Hero-Medien behalten standardmäßig natürliche Farbe; kein globaler Grayscale-/Entsättigungs-Look ohne explizite redaktionelle Begründung.
