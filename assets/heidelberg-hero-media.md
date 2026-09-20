@@ -2,29 +2,33 @@
 
 - Guide: `heidelberg-ein-tag-entspannt`
 - Position: Walking-Hero
-- Video: `/videos/heidelberg-hero.mp4`
-- Poster/Fallback: `/images/heidelberg-hero-poster.webp`
-- Status: **Spike – lokal integriert**
+- Status: **Spike**
 
-## Quelle und Lizenz
+## Video
+
+- Quelle: Pexels
+- Urheberin: Alyona Nagel
+- Source URL: https://www.pexels.com/video/heidelberg-castle-and-scenic-city-view-33386385/
+- Direkte Spike-Quelle: https://videos.pexels.com/video-files/33386385/14213622_3840_2160_30fps.mp4
+- Lizenz: Pexels License
+- Format Quelle: 3840 × 2160, 16:9, 10 s, 30 fps
+
+## Poster/Fallback
 
 - Quelle: Wikimedia Commons
 - Urheber: Reinhard Wolf (Pumuckel42)
-- Ausgangsmotiv: `Heidelberg-Schloß.JPG`
 - Source URL: https://commons.wikimedia.org/wiki/File:Heidelberg-Schlo%C3%9F.JPG
 - Lizenz: CC BY-SA 3.0
 
-## Bearbeitung
+## Experience-Prüfung
 
-- Ausgangsmotiv im finalen Walking-Hero-Kontext auf 7:3 geprüft.
-- Poster als lokales 1120 × 480 px WebP-Derivat erzeugt.
-- Video als 6-s-Motion-Derivat desselben Fotos erzeugt.
-- Zielauflösung Video: 1120 × 480 px.
-- Kein Ton.
-- Natürliche Farbwirkung beibehalten.
-- Animation ist rein visuell; Inhalt und Navigation funktionieren über das Poster vollständig weiter.
-- Derivative werden unter derselben CC-BY-SA-Lizenz geführt.
+- Der Walking-Hero nutzt die verbindliche 7:3-Geometrie des Frameworks.
+- Sichtbare H1 ist über `heroTitle` auf `Heidelberg an einem Tag` gekürzt.
+- Scrim/Textfläche kommen aus dem generischen Walking-Layout.
+- Post-Hero-Intro und Main Content bleiben getrennte Zonen.
+- Reduced Motion und Data Saver laden das Video nicht.
+- Das Poster bleibt vollständiger Fallback.
 
-## Motiv-/Experience-Prüfung
+## Offener Produktionsschritt
 
-Das Schlossmotiv entspricht dem inhaltlichen Hauptanker des Artikels. Der sichtbare Text wird im Walking-Hero über Scrim gelegt; die Kurz-H1 `Heidelberg an einem Tag` hält das feste Hero-Budget ein.
+Für dauerhafte Produktionsfreigabe Video und Poster lokal ableiten, finalen 1120×480-Crop als Datei prüfen und Provenienz aktualisieren. Externe Media-URLs sind gemäß Media Governance nur im Spike-Status zulässig.
