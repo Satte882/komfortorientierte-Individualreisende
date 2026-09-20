@@ -302,7 +302,7 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 19. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
 20. Führe den Full Article Review in curation.md vollständig durch.
 21. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
-22. Vor Publish dürfen in research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
+22. Vor Publish dürfen in sources.md, research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; sources.md braucht mindestens eine konkrete Primär-/offizielle Quelle. Nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
