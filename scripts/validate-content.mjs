@@ -5,6 +5,13 @@ import { join, relative } from 'node:path';
 const root = process.cwd();
 const contentRoot = join(root, 'src', 'content');
 const publicLaunch = process.env.PUBLIC_LAUNCH === 'true';
+const walkingExperienceFile = join(root, 'src', 'data', 'experiences', 'walking.ts');
+const walkingExperienceSource = existsSync(walkingExperienceFile)
+  ? readFileSync(walkingExperienceFile, 'utf8')
+  : '';
+const walkingExperienceSlugs = new Set(
+  [...walkingExperienceSource.matchAll(/^\s{2}'([a-z0-9-]+)':\s*\{/gm)].map((match) => match[1])
+);
 
 function walk(dir) {
   if (!existsSync(dir)) return [];
@@ -36,6 +43,10 @@ for (const file of files) {
     if (!slug) {
       errors.push(`${display}: published content requires a parseable slug`);
     } else {
+      if (walkingExperienceSlugs.has(slug) && !text.includes('heroImage:')) {
+        errors.push(`${display}: published walking experience requires heroImage as poster/fallback`);
+      }
+
       const curation = join(root, 'research', slug, 'curation.md');
       if (!existsSync(curation)) {
         errors.push(`${display}: missing ${relative(root, curation)}`);
@@ -50,6 +61,25 @@ for (const file of files) {
   if (text.includes('heroImage:')) {
     for (const field of ['source:', 'creator:', 'sourceUrl:', 'license:', 'downloaded:']) {
       if (!text.includes(field)) errors.push(`${display}: heroImage missing ${field}`);
+    }
+  }
+
+  if (text.includes('heroVideo:')) {
+    const heroVideoBlock = text.match(/^heroVideo:\s*\n([\s\S]*?)(?=^[a-zA-Z][a-zA-Z0-9]*:|^---\s*$)/m)?.[1] ?? '';
+
+    for (const field of ['src:', 'poster:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'reviewed:', 'status:']) {
+      if (!heroVideoBlock.includes(field)) errors.push(`${display}: heroVideo missing ${field}`);
+    }
+
+    if (!text.includes('heroImage:')) {
+      errors.push(`${display}: heroVideo requires heroImage as semantic poster/fallback`);
+    }
+
+    const videoStatus = heroVideoBlock.match(/^\s+status:\s*["']?([a-z]+)["']?\s*$/m)?.[1];
+    const videoSrc = heroVideoBlock.match(/^\s+src:\s*["']?([^\n"']+)["']?\s*$/m)?.[1];
+
+    if (videoStatus === 'approved' && videoSrc && /^https?:\/\//.test(videoSrc)) {
+      errors.push(`${display}: approved heroVideo must be delivered locally; remote URLs are spike-only`);
     }
   }
 
