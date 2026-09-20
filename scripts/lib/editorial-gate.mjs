@@ -24,6 +24,12 @@ export const V2_REQUIRED_MARKERS = [
   '## Redaktionsfreigabe'
 ];
 
+export const V2_STRICT_CURATION_MARKERS = [
+  '## Relevante Research-Signale',
+  '### Übernommen in die Kuration',
+  '### Verworfen / ohne Entscheidungsauswirkung'
+];
+
 export const V2_STRICT_RESEARCH_MARKERS = [
   '## ICP-Signal-Scan',
   '### Reibung / realer Aufwand',
@@ -73,6 +79,27 @@ export function validateCurationV2(curation) {
 
   if (/\bTODO\b/i.test(curation)) {
     errors.push('Gate v2 curation.md enthält noch TODO-Platzhalter');
+  }
+
+  return errors;
+}
+
+export function validateSignalBridgeV2(curation) {
+  const errors = [];
+
+  for (const marker of V2_STRICT_CURATION_MARKERS) {
+    if (!curation.includes(marker)) {
+      errors.push('Gate v2 fehlt in curation.md: ' + marker);
+    }
+  }
+
+  const signalBridge = curation.match(/## Relevante Research-Signale\s*\n([\s\S]*?)(?=\n## )/)?.[1] ?? '';
+  const substantiveSignalItems = (signalBridge.match(/^\s*-\s+.+$/gm) || [])
+    .map((line) => line.replace(/^\s*-\s+/, '').trim())
+    .filter((line) => !/^(keine|nicht erforderlich)\.?$/i.test(line));
+
+  if (!signalBridge || substantiveSignalItems.length < 1) {
+    errors.push('Gate v2 curation.md braucht mindestens ein konkret übernommenes oder verworfenes Research-Signal');
   }
 
   return errors;
@@ -134,6 +161,10 @@ export function validateHumanGateV2(curation) {
     errors.push('Human Gate bestätigt nicht die vollständige Decision-Block-Abdeckung');
   }
 
+  if (!/- \[[xX]\] Die stärksten Research-Signale wurden in der Kuration berücksichtigt oder bewusst verworfen/.test(curation)) {
+    errors.push('Human Gate bestätigt nicht die Prüfung der stärksten Research-Signale');
+  }
+
   const approvedBy = curation.match(/^Freigabe durch:\s*(.+)$/m)?.[1]?.trim() ?? '';
   if (!approvedBy || /^TODO\b/i.test(approvedBy)) {
     errors.push('Human Gate braucht Freigabe durch eine konkrete Person');
@@ -164,6 +195,7 @@ export function validateGateForPublish({ content, curation, research = '', slug 
 
     return [
       ...curationErrors,
+      ...validateSignalBridgeV2(curation),
       ...validateResearchV2(research),
       ...validateHumanGateV2(curation),
       ...validatePublicContentV2(content)

@@ -183,6 +183,18 @@ TODO
 
 TODO
 
+## Relevante Research-Signale
+
+Die 3–7 stärksten Signale aus research.md vor der Priorisierung prüfen. Nicht jedes Signal muss zu einer Empfehlung werden.
+
+### Übernommen in die Kuration
+
+- TODO: Signal + welche Kurationsentscheidung es beeinflusst und warum
+
+### Verworfen / ohne Entscheidungsauswirkung
+
+- TODO: Signal + warum es nach dem vertieften Research keine Kurationsentscheidung verändert
+
 ## Social-Media-Realitätscheck
 
 Im öffentlichen Artikel erforderlich: TODO ja/nein
@@ -226,6 +238,7 @@ Nur nach ausdrücklicher Freigabe durch den Owner ausfüllen. Ein Agent darf die
 
 - [ ] Kuration und Decision-Blöcke vom Owner freigegeben
 - [ ] Für jeden wesentlichen öffentlichen Hauptabschnitt existiert ein vollständiger Decision-Block
+- [ ] Die stärksten Research-Signale wurden in der Kuration berücksichtigt oder bewusst verworfen
 Freigabe durch: TODO
 Freigabe am: TODO YYYY-MM-DD
 
@@ -276,19 +289,20 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 6. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
 7. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
 8. Führe nach dem vertieften Research den Hypothesen-Review durch: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem mit kurzer Begründung in research.md festhalten.
-9. Nutze ausschließlich dieses finale ICP-Problem als Input für Kuration und Decision-Blöcke.
-10. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-11. Trenne Fakten von redaktionellem Urteil.
-12. Keine persönliche Reiseerfahrung erfinden.
-13. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Der Human-Gate-Block darf nur nach ausdrücklicher Freigabe durch den Owner ausgefüllt werden; ein Agent darf weder Checkbox, Name noch Datum selbst setzen. Finalisiere den MDX-Text erst danach und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
-14. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
-15. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
-16. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-17. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-18. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-19. Führe den Full Article Review in curation.md vollständig durch.
-20. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
-21. Vor Publish dürfen in research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
+9. Nutze das finale ICP-Problem als verbindlichen Bezugsrahmen für Kuration und Decision-Blöcke.
+10. Prüfe vor der Priorisierung die 3–7 stärksten Research-Signale und dokumentiere in curation.md knapp, welche die Kuration beeinflussen und welche verworfen bzw. ohne Entscheidungsauswirkung bleiben.
+11. Erstelle danach in curation.md eine begründete Auswahl ausschließlich in den Kategorien Priorität, Optional und Bewusst nicht priorisieren.
+12. Trenne Fakten von redaktionellem Urteil.
+13. Keine persönliche Reiseerfahrung erfinden.
+14. Stoppe nach Kuration und Decision-Blöcken am Human Gate. Der Human-Gate-Block darf nur nach ausdrücklicher Freigabe durch den Owner ausgefüllt werden; ein Agent darf weder Checkbox, Name noch Datum selbst setzen. Finalisiere den MDX-Text erst danach und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+15. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+16. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+17. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+18. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+19. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+20. Führe den Full Article Review in curation.md vollständig durch.
+21. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+22. Vor Publish dürfen in research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}

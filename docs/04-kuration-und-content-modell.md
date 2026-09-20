@@ -29,6 +29,22 @@ Die Kuration beantwortet:
 - Was wird ausgelassen?
 - Welcher Trade-off entsteht?
 
+### Verbindlicher Übergang aus dem Research
+
+Vor der Priorisierung werden die 3–7 stärksten Signale aus `research.md` ausdrücklich geprüft. Jedes Signal wird redaktionell entweder **in die Kuration übernommen** oder **verworfen / als ohne Entscheidungsauswirkung eingeordnet**. Nicht jedes Signal muss zu einer Empfehlung werden und nicht jede Empfehlung braucht einen eigenen Signal-Bezug.
+
+Der Zweck ist ausschließlich, den Übergang vom Signal-Scan zur Kuration sichtbar zu machen und zu verhindern, dass relevante Research-Signale unter Zeitdruck unbeachtet bleiben.
+
+### Verbindliche Kurationskategorien
+
+Die Kuration verwendet nur drei Kategorien:
+
+- **Priorität**
+- **Optional**
+- **Bewusst nicht priorisieren**
+
+Eine bessere Alternative ist keine vierte Kategorie, sondern Teil der Begründung für eine Entscheidung bzw. des Feldes `Bewusst weglassen / Alternative` im Decision-Block.
+
 ## 3. Interessen-Cluster
 
 Zu Beginn nur wenige stabile Cluster verwenden.

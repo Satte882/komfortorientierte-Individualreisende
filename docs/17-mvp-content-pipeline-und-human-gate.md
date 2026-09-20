@@ -133,7 +133,8 @@ Hypothesen-Review in research.md
 
 KI-Kurationsvorschlag
 → curation.md
-→ Priorität / optional / bewusst weglassen
+→ relevante Research-Signale übernehmen oder verwerfen
+→ Priorität / optional / bewusst nicht priorisieren
 → Decision-Blöcke
 
       ↓
@@ -199,6 +200,7 @@ Neue Artikel aus `article:new` erhalten immer Gate v2 und müssen zusätzlich `r
 
 - vollständig ausgefüllten ICP-Signal-Scan in `research.md` mit mindestens 3 stärksten Signalen;
 - abgeschlossenen Hypothesen-Review: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem in `research.md` festgehalten;
+- `## Relevante Research-Signale` in `curation.md`: Signale, die die Kuration beeinflussen, sowie bewusst verworfene / folgenlose Signale;
 - expliziten Human Gate in `curation.md`: Owner-Freigabe, Name und Datum;
 - Decision-Blöcke für die wesentlichen Hauptabschnitte;
 - Affiliate-Prüfung über die bestehende Commercial-Logik;
