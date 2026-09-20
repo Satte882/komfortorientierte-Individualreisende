@@ -25,7 +25,7 @@ Das lokale Hero-Video ist eine abgeleitete Fassung von `Paris, river Seine102817
 
 - Quelle: eigenes Werk des Uploaders Quahadi;
 - Ausschnitt: ca. 12 Sekunden ab Sekunde 3;
-- Auflösung: 720p;
+- Auflösung: 540p;
 - Bildrate: 24 fps;
 - Audio vollständig entfernt;
 - H.264/MP4 für breite Browser-Kompatibilität;
