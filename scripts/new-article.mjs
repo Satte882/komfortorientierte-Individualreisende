@@ -82,7 +82,7 @@ icp_model: "docs/05-icp-und-zielgruppe.md"
 editorial_method: "docs/07-redaktionelle-methodik.md"
 writing_standard: "docs/23-icp-schreibstandard.md"
 public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
-editorial_gate_version: 2
+editorial_gate_version: 3
 status: research
 `);
 
@@ -134,6 +134,32 @@ Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
 
 Social-Media-Realitätscheck im öffentlichen Artikel:
 TODO: ja/nein + kurze Begründung; bei ja: praktischen Effekt und Empfehlung festhalten.
+
+## Besonderes Extra / Affiliate-Check
+
+Suchschritte:
+TODO: 1 bis maximal 3 gezielte Suchen
+
+Status:
+TODO: gefunden / kein passendes Angebot gefunden nach 3 gezielten Suchen
+
+Angebot:
+TODO
+
+Warum ICP-Fit:
+TODO
+
+Partner:
+TODO: bestehender Affiliate-Partner oder konkretes affiliatefähiges Angebot
+
+Link-Ziel:
+TODO: konkrete Angebots-/Hotel-/Tour-Seite
+
+Affiliate-Potenzial:
+TODO: aktiv / Tracking-Link ausstehend / nicht verfügbar
+
+Begründung:
+TODO: nur für die 3-Suchen-Ausnahme erforderlich
 
 ## Belastbare Fakten
 
@@ -206,6 +232,23 @@ Falls ja:
 - Empfehlung für den ICP: TODO
 - Evidenz / Abrufstand: TODO
 
+## Pflichtbausteine v3
+
+Tipps im Artikel:
+TODO: ja
+
+Andrang / Social Media im Artikel:
+TODO: sichtbar / nicht erforderlich – kurze Begründung
+
+Kostenübersicht für zwei:
+TODO: ja
+
+Besonderes Extra:
+TODO: gefunden / kein passendes Angebot gefunden nach 3 gezielten Suchen
+
+Affiliate-Status:
+TODO: aktiv / affiliatefähig – Tracking-Link ausstehend / nicht verfügbar nach 3 Suchen
+
 ## Entscheidungsblöcke
 
 Für jeden wesentlichen Hauptabschnitt vor der Prosa mindestens einen Block ausfüllen:
@@ -253,6 +296,10 @@ Freigabe am: TODO YYYY-MM-DD
 - [ ] keine wesentlichen Informationslücken
 - [ ] echte Insights statt Allgemeinplätze
 - [ ] natürliche Affiliate-Chancen geprüft, aber nicht künstlich erzeugt
+- [ ] 3–5 konkrete Tipps sind im öffentlichen Artikel kompakt sichtbar
+- [ ] Andrang / Social Media ist praktisch eingeordnet oder begründet nicht erforderlich
+- [ ] eine kompakte Kostenübersicht für zwei Personen ist sichtbar
+- [ ] Besonderes Extra ist als Box umgesetzt oder die 3-Suchen-Ausnahme ist dokumentiert
 - [ ] Text, Bild, Karte und CTA sind semantisch konsistent
 - [ ] Artikel besitzt einen klaren roten Faden
 - [ ] ICP müsste für die Kernentscheidung nicht sofort wieder selbst recherchieren
@@ -300,10 +347,13 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 16. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
 17. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
 18. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-19. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-20. Führe den Full Article Review in curation.md vollständig durch.
-21. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
-22. Vor Publish dürfen in sources.md, research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; sources.md braucht mindestens eine konkrete Primär-/offizielle Quelle. Nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
+19. Verdichte 3–5 konkrete Tipps im öffentlichen Artikel und ergänze eine kompakte Kostenübersicht für zwei Personen.
+20. Prüfe Social Media und Besucherandrang getrennt: keine unbelegte Kausalität; bei relevantem Andrang eine praktische öffentliche Einordnung mit Ausweichoption geben.
+21. Suche für genau ein „Besonderes Extra“ maximal 3-mal gezielt nach einem ICP-passenden, kostenpflichtigen und affiliatefähigen Angebot. Bei Fund bestehende AffiliateBox wiederverwenden. Ohne Fund nach 3 Suchen die definierte Ausnahme dokumentieren; nichts Mittelmäßiges erfinden.
+22. Ein vorhandenes, aber noch nicht mit Tracking versehenes Partnerziel darf mit AffiliateBox und affiliateActive={false} dargestellt werden. Erst mit echtem Tracking-Link affiliateActive aktivieren und affiliateDisclosure: true setzen.
+23. Führe den Full Article Review in curation.md vollständig durch.
+24. Vor Abschluss müssen alle Gate-v3-Checkboxen in curation.md geschlossen sein.
+25. Vor Publish dürfen in sources.md, research.md, curation.md und dem öffentlichen MDX keine TODO-Platzhalter verbleiben; sources.md braucht mindestens eine konkrete Primär-/offizielle Quelle. Nicht relevante optionale Felder ausdrücklich als „nicht erforderlich“ kennzeichnen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
@@ -332,7 +382,7 @@ datePublished: ${today}
 dateReviewed: ${today}
 reviewAfter: ${reviewAfter}
 status: draft
-editorialGateVersion: 2
+editorialGateVersion: 3
 affiliateDisclosure: false
 sources:
 ${sourceIndent}
@@ -354,6 +404,22 @@ TODO: mindestens einen echten Verzicht oder Trade-off sichtbar machen.
 ## Realistischer Ablauf
 
 TODO: Reihenfolge, Pausen, Wege und Puffer aus Sicht des ICP.
+
+## Tipps & Tricks
+
+TODO: 3–5 konkrete, reibungsreduzierende Tipps.
+
+## Andrang / Realität
+
+TODO: nur wenn laut Research praktisch relevant; sonst im finalen Artikel entfernen.
+
+## Was kostet der Tag zu zweit?
+
+TODO: kompakte Varianten mit konkreten Beträgen.
+
+## Besonderes Extra
+
+TODO: bei gefundenem Angebot die bestehende AffiliateBox verwenden; bei 3-Suchen-Ausnahme diesen Abschnitt entfernen.
 
 ## Was vor der Reise geprüft werden muss
 
