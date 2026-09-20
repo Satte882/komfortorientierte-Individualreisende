@@ -165,6 +165,7 @@ Besonders relevant:
 - `docs/20-mvp-auswertung.md`
 - `docs/21-content-automation.md`
 - `docs/22-lokaler-mvp-dod.md`
+- `docs/23-icp-schreibstandard.md` – verbindlicher Schreibstandard für öffentlichen Content
 
 ## Leitprinzip
 
