@@ -189,15 +189,17 @@ editorialGateVersion: 2
 
 Bereits veröffentlichte Legacy-Artikel bleiben v1 und werden nicht rückwirkend gegen neue Pflichtbereiche geprüft.
 
-Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Dadurch kann ein neuer Artikel das v2-Gate nicht einfach durch Weglassen des Feldes umgehen.
+Die erlaubten Legacy-v1-Slugs werden im gemeinsamen Gate-Helper explizit geführt. Zusätzlich bleibt der bereits vor Einführung von ICP-Signal-Scan/Hypothesen-Review veröffentlichte v2-Artikel `munich-altstadt-walk` explizit grandfathered. Neue v2-Artikel erhalten diese Ausnahme nicht.
 
-Neue Artikel aus `article:new` erhalten immer Gate v2.
+Neue Artikel aus `article:new` erhalten immer Gate v2 und müssen zusätzlich `research.md` mit vollständig ausgefülltem Signal-Scan/Hypothesen-Review sowie einen explizit freigegebenen Human-Gate-Block in `curation.md` besitzen.
 
 ### Gate-v2-Inhalt
 
 `research/<slug>/curation.md` muss enthalten:
 
+- vollständig ausgefüllten ICP-Signal-Scan in `research.md` mit mindestens 3 stärksten Signalen;
 - abgeschlossenen Hypothesen-Review: Ausgangshypothese bestätigt, präzisiert oder verworfen; finales ICP-Problem in `research.md` festgehalten;
+- expliziten Human Gate in `curation.md`: Owner-Freigabe, Name und Datum;
 - Decision-Blöcke für die wesentlichen Hauptabschnitte;
 - Affiliate-Prüfung über die bestehende Commercial-Logik;
 - Full Article Review;
