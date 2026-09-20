@@ -53,8 +53,10 @@ for (const file of files) {
       } else {
         const research = join(root, 'research', slug, 'research.md');
         const researchText = existsSync(research) ? readFileSync(research, 'utf8') : '';
+        const sources = join(root, 'research', slug, 'sources.md');
+        const sourcesText = existsSync(sources) ? readFileSync(sources, 'utf8') : '';
         const curationText = readFileSync(curation, 'utf8');
-        const gateErrors = validateGateForPublish({ content: text, curation: curationText, research: researchText, slug });
+        const gateErrors = validateGateForPublish({ content: text, curation: curationText, research: researchText, sources: sourcesText, slug });
         for (const error of gateErrors) errors.push(`${display}: ${error}`);
       }
     }

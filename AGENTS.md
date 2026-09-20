@@ -40,6 +40,7 @@ Wenn du ein Content-Issue anlegst, enthält dessen DoD mindestens:
 - bestehendes ICP-Modell auf den konkreten Beitrag angewendet;
 - ICP-Signal-Scan durchgeführt;
 - primäre ICP-Problemahypothese + max. 2 Nebenfragen dokumentiert;
+- sources.md vollständig dokumentiert und ohne TODO-Platzhalter;
 - vertieftes Research dokumentiert;
 - Problemahypothese nach Research bestätigt, präzisiert oder verworfen und finales ICP-Problem festgehalten;
 - stärkste Research-Signale vor der Priorisierung in curation.md übernommen oder bewusst verworfen;
