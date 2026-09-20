@@ -18,7 +18,27 @@ export const V2_REQUIRED_MARKERS = [
 ];
 
 export function parseFrontmatterValue(text, field) {
-  return text.match(new RegExp('^' + field + ':\\s*["\\\']?([^\\n"\\\']+)["\\\']?\\s*$', 'm'))?.[1]?.trim();
+  return text.match(new RegExp(`^${field}:\\s*["']?([^\\n"']+)["']?\\s*export const EDITORIAL_GATE_VERSION = 2;
+
+export const LEGACY_EDITORIAL_V1_SLUGS = new Set([
+  'paris-kunst-4-tage',
+  'andalusien-kultur-9-tage'
+]);
+
+export const V2_REQUIRED_MARKERS = [
+  '## Entscheidungsblöcke',
+  'ICP-Frage:',
+  'Entscheidung:',
+  'Zeit / Aufwand:',
+  'Bewusst weglassen / Alternative:',
+  'Insight:',
+  'Affiliate-Prüfung:',
+  '## Full Article Review',
+  '## Redaktionsfreigabe'
+];
+
+export function parseFrontmatterValue(text, field) {
+  , 'm'))?.[1]?.trim();
 }
 
 export function parseEditorialGateVersion(text) {
