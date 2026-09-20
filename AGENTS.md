@@ -20,11 +20,13 @@ Interne Begriffe wie Spike, Framework, State, GeoJSON, Routing-Implementierung, 
 
 Jeder Hauptabschnitt soll Entscheidungen reduzieren: Was lohnt sich, wie lange, reingehen oder außen, Pause oder weiter, was weglassen, welcher Trade-off?
 
+Neue Gate-v3-Artikel machen zusätzlich 3–5 konkrete Tipps, Andrang/Social-Media-Realität bei Relevanz, eine kompakte Kostenübersicht für zwei und genau ein optionales „Besonderes Extra“ sichtbar. Für das Extra maximal 3 gezielte Suchen; ohne glaubwürdigen Fund gilt die dokumentierte Ausnahme statt erfundener Werbung.
+
 Research-/Technikdetails bleiben in `research/`, `docs/` oder Issues.
 
-### Editorial Gate v2
+### Editorial Gate v3
 
-Neue oder bewusst migrierte öffentliche Inhalte verwenden `editorialGateVersion: 2`.
+Neue oder bewusst migrierte öffentliche Inhalte verwenden `editorialGateVersion: 3`. Veröffentlichte v1/v2-Legacy-Inhalte bleiben explizit grandfathered.
 
 Vor `published` müssen:
 - ICP-Signal-Scan und Hypothesen-Review in `research.md` vollständig abgeschlossen sein;
