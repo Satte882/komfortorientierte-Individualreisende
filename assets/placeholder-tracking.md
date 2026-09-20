@@ -6,7 +6,7 @@ Diese Liste ist die zentrale Launch-Checkliste für visuelle Demo-Assets. Status
 |---|---|---|---|---|---|
 | home | Homepage-Hero | /images/hero-editorial.svg | ruhige Kultur- oder Städtereise; erwachsene Zielgruppe; glaubwürdige reale Reisesituation | offen – Demo-SVG | ausstehend |
 | paris-kunst-4-tage | Article-Hero und Karten | /images/paris-spike/paris-seine-sunset.webp + Orsay/Louvre/Orangerie | Paris mit Architektur-/Museumskontext; ruhig, hochwertig, keine Postkarten-Klischees | **ersetzt – Spike-Medien** | Wikimedia Commons; CC BY 2.0 / CC BY-SA 4.0; Details: `assets/paris-spike-media.md` |
-| munich-altstadt-walk | Walking-Hero | /images/munich-altstadt-hero-poster.webp + /videos/munich-altstadt-hero.mp4 | realer München-/Marienplatz-Kontext; ruhiger Einstieg in die Altstadt-Route | **ersetzt – lokale Spike-Medien** | Pexels / Memory Lane / Pexels License; 8-s-Fassung lokal, Audio entfernt; Details: `assets/munich-hero-media.md` |
+| munich-altstadt-walk | Walking-Hero | /images/munich-altstadt-hero-poster.webp + /videos/munich-altstadt-hero.mp4 | farbiger München-Stadtkontext; ruhiger Einstieg in die Altstadt-Route | **ersetzt – lokale Spike-Medien** | Pexels / Fluxx Films / Pexels License; 8-s-Fassung lokal, Audio entfernt, Farbcheck bestanden; Details: `assets/munich-hero-media.md` |
 | andalusien-kultur-9-tage | Article-Hero und Karten | /images/andalusien-editorial.svg | andalusische Architektur oder Stadtraum; Kulturfokus, warmes natürliches Licht | offen – Demo-SVG | ausstehend |
 | cordoba-tagesausflug-oder-uebernachten | Article-Hero und Karten | /images/cordoba-editorial.svg | Córdoba im Architektur-/Altstadtkontext; reale Reisesituation statt Lifestyle-Stock | offen – Demo-SVG | ausstehend |
 
