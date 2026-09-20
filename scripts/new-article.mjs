@@ -77,6 +77,7 @@ duration_days: ${days}
 interests:
 ${interests.map((x)=>`  - ${x}`).join('\n')}
 target_profile: "komfortorientierte Individualreisende"
+icp_model: "docs/05-icp-und-zielgruppe.md"
 editorial_method: "docs/07-redaktionelle-methodik.md"
 writing_standard: "docs/23-icp-schreibstandard.md"
 public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
