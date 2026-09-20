@@ -41,6 +41,7 @@ Beim Eiffelturm ist zwischen dem Bauwerk bei Tag und der nächtlichen Lichtinsze
 - ohne Ton;
 - kurze, weboptimierte Fassung;
 - Poster immer vorhanden und visuell passend zum tatsächlichen Video-Crop;
+- für breite Desktop-Heros Querformat als Standard verwenden; Hochformat-Quellen nur nach expliziter Crop-Prüfung, wenn Motiv und Kontext im breiten Frame erhalten bleiben;
 - vor Auswahl im vorgesehenen Hero-Layout prüfen: ruhige Textfläche, kein dominantes Motiv direkt hinter H1/Lead, ausreichender Kontrast mit Scrim;
 - natürliche Farbe ist der Default; Schwarz/Weiß, starke Entsättigung oder Look-Filter nur als bewusste und dokumentierte redaktionelle Entscheidung;
 - für allgemeine Reise-Heros Frühling/Sommer oder eine vergleichbar helle Tageslicht-Situation bevorzugen; saisonal abweichende Motive nur verwenden, wenn der Artikel diese Saison tatsächlich thematisiert;
