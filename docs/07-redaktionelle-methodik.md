@@ -305,3 +305,43 @@ Nicht „möglichst viele Artikel“.
 Sondern:
 
 > **möglichst viele hochwertige, kaufnahe Entscheidungen pro redaktioneller Stunde.**
+
+
+## 15. Von Research zu Text: Decision-Blöcke
+
+Für Editorial Gate v2 wird vor der eigentlichen Prosa in `research/<slug>/curation.md` dokumentiert, welche Entscheidung jeder wesentliche Hauptabschnitt reduziert.
+
+Minimalformat:
+
+```md
+## <Abschnitt / Stop>
+
+ICP-Frage:
+...
+
+Entscheidung:
+...
+
+Warum:
+...
+
+Zeit / Aufwand:
+...
+
+Bewusst weglassen / Alternative:
+...
+
+Insight:
+...
+
+Affiliate-Prüfung:
+...
+```
+
+Die Decision-Blöcke sind Redaktionsinput, kein neues Frontmatter- oder Runtime-Datenmodell.
+
+Reihenfolge:
+
+> ICP-Problem → Research → Kuration → Decision-Blöcke → öffentlicher Text.
+
+Erst danach wird der Artikel nach `docs/23-icp-schreibstandard.md` formuliert.
