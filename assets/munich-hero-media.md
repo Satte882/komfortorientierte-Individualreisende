@@ -28,6 +28,7 @@ Aus dem Pexels-Original wurde für die Website ein lokales Derivat erzeugt:
 - 8-Sekunden-Fassung ab ca. Sekunde 1 des Quellclips;
 - Ton vollständig entfernt;
 - Querformat-Original (1920 × 1080, 16:9) als finales Desktop-Hero-Derivat auf 1120 × 480 px (7:3) ausgegeben;
+- dieser 7:3-Crop ist das redaktionell zu prüfende Desktop-Derivat; der Browser erzeugt auf Desktop keinen zusätzlichen Vertikal-Crop;
 - H.264/MP4, Web-Optimierung mit Faststart;
 - Poster aus dem Quellclip bei ca. Sekunde 4 als WebP erzeugt;
 - Pexels kennzeichnet das Motiv u. a. mit `Munich`, `Summer`, `Daylight`, `Cityscape` und `Motion`;
