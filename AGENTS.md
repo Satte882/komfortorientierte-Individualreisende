@@ -27,8 +27,9 @@ Research-/Technikdetails bleiben in `research/`, `docs/` oder Issues.
 Neue oder bewusst migrierte öffentliche Inhalte verwenden `editorialGateVersion: 2`.
 
 Vor `published` müssen:
-- ICP-Signal-Scan und Hypothesen-Review abgeschlossen sein;
+- ICP-Signal-Scan und Hypothesen-Review in `research.md` vollständig abgeschlossen sein;
 - Decision-Blöcke in `curation.md` vorhanden sein;
+- Human Gate ausdrücklich durch den Owner freigegeben sein;
 - natürliche Affiliate-Chancen geprüft sein;
 - Full Article Review abgeschlossen sein;
 - alle Gate-Checkboxen geschlossen sein.
@@ -56,7 +57,7 @@ Verbindlicher Content-Pfad:
 
 > ICP-Modell → ICP-Signal-Scan → ICP-Problemahypothese → vertieftes Research → Hypothesen-Review/finales ICP-Problem → Kuration → Decision-Blöcke → Human Gate → Artikel → Review → Publish.
 
-Keinen Schritt überspringen. Insbesondere entsteht die öffentliche Prosa erst nach Kuration, Decision-Blöcken und Human Gate.
+Keinen Schritt überspringen. Insbesondere entsteht die öffentliche Prosa erst nach Kuration, Decision-Blöcken und Human Gate. Der Agent darf die Human-Gate-Freigabe niemals selbst setzen; Checkbox, Freigabename und Datum werden ausschließlich nach einer ausdrücklichen menschlichen Freigabe eingetragen.
 
 ## Experience / UI
 
