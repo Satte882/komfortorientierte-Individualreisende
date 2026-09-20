@@ -157,17 +157,19 @@ Mögliche Kriterien:
 - Preis;
 - Alternativen.
 
-### Schritt 8 – priorisieren
+### Schritt 8 – Signale in Kuration überführen und priorisieren
 
-Nicht alles empfehlen.
+Vor der Priorisierung werden die 3–7 stärksten Signale aus `research.md` geprüft. In `curation.md` wird knapp dokumentiert, welche Signale die Kuration beeinflussen und welche nach dem vertieften Research verworfen bzw. ohne Entscheidungsauswirkung bleiben.
 
-Mögliche Kategorien:
+Nicht jedes Signal muss zu einer Empfehlung werden. Umgekehrt muss nicht jede redaktionelle Entscheidung aus einem Signal entstehen.
 
-- Priorität;
-- sinnvoll;
-- optional;
-- nur bei Spezialinteresse;
-- bei knapper Zeit weglassen.
+Danach wird ausschließlich in drei Kategorien kuratiert:
+
+- **Priorität**
+- **Optional**
+- **Bewusst nicht priorisieren**
+
+Alternativen werden innerhalb der Begründung bzw. im Decision-Block unter `Bewusst weglassen / Alternative` dokumentiert, nicht als eigene Kurationskategorie.
 
 ### Schritt 9 – Trade-offs erklären
 
