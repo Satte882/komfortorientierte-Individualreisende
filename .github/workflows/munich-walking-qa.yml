@@ -1,0 +1,203 @@
+name: Munich walking experience QA
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Install browser client
+        run: pip install selenium
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4321 --directory dist >/tmp/server.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:4321/spikes/munchen-walking/ >/dev/null
+          curl --fail http://127.0.0.1:4321/data/routes/munich-old-town-walk.geojson >/dev/null
+
+      - name: Validate walking-map behavior
+        run: |
+          mkdir -p visual-qa
+          python3 - <<'PY'
+          import time
+          from pathlib import Path
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+
+          url = "http://127.0.0.1:4321/spikes/munchen-walking/"
+          out = Path("visual-qa")
+          options = Options()
+          options.add_argument("--headless=new")
+          options.add_argument("--no-sandbox")
+          options.add_argument("--disable-dev-shm-usage")
+          driver = webdriver.Chrome(options=options)
+
+          def wait_until(script, timeout=12):
+              end=time.time()+timeout
+              while time.time()<end:
+                  try:
+                      if driver.execute_script(script):
+                          return
+                  except Exception:
+                      pass
+                  time.sleep(.2)
+              raise AssertionError("timeout waiting for: "+script)
+
+          def open_page(width, height):
+              driver.set_window_size(width, height)
+              driver.get(url)
+              wait_until("return document.querySelector('[data-walking-experience]')?.getAttribute('data-map-loaded') === 'true'")
+              time.sleep(.8)
+
+          def step(state_id):
+              return driver.find_element("css selector", f'[data-walking-step="{state_id}"]')
+
+          def scroll_to(state_id):
+              el=step(state_id)
+              driver.execute_script("arguments[0].scrollIntoView({block:'center'});", el)
+              wait_until(f"return document.querySelector('[data-walking-experience]')?.getAttribute('data-active-stop') === '{state_id}'")
+              time.sleep(.75)
+
+          def state():
+              root=driver.find_element("css selector","[data-walking-experience]")
+              active=root.get_attribute("data-active-stop")
+              index=int(root.get_attribute("data-active-index"))
+              markers=driver.find_elements("css selector",".walking-map-marker")
+              active_markers=[m for m in markers if "is-active" in (m.get_attribute("class") or "")]
+              completed=[m for m in markers if "is-completed" in (m.get_attribute("class") or "")]
+              future=[m for m in markers if "is-future" in (m.get_attribute("class") or "")]
+              route_index=int(driver.find_element("css selector","[data-walking-map]").get_attribute("data-route-progress-index") or 0)
+              return {
+                  "active":active,"index":index,"route_index":route_index,
+                  "active_count":len(active_markers),"completed":len(completed),"future":len(future)
+              }
+
+          def all_markers_visible():
+              return driver.execute_script("""
+                const map=document.querySelector('[data-walking-map]').getBoundingClientRect();
+                return [...document.querySelectorAll('.walking-map-marker')].every((el)=>{
+                  const r=el.getBoundingClientRect();
+                  const x=r.left+r.width/2, y=r.top+r.height/2;
+                  return x>=map.left && x<=map.right && y>=map.top && y<=map.bottom;
+                });
+              """)
+
+          def marker_center(index):
+              return driver.execute_script("""
+                const el=document.querySelector('[data-walking-marker="'+arguments[0]+'"]');
+                const r=el.getBoundingClientRect();
+                return {x:r.left+r.width/2,y:r.top+r.height/2};
+              """, index)
+
+          open_page(1440,1200)
+
+          markers=driver.find_elements("css selector",".walking-map-marker")
+          if len(markers)!=6:
+              raise AssertionError(f"expected 6 markers, got {len(markers)}")
+
+          attribution=driver.find_element("css selector",".maplibregl-ctrl-attrib").text
+          if "OpenStreetMap" not in attribution:
+              raise AssertionError(f"OSM attribution missing: {attribution}")
+
+          resources=driver.execute_script("return performance.getEntriesByType('resource').map(x=>x.name)")
+          if not any("munich-old-town-walk.geojson" in x for x in resources):
+              raise AssertionError("local walking GeoJSON was not loaded")
+          if any("routing.openstreetmap.de" in x or "brouter" in x.lower() for x in resources):
+              raise AssertionError("runtime routing request detected")
+
+          progress=[]
+          for i,state_id in enumerate([
+              "odeonsplatz","max-joseph-platz","marienplatz",
+              "viktualienmarkt","gaertnerplatz","deutsches-museum"
+          ]):
+              scroll_to(state_id)
+              s=state()
+              if s["index"]!=i or s["active_count"]!=1 or s["completed"]!=i or s["future"]!=5-i:
+                  raise AssertionError(f"bad marker state at {state_id}: {s}")
+              if not all_markers_visible():
+                  raise AssertionError(f"route context lost at {state_id}")
+              progress.append(s["route_index"])
+
+          if not all(progress[i] < progress[i+1] for i in range(len(progress)-1)):
+              raise AssertionError(f"route did not progress monotonically: {progress}")
+
+          # Fast jump: stop 1 directly to stop 5.
+          scroll_to("odeonsplatz")
+          pos_before=marker_center(2)
+          scroll_to("gaertnerplatz")
+          fast=state()
+          pos_after=marker_center(2)
+          if fast["index"]!=4 or fast["completed"]!=4:
+              raise AssertionError(f"fast-scroll resolver failed: {fast}")
+          if abs(pos_before["x"]-pos_after["x"]) < 8 and abs(pos_before["y"]-pos_after["y"]) < 8:
+              raise AssertionError(f"camera focus did not visibly move: {pos_before} -> {pos_after}")
+
+          # Backward scroll must shorten route and restore earlier marker state.
+          route_at_5=fast["route_index"]
+          scroll_to("max-joseph-platz")
+          back=state()
+          if back["index"]!=1 or back["route_index"]>=route_at_5:
+              raise AssertionError(f"backward scroll failed: {back}, previous route {route_at_5}")
+
+          driver.save_screenshot(str(out/"munich-walking-desktop.png"))
+
+          # Mobile portrait: sticky map top, one-column story, no horizontal overflow.
+          open_page(390,844)
+          stage=driver.find_element("css selector",".walking-stage")
+          css=driver.execute_script("""
+            const s=getComputedStyle(arguments[0]), r=arguments[0].getBoundingClientRect();
+            return {position:s.position,height:r.height};
+          """,stage)
+          if css["position"]!="sticky" or not (239 <= css["height"] <= 341):
+              raise AssertionError(f"mobile sticky map incorrect: {css}")
+
+          scroll_to("viktualienmarkt")
+          mobile=state()
+          if mobile["index"]!=3:
+              raise AssertionError(f"mobile state failed: {mobile}")
+
+          overflow=driver.execute_script(
+              "return document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+          )
+          if overflow:
+              raise AssertionError("mobile horizontal overflow")
+
+          driver.save_screenshot(str(out/"munich-walking-mobile.png"))
+
+          # Orientation/viewport change: current state remains derivable and map stays functional.
+          driver.set_window_size(844,390)
+          driver.execute_script("window.dispatchEvent(new Event('resize'))")
+          time.sleep(1.0)
+          wait_until("return document.querySelector('[data-walking-experience]')?.getAttribute('data-map-loaded') === 'true'")
+          oriented=state()
+          if oriented["active_count"]!=1:
+              raise AssertionError(f"orientation change broke state: {oriented}")
+
+          driver.quit()
+          print("Munich walking experience QA passed")
+          PY
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: munich-walking-qa
+          path: visual-qa/*.png
+          retention-days: 7
