@@ -151,10 +151,9 @@ const jsonLd = {
 
           <div class="paris-decision" data-paris-decision>
             <span class="paris-decision__status" data-decision-status>Unsere Auswahl</span>
-            <strong data-decision-title>Orsay → Louvre → Orangerie</strong>
+            <strong data-decision-title>Orsay → Louvre → Orangerie → Flex</strong>
             <p data-decision-copy>
-              Drei Kunstanker reichen für vier Tage. Die Visualisierung folgt unserer redaktionellen
-              Priorisierung – nicht einer möglichst vollständigen Sehenswürdigkeiten-Liste.
+              Drei Kunstanker strukturieren die Reise. Der vierte Tag bleibt bewusst als Puffer geschützt.
             </p>
           </div>
         </div>
@@ -676,28 +675,47 @@ const jsonLd = {
         })
         .filter(Boolean);
 
-      if ('IntersectionObserver' in window) {
-        const storyObserver = new IntersectionObserver(
-          (entries) => {
-            const visible = entries
-              .filter((entry) => entry.isIntersecting)
-              .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+      let activeStoryElement = null;
+      let storyTicking = false;
 
-            if (!visible) return;
-            const item = tracked.find((entry) => entry.element === visible.target);
-            if (!item) return;
+      function applyStoryState(item) {
+        if (!item || activeStoryElement === item.element) return;
+        activeStoryElement = item.element;
 
-            if (item.state.place) {
-              activatePlace(item.state.place);
-            } else if (item.state.custom) {
-              activateCustom(item.state.custom);
-            }
-          },
-          { rootMargin: '-28% 0px -58% 0px', threshold: [0, 1] }
-        );
-
-        tracked.forEach(({ element }) => storyObserver.observe(element));
+        if (item.state.place) {
+          activatePlace(item.state.place);
+        } else if (item.state.custom) {
+          activateCustom(item.state.custom);
+        }
       }
+
+      function syncStoryState() {
+        storyTicking = false;
+        const anchorY = window.innerHeight * 0.56;
+        let current = null;
+
+        tracked.forEach((item) => {
+          const top = item.element.getBoundingClientRect().top;
+          if (top <= anchorY) current = item;
+        });
+
+        if (current) {
+          applyStoryState(current);
+        } else if (activeStoryElement !== null) {
+          activeStoryElement = null;
+          activateCustom(overviewState);
+        }
+      }
+
+      function requestStorySync() {
+        if (storyTicking) return;
+        storyTicking = true;
+        requestAnimationFrame(syncStoryState);
+      }
+
+      window.addEventListener('scroll', requestStorySync, { passive: true });
+      window.addEventListener('resize', requestStorySync);
+      requestStorySync();
 
       setMedia('paris');
     }
