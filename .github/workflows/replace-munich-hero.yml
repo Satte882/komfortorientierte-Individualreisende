@@ -23,19 +23,16 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-          python -m pip install --disable-pip-version-check yt-dlp pillow
+          python -m pip install --disable-pip-version-check pillow
 
-      - name: Download Pixabay source
+      - name: Download Pexels source
         shell: bash
         run: |
-          yt-dlp \
-            --no-playlist \
-            -f "best[ext=mp4]/best" \
-            -o "/tmp/munich-source.%(ext)s" \
-            "https://pixabay.com/videos/tower-buildings-munich-germany-86521/"
-          SOURCE="$(find /tmp -maxdepth 1 -type f -name 'munich-source.*' | head -n 1)"
-          test -n "$SOURCE"
-          echo "SOURCE=$SOURCE" >> "$GITHUB_ENV"
+          curl -L --fail --retry 3 \
+            "https://videos.pexels.com/video-files/3863114/3863114-uhd_3840_2160_25fps.mp4" \
+            -o /tmp/munich-source.mp4
+          test -s /tmp/munich-source.mp4
+          echo "SOURCE=/tmp/munich-source.mp4" >> "$GITHUB_ENV"
 
       - name: Build web hero video and poster
         shell: bash
