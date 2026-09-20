@@ -1,0 +1,123 @@
+---
+import WalkingExperienceLayout from '../../layouts/WalkingExperienceLayout.astro';
+import WalkingStop from '../../components/experience/WalkingStop.astro';
+import { munichWalkingExperience } from '../../data/experiences/munich-walking';
+
+const data = {
+  title: 'München zu Fuß: sechs Stopps von Odeonsplatz bis zur Museumsinsel',
+  description: 'Experience-Spike für eine progressive Walking-Route durch München: sechs Stopps, sticky Karte, aktiver POI und wachsender Fußweg beim Scrollen.',
+  datePublished: '2026-09-20',
+  dateReviewed: '2026-09-20',
+  duration: { ideal: 1 },
+  status: 'review',
+  sources: [
+    {
+      label: 'OpenStreetMap – Copyright und Lizenz',
+      url: 'https://www.openstreetmap.org/copyright'
+    },
+    {
+      label: 'FOSSGIS – OSRM Routing Service',
+      url: 'https://routing.openstreetmap.de/about.html'
+    },
+    {
+      label: 'OpenFreeMap – Public Map Service',
+      url: 'https://openfreemap.org/'
+    }
+  ]
+};
+---
+
+<WalkingExperienceLayout data={data} experience={munichWalkingExperience}>
+  <p>
+    Dieser München-Guide ist bewusst ein <strong>Experience-Spike</strong>, kein fertiger
+    redaktioneller Stadtführer. Er prüft nur, ob eine echte Walking-Route mit sechs Stopps
+    beim Scrollen verständlich bleibt: aktueller Punkt, bereits zurückgelegter Weg und
+    Gesamtzusammenhang der Route.
+  </p>
+
+  <WalkingStop
+    stateId="odeonsplatz"
+    number={1}
+    title="Odeonsplatz"
+    lead="Der Startpunkt: nördlicher Rand der Route, bevor es durch die Altstadt nach Süden geht."
+  >
+    <p>
+      Beim Einstieg soll die Karte sofort die vollständige Route zeigen, aber nur
+      <strong>Stop 1</strong> hervorheben. Die aktive Weglinie beginnt hier; alle späteren
+      Stopps bleiben als zukünftige Punkte sichtbar.
+    </p>
+  </WalkingStop>
+
+  <WalkingStop
+    stateId="max-joseph-platz"
+    number={2}
+    title="Max-Joseph-Platz"
+    lead="Der zweite Punkt liegt nur einen kurzen Abschnitt südöstlich des Starts."
+  >
+    <p>
+      Jetzt muss die Karte sichtbar von 1 auf 2 reagieren: Odeonsplatz wird
+      <strong>completed</strong>, Max-Joseph-Platz wird aktiv und die bronzene Route reicht
+      genau bis hierher.
+    </p>
+  </WalkingStop>
+
+  <WalkingStop
+    stateId="marienplatz"
+    number={3}
+    title="Marienplatz"
+    lead="In der Mitte der Route wird der räumliche Zusammenhang besonders wichtig."
+  >
+    <p>
+      Der aktive Fokus wandert zum Marienplatz. Trotzdem darf die Karte nicht aggressiv
+      hineinzoomen: Start, bisherige Strecke und die noch folgenden Stopps sollen weiterhin
+      grob einzuordnen sein.
+    </p>
+  </WalkingStop>
+
+  <WalkingStop
+    stateId="viktualienmarkt"
+    number={4}
+    title="Viktualienmarkt"
+    lead="Ab hier geht die Walking Story aus dem zentralen Platzraum weiter nach Süden."
+  >
+    <p>
+      Beim schnellen Scrollen direkt von Stop 2 auf Stop 4 muss der State sofort korrekt
+      hier landen. Die Route 1→2→3→4 wird vollständig aktiv, ohne dass Stop 3 vorher als
+      Browser-Event durchlaufen werden musste.
+    </p>
+  </WalkingStop>
+
+  <WalkingStop
+    stateId="gaertnerplatz"
+    number={5}
+    title="Gärtnerplatz"
+    lead="Punkt 5 testet die stärkere Verschiebung innerhalb der Gesamtstrecke."
+  >
+    <p>
+      Der Gärtnerplatz liegt deutlich südlicher. Die Kamera darf den Schwerpunkt deshalb
+      verschieben, aber die gesamte Route bleibt die gemeinsame Bezugsfläche. Genau hier
+      zeigt sich, ob der generische Kamera-Algorithmus ohne Handtuning funktioniert.
+    </p>
+  </WalkingStop>
+
+  <WalkingStop
+    stateId="deutsches-museum"
+    number={6}
+    title="Deutsches Museum"
+    lead="Der letzte Abschnitt schwenkt nach Osten zur Museumsinsel."
+  >
+    <p>
+      Am Ziel ist die gesamte gegangene Route aktiv. Alle vorherigen Marker sind completed,
+      Stop 6 ist aktiv und die Karte zeigt weiterhin, wie der Weg durch die Münchner
+      Innenstadt verlaufen ist.
+    </p>
+  </WalkingStop>
+
+  <h2>Was dieser Spike beweisen soll</h2>
+  <p>
+    Wenn Desktop, Mobile, schnelles Vor- und Rückwärtsscrollen, progressive Route und
+    automatische Kamera hier ohne München-spezifische Sonderwerte funktionieren, ist das
+    Walking-Pattern bereit für das Human Gate. Erst danach wird entschieden, ob es als
+    endgültiger Standard für weitere Beiträge gilt.
+  </p>
+</WalkingExperienceLayout>
