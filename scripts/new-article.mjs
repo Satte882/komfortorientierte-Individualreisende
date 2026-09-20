@@ -76,6 +76,9 @@ duration_days: ${days}
 interests:
 ${interests.map((x)=>`  - ${x}`).join('\n')}
 target_profile: "komfortorientierte Individualreisende"
+editorial_method: "docs/07-redaktionelle-methodik.md"
+writing_standard: "docs/23-icp-schreibstandard.md"
+public_perspective: "Reiseentscheidung des ICP; keine interne Projekt-, Technik- oder Testperspektive"
 status: research
 `);
 
@@ -135,6 +138,8 @@ TODO
 
 ## Redaktionsfreigabe
 
+### Fakten und Kuration
+
 - [ ] zentrale Fakten gegen geeignete Primärquellen geprüft
 - [ ] volatile Angaben aktuell geprüft
 - [ ] keine unbelegten Mengenbehauptungen
@@ -142,17 +147,31 @@ TODO
 - [ ] eigene Artikelstruktur
 - [ ] Quellen für wesentliche Aussagen dokumentiert
 - [ ] Kuration / Priorisierung freigegeben
+
+### ICP und Schreibstandard
+
+- [ ] öffentlicher Text folgt docs/23-icp-schreibstandard.md
+- [ ] jeder Hauptabschnitt reduziert mindestens eine reale Reiseentscheidung
+- [ ] Priorität, Zeit/Aufwand, Komfort oder Trade-off werden dort konkret, wo sie relevant sind
+- [ ] generische Ortsbeschreibung wurde zugunsten konkreter Entscheidungshilfe gekürzt
+- [ ] keine interne Projekt-, Spike-, Framework-, State-, Routing- oder QA-Sprache im Nutzertext
+- [ ] UI/Map wird nicht erklärt, wenn das für die Reiseentscheidung keinen Nutzen hat
 `);
 
 writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 
-1. Lies zuerst brief.yml und die redaktionellen Regeln in docs/07-redaktionelle-methodik.md.
-2. Recherchiere aktuelle Primärquellen im Web.
-3. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
-4. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-5. Trenne Fakten von redaktionellem Urteil.
-6. Keine persönliche Reiseerfahrung erfinden.
-7. Erst nach Freigabe den MDX-Entwurf finalisieren.
+1. Lies zuerst brief.yml.
+2. Lies verbindlich docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
+3. Recherchiere aktuelle Primärquellen im Web.
+4. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
+5. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
+6. Trenne Fakten von redaktionellem Urteil.
+7. Keine persönliche Reiseerfahrung erfinden.
+8. Finalisiere den MDX-Text erst nach der Kuration und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+9. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+10. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+11. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+12. Vor Abschluss die ICP-/Sprachcheck-Checkboxen in curation.md prüfen.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
@@ -187,21 +206,25 @@ ${sourceIndent}
 editorialApproval: false
 ---
 
-## Arbeitsstand
+## Für wen wir hier entscheiden
 
-Dieser Draft wurde automatisch aus dem Thema erzeugt.
+TODO: Zielprofil nur so konkretisieren, wie es für die Reiseentscheidung relevant ist.
 
 ## Unsere Auswahl
 
-TODO nach Research und Kuration.
+TODO: klare Prioritäten mit Zeit/Aufwand, Komfort und kurzer Begründung.
 
 ## Was wir bewusst weglassen
 
-TODO.
+TODO: mindestens einen echten Verzicht oder Trade-off sichtbar machen.
+
+## Realistischer Ablauf
+
+TODO: Reihenfolge, Pausen, Wege und Puffer aus Sicht des ICP.
 
 ## Was vor der Reise geprüft werden muss
 
-TODO.
+TODO: nur volatile Informationen, die die Entscheidung oder Planung tatsächlich verändern.
 `);
 
 console.log(`Artikelpfad angelegt: ${slug}`);
