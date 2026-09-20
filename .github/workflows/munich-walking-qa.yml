@@ -156,7 +156,7 @@ jobs:
 
           # Fast jump over several sections must resolve directly from DOM position.
           target = step("gaertnerplatz")
-          driver.execute_script("window.scrollTo(0, arguments[0].offsetTop);", target)
+          driver.execute_script("arguments[0].scrollIntoView({block:'center', behavior:'auto'});", target)
           time.sleep(.35)
           if active_stop() != "gaertnerplatz":
               raise AssertionError(f"Fast forward jump resolved to {active_stop()!r}")
@@ -166,7 +166,7 @@ jobs:
               "css selector", "[data-walking-map]"
           ).get_attribute("data-active-route-coordinate-count") or "0")
           target = step("hofgarten")
-          driver.execute_script("window.scrollTo(0, arguments[0].offsetTop);", target)
+          driver.execute_script("arguments[0].scrollIntoView({block:'center', behavior:'auto'});", target)
           time.sleep(.4)
           if active_stop() != "hofgarten":
               raise AssertionError(f"Fast backward jump resolved to {active_stop()!r}")
