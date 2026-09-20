@@ -35,6 +35,7 @@ const jsonLd = {
   <div class="paris-experience" data-paris-experience>
     <section class="paris-cinematic-hero" aria-labelledby="paris-hero-title">
       <img
+        class="paris-cinematic-hero__fallback"
         src="/images/paris-spike/paris-seine-sunset.webp"
         alt="Paris an der Seine bei Sonnenuntergang"
         width="1800"
@@ -42,6 +43,23 @@ const jsonLd = {
         loading="eager"
         fetchpriority="high"
       />
+      <video
+        class="paris-cinematic-hero__video"
+        data-paris-hero-video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster="/images/paris-spike/paris-seine-sunset.webp"
+        aria-hidden="true"
+      >
+        <source
+          data-paris-hero-source
+          data-src="/videos/paris-spike/paris-hero.mp4"
+          type="video/mp4"
+        />
+      </video>
       <div class="paris-cinematic-hero__scrim" aria-hidden="true"></div>
       <div class="paris-cinematic-hero__content container">
         <Breadcrumbs items={[{ label: data.title }]} />
@@ -62,7 +80,7 @@ const jsonLd = {
         </a>
       </div>
       <p class="paris-cinematic-hero__credit">
-        Foto: Raphael Desrosiers · CC BY 2.0 · Wikimedia Commons
+        Video: Yann Caradec · CC BY-SA 2.0 · gekürzt, ohne Ton · Foto-Fallback: Raphael Desrosiers · CC BY 2.0
       </p>
     </section>
 
@@ -173,6 +191,9 @@ const jsonLd = {
 
     if (experience) {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = Boolean(navigator.connection?.saveData);
+      const heroVideo = experience.querySelector('[data-paris-hero-video]');
+      const heroSource = experience.querySelector('[data-paris-hero-source]');
       const mediaItems = [...experience.querySelectorAll('[data-media]')];
       const decisionStatus = experience.querySelector('[data-decision-status]');
       const decisionTitle = experience.querySelector('[data-decision-title]');
@@ -265,6 +286,15 @@ const jsonLd = {
       const routeOrder = ['orsay', 'louvre', 'orangerie'];
       const routeCoordinates = routeOrder.map((key) => places[key].center);
 
+      if (heroVideo && heroSource && !reducedMotion && !saveData) {
+        heroSource.src = heroSource.dataset.src;
+        heroVideo.load();
+        heroVideo.addEventListener('canplay', () => {
+          heroVideo.classList.add('is-ready');
+          heroVideo.play().catch(() => {});
+        }, { once: true });
+      }
+
       function setMedia(key) {
         mediaItems.forEach((item) => {
           const active = item.getAttribute('data-media') === key;
@@ -338,6 +368,31 @@ const jsonLd = {
         routeAnimationFrame = requestAnimationFrame(frame);
       }
 
+      function boundsFor(coordinates) {
+        return coordinates.reduce(
+          (bounds, coordinate) => bounds.extend(coordinate),
+          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+        );
+      }
+
+      function fitMapForPlace(key) {
+        if (!mapReady || !map || !maplibregl) return;
+
+        const core = routeOrder.includes(key);
+        const coordinates = core
+          ? routeCoordinates
+          : [...routeCoordinates, places.marmottan.center];
+
+        map.fitBounds(boundsFor(coordinates), {
+          padding: core
+            ? { top: 58, right: 52, bottom: 58, left: 52 }
+            : { top: 52, right: 46, bottom: 52, left: 46 },
+          maxZoom: core ? 14.15 : 12.8,
+          duration: reducedMotion ? 0 : 700,
+          essential: false
+        });
+      }
+
       function activatePlace(key, shouldScroll = false) {
         const place = places[key];
         if (!place) return;
@@ -345,18 +400,15 @@ const jsonLd = {
         setMedia(place.media);
         setDecision(place.role, place.name, place.copy);
         updateRoute(key);
+        fitMapForPlace(key);
 
-        if (mapReady && map) {
-          map.flyTo({
-            center: place.center,
-            zoom: place.zoom,
-            duration: reducedMotion ? 0 : 1150,
-            essential: false
-          });
-        }
-
+        const activeIndex = routeOrder.indexOf(key);
         experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
-          marker.classList.toggle('is-active', marker.getAttribute('data-poi-key') === key);
+          const markerKey = marker.getAttribute('data-poi-key');
+          const markerIndex = routeOrder.indexOf(markerKey);
+          marker.classList.toggle('is-active', markerKey === key);
+          marker.classList.toggle('is-completed', activeIndex >= 0 && markerIndex >= 0 && markerIndex < activeIndex);
+          marker.classList.toggle('is-future', activeIndex >= 0 && markerIndex > activeIndex);
         });
         experience.querySelectorAll('[data-poi-jump]').forEach((card) => {
           card.classList.toggle('is-active', card.getAttribute('data-poi-jump') === key);
@@ -399,7 +451,7 @@ const jsonLd = {
           map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
 
           map.on('load', () => {
-            map.addSource('editorial-route', {
+            map.addSource('editorial-route-plan', {
               type: 'geojson',
               data: {
                 type: 'Feature',
@@ -407,6 +459,34 @@ const jsonLd = {
                 geometry: {
                   type: 'LineString',
                   coordinates: routeCoordinates
+                }
+              }
+            });
+
+            map.addLayer({
+              id: 'editorial-route-plan-line',
+              type: 'line',
+              source: 'editorial-route-plan',
+              layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+              },
+              paint: {
+                'line-color': '#526057',
+                'line-width': 3,
+                'line-opacity': 0.32,
+                'line-dasharray': [1.5, 1.5]
+              }
+            });
+
+            map.addSource('editorial-route', {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'LineString',
+                  coordinates: [routeCoordinates[0], routeCoordinates[0]]
                 }
               }
             });
@@ -422,7 +502,7 @@ const jsonLd = {
               paint: {
                 'line-color': '#9a7146',
                 'line-width': 5,
-                'line-opacity': 0.9
+                'line-opacity': 0.96
               }
             });
 
@@ -533,7 +613,8 @@ const jsonLd = {
     color: #fff;
   }
 
-  .paris-cinematic-hero > img,
+  .paris-cinematic-hero__fallback,
+  .paris-cinematic-hero__video,
   .paris-cinematic-hero__scrim {
     position: absolute;
     inset: 0;
@@ -541,10 +622,25 @@ const jsonLd = {
     height: 100%;
   }
 
-  .paris-cinematic-hero > img {
+  .paris-cinematic-hero__fallback,
+  .paris-cinematic-hero__video {
     object-fit: cover;
     object-position: center 55%;
     transform: scale(1.01);
+  }
+
+  .paris-cinematic-hero__video {
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .paris-cinematic-hero__video.is-ready {
+    opacity: 1;
+  }
+
+  .paris-cinematic-hero__fallback {
+    z-index: 0;
   }
 
   .paris-cinematic-hero__scrim {
@@ -905,6 +1001,15 @@ const jsonLd = {
     background: #a6774a;
   }
 
+  :global(.paris-map-marker.is-completed) {
+    background: #4d6758;
+  }
+
+  :global(.paris-map-marker.is-future) {
+    opacity: .62;
+    transform: scale(.9);
+  }
+
   :global(.paris-map-marker--optional) {
     background: #778d7e;
   }
@@ -1016,6 +1121,10 @@ const jsonLd = {
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .paris-cinematic-hero__video {
+      display: none;
+    }
+
     .paris-stage__image,
     .paris-cinematic-hero__jump span,
     :global(.paris-map-marker) {
