@@ -4,7 +4,7 @@ Stand: 20.09.2026
 
 ## Zweck
 
-Dieser Standard gilt für alle Texte, die auf der öffentlichen Reisewebsite erscheinen.
+Dieser Standard gilt für alle Texte, die auf der öffentlichen Reisewebsite erscheinen – einschließlich Artikeltext, Überschriften, Komponenten-Labels, Karten-/Experience-Chrome und anderer sichtbarer UI-Texte.
 
 Er ergänzt die redaktionelle Methodik in `docs/07-redaktionelle-methodik.md`.
 
@@ -257,7 +257,7 @@ Wenn mehrere Antworten „nein“ sind, ist der Text noch kein veröffentlichung
 
 ## Leser entscheidet, Redaktion empfiehlt
 
-Interne Decision-Blöcke dürfen eine redaktionelle Entscheidung festhalten; im öffentlichen Text wird daraus eine **Empfehlung**. Formulierungen wie „Unsere Entscheidung“ vermeiden – der Leser entscheidet selbst.
+Interne Decision-Blöcke dürfen eine redaktionelle Entscheidung festhalten; öffentlich wird daraus eine **Empfehlung oder mögliche Priorisierung**. Das gilt für Artikeltext ebenso wie für Komponenten-Labels und Experience-UI. Formulierungen wie „Unsere Entscheidung“, „Unsere Standardentscheidung“, „Unsere Auswahl“ oder „Was wir priorisieren“ vermeiden – der Leser entscheidet selbst.
 
 ---
 
