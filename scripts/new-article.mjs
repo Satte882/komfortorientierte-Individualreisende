@@ -103,6 +103,33 @@ Keine längeren Passagen kopieren. Erkenntnisse paraphrasieren und Quellen saube
 
 writeFileSync(join(researchDir,'research.md'), `# Research – ${topic}
 
+## ICP-Signal-Scan
+
+### Reibung / realer Aufwand
+TODO: Schritte, Steigungen, Wege, Transfers, Wartezeiten, volle Zeiten, Parken und unnötige Umwege.
+
+### Social-Media-Hype vs. Realität
+TODO: Aktuell sichtbare Instagram-/TikTok-/YouTube-/Community-Signale prüfen. Für relevante Spots einordnen: problemlos mitnehmen / Zusatzaufwand einplanen / andere Zeit / bessere Alternative / eher vermeiden. „Trendend“ nur mit aktuellem Trend-Signal oder wiederkehrenden Hinweisen aus mindestens zwei unabhängigen Quellen/Plattformen. Keine Social-Media-Kausalität für Besucherandrang behaupten, wenn sie nicht belegt ist.
+
+### Tipps & Tricks
+TODO: bessere Uhrzeit/Reihenfolge, Abkürzungen, sinnvoller Transport, Pausen, Plan B und andere nicht offensichtliche Reibungsreduzierer.
+
+### Reale Kosten
+TODO: soweit sinnvoll realistische Gesamtkosten für zwei Personen recherchieren; Familienkosten nur ergänzen, wenn Familien für den Beitrag relevant sind.
+
+### Bessere Alternativen / echte Geheimtipps
+TODO: nur mit konkretem Vorteil aufnehmen, z. B. weniger voll, entspannter, kürzer, bessere Aussicht oder besseres Preis-Leistungs-Verhältnis.
+
+### Signal-Output
+Primäre ICP-Problemahypothese:
+TODO
+
+Nebenfragen (max. 2):
+- TODO
+
+Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
+- TODO
+
 ## Belastbare Fakten
 
 TODO
@@ -209,19 +236,21 @@ writeFileSync(join(researchDir,'agent-task.md'), `# Agent-Auftrag – ${topic}
 
 1. Lies zuerst brief.yml.
 2. Lies verbindlich docs/05-icp-und-zielgruppe.md, docs/07-redaktionelle-methodik.md und docs/23-icp-schreibstandard.md.
-3. Recherchiere aktuelle Primärquellen im Web.
-4. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
-5. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
-6. Trenne Fakten von redaktionellem Urteil.
-7. Keine persönliche Reiseerfahrung erfinden.
-8. Finalisiere den MDX-Text erst nach der Kuration und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
-9. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
-10. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
-11. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
-12. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
-13. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
-14. Führe den Full Article Review in curation.md vollständig durch.
-15. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
+3. Führe zuerst den ICP-Signal-Scan durch: Reibung, Social-Media-Hype vs. Realität, Tipps & Tricks, reale Kosten sowie bessere Alternativen/Geheimtipps.
+4. Dokumentiere 1 primäre ICP-Problemahypothese, maximal 2 Nebenfragen und 3–7 stärkste Signale. Kennzeichne Fakt / Signal / noch zu verifizieren.
+5. Recherchiere danach aktuelle Primärquellen im Web und verifiziere faktische bzw. volatile Signale.
+6. Fülle sources.md und research.md mit paraphrasierten Erkenntnissen.
+7. Erstelle in curation.md eine begründete Auswahl: Priorität, optional, bewusst weglassen.
+8. Trenne Fakten von redaktionellem Urteil.
+9. Keine persönliche Reiseerfahrung erfinden.
+10. Finalisiere den MDX-Text erst nach der Kuration und schreibe ausschließlich aus Sicht des komfortorientierten Individualreisenden.
+11. Jeder Hauptabschnitt soll konkrete Entscheidungshilfe liefern: Was lohnt sich? Wie viel Zeit? Reingehen oder außen? Pause oder weiter? Was weglassen? Welcher Trade-off?
+12. Interne Projekt-/Techniksprache wie Spike, Framework, State, GeoJSON, Routing-Implementierung oder Browser-QA gehört nicht in den öffentlichen Artikel.
+13. Die UI nicht erklären. Karte/Experience visualisieren den Inhalt; der Text spricht über die Reise.
+14. Fülle für jeden wesentlichen Hauptabschnitt in curation.md einen Decision-Block aus.
+15. Prüfe natürliche Affiliate-Aktionen über die bestehende AffiliateBox-Logik; keine künstlichen Links erzeugen.
+16. Führe den Full Article Review in curation.md vollständig durch.
+17. Vor Abschluss müssen alle Gate-v2-Checkboxen in curation.md geschlossen sein.
 `);
 
 writeFileSync(join(assetDir,'manifest.yml'), `slug: ${slug}
