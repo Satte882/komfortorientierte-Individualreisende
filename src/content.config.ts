@@ -20,7 +20,21 @@ const heroImageSchema = z
     creator: z.string().min(2),
     sourceUrl: z.string().url(),
     license: z.string().min(2),
-    downloaded: z.coerce.date()
+    downloaded: z.coerce.date(),
+    status: z.enum(['spike', 'approved']).optional()
+  })
+  .optional();
+
+const heroVideoSchema = z
+  .object({
+    src: z.string().min(1),
+    poster: z.string().min(1),
+    source: z.string().min(2),
+    creator: z.string().min(2),
+    sourceUrl: z.string().url(),
+    license: z.string().min(2),
+    reviewed: z.coerce.date(),
+    status: z.enum(['spike', 'approved'])
   })
   .optional();
 
@@ -39,6 +53,7 @@ const commonSchema = z.object({
   reviewAfter: z.coerce.date(),
   status: z.enum(['draft', 'review', 'published']),
   heroImage: heroImageSchema,
+  heroVideo: heroVideoSchema,
   affiliateDisclosure: z.boolean().default(false),
   sources: z.array(z.object({ label: z.string(), url: z.string().url() })).min(1),
   editorialApproval: z.boolean().default(false),
