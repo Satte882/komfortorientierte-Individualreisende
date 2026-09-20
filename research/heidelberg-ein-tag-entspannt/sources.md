@@ -12,6 +12,11 @@ Abrufstand: 2026-09-20
 - Universität Heidelberg – Studentenkarzer: https://www.heicollections.uni-heidelberg.de/de/museen-sammlungen/studentenkarzer
 - Stadt Heidelberg – Parkhaus P12 Kornmarkt/Schloss: https://parking.datenplattform.heidelberg.de/detailView/P12/prices
 - Stadt Heidelberg – Alte Brücke, Balkonsanierung 2026: https://www.heidelberg.de/7071_34581_34869_284696_1219308_5891848_5891824.html
+- Stadt Heidelberg – Heidelberg in Zahlen / rund 13,9 Mio. Gäste jährlich: https://www.heidelberg.de/1348853.html
+- Stadt Heidelberg – Altstadt / rund 3 Mio. Besucher jährlich: https://www.heidelberg.de/hd/HD/Leben/Altstadt.html
+- Heidelberg Marketing – Veranstaltungskalender und Schlossbeleuchtung / Andrangshinweise: https://www.heidelberg-marketing.de/
+- Hotel Europäischer Hof Heidelberg – Zimmer & Suiten: https://www.europaeischerhof.com/en/rooms-suites-heidelberg/
+- Booking.com – Hotel Europäischer Hof Heidelberg: https://www.booking.com/hotel/de/der-europaische-hof-europa.de.html
 
 ## Ergänzende Erfahrungsquellen
 
