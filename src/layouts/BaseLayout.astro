@@ -30,6 +30,7 @@ const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site);
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    <slot name="head" />
   </head>
   <body>
     <Header />
