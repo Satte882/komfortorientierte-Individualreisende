@@ -389,15 +389,15 @@ ${sourceIndent}
 editorialApproval: false
 ---
 
-## Für wen wir hier entscheiden
+## Für wen dieser Guide passt
 
 TODO: Zielprofil nur so konkretisieren, wie es für die Reiseentscheidung relevant ist.
 
-## Unsere Auswahl
+## Mögliche Priorisierungen
 
 TODO: klare Prioritäten mit Zeit/Aufwand, Komfort und kurzer Begründung.
 
-## Was wir bewusst weglassen
+## Bewusst weglassen
 
 TODO: mindestens einen echten Verzicht oder Trade-off sichtbar machen.
 
