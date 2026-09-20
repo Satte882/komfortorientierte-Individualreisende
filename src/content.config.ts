@@ -41,7 +41,8 @@ const commonSchema = z.object({
   heroImage: heroImageSchema,
   affiliateDisclosure: z.boolean().default(false),
   sources: z.array(z.object({ label: z.string(), url: z.string().url() })).min(1),
-  editorialApproval: z.boolean().default(false)
+  editorialApproval: z.boolean().default(false),
+  editorialGateVersion: z.literal(2).optional()
 });
 
 const destinationsCollection = defineCollection({
