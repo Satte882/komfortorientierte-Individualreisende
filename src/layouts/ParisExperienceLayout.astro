@@ -1,0 +1,895 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumbs from '../components/layout/Breadcrumbs.astro';
+import ArticleMeta from '../components/content/ArticleMeta.astro';
+import MethodologyNote from '../components/content/MethodologyNote.astro';
+import SourceList from '../components/content/SourceList.astro';
+
+const { data } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.description,
+  datePublished: new Date(data.datePublished).toISOString(),
+  dateModified: new Date(data.dateReviewed).toISOString(),
+  inLanguage: 'de-DE'
+};
+---
+
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  jsonLd={jsonLd}
+  noindex={data.status !== 'published'}
+>
+  <Fragment slot="head">
+    <link rel="preconnect" href="https://tiles.openfreemap.org" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.css"
+    />
+  </Fragment>
+
+  <div class="paris-experience" data-paris-experience>
+    <section class="paris-cinematic-hero" aria-labelledby="paris-hero-title">
+      <img
+        src="/images/paris-spike/paris-seine-sunset.webp"
+        alt="Paris an der Seine bei Sonnenuntergang"
+        width="1800"
+        height="1350"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="paris-cinematic-hero__scrim" aria-hidden="true"></div>
+      <div class="paris-cinematic-hero__content container">
+        <Breadcrumbs items={[{ label: data.title }]} />
+        <p class="eyebrow">Kuratierter Kunst-Guide · Paris</p>
+        <h1 id="paris-hero-title">{data.title}</h1>
+        <p class="paris-cinematic-hero__lead">{data.description}</p>
+        <div class="paris-cinematic-hero__meta">
+          <ArticleMeta
+            datePublished={data.datePublished}
+            dateReviewed={data.dateReviewed}
+            duration={data.duration}
+          />
+          <span>3 Kernmuseen · bewusst priorisiert</span>
+        </div>
+        <a class="paris-cinematic-hero__jump" href="#paris-story">
+          Reiseentscheidung erleben
+          <span aria-hidden="true">↓</span>
+        </a>
+      </div>
+      <p class="paris-cinematic-hero__credit">
+        Foto: Raphael Desrosiers · CC BY 2.0 · Wikimedia Commons
+      </p>
+    </section>
+
+    <section class="paris-experience__intro container">
+      <p class="eyebrow">Vertical-Slice-Spike</p>
+      <p>
+        Der redaktionelle Inhalt bleibt unverändert. Karte, Bilder und Übergänge machen nur sichtbar,
+        <strong>wo</strong> unsere Prioritäten liegen und <strong>warum</strong> wir sie so setzen.
+      </p>
+    </section>
+
+    <div class="paris-story container" id="paris-story">
+      <aside class="paris-stage" aria-label="Visuelle Begleitung des Paris-Guides">
+        <div class="paris-stage__frame">
+          <div class="paris-stage__media" aria-live="polite">
+            <figure class="paris-stage__image is-active" data-media="paris">
+              <img
+                src="/images/paris-spike/paris-seine-sunset.webp"
+                alt="Paris an der Seine bei Sonnenuntergang"
+                loading="eager"
+              />
+              <figcaption>Paris · Einstieg</figcaption>
+            </figure>
+            <figure class="paris-stage__image" data-media="orsay" aria-hidden="true">
+              <img
+                src="/images/paris-spike/orsay.webp"
+                alt="Frontansicht des Musée d'Orsay in Paris"
+                loading="lazy"
+              />
+              <figcaption>Musée d'Orsay · Foto: DiscoA340 · CC BY-SA 4.0</figcaption>
+            </figure>
+            <figure class="paris-stage__image" data-media="louvre" aria-hidden="true">
+              <img
+                src="/images/paris-spike/louvre.webp"
+                alt="Musée du Louvre im Abendlicht"
+                loading="lazy"
+              />
+              <figcaption>Louvre · Foto: DiscoA340 · CC BY-SA 4.0</figcaption>
+            </figure>
+            <figure class="paris-stage__image" data-media="orangerie" aria-hidden="true">
+              <img
+                src="/images/paris-spike/orangerie.webp"
+                alt="Außenansicht des Musée de l'Orangerie in Paris"
+                loading="lazy"
+              />
+              <figcaption>Musée de l'Orangerie · Foto: John Samuel · CC BY-SA 4.0</figcaption>
+            </figure>
+          </div>
+
+          <div class="paris-stage__map-wrap">
+            <div
+              class="paris-stage__map"
+              data-paris-map
+              role="region"
+              aria-label="Interaktive Karte der priorisierten Kunstorte in Paris"
+            >
+              <div class="paris-stage__map-placeholder">
+                <span>Karte wird bei Bedarf geladen</span>
+              </div>
+            </div>
+            <div class="paris-stage__route-label">
+              Redaktionelle Abfolge · keine Navigationsroute
+            </div>
+          </div>
+
+          <div class="paris-decision" data-paris-decision>
+            <span class="paris-decision__status" data-decision-status>Unsere Auswahl</span>
+            <strong data-decision-title>Orsay → Louvre → Orangerie</strong>
+            <p data-decision-copy>
+              Drei Kunstanker reichen für vier Tage. Die Visualisierung folgt unserer redaktionellen
+              Priorisierung – nicht einer möglichst vollständigen Sehenswürdigkeiten-Liste.
+            </p>
+          </div>
+        </div>
+
+        <div class="paris-stage__legend" aria-label="Kartenlegende">
+          <span><i class="paris-dot paris-dot--priority"></i> Priorität</span>
+          <span><i class="paris-dot paris-dot--optional"></i> Optional</span>
+          <span><i class="paris-dot paris-dot--skip"></i> Bewusst weglassen</span>
+        </div>
+      </aside>
+
+      <article class="prose article-body paris-story__copy" data-paris-story-copy>
+        <slot />
+        <MethodologyNote />
+        <SourceList sources={data.sources} />
+      </article>
+    </div>
+  </div>
+
+  <script is:inline type="module">
+    const experience = document.querySelector('[data-paris-experience]');
+
+    if (experience) {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const mediaItems = [...experience.querySelectorAll('[data-media]')];
+      const decisionStatus = experience.querySelector('[data-decision-status]');
+      const decisionTitle = experience.querySelector('[data-decision-title]');
+      const decisionCopy = experience.querySelector('[data-decision-copy]');
+      const mapContainer = experience.querySelector('[data-paris-map]');
+
+      const places = {
+        orsay: {
+          id: 'orsay',
+          name: "Musée d'Orsay",
+          center: [2.3259, 48.8600],
+          zoom: 15.2,
+          role: 'Priorität',
+          media: 'orsay',
+          copy: 'Erste Priorität für Impressionismus und Kunst des 19. Jahrhunderts.'
+        },
+        louvre: {
+          id: 'louvre',
+          name: 'Louvre',
+          center: [2.3364, 48.8606],
+          zoom: 15.2,
+          role: 'Priorität',
+          media: 'louvre',
+          copy: 'Unbedingt – aber mit vorher gewähltem Schwerpunkt statt als Vollständigkeitsprojekt.'
+        },
+        orangerie: {
+          id: 'orangerie',
+          name: "Musée de l'Orangerie",
+          center: [2.3226, 48.8638],
+          zoom: 15.5,
+          role: 'Priorität',
+          media: 'orangerie',
+          copy: 'Kleine Fläche, großer Mehrwert für Monet – bewusst an einem leichteren Tag.'
+        },
+        marmottan: {
+          id: 'marmottan',
+          name: 'Musée Marmottan Monet',
+          center: [2.2672, 48.8593],
+          zoom: 13.8,
+          role: 'Optional',
+          media: 'paris',
+          copy: 'Als vierter Kunstbaustein nur bei echtem Monet-Spezialinteresse.'
+        }
+      };
+
+      const states = [
+        {
+          match: /musée d'orsay/i,
+          place: 'orsay'
+        },
+        {
+          match: /^louvre:/i,
+          place: 'louvre'
+        },
+        {
+          match: /orangerie:/i,
+          place: 'orangerie'
+        },
+        {
+          match: /monet dein spezialinteresse/i,
+          place: 'marmottan'
+        },
+        {
+          match: /centre pompidou/i,
+          custom: {
+            media: 'paris',
+            role: 'Aktuell weglassen',
+            title: 'Centre Pompidou',
+            copy: '2026 nicht als normales Museumsziel einplanen: Das Gebäude in Beaubourg ist geschlossen.'
+          }
+        },
+        {
+          match: /^versailles$/i,
+          custom: {
+            media: 'paris',
+            role: 'Bewusst weglassen',
+            title: 'Versailles',
+            copy: 'Bei vier Tagen und engem Malerei-Fokus bindet der Ausflug zu viel Reisezeit.'
+          }
+        }
+      ];
+
+      let map;
+      let maplibregl;
+      let routeSource;
+      let activePlace = null;
+      let mapReady = false;
+
+      const routeOrder = ['orsay', 'louvre', 'orangerie'];
+      const routeCoordinates = routeOrder.map((key) => places[key].center);
+
+      function setMedia(key) {
+        mediaItems.forEach((item) => {
+          const active = item.getAttribute('data-media') === key;
+          item.classList.toggle('is-active', active);
+          item.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+      }
+
+      function setDecision(role, title, copy) {
+        if (decisionStatus) decisionStatus.textContent = role;
+        if (decisionTitle) decisionTitle.textContent = title;
+        if (decisionCopy) decisionCopy.textContent = copy;
+        const decision = experience.querySelector('[data-paris-decision]');
+        if (decision) decision.setAttribute('data-role', role.toLowerCase());
+      }
+
+      function routeForPlace(key) {
+        const index = routeOrder.indexOf(key);
+        if (index < 0) return routeCoordinates;
+        return routeCoordinates.slice(0, index + 1);
+      }
+
+      function updateRoute(key) {
+        if (!mapReady || !routeSource) return;
+        const coordinates = routeForPlace(key);
+        routeSource.setData({
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'LineString',
+            coordinates: coordinates.length > 1 ? coordinates : [coordinates[0], coordinates[0]]
+          }
+        });
+      }
+
+      function activatePlace(key, shouldScroll = false) {
+        const place = places[key];
+        if (!place) return;
+        activePlace = key;
+        setMedia(place.media);
+        setDecision(place.role, place.name, place.copy);
+        updateRoute(key);
+
+        if (mapReady && map) {
+          map.flyTo({
+            center: place.center,
+            zoom: place.zoom,
+            duration: reducedMotion ? 0 : 1150,
+            essential: false
+          });
+        }
+
+        experience.querySelectorAll('[data-poi-key]').forEach((marker) => {
+          marker.classList.toggle('is-active', marker.getAttribute('data-poi-key') === key);
+        });
+
+        if (shouldScroll) {
+          const target = [...experience.querySelectorAll('h2')].find((heading) => {
+            const text = heading.textContent?.trim() || '';
+            const state = states.find((entry) => entry.place === key);
+            return Boolean(state?.match.test(text));
+          });
+          target?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'center' });
+        }
+      }
+
+      function activateCustom(custom) {
+        activePlace = null;
+        setMedia(custom.media);
+        setDecision(custom.role, custom.title, custom.copy);
+      }
+
+      async function initMap() {
+        if (mapReady || !mapContainer) return;
+
+        try {
+          maplibregl = await import('https://unpkg.com/maplibre-gl@6.10.0/dist/maplibre-gl.mjs');
+          mapContainer.innerHTML = '';
+
+          map = new maplibregl.Map({
+            container: mapContainer,
+            style: 'https://tiles.openfreemap.org/styles/liberty',
+            center: [2.3299, 48.8614],
+            zoom: 13.7,
+            pitch: 28,
+            bearing: -8,
+            attributionControl: true,
+            interactive: true
+          });
+
+          map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+
+          map.on('load', () => {
+            map.addSource('editorial-route', {
+              type: 'geojson',
+              data: {
+                type: 'Feature',
+                properties: {},
+                geometry: {
+                  type: 'LineString',
+                  coordinates: routeCoordinates
+                }
+              }
+            });
+
+            map.addLayer({
+              id: 'editorial-route-line',
+              type: 'line',
+              source: 'editorial-route',
+              layout: {
+                'line-cap': 'round',
+                'line-join': 'round'
+              },
+              paint: {
+                'line-color': '#9a7146',
+                'line-width': 5,
+                'line-opacity': 0.9
+              }
+            });
+
+            routeSource = map.getSource('editorial-route');
+
+            Object.values(places).forEach((place) => {
+              const marker = document.createElement('button');
+              marker.type = 'button';
+              marker.className = 'paris-map-marker';
+              marker.setAttribute('data-poi-key', place.id);
+              marker.setAttribute('aria-label', place.name + ' auf der Karte auswählen');
+              marker.textContent = place.id === 'marmottan' ? 'O' : String(routeOrder.indexOf(place.id) + 1);
+              if (place.id === 'marmottan') marker.classList.add('paris-map-marker--optional');
+              marker.addEventListener('click', () => activatePlace(place.id, true));
+
+              new maplibregl.Marker({ element: marker, anchor: 'center' })
+                .setLngLat(place.center)
+                .addTo(map);
+            });
+
+            mapReady = true;
+            activatePlace(activePlace || 'orsay');
+          });
+        } catch (error) {
+          mapContainer.innerHTML = '<div class="paris-stage__map-placeholder"><span>Interaktive Karte konnte nicht geladen werden. Der Guide bleibt vollständig nutzbar.</span></div>';
+          console.error('Paris map failed to initialize', error);
+        }
+      }
+
+      if (mapContainer && 'IntersectionObserver' in window) {
+        const mapObserver = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+              initMap();
+              mapObserver.disconnect();
+            }
+          },
+          { rootMargin: '500px 0px' }
+        );
+        mapObserver.observe(mapContainer);
+      } else {
+        initMap();
+      }
+
+      const candidates = [
+        ...experience.querySelectorAll('[data-paris-story-copy] h2'),
+        ...experience.querySelectorAll('[data-paris-story-copy] .editorial-box h2')
+      ];
+
+      const tracked = candidates
+        .map((element) => {
+          const text = element.textContent?.trim() || '';
+          const state = states.find((entry) => entry.match.test(text));
+          return state ? { element, state } : null;
+        })
+        .filter(Boolean);
+
+      if ('IntersectionObserver' in window) {
+        const storyObserver = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => Math.abs(a.boundingClientRect.top) - Math.abs(b.boundingClientRect.top))[0];
+
+            if (!visible) return;
+            const item = tracked.find((entry) => entry.element === visible.target);
+            if (!item) return;
+
+            if (item.state.place) {
+              activatePlace(item.state.place);
+            } else if (item.state.custom) {
+              activateCustom(item.state.custom);
+            }
+          },
+          { rootMargin: '-28% 0px -58% 0px', threshold: [0, 1] }
+        );
+
+        tracked.forEach(({ element }) => storyObserver.observe(element));
+      }
+
+      setMedia('paris');
+    }
+  </script>
+</BaseLayout>
+
+<style>
+  .paris-experience {
+    --paris-night: #101813;
+    --paris-paper: #f6f1e7;
+    --paris-bronze: #b48a5e;
+    --paris-green: #24382d;
+  }
+
+  .paris-cinematic-hero {
+    position: relative;
+    min-height: min(86svh, 900px);
+    display: grid;
+    align-items: end;
+    overflow: hidden;
+    background: #17231b;
+    color: #fff;
+  }
+
+  .paris-cinematic-hero > img,
+  .paris-cinematic-hero__scrim {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .paris-cinematic-hero > img {
+    object-fit: cover;
+    object-position: center 55%;
+    transform: scale(1.01);
+  }
+
+  .paris-cinematic-hero__scrim {
+    background:
+      linear-gradient(180deg, rgba(9, 14, 11, .14) 0%, rgba(9, 14, 11, .28) 42%, rgba(9, 14, 11, .9) 100%),
+      linear-gradient(90deg, rgba(9, 14, 11, .54), transparent 70%);
+  }
+
+  .paris-cinematic-hero__content {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4rem, 10vh, 8rem) clamp(3.5rem, 8vh, 6rem);
+  }
+
+  .paris-cinematic-hero :global(.breadcrumbs),
+  .paris-cinematic-hero :global(.breadcrumbs a),
+  .paris-cinematic-hero :global(.article-meta) {
+    color: rgba(255,255,255,.78);
+  }
+
+  .paris-cinematic-hero .eyebrow {
+    color: #efd5b4;
+    margin-top: 2.2rem;
+  }
+
+  .paris-cinematic-hero h1 {
+    color: #fff;
+    max-width: 12ch;
+    font-size: clamp(3rem, 7vw, 7.2rem);
+    text-wrap: balance;
+    text-shadow: 0 5px 35px rgba(0,0,0,.22);
+  }
+
+  .paris-cinematic-hero__lead {
+    max-width: 62ch;
+    margin: 0;
+    font-size: clamp(1.08rem, 2vw, 1.42rem);
+    color: rgba(255,255,255,.86);
+  }
+
+  .paris-cinematic-hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem 1.4rem;
+    margin-top: 1.5rem;
+    color: rgba(255,255,255,.72);
+    font-size: .82rem;
+  }
+
+  .paris-cinematic-hero__jump {
+    display: inline-flex;
+    gap: .8rem;
+    align-items: center;
+    margin-top: 2rem;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,.5);
+    padding-bottom: .35rem;
+    font-weight: 750;
+  }
+
+  .paris-cinematic-hero__jump span {
+    transition: transform .2s ease;
+  }
+
+  .paris-cinematic-hero__jump:hover span {
+    transform: translateY(3px);
+  }
+
+  .paris-cinematic-hero__credit {
+    position: absolute;
+    z-index: 2;
+    right: 1rem;
+    bottom: .75rem;
+    margin: 0;
+    color: rgba(255,255,255,.56);
+    font-size: .68rem;
+  }
+
+  .paris-experience__intro {
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+    display: grid;
+    grid-template-columns: .55fr 1.45fr;
+    gap: 2rem 4rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .paris-experience__intro > p:last-child {
+    max-width: 58ch;
+    font: 500 clamp(1.35rem, 2.8vw, 2.2rem)/1.35 Georgia, serif;
+    color: var(--ink);
+  }
+
+  .paris-story {
+    display: grid;
+    grid-template-columns: minmax(420px, .95fr) minmax(0, 1.05fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+    padding-block: clamp(4rem, 8vw, 8rem);
+  }
+
+  .paris-stage {
+    position: sticky;
+    top: 105px;
+    align-self: start;
+  }
+
+  .paris-stage__frame {
+    position: relative;
+    min-height: 680px;
+    overflow: hidden;
+    background: var(--paris-night);
+    box-shadow: 0 28px 70px rgba(35, 28, 18, .16);
+  }
+
+  .paris-stage__media {
+    position: relative;
+    height: 330px;
+    overflow: hidden;
+    background: #17231b;
+  }
+
+  .paris-stage__image {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    transform: scale(1.035);
+    filter: blur(7px);
+    transition: opacity .55s ease, transform .8s ease, filter .55s ease;
+    pointer-events: none;
+  }
+
+  .paris-stage__image.is-active {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  .paris-stage__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .paris-stage__image figcaption {
+    position: absolute;
+    right: .75rem;
+    bottom: .55rem;
+    padding: .25rem .45rem;
+    color: rgba(255,255,255,.76);
+    background: rgba(9,14,11,.52);
+    font-size: .62rem;
+  }
+
+  .paris-stage__map-wrap {
+    position: relative;
+    height: 350px;
+    border-top: 1px solid rgba(255,255,255,.18);
+  }
+
+  .paris-stage__map {
+    width: 100%;
+    height: 100%;
+    background: #d9ded5;
+  }
+
+  .paris-stage__map-placeholder {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 2rem;
+    color: #57625a;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,.36), transparent),
+      #d9ded5;
+  }
+
+  .paris-stage__route-label {
+    position: absolute;
+    left: .7rem;
+    bottom: .7rem;
+    z-index: 4;
+    padding: .35rem .5rem;
+    background: rgba(246,241,231,.92);
+    color: #4e5148;
+    font-size: .64rem;
+    border: 1px solid rgba(45,55,48,.16);
+  }
+
+  .paris-decision {
+    position: absolute;
+    z-index: 7;
+    left: 1.1rem;
+    right: 1.1rem;
+    top: 290px;
+    transform: translateY(-50%);
+    padding: 1rem 1.1rem 1.05rem;
+    background: rgba(247,243,234,.96);
+    border-left: 4px solid var(--paris-bronze);
+    box-shadow: 0 14px 38px rgba(0,0,0,.18);
+  }
+
+  .paris-decision__status {
+    display: block;
+    margin-bottom: .25rem;
+    color: #8b623b;
+    font-size: .66rem;
+    font-weight: 850;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .paris-decision strong {
+    display: block;
+    font: 600 1.08rem/1.25 Georgia, serif;
+    color: #18221b;
+  }
+
+  .paris-decision p {
+    margin: .35rem 0 0;
+    color: #52564e;
+    font-size: .78rem;
+    line-height: 1.45;
+  }
+
+  .paris-decision[data-role*="optional"] {
+    border-left-color: #6b8273;
+  }
+
+  .paris-decision[data-role*="weglassen"] {
+    border-left-color: #87645b;
+  }
+
+  .paris-stage__legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem 1.1rem;
+    padding-top: .8rem;
+    color: var(--muted);
+    font-size: .7rem;
+  }
+
+  .paris-stage__legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+  }
+
+  .paris-dot {
+    width: .55rem;
+    height: .55rem;
+    border-radius: 50%;
+    background: var(--forest);
+  }
+
+  .paris-dot--optional { background: #768b7c; }
+  .paris-dot--skip { background: #8a665e; }
+
+  .paris-story__copy {
+    width: 100%;
+    margin: 0;
+    padding: 0 0 5rem;
+  }
+
+  .paris-story__copy :global(h2) {
+    scroll-margin-top: 180px;
+  }
+
+  .paris-story__copy :global(.editorial-box) {
+    background: #f5efe4;
+    border-top: 0;
+    border-left: 4px solid var(--bronze);
+    box-shadow: 0 12px 32px rgba(49,43,34,.06);
+  }
+
+  .paris-story__copy :global(table) {
+    background: rgba(255,255,255,.54);
+  }
+
+  :global(.paris-map-marker) {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: #263d31;
+    color: #fff;
+    box-shadow: 0 5px 18px rgba(0,0,0,.28);
+    font: 800 .72rem/1 Inter, sans-serif;
+    cursor: pointer;
+    transition: transform .18s ease, background .18s ease;
+  }
+
+  :global(.paris-map-marker:hover),
+  :global(.paris-map-marker.is-active) {
+    transform: scale(1.18);
+    background: #a6774a;
+  }
+
+  :global(.paris-map-marker--optional) {
+    background: #778d7e;
+  }
+
+  :global(.maplibregl-ctrl-attrib) {
+    font-size: 9px;
+  }
+
+  @media (max-width: 1024px) {
+    .paris-cinematic-hero {
+      min-height: 720px;
+    }
+
+    .paris-experience__intro {
+      grid-template-columns: 1fr;
+      gap: .8rem;
+    }
+
+    .paris-story {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .paris-stage {
+      position: relative;
+      top: auto;
+    }
+
+    .paris-stage__frame {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .paris-stage__media,
+    .paris-stage__map-wrap {
+      height: 390px;
+    }
+
+    .paris-decision {
+      top: auto;
+      bottom: 1rem;
+      left: 1rem;
+      right: calc(50% + 1rem);
+      transform: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .paris-cinematic-hero {
+      min-height: 78svh;
+    }
+
+    .paris-cinematic-hero__content {
+      padding-bottom: 4rem;
+    }
+
+    .paris-cinematic-hero__credit {
+      left: 1rem;
+      right: 1rem;
+      bottom: .65rem;
+      text-align: left;
+    }
+
+    .paris-experience__intro {
+      padding-block: 2.5rem;
+    }
+
+    .paris-story {
+      padding-block: 2.5rem;
+    }
+
+    .paris-stage__frame {
+      display: block;
+    }
+
+    .paris-stage__media {
+      height: 270px;
+    }
+
+    .paris-stage__map-wrap {
+      height: 320px;
+    }
+
+    .paris-decision {
+      position: relative;
+      inset: auto;
+      transform: none;
+      margin: -1rem 1rem 1rem;
+    }
+
+    .paris-stage__legend {
+      display: grid;
+      gap: .35rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .paris-stage__image,
+    .paris-cinematic-hero__jump span,
+    :global(.paris-map-marker) {
+      transition: none !important;
+    }
+
+    .paris-stage__image {
+      filter: none;
+      transform: none;
+    }
+  }
+</style>
