@@ -238,9 +238,9 @@ Nicht zuerst eine lange allgemeine Destinationseinführung schreiben.
 
 ---
 
-## 12. Qualitätscheck vor Human Gate
+## 12. Qualitätscheck des fertigen Artikels
 
-Vor Freigabe eines öffentlichen Artikels:
+Nach Human Gate und finaler Artikelgenerierung wird der fertige öffentliche Text im Full Article Review geprüft. Vor Publish:
 
 - Kann ein Leser nach jedem Hauptabschnitt eine konkrete Entscheidung leichter treffen?
 - Sind Zeitbedarf und Aufwand dort genannt, wo sie die Entscheidung beeinflussen?
