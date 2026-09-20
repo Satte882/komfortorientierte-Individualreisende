@@ -1,0 +1,140 @@
+name: paris final polish qa
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  browser-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build
+        run: |
+          npm install
+          npm run build
+
+      - name: Install browser client
+        run: pip install selenium
+
+      - name: Start static server
+        run: |
+          python3 -m http.server 4321 --directory dist >/tmp/server.log 2>&1 &
+          sleep 2
+          curl --fail http://127.0.0.1:4321/guides/paris-kunst-4-tage/ >/dev/null
+
+      - name: Validate semantic sticky states and day plan
+        run: |
+          mkdir -p visual-qa
+          python3 - <<'PY'
+          import time
+          from pathlib import Path
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+
+          url = "http://127.0.0.1:4321/guides/paris-kunst-4-tage/"
+          out = Path("visual-qa")
+          options = Options()
+          options.add_argument("--headless=new")
+          options.add_argument("--no-sandbox")
+          options.add_argument("--disable-dev-shm-usage")
+          options.add_argument("--hide-scrollbars")
+          driver = webdriver.Chrome(options=options)
+
+          def open_page(width, height):
+              driver.set_window_size(width, height)
+              driver.get(url)
+              driver.execute_script(
+                  "localStorage.setItem('reiseauswahl-consent-v1', JSON.stringify({analytics:false,marketing:false}));"
+              )
+              driver.refresh()
+              time.sleep(2.5)
+
+          def h2(text):
+              return driver.find_element("xpath", f"//h2[contains(normalize-space(.), {text!r})]")
+
+          def assert_state(heading_text, expected_title):
+              el = h2(heading_text)
+              driver.execute_script("arguments[0].scrollIntoView({block:'center'});", el)
+              time.sleep(1.1)
+              actual = driver.find_element("css selector", "[data-decision-title]").text.strip()
+              if actual != expected_title:
+                  raise AssertionError(f"{heading_text}: expected {expected_title!r}, got {actual!r}")
+
+          open_page(1440, 1200)
+
+          video = driver.find_element("css selector", "[data-paris-hero-video]")
+          time.sleep(1.0)
+          video_state = driver.execute_script(
+              "const v=arguments[0]; return {ready:v.classList.contains('is-ready'), time:v.currentTime, src:v.currentSrc};",
+              video
+          )
+          if not video_state["ready"] or video_state["time"] <= 0:
+              raise AssertionError(f"hero video not running: {video_state}")
+
+          credit = driver.find_element("css selector", ".paris-cinematic-hero__credit").text
+          if "Quahadi" not in credit or "CC BY-SA 3.0" not in credit:
+              raise AssertionError(f"new hero attribution missing: {credit}")
+
+          cards = driver.find_elements("css selector", ".day-plan__card")
+          if len(cards) != 4:
+              raise AssertionError(f"expected 4 day cards, got {len(cards)}")
+
+          assert_state("So würden wir vier Tage tatsächlich aufbauen", "Orsay → Louvre → Orangerie → Flex")
+          driver.save_screenshot(str(out / "day-plan-desktop.png"))
+
+          assert_state("Plan B:", "Tag D hält die Reise beweglich")
+          assert_state("Unsere Entscheidung in einem Satz", "Drei Kunstanker. Ein Flex-Tag.")
+
+          overflow = driver.execute_script(
+              "return document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+          )
+          if overflow:
+              raise AssertionError("desktop horizontal overflow")
+
+          open_page(390, 844)
+          day_heading = h2("So würden wir vier Tage tatsächlich aufbauen")
+          driver.execute_script("arguments[0].scrollIntoView({block:'start'});", day_heading)
+          time.sleep(1.0)
+
+          cards = driver.find_elements("css selector", ".day-plan__card")
+          if len(cards) != 4:
+              raise AssertionError("mobile day cards missing")
+          overflow = driver.execute_script(
+              "return document.documentElement.scrollWidth > document.documentElement.clientWidth + 1"
+          )
+          if overflow:
+              raise AssertionError("mobile horizontal overflow")
+          driver.save_screenshot(str(out / "day-plan-mobile.png"))
+
+          driver.execute_cdp_cmd("Emulation.setEmulatedMedia", {
+              "features": [{"name": "prefers-reduced-motion", "value": "reduce"}]
+          })
+          driver.get(url)
+          time.sleep(1.2)
+          reduced = driver.execute_script("""
+            const v = document.querySelector('[data-paris-hero-video]');
+            return {src:v.currentSrc, display:getComputedStyle(v).display, time:v.currentTime};
+          """)
+          if reduced["src"] or reduced["time"] > 0 or reduced["display"] != "none":
+              raise AssertionError(f"video loaded with reduced motion: {reduced}")
+
+          driver.quit()
+          print("Paris final polish QA passed")
+          PY
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: paris-final-polish-qa
+          path: visual-qa/*.png
+          retention-days: 7
