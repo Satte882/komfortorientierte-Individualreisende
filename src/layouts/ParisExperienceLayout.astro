@@ -64,7 +64,7 @@ const jsonLd = {
       <div class="paris-cinematic-hero__content container">
         <Breadcrumbs items={[{ label: data.title }]} />
         <p class="eyebrow">Kuratierter Kunst-Guide · Paris</p>
-        <h1 id="paris-hero-title">{data.title}</h1>
+        <h1 id="paris-hero-title">{data.heroTitle ?? data.title}</h1>
         <p class="paris-cinematic-hero__lead">{data.description}</p>
         <div class="paris-cinematic-hero__meta">
           <ArticleMeta
