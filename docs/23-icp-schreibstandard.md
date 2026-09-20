@@ -255,6 +255,12 @@ Vor Freigabe eines öffentlichen Artikels:
 Wenn mehrere Antworten „nein“ sind, ist der Text noch kein veröffentlichungsreifer ICP-Content.
 
 
+## Leser entscheidet, Redaktion empfiehlt
+
+Interne Decision-Blöcke dürfen eine redaktionelle Entscheidung festhalten; im öffentlichen Text wird daraus eine **Empfehlung**. Formulierungen wie „Unsere Entscheidung“ vermeiden – der Leser entscheidet selbst.
+
+---
+
 ## 13. Verhältnis zu Decision-Blöcken und Gate v2
 
 Dieser Schreibstandard entscheidet **wie** der öffentliche Text formuliert wird.
