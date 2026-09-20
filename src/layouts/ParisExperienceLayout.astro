@@ -860,7 +860,7 @@ const jsonLd = {
   }
 
   .paris-experience__intro {
-    padding-block: clamp(3rem, 7vw, 5.5rem);
+    padding-block: var(--experience-intro-space);
     display: grid;
     grid-template-columns: .55fr 1.45fr;
     gap: 2rem 4rem;
@@ -878,7 +878,7 @@ const jsonLd = {
     grid-template-columns: minmax(420px, .95fr) minmax(0, 1.05fr);
     gap: clamp(3rem, 6vw, 6rem);
     align-items: start;
-    padding-block: clamp(4rem, 8vw, 8rem);
+    padding-block: var(--experience-content-space);
   }
 
   .paris-stage {
