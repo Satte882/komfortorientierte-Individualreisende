@@ -1,0 +1,76 @@
+name: Rebuild Munich hero to final frame
+
+on:
+  push:
+    branches:
+      - fix/hero-frame-and-map-hud
+
+permissions:
+  contents: write
+
+jobs:
+  ingest:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/hero-frame-and-map-hud
+          fetch-depth: 0
+
+      - name: Install media tooling
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --disable-pip-version-check pillow
+
+      - name: Download Munich source
+        shell: bash
+        run: |
+          curl -L --fail --retry 3 \
+            "https://videos.pexels.com/video-files/37252002/15781304_1920_1080_60fps.mp4" \
+            -o /tmp/munich-source.mp4
+          test -s /tmp/munich-source.mp4
+
+      - name: Build approved 7-to-3 desktop derivative
+        shell: bash
+        run: |
+          ffmpeg -y -ss 1 -t 8 -i /tmp/munich-source.mp4 \
+            -an \
+            -vf "scale=1120:630,crop=1120:480:0:72" \
+            -c:v libx264 -preset medium -crf 23 -pix_fmt yuv420p -movflags +faststart \
+            public/videos/munich-altstadt-hero.mp4
+
+          ffmpeg -y -ss 4 -i /tmp/munich-source.mp4 -frames:v 1 \
+            -vf "scale=1120:630,crop=1120:480:0:72" \
+            -c:v libwebp -quality 86 \
+            public/images/munich-altstadt-hero-poster.webp
+
+      - name: Validate final derivative
+        shell: bash
+        run: |
+          test -s public/videos/munich-altstadt-hero.mp4
+          test -s public/images/munich-altstadt-hero-poster.webp
+          ffprobe -v error -select_streams v:0 \
+            -show_entries stream=width,height \
+            -of csv=s=x:p=0 public/videos/munich-altstadt-hero.mp4 | grep -qx "1120x480"
+          python - <<'PY'
+          from PIL import Image, ImageStat
+          image = Image.open("public/images/munich-altstadt-hero-poster.webp").convert("HSV")
+          saturation = ImageStat.Stat(image).mean[1] / 255
+          print(f"mean_saturation={saturation:.4f}")
+          if saturation < 0.10:
+              raise SystemExit("Hero poster is effectively monochrome; rejecting asset.")
+          PY
+
+      - name: Commit final derivative
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/videos/munich-altstadt-hero.mp4 public/images/munich-altstadt-hero-poster.webp
+          git commit -m "feat: render Munich hero in final 7-to-3 frame"
+          git fetch origin fix/hero-frame-and-map-hud
+          git rebase origin/fix/hero-frame-and-map-hud
+          git push origin HEAD:fix/hero-frame-and-map-hud
