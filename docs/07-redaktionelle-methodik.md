@@ -144,7 +144,7 @@ Das **finale ICP-Problem** wird mit kurzer Begründung in `research.md` festgeha
 
 ### Schritt 7 – Bewertungskriterien anwenden
 
-Mögliche Kriterien:
+Die Detailkriterien bleiben:
 
 - Relevanz für Interesse;
 - Einzigartigkeit;
@@ -157,6 +157,8 @@ Mögliche Kriterien:
 - Preis;
 - Alternativen.
 
+Für die eigentliche Kurationsentscheidung werden sie nach der verbindlichen Regel aus `docs/04-kuration-und-content-modell.md` gebündelt: **Problembeitrag → eigenständiger Zusatzwert → Reibung → bessere Alternative**. Kein Punktescore; entscheidend ist die begründete Einordnung für das finale ICP-Problem.
+
 ### Schritt 8 – Signale in Kuration überführen und priorisieren
 
 Vor der Priorisierung werden die 3–7 stärksten Signale aus `research.md` geprüft. In `curation.md` wird knapp dokumentiert, welche Signale die Kuration beeinflussen und welche nach dem vertieften Research verworfen bzw. ohne Entscheidungsauswirkung bleiben.
@@ -168,6 +170,8 @@ Danach wird ausschließlich in drei Kategorien kuratiert:
 - **Priorität**
 - **Optional**
 - **Bewusst nicht priorisieren**
+
+Die Summe der Prioritäten muss in das versprochene Zeit-, Energie- und Komfortbudget des Beitrags passen. Eine einzelne sinnvolle Empfehlung darf nicht dazu führen, dass das Gesamtprogramm für den ICP unrealistisch wird.
 
 Alternativen werden innerhalb der Begründung bzw. im Decision-Block unter `Bewusst weglassen / Alternative` dokumentiert, nicht als eigene Kurationskategorie.
 
