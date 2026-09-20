@@ -59,8 +59,18 @@ for (const file of files) {
   }
 
   if (text.includes('heroImage:')) {
-    for (const field of ['source:', 'creator:', 'sourceUrl:', 'license:', 'downloaded:']) {
-      if (!text.includes(field)) errors.push(`${display}: heroImage missing ${field}`);
+    const heroImageBlock = text.match(/^heroImage:\s*\n([\s\S]*?)(?=^[a-zA-Z][a-zA-Z0-9]*:|^---\s*$)/m)?.[1] ?? '';
+
+    for (const field of ['src:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'downloaded:']) {
+      if (!heroImageBlock.includes(field)) errors.push(`${display}: heroImage missing ${field}`);
+    }
+
+    const imageSrc = heroImageBlock.match(/^\s+src:\s*["']?([^\n"']+)["']?\s*$/m)?.[1];
+    if (imageSrc?.startsWith('/')) {
+      const imageFile = join(root, 'public', imageSrc.slice(1));
+      if (!existsSync(imageFile)) {
+        errors.push(`${display}: heroImage local file missing: ${imageSrc}`);
+      }
     }
   }
 
@@ -77,6 +87,16 @@ for (const file of files) {
 
     const videoStatus = heroVideoBlock.match(/^\s+status:\s*["']?([a-z]+)["']?\s*$/m)?.[1];
     const videoSrc = heroVideoBlock.match(/^\s+src:\s*["']?([^\n"']+)["']?\s*$/m)?.[1];
+    const posterSrc = heroVideoBlock.match(/^\s+poster:\s*["']?([^\n"']+)["']?\s*$/m)?.[1];
+
+    for (const [label, mediaSrc] of [['heroVideo', videoSrc], ['heroVideo poster', posterSrc]]) {
+      if (mediaSrc?.startsWith('/')) {
+        const mediaFile = join(root, 'public', mediaSrc.slice(1));
+        if (!existsSync(mediaFile)) {
+          errors.push(`${display}: ${label} local file missing: ${mediaSrc}`);
+        }
+      }
+    }
 
     if (videoStatus === 'approved' && videoSrc && /^https?:\/\//.test(videoSrc)) {
       errors.push(`${display}: approved heroVideo must be delivered locally; remote URLs are spike-only`);
