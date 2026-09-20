@@ -61,7 +61,7 @@ for (const file of files) {
   if (text.includes('heroImage:')) {
     const heroImageBlock = text.match(/^heroImage:\s*\n([\s\S]*?)(?=^[a-zA-Z][a-zA-Z0-9]*:|^---\s*$)/m)?.[1] ?? '';
 
-    for (const field of ['src:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'downloaded:']) {
+    for (const field of ['src:', 'alt:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'downloaded:']) {
       if (!heroImageBlock.includes(field)) errors.push(`${display}: heroImage missing ${field}`);
     }
 
@@ -98,8 +98,13 @@ for (const file of files) {
       }
     }
 
-    if (videoStatus === 'approved' && videoSrc && /^https?:\/\//.test(videoSrc)) {
-      errors.push(`${display}: approved heroVideo must be delivered locally; remote URLs are spike-only`);
+    if (videoStatus === 'approved') {
+      if (videoSrc && /^https?:\/\//.test(videoSrc)) {
+        errors.push(`${display}: approved heroVideo must be delivered locally; remote URLs are spike-only`);
+      }
+      if (posterSrc && /^https?:\/\//.test(posterSrc)) {
+        errors.push(`${display}: approved heroVideo poster must be delivered locally`);
+      }
     }
   }
 
