@@ -40,6 +40,7 @@ const heroVideoSchema = z
 
 const commonSchema = z.object({
   title: z.string().min(10),
+  heroTitle: z.string().min(4).max(80).optional(),
   description: z.string().min(50).max(180),
   slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
   country: z.string().min(2),

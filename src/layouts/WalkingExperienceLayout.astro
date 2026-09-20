@@ -65,15 +65,8 @@ const firstPoi = experience.pois[0];
     <div class="walking-cinematic-hero__content container">
       <Breadcrumbs items={[{ label: data.title }]} />
       <p class="eyebrow">Walking Guide</p>
-      <h1 id="walking-hero-title">{data.title}</h1>
-      <p class="walking-cinematic-hero__lead">{data.description}</p>
-      <div class="walking-cinematic-hero__meta">
-        <ArticleMeta datePublished={data.datePublished} dateReviewed={data.dateReviewed} duration={data.duration} />
-        <span>{experience.pois.length} Stopps · {experience.subtitle}</span>
-      </div>
-      <p class="walking-cinematic-hero__summary">
-        Orientierung, Pausen und Prioritäten entlang einer zusammenhängenden Route.
-      </p>
+      <h1 id="walking-hero-title">{data.heroTitle ?? data.title}</h1>
+
     </div>
 
     {(data.heroVideo || data.heroImage) && (
@@ -87,6 +80,20 @@ const firstPoi = experience.pois[0];
       </p>
     )}
   </header>
+
+  <section class="walking-experience__intro container" aria-label="Guide auf einen Blick">
+    <p class="eyebrow">Auf einen Blick</p>
+    <div>
+      <p class="walking-experience__intro-lead">{data.description}</p>
+      <div class="walking-experience__intro-meta">
+        <ArticleMeta datePublished={data.datePublished} dateReviewed={data.dateReviewed} duration={data.duration} />
+        <span>{experience.pois.length} Stopps · {experience.subtitle}</span>
+      </div>
+      <p class="walking-experience__intro-summary">
+        Orientierung, Pausen und Prioritäten entlang einer zusammenhängenden Route.
+      </p>
+    </div>
+  </section>
 
   <script is:inline>
     const heroVideo = document.querySelector('[data-walking-hero-video]');
@@ -567,31 +574,6 @@ const firstPoi = experience.pois[0];
     text-shadow: 0 5px 35px rgba(0, 0, 0, .24);
   }
 
-  .walking-cinematic-hero__lead {
-    max-width: 62ch;
-    margin: 0;
-    color: rgba(255, 255, 255, .88);
-    font-size: clamp(1rem, 1.55vw, 1.24rem);
-    line-height: 1.5;
-  }
-
-  .walking-cinematic-hero__meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .65rem 1.4rem;
-    margin-top: 1rem;
-    color: rgba(255, 255, 255, .76);
-    font-size: .82rem;
-  }
-
-  .walking-cinematic-hero__summary {
-    max-width: 52ch;
-    margin: .65rem 0 0;
-    color: rgba(255, 255, 255, .72);
-    font-size: .9rem;
-    line-height: 1.55;
-  }
-
   .walking-cinematic-hero__credit {
     position: absolute;
     z-index: 3;
@@ -607,7 +589,39 @@ const firstPoi = experience.pois[0];
     text-underline-offset: .15em;
   }
 
+  .walking-experience__intro {
+    padding-block: var(--experience-intro-space);
+    display: grid;
+    grid-template-columns: .55fr 1.45fr;
+    gap: 2rem 4rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .walking-experience__intro-lead {
+    max-width: 58ch;
+    margin: 0;
+    font: 500 clamp(1.25rem, 2.2vw, 1.9rem)/1.4 Georgia, serif;
+    color: var(--ink);
+  }
+
+  .walking-experience__intro-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .65rem 1.4rem;
+    margin-top: 1.1rem;
+    color: var(--muted);
+    font-size: .82rem;
+  }
+
+  .walking-experience__intro-summary {
+    max-width: 54ch;
+    margin: .75rem 0 0;
+    color: var(--muted);
+    font-size: .9rem;
+  }
+
   .walking-experience {
+    padding-top: var(--experience-content-space);
     padding-bottom: 5rem;
   }
 
@@ -751,13 +765,14 @@ const firstPoi = experience.pois[0];
       font-size: clamp(2.55rem, 12vw, 4.4rem);
     }
 
-    .walking-cinematic-hero__meta {
-      display: grid;
-      gap: .45rem;
+    .walking-experience__intro {
+      grid-template-columns: 1fr;
+      gap: 1rem;
     }
 
-    .walking-cinematic-hero__summary {
-      display: none;
+    .walking-experience__intro-meta {
+      display: grid;
+      gap: .45rem;
     }
 
     .walking-cinematic-hero__credit {
