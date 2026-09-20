@@ -44,7 +44,7 @@ Stärkste Signale (3–7; Quelle/Abrufstand; Fakt / Signal / zu verifizieren):
 - Fakt, 2026-09-20: An der Alten Brücke laufen September bis Dezember 2026 Sanierungsarbeiten an Balkonen; Fußverkehr ist nach den bisherigen städtischen Angaben nicht grundsätzlich gesperrt.
 
 Social-Media-Realitätscheck im öffentlichen Artikel:
-nein – es gibt kein ausreichend belegtes, eigenständiges Social-Media-Hype-Signal. Besucherandrang und Steigungen werden als praktische Reibung behandelt.
+ja – als praktische Andrang-/Realitäts-Einordnung. Kein Social-Media-Kausalzusammenhang behaupten; stattdessen reale Besucherintensität, Eventtage und komfortable Ausweichoptionen benennen.
 
 ## Besonderes Extra / Affiliate-Check
 
