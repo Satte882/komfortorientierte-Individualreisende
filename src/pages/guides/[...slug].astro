@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
 import ParisExperienceLayout from '../../layouts/ParisExperienceLayout.astro';
+import SpatialExperienceLayout from '../../layouts/SpatialExperienceLayout.astro';
 import WalkingExperienceLayout from '../../layouts/WalkingExperienceLayout.astro';
 import { walkingExperiences } from '../../data/experiences/walking';
 
@@ -15,14 +16,19 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const walkingExperience = walkingExperiences[entry.data.slug];
+const spatialExperience = walkingExperiences[entry.data.slug];
+const isSpatialV1 = entry.data.spatialExperienceVersion === 1;
 ---
-{entry.data.slug === 'paris-kunst-4-tage' ? (
+{isSpatialV1 && spatialExperience ? (
+  <SpatialExperienceLayout data={entry.data} experience={spatialExperience}>
+    <Content />
+  </SpatialExperienceLayout>
+) : entry.data.slug === 'paris-kunst-4-tage' ? (
   <ParisExperienceLayout data={entry.data}>
     <Content />
   </ParisExperienceLayout>
-) : walkingExperience ? (
-  <WalkingExperienceLayout data={entry.data} experience={walkingExperience}>
+) : spatialExperience ? (
+  <WalkingExperienceLayout data={entry.data} experience={spatialExperience}>
     <Content />
   </WalkingExperienceLayout>
 ) : (

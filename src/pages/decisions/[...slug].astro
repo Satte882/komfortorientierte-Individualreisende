@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
 import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import SpatialExperienceLayout from '../../layouts/SpatialExperienceLayout.astro';
+import { walkingExperiences } from '../../data/experiences/walking';
 
 export async function getStaticPaths() {
   const preview = import.meta.env.PREVIEW_CONTENT === 'true';
@@ -12,7 +14,15 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const spatialExperience = walkingExperiences[entry.data.slug];
+const isSpatialV1 = entry.data.spatialExperienceVersion === 1;
 ---
-<ArticleLayout data={entry.data}>
-  <Content />
-</ArticleLayout>
+{isSpatialV1 && spatialExperience ? (
+  <SpatialExperienceLayout data={entry.data} experience={spatialExperience}>
+    <Content />
+  </SpatialExperienceLayout>
+) : (
+  <ArticleLayout data={entry.data}>
+    <Content />
+  </ArticleLayout>
+)}

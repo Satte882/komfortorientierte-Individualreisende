@@ -1,0 +1,19 @@
+---
+import WalkingExperienceLayout from './WalkingExperienceLayout.astro';
+import type { WalkingExperience } from '../types/walking-experience';
+
+const { data, experience } = Astro.props as {
+  data: Record<string, any>;
+  experience: WalkingExperience;
+};
+---
+
+<!--
+  Gemeinsamer Entry-Point für Spatial Experience v1.
+  WalkingExperienceLayout ist derzeit die erste Engine-Ausprägung und unterstützt
+  sowohl routeMode=walking als auch routeMode=editorial. Neue Destinationen sollen
+  diesen Entry-Point/Datenvertrag erweitern statt eigene Destination-Layouts anzulegen.
+-->
+<WalkingExperienceLayout data={data} experience={experience}>
+  <slot />
+</WalkingExperienceLayout>

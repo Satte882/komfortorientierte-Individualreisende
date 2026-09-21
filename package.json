@@ -9,20 +9,12 @@
     "build": "astro build",
     "preview": "astro preview --host 0.0.0.0",
     "check:astro": "astro check",
-    "validate:content": "node scripts/validate-content.mjs",
+    "validate:content": "node scripts/validate-content.mjs && node scripts/validate-spatial-experience.mjs",
     "check": "npm run check:astro && npm run validate:content && npm run build",
-    "article:new": "node scripts/new-article.mjs",
+    "article:new": "node scripts/new-spatial-article.mjs",
     "article:publish": "node scripts/publish-article.mjs"
   },
-  "dependencies": {
-    "@astrojs/mdx": "8.0.1",
-    "astro": "7.3.3"
-  },
-  "devDependencies": {
-    "@astrojs/check": "0.9.10",
-    "typescript": "^6.0.0"
-  },
-  "engines": {
-    "node": ">=22"
-  }
+  "dependencies": { "@astrojs/mdx": "8.0.1", "astro": "7.3.3" },
+  "devDependencies": { "@astrojs/check": "0.9.10", "typescript": "^6.0.0" },
+  "engines": { "node": ">=22" }
 }
