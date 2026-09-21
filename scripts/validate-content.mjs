@@ -98,7 +98,7 @@ for (const file of files) {
   if (text.includes('heroVideo:')) {
     const heroVideoBlock = text.match(/^heroVideo:\s*\n([\s\S]*?)(?=^[a-zA-Z][a-zA-Z0-9]*:|^---\s*$)/m)?.[1] ?? '';
 
-    for (const field of ['src:', 'poster:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'reviewed:', 'status:']) {
+    for (const field of ['src:', 'poster:', 'source:', 'creator:', 'sourceUrl:', 'license:', 'destination:', 'reviewed:', 'status:']) {
       if (!heroVideoBlock.includes(field)) errors.push(`${display}: heroVideo missing ${field}`);
     }
 

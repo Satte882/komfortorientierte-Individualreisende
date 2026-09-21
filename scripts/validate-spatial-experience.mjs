@@ -7,6 +7,16 @@ const experienceFile = join(root, 'src', 'data', 'experiences', 'walking.ts');
 const experienceSource = existsSync(experienceFile) ? readFileSync(experienceFile, 'utf8') : '';
 const errors = [];
 
+function nestedValue(text, field) {
+  const line = text.split('\n').find((candidate) => candidate.trimStart().startsWith(field + ':'));
+  if (!line) return undefined;
+  return line.slice(line.indexOf(':') + 1).trim().replace(/^["']|["']$/g, '');
+}
+
+function normalizedToken(input) {
+  return (input ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function walk(dir) {
   if (!existsSync(dir)) return [];
   return readdirSync(dir).flatMap((name) => {
@@ -38,12 +48,22 @@ for (const file of files) {
   if (!heroVideo) {
     errors.push(`${display}: Spatial Experience v1 requires heroVideo`);
   } else {
-    const status = heroVideo.match(/^\s+status:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
-    const src = heroVideo.match(/^\s+src:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
-    const poster = heroVideo.match(/^\s+poster:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
+    const status = nestedValue(heroVideo, 'status');
+    const src = nestedValue(heroVideo, 'src');
+    const poster = nestedValue(heroVideo, 'poster');
+    const mediaDestination = nestedValue(heroVideo, 'destination');
+    const articleDestination = value(text, 'destination');
     if (status !== 'approved') errors.push(`${display}: Spatial Experience v1 heroVideo must be approved`);
     if (!src?.startsWith('/')) errors.push(`${display}: Spatial Experience v1 heroVideo must be local`);
     if (!poster?.startsWith('/')) errors.push(`${display}: Spatial Experience v1 heroVideo poster must be local`);
+    if (!mediaDestination) {
+      errors.push(`${display}: Spatial Experience v1 heroVideo requires explicit destination provenance`);
+    } else if (normalizedToken(mediaDestination) !== normalizedToken(articleDestination)) {
+      errors.push(`${display}: heroVideo destination provenance (${mediaDestination}) does not match article destination (${articleDestination})`);
+    }
+    if (src && articleDestination && !normalizedToken(src).includes(normalizedToken(articleDestination))) {
+      errors.push(`${display}: heroVideo path must identify the article destination to prevent cross-destination asset reuse`);
+    }
     for (const [label, media] of [['video', src], ['poster', poster]]) {
       if (media?.startsWith('/') && !existsSync(join(root, 'public', media.slice(1)))) {
         errors.push(`${display}: Spatial Experience v1 ${label} file missing: ${media}`);

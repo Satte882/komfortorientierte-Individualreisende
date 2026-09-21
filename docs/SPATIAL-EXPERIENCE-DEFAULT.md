@@ -43,7 +43,7 @@ Neue Scaffolds tragen `spatialExperienceVersion: 1`. Dieses Feld ist die technis
 
 Für `status: published` + `spatialExperienceVersion: 1` sind Pflicht:
 
-- `heroVideo` mit `status: approved` und lokalem `src`;
+- `heroVideo` mit `status: approved`, lokalem `src` und expliziter `destination`-Provenienz, die dem Artikelziel entspricht;
 - `heroImage` als semantischer Poster/Fallback;
 - lokales Poster des Videos;
 - ein Experience-Datensatz für denselben Slug;
@@ -51,7 +51,7 @@ Für `status: published` + `spatialExperienceVersion: 1` sind Pflicht:
 - `routeMode: editorial | walking`;
 - bei `walking` eine lokale `routeUrl`; bei `editorial` ist die POI-Reihenfolge selbst die Route.
 
-CI blockiert die Veröffentlichung, wenn einer dieser Bestandteile fehlt.
+CI blockiert die Veröffentlichung, wenn einer dieser Bestandteile fehlt. Ein Video eines anderen Zielorts darf weder kopiert noch unter einem passenden Dateinamen als Ersatz freigegeben werden; Dateipfad und dokumentierte `destination`-Provenienz müssen zum Artikelziel passen.
 
 ## Legacy / Migration
 
