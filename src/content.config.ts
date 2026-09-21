@@ -20,7 +20,7 @@ const heroImageSchema = z.object({
 
 const heroVideoSchema = z.object({
   src: z.string().min(1), poster: z.string().min(1), source: z.string().min(2), creator: z.string().min(2),
-  sourceUrl: z.string().url(), license: z.string().min(2), reviewed: z.coerce.date(), status: z.enum(['spike', 'approved'])
+  sourceUrl: z.string().url(), license: z.string().min(2), destination: z.string().min(2), reviewed: z.coerce.date(), status: z.enum(['spike', 'approved'])
 }).optional();
 
 const commonSchema = z.object({
