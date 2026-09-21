@@ -19,30 +19,9 @@ jobs:
           ref: fix/salzburg-authentic-video-publish
       - name: Download authentic Salzburg footage
         run: |
-          python -m pip install --quiet requests beautifulsoup4
-          python - <<'PY'
-          import html, json, re, requests
-          from bs4 import BeautifulSoup
-          page='https://pixabay.com/videos/salzburg-city-salzburg-mountains-132540/'
-          text=requests.get(page,headers={'User-Agent':'Mozilla/5.0'},timeout=30).text
-          candidates=[]
-          soup=BeautifulSoup(text,'html.parser')
-          for tag in soup.find_all('script'):
-              raw=html.unescape(tag.string or tag.get_text() or '')
-              candidates += re.findall(r'https://cdn\.pixabay\.com/[^"\\\\ ]+?\.mp4[^"\\\\ ]*', raw)
-          if not candidates:
-              candidates += re.findall(r'https://cdn\.pixabay\.com/[^"\\\\ ]+?\.mp4[^"\\\\ ]*', html.unescape(text))
-          if not candidates:
-              raise SystemExit('No Pixabay MP4 URL found')
-          def score(u):
-              m=re.search(r'(\d{3,4})x(\d{3,4})',u)
-              return int(m.group(1))*int(m.group(2)) if m else 0
-          url=max(set(candidates), key=score)
-          print('Using Pixabay asset:', url.split('?')[0])
-          r=requests.get(url,headers={'User-Agent':'Mozilla/5.0','Referer':page},timeout=60)
-          r.raise_for_status()
-          open('/tmp/salzburg-source.mp4','wb').write(r.content)
-          PY
+          python -m pip install --quiet yt-dlp
+          yt-dlp "https://pixabay.com/videos/salzburg-city-salzburg-mountains-132540/" -f "best[ext=mp4]/best" -o /tmp/salzburg-source.mp4
+          test -s /tmp/salzburg-source.mp4
       - name: Optimize hero clip
         run: |
           ffmpeg -y -i /tmp/salzburg-source.mp4 -t 9 -vf "scale=1280:-2:force_original_aspect_ratio=decrease,crop=1280:720" -an -c:v libx264 -preset medium -crf 25 -movflags +faststart public/videos/salzburg-hero.mp4
