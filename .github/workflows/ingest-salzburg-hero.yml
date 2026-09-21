@@ -19,8 +19,8 @@ jobs:
           ref: fix/salzburg-authentic-video-publish
       - name: Download authentic Salzburg footage
         run: |
-          python -m pip install --quiet yt-dlp
-          yt-dlp "https://pixabay.com/videos/salzburg-city-salzburg-mountains-132540/" -f "best[ext=mp4]/best" -o /tmp/salzburg-source.mp4
+          python -m pip install --quiet 'yt-dlp[default,curl-cffi]'
+          yt-dlp "https://pixabay.com/videos/salzburg-city-salzburg-mountains-132540/" --extractor-args "generic:impersonate" -f "best[ext=mp4]/best" -o /tmp/salzburg-source.mp4
           test -s /tmp/salzburg-source.mp4
       - name: Optimize hero clip
         run: |
