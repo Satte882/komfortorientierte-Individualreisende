@@ -90,5 +90,44 @@ export const walkingExperiences: Record<string, WalkingExperience> = {
         shortContext: 'Bei guter Energie aufsteigen; sonst den Tag ohne weiteren Höhenblock auslaufen lassen.'
       }
     ]
+  },
+  'salzburg-ein-entspannter-tag': {
+    id: 'salzburg-ein-entspannter-tag',
+    title: 'Salzburg – ein entspannter Tag',
+    subtitle: 'Mirabell, Altstadt und Festung mit nur einem großen Höhenblock',
+    routeUrl: '/data/routes/salzburg-ein-entspannter-tag.geojson',
+    routeMode: 'editorial',
+    pois: [
+      {
+        id: 'mirabellgarten',
+        name: 'Mirabellgarten',
+        coordinates: [13.04136, 47.80564],
+        shortContext: 'Ruhiger Einstieg mit Blickachse Richtung Altstadt und Festung; Eintritt frei.'
+      },
+      {
+        id: 'makartsteg',
+        name: 'Makartsteg & Salzach',
+        coordinates: [13.04008, 47.80264],
+        shortContext: 'Kurzer Übergang über die Salzach; Stadtbild statt zusätzlichem Programmpunkt.'
+      },
+      {
+        id: 'getreidegasse',
+        name: 'Getreidegasse & Altstadt',
+        coordinates: [13.04315, 47.80033],
+        shortContext: 'Altstadt bewusst langsam erleben; Mozarts Geburtshaus nur bei echtem Interesse.'
+      },
+      {
+        id: 'dom-kapitelplatz',
+        name: 'Dom & Kapitelplatz',
+        coordinates: [13.04554, 47.79823],
+        shortContext: 'Barockes Zentrum und natürlicher Übergang zur Festungsbahn.'
+      },
+      {
+        id: 'festung',
+        name: 'Festung Hohensalzburg',
+        coordinates: [13.04775, 47.79517],
+        shortContext: 'Der eine große Höhenblock des Tages; per Festungsbahn komfortabel erreichbar.'
+      }
+    ]
   }
 };
