@@ -38,9 +38,9 @@ for (const file of files) {
   if (!heroVideo) {
     errors.push(`${display}: Spatial Experience v1 requires heroVideo`);
   } else {
-    const status = value(heroVideo, 'status');
-    const src = value(heroVideo, 'src');
-    const poster = value(heroVideo, 'poster');
+    const status = heroVideo.match(/^\s+status:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
+    const src = heroVideo.match(/^\s+src:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
+    const poster = heroVideo.match(/^\s+poster:\s*["']?([^\n"']+)["']?\s*$/m)?.[1]?.trim();
     if (status !== 'approved') errors.push(`${display}: Spatial Experience v1 heroVideo must be approved`);
     if (!src?.startsWith('/')) errors.push(`${display}: Spatial Experience v1 heroVideo must be local`);
     if (!poster?.startsWith('/')) errors.push(`${display}: Spatial Experience v1 heroVideo poster must be local`);
