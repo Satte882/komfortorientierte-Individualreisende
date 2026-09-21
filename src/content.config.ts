@@ -12,31 +12,16 @@ const durationSchema = z.object({
   max: z.number().int().positive().optional()
 });
 
-const heroImageSchema = z
-  .object({
-    src: z.string().min(1),
-    alt: z.string().min(5),
-    source: z.string().min(2),
-    creator: z.string().min(2),
-    sourceUrl: z.string().url(),
-    license: z.string().min(2),
-    downloaded: z.coerce.date(),
-    status: z.enum(['spike', 'approved']).optional()
-  })
-  .optional();
+const heroImageSchema = z.object({
+  src: z.string().min(1), alt: z.string().min(5), source: z.string().min(2), creator: z.string().min(2),
+  sourceUrl: z.string().url(), license: z.string().min(2), downloaded: z.coerce.date(),
+  status: z.enum(['spike', 'approved']).optional()
+}).optional();
 
-const heroVideoSchema = z
-  .object({
-    src: z.string().min(1),
-    poster: z.string().min(1),
-    source: z.string().min(2),
-    creator: z.string().min(2),
-    sourceUrl: z.string().url(),
-    license: z.string().min(2),
-    reviewed: z.coerce.date(),
-    status: z.enum(['spike', 'approved'])
-  })
-  .optional();
+const heroVideoSchema = z.object({
+  src: z.string().min(1), poster: z.string().min(1), source: z.string().min(2), creator: z.string().min(2),
+  sourceUrl: z.string().url(), license: z.string().min(2), reviewed: z.coerce.date(), status: z.enum(['spike', 'approved'])
+}).optional();
 
 const commonSchema = z.object({
   title: z.string().min(10),
@@ -49,31 +34,18 @@ const commonSchema = z.object({
   duration: durationSchema,
   targetProfile: z.array(z.string()).default(['komfortorientiert', 'individualreisend']),
   commercialIntent: z.array(z.enum(['hotel', 'tickets', 'tours', 'rental-car', 'none'])).default(['none']),
-  datePublished: z.coerce.date(),
-  dateReviewed: z.coerce.date(),
-  reviewAfter: z.coerce.date(),
+  datePublished: z.coerce.date(), dateReviewed: z.coerce.date(), reviewAfter: z.coerce.date(),
   status: z.enum(['draft', 'review', 'published']),
-  heroImage: heroImageSchema,
-  heroVideo: heroVideoSchema,
+  heroImage: heroImageSchema, heroVideo: heroVideoSchema,
   affiliateDisclosure: z.boolean().default(false),
   sources: z.array(z.object({ label: z.string(), url: z.string().url() })).min(1),
   editorialApproval: z.boolean().default(false),
-  editorialGateVersion: z.union([z.literal(2), z.literal(3)]).optional()
+  editorialGateVersion: z.union([z.literal(2), z.literal(3)]).optional(),
+  spatialExperienceVersion: z.literal(1).optional()
 });
 
-const destinationsCollection = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/destinations' }),
-  schema: commonSchema.extend({ type: z.literal('destination') })
-});
-
-const guides = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guides' }),
-  schema: commonSchema.extend({ type: z.literal('guide') })
-});
-
-const decisions = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/decisions' }),
-  schema: commonSchema.extend({ type: z.literal('decision') })
-});
+const destinationsCollection = defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/destinations' }), schema: commonSchema.extend({ type: z.literal('destination') }) });
+const guides = defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guides' }), schema: commonSchema.extend({ type: z.literal('guide') }) });
+const decisions = defineCollection({ loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/decisions' }), schema: commonSchema.extend({ type: z.literal('decision') }) });
 
 export const collections = { destinations: destinationsCollection, guides, decisions };
