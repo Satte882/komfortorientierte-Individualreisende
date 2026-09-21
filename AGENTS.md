@@ -69,6 +69,11 @@ Für Experience-Arbeit zusätzlich lesen:
 
 - `docs/EXPERIENCE.md`
 - `docs/EXPERIENCE-DATA-CONTRACT.md`
+- `docs/SPATIAL-EXPERIENCE-DEFAULT.md`
 - `docs/MEDIA-GOVERNANCE.md`
 
 Experience visualisiert die redaktionelle Entscheidung. Sie darf keine neue inhaltliche Empfehlung erfinden.
+
+**Neue Artikel sind Spatial Experience v1:** Der Scaffold setzt `spatialExperienceVersion: 1`. Vor Veröffentlichung sind ein freigegebener lokaler Video-Hero mit Poster/Fallback, eine Karte und eine in den Experience-Daten definierte räumliche Abfolge/Route Pflicht. Route bedeutet nicht automatisch Walking; redaktionelle POI-Abfolge und Reiseetappen sind zulässige Formen. Bestehende veröffentlichte Beiträge ohne Versionsfeld bleiben grandfathered.
+
+Keine destinationsspezifischen Experience-Layouts für neue Beiträge anlegen. Unterschiede zuerst über den gemeinsamen Datenvertrag und die vorhandenen Mechaniken ausdrücken. Eine separate Decision-Summary ist keine Pflicht.
