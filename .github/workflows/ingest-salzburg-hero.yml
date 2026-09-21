@@ -22,9 +22,9 @@ jobs:
           python -m pip install --quiet 'yt-dlp[default,curl-cffi]'
           yt-dlp "https://pixabay.com/videos/salzburg-city-salzburg-mountains-132540/" --extractor-args "generic:impersonate" -f "best[ext=mp4]/best" -o /tmp/salzburg-source.mp4
           test -s /tmp/salzburg-source.mp4
-      - name: Optimize hero clip
+      - name: Install authentic hero clip
         run: |
-          ffmpeg -y -i /tmp/salzburg-source.mp4 -t 9 -vf "scale=1280:-2:force_original_aspect_ratio=decrease,crop=1280:720" -an -c:v libx264 -preset medium -crf 25 -movflags +faststart public/videos/salzburg-hero.mp4
+          cp /tmp/salzburg-source.mp4 public/videos/salzburg-hero.mp4
           test -s public/videos/salzburg-hero.mp4
       - name: Commit authentic Salzburg asset
         run: |
